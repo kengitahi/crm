@@ -1,0 +1,30 @@
+<?php
+
+namespace App\Events;
+
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
+
+class ShiftRotationEvent
+{
+    use Dispatchable, InteractsWithSockets, SerializesModels;
+
+    public $employeeData;
+
+    public $dates;
+
+    public $rotationFrequency;
+
+    /**
+     * Create a new event instance.
+     *
+     * @return void
+     */
+    public function __construct($employeeData, $dates, $rotationFrequency)
+    {
+        $this->employeeData = $employeeData;
+        $this->dates = $dates;
+        $this->rotationFrequency = $rotationFrequency;
+    }
+}
