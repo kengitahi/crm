@@ -1,6 +1,7 @@
 <?php
 
 // @formatter:off
+// phpcs:ignoreFile
 /**
  * A helper file for your Eloquent Models
  * Copy the phpDocs from this file to the correct Model,
@@ -32,8 +33,50 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|AcceptEstimate whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AcceptEstimate whereSignature($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AcceptEstimate whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @property-read \App\Models\Estimate|null $estimate
+ * @method static \Illuminate\Database\Eloquent\Builder|AcceptEstimate whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class AcceptEstimate extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Appreciation
+ *
+ * @property int $id
+ * @property int|null $company_id
+ * @property int $award_id
+ * @property int $award_to
+ * @property \Illuminate\Support\Carbon $award_date
+ * @property string|null $image
+ * @property string|null $summary
+ * @property int $added_by
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User $addedBy
+ * @property-read \App\Models\Award $award
+ * @property-read \App\Models\User $awardTo
+ * @property-read \App\Models\Company|null $company
+ * @property-read mixed $image_url
+ * @method static \Illuminate\Database\Eloquent\Builder|Appreciation newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Appreciation newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Appreciation query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Appreciation whereAddedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Appreciation whereAwardDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Appreciation whereAwardId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Appreciation whereAwardTo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Appreciation whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Appreciation whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Appreciation whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Appreciation whereImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Appreciation whereSummary($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Appreciation whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
+	class Appreciation extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -42,6 +85,7 @@ namespace App\Models{
  *
  * @property int $id
  * @property int $user_id
+ * @property int $lateCount
  * @property \Illuminate\Support\Carbon $clock_in_time
  * @property \Illuminate\Support\Carbon|null $clock_out_time
  * @property string $clock_in_ip
@@ -72,6 +116,37 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Attendance whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Attendance whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Attendance whereWorkingFrom($value)
+ * @property string|null $latitude
+ * @property string|null $longitude
+ * @method static \Illuminate\Database\Eloquent\Builder|Attendance whereLatitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Attendance whereLongitude($value)
+ * @property int|null $company_id
+ * @property int|null $location_id
+ * @property \Illuminate\Support\Carbon|null $shift_start_time
+ * @property \Illuminate\Support\Carbon|null $shift_end_time
+ * @property int|null $employee_shift_id
+ * @property string $work_from_type
+ * @property \Illuminate\Support\Carbon $attendance
+ * @property-read \App\Models\Company|null $company
+ * @property-read \App\Models\CompanyAddress|null $location
+ * @property-read \App\Models\EmployeeShift|null $shift
+ * @method static \Illuminate\Database\Eloquent\Builder|Attendance whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Attendance whereEmployeeShiftId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Attendance whereLocationId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Attendance whereShiftEndTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Attendance whereShiftStartTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Attendance whereWorkFromType($value)
+ * @property string $overwrite_attendance
+ * @property string $status
+ * @property string $occassion
+ * @property string $date
+ * @property string $status
+ * @method static \Illuminate\Database\Eloquent\Builder|Attendance whereOverwriteAttendance($value)
+ * @mixin \Eloquent
+ * @property int $auto_clock_out
+ * @property string|null $half_day_type
+ * @method static \Illuminate\Database\Eloquent\Builder|Attendance whereAutoClockOut($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Attendance whereHalfDayType($value)
  */
 	class Attendance extends \Eloquent {}
 }
@@ -112,8 +187,229 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|AttendanceSetting whereRadius($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AttendanceSetting whereRadiusCheck($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AttendanceSetting whereUpdatedAt($value)
+ * @property int|null $alert_after
+ * @property int $alert_after_status
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendanceSetting whereAlertAfter($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendanceSetting whereAlertAfterStatus($value)
+ * @property int $save_current_location
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendanceSetting whereSaveCurrentLocation($value)
+ * @property int|null $company_id
+ * @property string $auto_clock_in
+ * @property int|null $default_employee_shift
+ * @property string $week_start_from
+ * @property int $allow_shift_change
+ * @property string $show_clock_in_button
+ * @property-read \App\Models\Company|null $company
+ * @property-read \App\Models\EmployeeShift|null $shift
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendanceSetting whereAllowShiftChange($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendanceSetting whereAutoClockIn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendanceSetting whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendanceSetting whereDefaultEmployeeShift($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendanceSetting whereShowClockInButton($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendanceSetting whereWeekStartFrom($value)
+ * @property string $restrict_clockin
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendanceSetting whereRestrictClockin($value)
+ * @property string $auto_clock_in_location
+ * @property int $monthly_report
+ * @property string|null $monthly_report_roles
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendanceSetting whereAutoClockInLocation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendanceSetting whereMonthlyReport($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendanceSetting whereMonthlyReportRoles($value)
+ * @property string|null $early_clock_in
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendanceSetting whereEarlyClockIn($value)
+ * @mixin \Eloquent
+ * @property string $qr_enable
+ * @method static \Illuminate\Database\Eloquent\Builder|AttendanceSetting whereQrEnable($value)
  */
 	class AttendanceSetting extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property int|null $employee_shift_rotation_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\ShiftRotation|null $rotation
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ShiftRotationSequence> $sequences
+ * @property-read int|null $sequences_count
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|AutomateShift newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AutomateShift newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AutomateShift query()
+ * @method static \Illuminate\Database\Eloquent\Builder|AutomateShift whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AutomateShift whereEmployeeShiftRotationId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AutomateShift whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AutomateShift whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AutomateShift whereUserId($value)
+ */
+	class AutomateShift extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Award
+ *
+ * @property-read \App\Models\Appreciation|null $appreciation
+ * @property-read \App\Models\AwardIcon|null $awardIcon
+ * @property-read \App\Models\Company|null $company
+ * @method static Builder|Award newModelQuery()
+ * @method static Builder|Award newQuery()
+ * @method static Builder|Award query()
+ * @property int $id
+ * @property int|null $company_id
+ * @property string $title
+ * @property int|null $award_icon_id
+ * @property string|null $summary
+ * @property string $status
+ * @property string $color_code
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Appreciation[] $appreciations
+ * @property-read int|null $appreciations_count
+ * @method static Builder|Award whereAwardIconId($value)
+ * @method static Builder|Award whereColorCode($value)
+ * @method static Builder|Award whereCompanyId($value)
+ * @method static Builder|Award whereCreatedAt($value)
+ * @method static Builder|Award whereId($value)
+ * @method static Builder|Award whereStatus($value)
+ * @method static Builder|Award whereSummary($value)
+ * @method static Builder|Award whereTitle($value)
+ * @method static Builder|Award whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
+	class Award extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\AwardIcon
+ *
+ * @property-read \App\Models\Award|null $award
+ * @method static \Illuminate\Database\Eloquent\Builder|AwardIcon newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AwardIcon newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AwardIcon query()
+ * @property int $id
+ * @property string $title
+ * @property string $icon
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|AwardIcon whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AwardIcon whereIcon($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AwardIcon whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AwardIcon whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AwardIcon whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
+	class AwardIcon extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\BankAccount
+ *
+ * @property int $id
+ * @property int|null $company_id
+ * @property string|null $type
+ * @property string|null $bank_name
+ * @property string|null $account_name
+ * @property string|null $account_number
+ * @property string|null $account_type
+ * @property int|null $currency_id
+ * @property string|null $contact_number
+ * @property float|null $opening_balance
+ * @property string|null $bank_logo
+ * @property int|null $status
+ * @property int|null $added_by
+ * @property int|null $last_updated_by
+ * @property float|null $bank_balance
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Company|null $company
+ * @property-read \App\Models\Currency|null $currency
+ * @property-read mixed $file_url
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\BankTransaction[] $transaction
+ * @property-read int|null $transaction_count
+ * @method static \Illuminate\Database\Eloquent\Builder|BankAccount newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|BankAccount newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|BankAccount query()
+ * @method static \Illuminate\Database\Eloquent\Builder|BankAccount whereAccountName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankAccount whereAccountNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankAccount whereAccountType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankAccount whereAddedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankAccount whereBankBalance($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankAccount whereBankLogo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankAccount whereBankName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankAccount whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankAccount whereContactNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankAccount whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankAccount whereCurrencyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankAccount whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankAccount whereLastUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankAccount whereOpeningBalance($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankAccount whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankAccount whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankAccount whereUpdatedAt($value)
+ * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Expense> $expenses
+ * @property-read int|null $expenses_count
+ */
+	class BankAccount extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\BankTransaction
+ *
+ * @property int $id
+ * @property int|null $company_id
+ * @property int|null $bank_account_id
+ * @property int|null $payment_id
+ * @property int|null $invoice_id
+ * @property int|null $expense_id
+ * @property float|null $amount
+ * @property string $type
+ * @property int|null $added_by
+ * @property int|null $last_updated_by
+ * @property string|null $memo
+ * @property string|null $transaction_relation
+ * @property string|null $transaction_related_to
+ * @property string|null $title
+ * @property \Illuminate\Support\Carbon|null $transaction_date
+ * @property float|null $bank_balance
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read BankAccount|null $bankAccount
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|BankTransaction newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|BankTransaction newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|BankTransaction query()
+ * @method static \Illuminate\Database\Eloquent\Builder|BankTransaction whereAddedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankTransaction whereAmount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankTransaction whereBankAccountId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankTransaction whereBankBalance($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankTransaction whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankTransaction whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankTransaction whereExpenseId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankTransaction whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankTransaction whereInvoiceId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankTransaction whereLastUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankTransaction whereMemo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankTransaction wherePaymentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankTransaction whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankTransaction whereTransactionDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankTransaction whereTransactionRelatedTo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankTransaction whereTransactionRelation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankTransaction whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BankTransaction whereUpdatedAt($value)
+ * @property int|null $purchase_payment_id
+ * @method static \Illuminate\Database\Eloquent\Builder|BankTransaction wherePurchasePaymentId($value)
+ * @mixin \Eloquent
+ */
+	class BankTransaction extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -124,6 +420,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|BaseModel newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|BaseModel newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|BaseModel query()
+ * @mixin \Eloquent
  */
 	class BaseModel extends \Eloquent {}
 }
@@ -143,6 +440,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ClientCategory whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ClientCategory whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ClientCategory whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientCategory whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class ClientCategory extends \Eloquent {}
 }
@@ -170,6 +471,16 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ClientContact wherePhone($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ClientContact whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ClientContact whereUserId($value)
+ * @property int|null $added_by
+ * @property int|null $last_updated_by
+ * @method static Builder|ClientContact whereAddedBy($value)
+ * @method static Builder|ClientContact whereLastUpdatedBy($value)
+ * @property string|null $title
+ * @method static Builder|ClientContact whereTitle($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static Builder|ClientContact whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class ClientContact extends \Eloquent {}
 }
@@ -228,8 +539,63 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ClientDetails whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ClientDetails whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ClientDetails whereWebsite($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\User|null $addedBy
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientDetails whereCompanyId($value)
+ * @property string|null $company_logo
+ * @property int|null $quickbooks_client_id
+ * @property-read mixed $image_url
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientDetails whereCompanyLogo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientDetails whereQuickbooksClientId($value)
+ * @property string|null $electronic_address
+ * @property string|null $electronic_address_scheme
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientDetails whereElectronicAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientDetails whereElectronicAddressScheme($value)
+ * @mixin \Eloquent
+ * @property string|null $tax_name
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientDetails whereTaxName($value)
  */
 	class ClientDetails extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * Class Holiday
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string $name
+ * @property string $filename
+ * @property string $hashname
+ * @property string|null $size
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int|null $added_by
+ * @property int|null $last_updated_by
+ * @property-read mixed $doc_url
+ * @property-read mixed $icon
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientDocument newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientDocument newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientDocument query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientDocument whereAddedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientDocument whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientDocument whereFilename($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientDocument whereHashname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientDocument whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientDocument whereLastUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientDocument whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientDocument whereSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientDocument whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientDocument whereUserId($value)
+ * @property-read \App\Models\User|null $client
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientDocument whereCompanyId($value)
+ * @mixin \Eloquent
+ */
+	class ClientDocument extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -263,36 +629,15 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ClientNote whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ClientNote whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ClientNote whereUpdatedAt($value)
+ * @property-read \App\Models\User|null $client
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ClientUserNote[] $members
+ * @property-read int|null $members_count
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientNote whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class ClientNote extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * App\Models\ClientPayment
- *
- * @property int $id
- * @property int|null $project_id
- * @property int|null $invoice_id
- * @property float $amount
- * @property string|null $gateway
- * @property string|null $transaction_id
- * @property int|null $currency_id
- * @property string|null $plan_id
- * @property string|null $customer_id
- * @property string|null $event_id
- * @property string $status
- * @property \Illuminate\Support\Carbon|null $paid_on
- * @property string|null $remarks
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property int|null $offline_method_id
- * @property string|null $bill
- * @property int|null $added_by
- * @property int|null $last_updated_by
- * @property-read mixed $icon
- * @property-read \App\Models\Invoice|null $invoice
- */
 }
 
 namespace App\Models{
@@ -313,6 +658,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ClientSubCategory whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ClientSubCategory whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ClientSubCategory whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientSubCategory whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class ClientSubCategory extends \Eloquent {}
 }
@@ -334,8 +683,297 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ClientUserNote whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ClientUserNote whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ClientUserNote whereUserId($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientUserNote whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class ClientUserNote extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Company
+ *
+ * @property int $id
+ * @property string $company_name
+ * @property string $app_name
+ * @property string $company_email
+ * @property string $company_phone
+ * @property string|null $logo
+ * @property string|null $login_background
+ * @property string $address
+ * @property string|null $website
+ * @property int|null $currency_id
+ * @property string $timezone
+ * @property string $date_format
+ * @property string|null $date_picker_format
+ * @property string|null $moment_format
+ * @property string $time_format
+ * @property string $locale
+ * @property string $latitude
+ * @property string $longitude
+ * @property string $leaves_start_from
+ * @property string $active_theme
+ * @property int|null $last_updated_by
+ * @property string|null $currency_converter_key
+ * @property string|null $google_map_key
+ * @property string $task_self
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $purchase_code
+ * @property string|null $supported_until
+ * @property string $google_recaptcha_status
+ * @property string $google_recaptcha_v2_status
+ * @property string|null $google_recaptcha_v2_site_key
+ * @property string|null $google_recaptcha_v2_secret_key
+ * @property string $google_recaptcha_v3_status
+ * @property string|null $google_recaptcha_v3_site_key
+ * @property string|null $google_recaptcha_v3_secret_key
+ * @property int $app_debug
+ * @property int $rounded_theme
+ * @property int $system_update
+ * @property string $logo_background_color
+ * @property int $before_days
+ * @property int $after_days
+ * @property string $on_deadline
+ * @property int $default_task_status
+ * @property int $show_review_modal
+ * @property int $dashboard_clock
+ * @property int $taskboard_length
+ * @property string|null $favicon
+ * @property-read \App\Models\Currency|null $currency
+ * @property-read mixed $dark_logo_url
+ * @property-read mixed $favicon_url
+ * @property-read mixed $icon
+ * @property-read mixed $light_logo_url
+ * @property-read mixed $masked_default_logo
+ * @property-read mixed $login_background_url
+ * @property-read mixed $logo_url
+ * @property-read mixed $moment_date_format
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereActiveTheme($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereAfterDays($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereAppDebug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereBeforeDays($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereCompanyEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereCompanyName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereCompanyPhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereCurrencyConverterKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereCurrencyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereDashboardClock($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereDateFormat($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereDatePickerFormat($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereDefaultTaskStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereFavicon($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereGoogleMapKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereGoogleRecaptchaStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereGoogleRecaptchaV2SecretKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereGoogleRecaptchaV2SiteKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereGoogleRecaptchaV2Status($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereGoogleRecaptchaV3SecretKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereGoogleRecaptchaV3SiteKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereGoogleRecaptchaV3Status($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereHideCronMessage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereLastUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereLatitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereLeavesStartFrom($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereLocale($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereLoginBackground($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereLogo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereLogoBackgroundColor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereLongitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereMomentFormat($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereOnDeadline($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting wherePurchaseCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereRoundedTheme($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereShowReviewModal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereSupportedUntil($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereSystemUpdate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereTaskSelf($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereTaskboardLength($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereTimeFormat($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereTimezone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereWeatherKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereWebsite($value)
+ * @property int $ticket_form_google_captcha
+ * @property int $lead_form_google_captcha
+ * @property string|null $last_cron_run
+ * @property string $auth_theme
+ * @property string|null $light_logo
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereAuthTheme($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereLastCronRun($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereLeadFormGoogleCaptcha($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereLightLogo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereTicketFormGoogleCaptcha($value)
+ * @property string $sidebar_logo_style
+ * @property string $session_driver
+ * @property int $allow_client_signup
+ * @property int $admin_client_signup_approval
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereAdminClientSignupApproval($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereAllowClientSignup($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereAllowedFileTypes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereSessionDriver($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereSidebarLogoStyle($value)
+ * @property string $google_calendar_status
+ * @property string|null $google_client_id
+ * @property string|null $google_client_secret
+ * @property string $google_calendar_verification_status
+ * @property string|null $google_id
+ * @property string|null $name
+ * @property string|null $token
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereGoogleCalendarStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereGoogleCalendarVerificationStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereGoogleClientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereGoogleClientSecret($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereGoogleId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereAllowedFileSize($value)
+ * @property string $status
+ * @property string|null $last_login
+ * @property int $rtl
+ * @method static \Illuminate\Database\Eloquent\Builder|Company whereAppName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Company whereLastLogin($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Company whereRtl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Company whereStatus($value)
+ * @property-read \App\Models\AttendanceSetting|null $attendanceSetting
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\CompanyAddress[] $companyAddress
+ * @property-read int|null $company_address_count
+ * @property-read \App\Models\InvoiceSetting|null $invoiceSetting
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\LeadAgent[] $leadAgents
+ * @property-read int|null $lead_agents_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\LeadCategory[] $leadCategories
+ * @property-read int|null $lead_categories_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\LeadSource[] $leadSources
+ * @property-read int|null $lead_sources_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\LeadStatus[] $leadStats
+ * @property-read int|null $lead_stats_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\LeaveType[] $leaveTypes
+ * @property-read int|null $leave_types_count
+ * @property-read \App\Models\MessageSetting|null $messageSetting
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\OfflinePaymentMethod[] $offlinePaymentMethod
+ * @property-read int|null $offline_payment_method_count
+ * @property-read \App\Models\PaymentGatewayCredentials|null $paymentGatewayCredentials
+ * @property-read \App\Models\ProjectSetting|null $projectSetting
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ProjectStatusSetting[] $projectStatusSettings
+ * @property-read int|null $project_status_settings_count
+ * @property-read \App\Models\TaskSetting|null $taskSetting
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tax[] $taxes
+ * @property-read int|null $taxes_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\TicketChannel[] $ticketChannels
+ * @property-read int|null $ticket_channels_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\TicketType[] $ticketTypes
+ * @property-read int|null $ticket_types_count
+ * @property-read \App\Models\ProjectTimeLog|null $timeLogSetting
+ * @property string|null $hash
+ * @property-read \App\Models\LeaveSetting|null $leaveSetting
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ModuleSetting[] $moduleSetting
+ * @property-read int|null $module_setting_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Company whereHash($value)
+ * @property string $year_starts_from
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $clients
+ * @property-read int|null $clients_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Contract[] $contracts
+ * @property-read int|null $contracts_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Currency[] $currencies
+ * @property-read int|null $currencies_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Estimate[] $estimates
+ * @property-read int|null $estimates_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\FileStorage[] $fileStorage
+ * @property-read int|null $file_storage_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Invoice[] $invoices
+ * @property-read int|null $invoices_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Lead[] $leads
+ * @property-read int|null $leads_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Order[] $orders
+ * @property-read int|null $orders_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Project[] $projects
+ * @property-read int|null $projects_count
+ * @property-read \App\Models\SlackSetting|null $slackSetting
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Task[] $tasks
+ * @property-read int|null $tasks_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Ticket[] $tickets
+ * @property-read int|null $tickets_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Company whereYearStartsFrom($value)
+ * @property string $header_color
+ * @property int $datatable_row_limit
+ * @property int $show_new_webhook_alert
+ * @property string|null $pm_type
+ * @property string|null $pm_last_four
+ * @property-read \App\Models\CompanyAddress|null $defaultAddress
+ * @method static \Illuminate\Database\Eloquent\Builder|Company whereDatatableRowLimit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Company whereHeaderColor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Company wherePmLastFour($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Company wherePmType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Company whereShowNewWebhookAlert($value)
+ * @property string $auth_theme_text
+ * @method static \Illuminate\Database\Eloquent\Builder|Company whereAuthThemeText($value)
+ * @property int $employee_can_export_data
+ * @method static \Illuminate\Database\Eloquent\Builder|Company whereEmployeeCanExportData($value)
+ * @mixin \Eloquent
+ * @property string|null $headers
+ * @property string|null $register_ip
+ * @property string|null $location_details
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Event> $events
+ * @property-read int|null $events_count
+ * @property-read mixed $masked_dark_logo_url
+ * @property-read mixed $masked_favicon_url
+ * @property-read mixed $masked_light_logo_url
+ * @property-read mixed $masked_login_background_url
+ * @property-read mixed $masked_logo_url
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $users
+ * @property-read int|null $users_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Company active()
+ * @method static \Illuminate\Database\Eloquent\Builder|Company whereHeaders($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Company whereLocationDetails($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Company whereRegisterIp($value)
+ */
+	class Company extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\CompanyAddress
+ *
+ * @property int $id
+ * @property string $address
+ * @property int $is_default
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $tax_number
+ * @property string|null $tax_name
+ * @method static \Illuminate\Database\Eloquent\Builder|CompanyAddress newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|CompanyAddress newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|CompanyAddress query()
+ * @method static \Illuminate\Database\Eloquent\Builder|CompanyAddress whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CompanyAddress whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CompanyAddress whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CompanyAddress whereIsDefault($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CompanyAddress whereTaxName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CompanyAddress whereTaxNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CompanyAddress whereUpdatedAt($value)
+ * @property string|null $location
+ * @method static \Illuminate\Database\Eloquent\Builder|CompanyAddress whereLocation($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @property int|null $country_id
+ * @property-read \App\Models\Country|null $country
+ * @method static \Illuminate\Database\Eloquent\Builder|CompanyAddress whereCompanyId($value)
+ * @property string|null $latitude
+ * @property string|null $longitude
+ * @method static \Illuminate\Database\Eloquent\Builder|CompanyAddress whereLatitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CompanyAddress whereLongitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CompanyAddress whereCountryId($value)
+ * @mixin \Eloquent
+ */
+	class CompanyAddress extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -407,6 +1045,35 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereState($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereSubject($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contract whereUpdatedAt($value)
+ * @property string|null $hash
+ * @method static \Illuminate\Database\Eloquent\Builder|Contract whereHash($value)
+ * @property int|null $currency_id
+ * @property-read \App\Models\Currency|null $currency
+ * @method static \Illuminate\Database\Eloquent\Builder|Contract whereCurrencyId($value)
+ * @property string|null $event_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Contract whereEventId($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|Contract whereCompanyId($value)
+ * @property int|null $contract_number
+ * @property int|null $project_id
+ * @property string|null $contract_note
+ * @property-read mixed $extras
+ * @property-read \App\Models\Project|null $project
+ * @method static \Illuminate\Database\Eloquent\Builder|Contract whereContractNote($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contract whereContractNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contract whereProjectId($value)
+ * @property string|null $company_sign
+ * @property string|null $sign_date
+ * @property-read mixed $company_signature
+ * @method static \Illuminate\Database\Eloquent\Builder|Contract whereCompanySign($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contract whereSignDate($value)
+ * @property string|null $original_contract_number
+ * @method static \Illuminate\Database\Eloquent\Builder|Contract whereOriginalContractNumber($value)
+ * @mixin \Eloquent
+ * @property int|null $sign_by
+ * @property-read \App\Models\User|null $signer
+ * @method static \Illuminate\Database\Eloquent\Builder|Contract whereSignBy($value)
  */
 	class Contract extends \Eloquent {}
 }
@@ -436,6 +1103,11 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ContractDiscussion whereLastUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContractDiscussion whereMessage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContractDiscussion whereUpdatedAt($value)
+ * @property-read \App\Models\Contract $contract
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|ContractDiscussion whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class ContractDiscussion extends \Eloquent {}
 }
@@ -480,6 +1152,11 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ContractFile whereSize($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContractFile whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContractFile whereUserId($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|ContractFile whereCompanyId($value)
+ * @property-read mixed $file
+ * @mixin \Eloquent
  */
 	class ContractFile extends \Eloquent {}
 }
@@ -514,6 +1191,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ContractRenew whereRenewedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContractRenew whereStartDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContractRenew whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|ContractRenew whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class ContractRenew extends \Eloquent {}
 }
@@ -541,8 +1222,55 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ContractSign whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContractSign whereSignature($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContractSign whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|ContractSign whereCompanyId($value)
+ * @property string|null $place
+ * @property string|null $date
+ * @method static \Illuminate\Database\Eloquent\Builder|ContractSign whereDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContractSign wherePlace($value)
+ * @mixin \Eloquent
  */
 	class ContractSign extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\ContractTemplate
+ *
+ * @property int $id
+ * @property int|null $company_id
+ * @property string $subject
+ * @property string|null $description
+ * @property string $amount
+ * @property int $contract_type_id
+ * @property int|null $currency_id
+ * @property string|null $contract_detail
+ * @property int $added_by
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\ContractType $contractType
+ * @property-read \App\Models\Currency|null $currency
+ * @method static \Illuminate\Database\Eloquent\Builder|ContractTemplate newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ContractTemplate newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ContractTemplate query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ContractTemplate whereAddedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContractTemplate whereAmount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContractTemplate whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContractTemplate whereContractDetail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContractTemplate whereContractTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContractTemplate whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContractTemplate whereCurrencyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContractTemplate whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContractTemplate whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContractTemplate whereSubject($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContractTemplate whereUpdatedAt($value)
+ * @property int|null $contract_template_number
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|ContractTemplate whereContractTemplateNumber($value)
+ * @mixin \Eloquent
+ */
+	class ContractTemplate extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -561,6 +1289,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ContractType whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContractType whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ContractType whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|ContractType whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class ContractType extends \Eloquent {}
 }
@@ -586,6 +1318,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Country whereNicename($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Country whereNumcode($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Country wherePhonecode($value)
+ * @property-read mixed $nationality
+ * @mixin \Eloquent
  */
 	class Country extends \Eloquent {}
 }
@@ -620,8 +1354,49 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|CreditNoteItem whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CreditNoteItem whereUnitPrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CreditNoteItem whereUpdatedAt($value)
+ * @property-read \App\Models\CreditNoteItemImage|null $creditNoteItemImage
+ * @property string|null $item_summary
+ * @property-read mixed $tax_list
+ * @method static \Illuminate\Database\Eloquent\Builder|CreditNoteItem whereItemSummary($value)
+ * @property-read \App\Models\UnitType|null $unit
+ * @property int|null $unit_id
+ * @property int|null $product_id
+ * @method static \Illuminate\Database\Eloquent\Builder|CreditNoteItem whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CreditNoteItem whereUnitId($value)
+ * @mixin \Eloquent
  */
 	class CreditNoteItem extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\CreditNoteItemImage
+ *
+ * @property int $id
+ * @property int $credit_note_item_id
+ * @property string $filename
+ * @property string|null $hashname
+ * @property string|null $size
+ * @property string|null $external_link
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read mixed $file_url
+ * @property-read mixed $icon
+ * @method static \Illuminate\Database\Eloquent\Builder|CreditNoteItemImage newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|CreditNoteItemImage newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|CreditNoteItemImage query()
+ * @method static \Illuminate\Database\Eloquent\Builder|CreditNoteItemImage whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CreditNoteItemImage whereCreditNoteItemId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CreditNoteItemImage whereExternalLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CreditNoteItemImage whereFilename($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CreditNoteItemImage whereHashname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CreditNoteItemImage whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CreditNoteItemImage whereSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CreditNoteItemImage whereUpdatedAt($value)
+ * @property-read mixed $file
+ * @mixin \Eloquent
+ */
+	class CreditNoteItemImage extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -633,6 +1408,7 @@ namespace App\Models{
  * @property int|null $client_id
  * @property string $cn_number
  * @property int|null $invoice_id
+ * @property int|null $unit_id
  * @property \Illuminate\Support\Carbon $issue_date
  * @property \Illuminate\Support\Carbon $due_date
  * @property float $discount
@@ -697,6 +1473,18 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|CreditNotes whereSubTotal($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CreditNotes whereTotal($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CreditNotes whereUpdatedAt($value)
+ * @property float|null $adjustment_amount
+ * @property string $calculate_tax
+ * @method static \Illuminate\Database\Eloquent\Builder|CreditNotes whereAdjustmentAmount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CreditNotes whereCalculateTax($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|CreditNotes whereCompanyId($value)
+ * @property-read \App\Models\UnitType|null $unit
+ * @method static \Illuminate\Database\Eloquent\Builder|CreditNotes whereUnitId($value)
+ * @property string|null $original_credit_note_number
+ * @method static \Illuminate\Database\Eloquent\Builder|CreditNotes whereOriginalCreditNoteNumber($value)
+ * @mixin \Eloquent
  */
 	class CreditNotes extends \Eloquent {}
 }
@@ -727,6 +1515,20 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Currency whereIsCryptocurrency($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Currency whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Currency whereUsdPrice($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|Currency whereCompanyId($value)
+ * @property string $currency_position
+ * @property int $no_of_decimal
+ * @property string|null $thousand_separator
+ * @property string|null $decimal_separator
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Invoice> $invoices
+ * @property-read int|null $invoices_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Currency whereCurrencyPosition($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Currency whereDecimalSeparator($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Currency whereNoOfDecimal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Currency whereThousandSeparator($value)
+ * @mixin \Eloquent
  */
 	class Currency extends \Eloquent {}
 }
@@ -749,6 +1551,11 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|CurrencyFormatSetting whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CurrencyFormatSetting whereNoOfDecimal($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CurrencyFormatSetting whereThousandSeparator($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|CurrencyFormatSetting whereCompanyId($value)
+ * @property-read \App\Models\Currency $currency
+ * @mixin \Eloquent
  */
 	class CurrencyFormatSetting extends \Eloquent {}
 }
@@ -761,9 +1568,11 @@ namespace App\Models{
  * @property int|null $custom_field_group_id
  * @property string $label
  * @property string $name
+ * @property bool $export
  * @property string $type
  * @property string $required
  * @property string|null $values
+ * @property string|null $visible
  * @method static \Illuminate\Database\Eloquent\Builder|CustomField newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|CustomField newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|CustomField query()
@@ -774,6 +1583,16 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|CustomField whereRequired($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CustomField whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CustomField whereValues($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @property-read \App\Models\LeadCustomForm|null $leadCustomForm
+ * @property-read \App\Models\TicketCustomForm|null $ticketCustomForm
+ * @method static \Illuminate\Database\Eloquent\Builder|CustomField whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CustomField whereExport($value)
+ * @property-read \App\Models\CustomFieldGroup|null $customFieldGroup
+ * @property-read \App\Models\CustomFieldGroup|null $fieldGroup
+ * @method static \Illuminate\Database\Eloquent\Builder|CustomField whereVisible($value)
+ * @mixin \Eloquent
  */
 	class CustomField extends \Eloquent {}
 }
@@ -791,8 +1610,44 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|CustomFieldGroup whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CustomFieldGroup whereModel($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CustomFieldGroup whereName($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|CustomFieldGroup whereCompanyId($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\CustomField[] $customField
+ * @property-read int|null $custom_field_count
+ * @mixin \Eloquent
+ * @property-read mixed $fields
  */
 	class CustomFieldGroup extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\CustomLinkSetting
+ *
+ * @property int $id
+ * @property int|null $company_id
+ * @property string $link_title
+ * @property string $url
+ * @property string|null $can_be_viewed_by
+ * @property string $status
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|CustomLinkSetting newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|CustomLinkSetting newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|CustomLinkSetting query()
+ * @method static \Illuminate\Database\Eloquent\Builder|CustomLinkSetting whereCanBeViewedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CustomLinkSetting whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CustomLinkSetting whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CustomLinkSetting whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CustomLinkSetting whereLinkTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CustomLinkSetting whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CustomLinkSetting whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CustomLinkSetting whereUrl($value)
+ * @mixin \Eloquent
+ */
+	class CustomLinkSetting extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -802,6 +1657,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|CustomModulePermission newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|CustomModulePermission newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|CustomModulePermission query()
+ * @mixin \Eloquent
  */
 	class CustomModulePermission extends \Eloquent {}
 }
@@ -826,8 +1682,339 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|DashboardWidget whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|DashboardWidget whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|DashboardWidget whereWidgetName($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|DashboardWidget whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class DashboardWidget extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\DatabaseBackup
+ *
+ * @property int $id
+ * @property string|null $filename
+ * @property string|null $size
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @method static \Illuminate\Database\Eloquent\Builder|DatabaseBackup newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|DatabaseBackup newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|DatabaseBackup query()
+ * @method static \Illuminate\Database\Eloquent\Builder|DatabaseBackup whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DatabaseBackup whereFilename($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DatabaseBackup whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DatabaseBackup whereSize($value)
+ * @mixin \Eloquent
+ */
+	class DatabaseBackup extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\DatabaseBackupSetting
+ *
+ * @property int $id
+ * @property string $status
+ * @property string|null $hour_of_day
+ * @property string|null $backup_after_days
+ * @property string|null $delete_backup_after_days
+ * @method static \Illuminate\Database\Eloquent\Builder|DatabaseBackupSetting newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|DatabaseBackupSetting newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|DatabaseBackupSetting query()
+ * @method static \Illuminate\Database\Eloquent\Builder|DatabaseBackupSetting whereBackupAfterDays($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DatabaseBackupSetting whereDeleteBackupAfterDays($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DatabaseBackupSetting whereHourOfDay($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DatabaseBackupSetting whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DatabaseBackupSetting whereStatus($value)
+ * @mixin \Eloquent
+ */
+	class DatabaseBackupSetting extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Lead
+ *
+ * @property int $id
+ * @property int|null $client_id
+ * @property int|null $source_id
+ * @property int|null $status_id
+ * @property int $column_priority
+ * @property int|null $agent_id
+ * @property string|null $company_name
+ * @property string|null $website
+ * @property string|null $address
+ * @property string|null $salutation
+ * @property string $client_name
+ * @property string $client_email
+ * @property string|null $mobile
+ * @property string|null $cell
+ * @property string|null $office
+ * @property string|null $city
+ * @property string|null $state
+ * @property string|null $country
+ * @property string|null $postal_code
+ * @property string|null $note
+ * @property string $next_follow_up
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property float|null $value
+ * @property float|null $total_value
+ * @property int|null $currency_id
+ * @property int|null $category_id
+ * @property int|null $added_by
+ * @property int|null $last_updated_by
+ * @property-read \App\Models\User|null $client
+ * @property-read \App\Models\Currency|null $currency
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\DealFile[] $files
+ * @property-read int|null $files_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\DealFollowUp[] $follow
+ * @property-read int|null $follow_count
+ * @property-read \App\Models\DealFollowUp|null $followup
+ * @property-read mixed $extras
+ * @property-read mixed $icon
+ * @property-read mixed $image_url
+ * @property-read \App\Models\LeadAgent|null $leadAgent
+ * @property-read \App\Models\LeadSource|null $leadSource
+ * @property-read \App\Models\LeadStatus|null $leadStatus
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read int|null $notifications_count
+ * @method static \Database\Factories\LeadFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead whereAddedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead whereAgentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead whereCategoryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead whereCell($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead whereCity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead whereClientEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead whereClientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead whereClientName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead whereColumnPriority($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead whereCompanyName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead whereCountry($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead whereCurrencyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead whereLastUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead whereMobile($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead whereNextFollowUp($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead whereNote($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead whereOffice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead wherePostalCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead whereSalutation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead whereSourceId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead whereState($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead whereStatusId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead whereValue($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead whereWebsite($value)
+ * @property string|null $hash
+ * @property-read \App\Models\LeadCategory|null $category
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead whereHash($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead whereCompanyId($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Product> $products
+ * @property-read int|null $products_count
+ * @property-read int|null $follow_up_date_next
+ * @property-read int|null $follow_up_date_past
+ * @property string|null $name
+ * @property int|null $lead_pipeline_id
+ * @property int|null $pipeline_stage_id
+ * @property int|null $lead_id
+ * @property \Illuminate\Support\Carbon|null $close_date
+ * @property-read \App\Models\Lead|null $contact
+ * @property-read \App\Models\PipelineStage|null $leadStage
+ * @property-read \App\Models\LeadPipeline|null $pipeline
+ * @method static \Illuminate\Database\Eloquent\Builder|Deal whereCloseDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Deal whereLeadId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Deal whereLeadPipelineId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Deal whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Deal wherePipelineStageId($value)
+ * @mixin \Eloquent
+ * @property int|null $deal_watcher
+ * @property-read \App\Models\User|null $addedBy
+ * @property-read \App\Models\User|null $dealWatcher
+ * @property-read \App\Models\LeadProduct $pivot
+ * @method static \Illuminate\Database\Eloquent\Builder|Deal whereDealWatcher($value)
+ */
+	class Deal extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * Class Holiday
+ *
+ * @property int $id
+ * @property int $lead_id
+ * @property int $user_id
+ * @property string $filename
+ * @property string $hashname
+ * @property string $size
+ * @property string|null $description
+ * @property string|null $google_url
+ * @property string|null $dropbox_link
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int|null $added_by
+ * @property int|null $last_updated_by
+ * @property-read mixed $file_url
+ * @property-read mixed $icon
+ * @property-read \App\Models\Lead $lead
+ * @method static \Illuminate\Database\Eloquent\Builder|DealFile newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|DealFile newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|DealFile query()
+ * @method static \Illuminate\Database\Eloquent\Builder|DealFile whereAddedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealFile whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealFile whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealFile whereDropboxLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealFile whereFilename($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealFile whereGoogleUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealFile whereHashname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealFile whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealFile whereLastUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealFile whereLeadId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealFile whereSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealFile whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealFile whereUserId($value)
+ * @mixin \Eloquent
+ * @property int|null $deal_id
+ * @method static \Illuminate\Database\Eloquent\Builder|DealFile whereDealId($value)
+ */
+	class DealFile extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\DealFollowUp
+ *
+ * @property int $id
+ * @property int $lead_id
+ * @property string|null $remark
+ * @property \Illuminate\Support\Carbon|null $next_follow_up_date
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int|null $added_by
+ * @property int|null $last_updated_by
+ * @property-read mixed $icon
+ * @property-read \App\Models\Lead $lead
+ * @method static \Illuminate\Database\Eloquent\Builder|DealFollowUp newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|DealFollowUp newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|DealFollowUp query()
+ * @method static \Illuminate\Database\Eloquent\Builder|DealFollowUp whereAddedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealFollowUp whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealFollowUp whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealFollowUp whereLastUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealFollowUp whereLeadId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealFollowUp whereNextFollowUpDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealFollowUp whereRemark($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealFollowUp whereUpdatedAt($value)
+ * @property string|null $event_id
+ * @method static \Illuminate\Database\Eloquent\Builder|DealFollowUp whereEventId($value)
+ * @property string|null $send_reminder
+ * @property string|null $remind_time
+ * @property string|null $remind_type
+ * @method static \Illuminate\Database\Eloquent\Builder|DealFollowUp whereRemindTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealFollowUp whereRemindType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealFollowUp whereSendReminder($value)
+ * @property-read \App\Models\User|null $addedBy
+ * @property string|null $status
+ * @method static \Illuminate\Database\Eloquent\Builder|DealFollowUp whereStatus($value)
+ * @property int|null $deal_id
+ * @method static \Illuminate\Database\Eloquent\Builder|DealFollowUp whereDealId($value)
+ * @mixin \Eloquent
+ */
+	class DealFollowUp extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property int $deal_id
+ * @property string $event_type
+ * @property int|null $created_by
+ * @property int|null $deal_stage_from_id
+ * @property int|null $file_id
+ * @property int|null $task_id
+ * @property int|null $follow_up_id
+ * @property int|null $note_id
+ * @property int|null $proposal_id
+ * @property int|null $agent_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int|null $deal_stage_to_id
+ * @property-read \App\Models\PipelineStage|null $dealStageFrom
+ * @property-read \App\Models\PipelineStage|null $dealStageTo
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|DealHistory newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|DealHistory newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|DealHistory query()
+ * @method static \Illuminate\Database\Eloquent\Builder|DealHistory whereAgentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealHistory whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealHistory whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealHistory whereDealId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealHistory whereDealStageFromId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealHistory whereDealStageToId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealHistory whereEventType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealHistory whereFileId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealHistory whereFollowUpId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealHistory whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealHistory whereNoteId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealHistory whereProposalId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealHistory whereTaskId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealHistory whereUpdatedAt($value)
+ */
+	class DealHistory extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\ClientNote
+ *
+ * @property int $id
+ * @property int|null $client_id
+ * @property string $title
+ * @property int $type
+ * @property int|null $member_id
+ * @property int $is_client_show
+ * @property int $ask_password
+ * @property string $details
+ * @property int|null $added_by
+ * @property int|null $last_updated_by
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientNote newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientNote newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientNote query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientNote whereAddedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientNote whereAskPassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientNote whereClientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientNote whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientNote whereDetails($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientNote whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientNote whereIsClientShow($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientNote whereLastUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientNote whereMemberId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientNote whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientNote whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientNote whereUpdatedAt($value)
+ * @property-read \App\Models\User|null $client
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ClientUserNote[] $members
+ * @property-read int|null $members_count
+ * @property int|null $deal_id
+ * @property int $is_lead_show
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadNote whereIsLeadShow($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadNote whereLeadId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DealNote whereDealId($value)
+ * @mixin \Eloquent
+ */
+	class DealNote extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -840,8 +2027,10 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int|null $added_by
  * @property int|null $last_updated_by
+ * @property int|null $parent_id
  * @property-read mixed $icon
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\EmployeeDetails[] $members
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Designation[] $childs
  * @property-read int|null $members_count
  * @method static \Illuminate\Database\Eloquent\Builder|Designation newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Designation newQuery()
@@ -852,6 +2041,12 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Designation whereLastUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Designation whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Designation whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read int|null $childs_count
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|Designation whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Designation whereParentId($value)
+ * @mixin \Eloquent
  */
 	class Designation extends \Eloquent {}
 }
@@ -901,6 +2096,19 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Discussion whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Discussion whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Discussion whereUserId($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\DiscussionFile[] $files
+ * @property-read int|null $files_count
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|Discussion whereCompanyId($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MentionUser> $mentionDiscussion
+ * @property-read int|null $mention_discussion_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $mentionUser
+ * @property-read int|null $mention_user_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MentionUser> $mentionDiscussion
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $mentionUser
+ * @mixin \Eloquent
+ * @property-read \App\Models\MentionUser $pivot
  */
 	class Discussion extends \Eloquent {}
 }
@@ -924,8 +2132,58 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|DiscussionCategory whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|DiscussionCategory whereOrder($value)
  * @method static \Illuminate\Database\Eloquent\Builder|DiscussionCategory whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|DiscussionCategory whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class DiscussionCategory extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\DiscussionFile
+ *
+ * @property string|null $external_link
+ * @property int $id
+ * @property int $user_id
+ * @property int|null $discussion_id
+ * @property int|null $discussion_reply_id
+ * @property string $filename
+ * @property string|null $description
+ * @property string|null $google_url
+ * @property string|null $hashname
+ * @property string|null $size
+ * @property string|null $dropbox_link
+ * @property string|null $external_link_name
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Discussion|null $discussion
+ * @property-read mixed $file_url
+ * @property-read mixed $icon
+ * @method static \Illuminate\Database\Eloquent\Builder|DiscussionFile newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|DiscussionFile newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|DiscussionFile query()
+ * @method static \Illuminate\Database\Eloquent\Builder|DiscussionFile whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DiscussionFile whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DiscussionFile whereDiscussionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DiscussionFile whereDiscussionReplyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DiscussionFile whereDropboxLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DiscussionFile whereExternalLinkName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DiscussionFile whereFilename($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DiscussionFile whereGoogleUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DiscussionFile whereHashname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DiscussionFile whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DiscussionFile whereSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DiscussionFile whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DiscussionFile whereUserId($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|DiscussionFile whereCompanyId($value)
+ * @property-read mixed $file
+ * @mixin \Eloquent
+ */
+	class DiscussionFile extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -954,6 +2212,19 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|DiscussionReply whereUserId($value)
  * @method static \Illuminate\Database\Query\Builder|DiscussionReply withTrashed()
  * @method static \Illuminate\Database\Query\Builder|DiscussionReply withoutTrashed()
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\DiscussionFile[] $files
+ * @property-read int|null $files_count
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|DiscussionReply whereCompanyId($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MentionUser> $mentionDiscussionReply
+ * @property-read int|null $mention_discussion_reply_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $mentionUser
+ * @property-read int|null $mention_user_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MentionUser> $mentionDiscussionReply
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $mentionUser
+ * @mixin \Eloquent
+ * @property-read \App\Models\MentionUser $pivot
  */
 	class DiscussionReply extends \Eloquent {}
 }
@@ -967,23 +2238,125 @@ namespace App\Models{
  * @property string $send_email
  * @property string $send_slack
  * @property string $send_push
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property string|null $slug
  * @property-read mixed $icon
- * @method static \Illuminate\Database\Eloquent\Builder|EmailNotificationSetting newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|EmailNotificationSetting newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|EmailNotificationSetting query()
- * @method static \Illuminate\Database\Eloquent\Builder|EmailNotificationSetting whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|EmailNotificationSetting whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|EmailNotificationSetting whereSendEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|EmailNotificationSetting whereSendPush($value)
- * @method static \Illuminate\Database\Eloquent\Builder|EmailNotificationSetting whereSendSlack($value)
- * @method static \Illuminate\Database\Eloquent\Builder|EmailNotificationSetting whereSettingName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|EmailNotificationSetting whereSlug($value)
- * @method static \Illuminate\Database\Eloquent\Builder|EmailNotificationSetting whereUpdatedAt($value)
+ * @method static Builder|EmailNotificationSetting newModelQuery()
+ * @method static Builder|EmailNotificationSetting newQuery()
+ * @method static Builder|EmailNotificationSetting query()
+ * @method static Builder|EmailNotificationSetting whereCreatedAt($value)
+ * @method static Builder|EmailNotificationSetting whereId($value)
+ * @method static Builder|EmailNotificationSetting whereSendEmail($value)
+ * @method static Builder|EmailNotificationSetting whereSendPush($value)
+ * @method static Builder|EmailNotificationSetting whereSendSlack($value)
+ * @method static Builder|EmailNotificationSetting whereSettingName($value)
+ * @method static Builder|EmailNotificationSetting whereSlug($value)
+ * @method static Builder|EmailNotificationSetting whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read Company|null $company
+ * @method static Builder|EmailNotificationSetting whereCompanyId($value)
+ * @property string $send_twilio
+ * @method static Builder|EmailNotificationSetting whereSendTwilio($value)
+ * @mixin Eloquent
  */
 	class EmailNotificationSetting extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\EmergencyContact
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string|null $name
+ * @property string|null $email
+ * @property string|null $mobile
+ * @property string|null $relation
+ * @property string|null $address
+ * @property int|null $added_by
+ * @property int|null $last_updated_by
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|EmergencyContact newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EmergencyContact newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EmergencyContact query()
+ * @method static \Illuminate\Database\Eloquent\Builder|EmergencyContact whereAddedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmergencyContact whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmergencyContact whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmergencyContact whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmergencyContact whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmergencyContact whereLastUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmergencyContact whereMobile($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmergencyContact whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmergencyContact whereRelation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmergencyContact whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmergencyContact whereUserId($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|EmergencyContact whereCompanyId($value)
+ * @mixin \Eloquent
+ */
+	class EmergencyContact extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property int $emp_id
+ * @property string $employee_activity
+ * @property int|null $leave_id
+ * @property int|null $task_id
+ * @property int|null $proj_id
+ * @property int|null $invoice_id
+ * @property int|null $ticket_id
+ * @property int|null $proposal_id
+ * @property int|null $estimate_id
+ * @property int|null $deal_id
+ * @property int|null $deal_followup_id
+ * @property int|null $client_id
+ * @property int|null $expenses_id
+ * @property int|null $timelog_id
+ * @property int|null $event_id
+ * @property int|null $product_id
+ * @property int|null $credit_note_id
+ * @property int|null $payment_id
+ * @property int|null $order_id
+ * @property int|null $contract_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeActivity newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeActivity newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeActivity query()
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeActivity whereClientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeActivity whereContractId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeActivity whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeActivity whereCreditNoteId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeActivity whereDealFollowupId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeActivity whereDealId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeActivity whereEmpId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeActivity whereEmployeeActivity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeActivity whereEstimateId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeActivity whereEventId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeActivity whereExpensesId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeActivity whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeActivity whereInvoiceId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeActivity whereLeaveId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeActivity whereOrderId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeActivity wherePaymentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeActivity whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeActivity whereProjId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeActivity whereProposalId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeActivity whereTaskId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeActivity whereTicketId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeActivity whereTimelogId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeActivity whereUpdatedAt($value)
+ */
+	class EmployeeActivity extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -998,6 +2371,7 @@ namespace App\Models{
  * @property string|null $slack_username
  * @property int|null $department_id
  * @property int|null $designation_id
+ * @property int|null $data
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon $joining_date
@@ -1009,23 +2383,59 @@ namespace App\Models{
  * @property-read mixed $extras
  * @property-read mixed $icon
  * @property-read \App\Models\User $user
- * @method static \Illuminate\Database\Eloquent\Builder|EmployeeDetails newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|EmployeeDetails newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|EmployeeDetails query()
- * @method static \Illuminate\Database\Eloquent\Builder|EmployeeDetails whereAddedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|EmployeeDetails whereAddress($value)
- * @method static \Illuminate\Database\Eloquent\Builder|EmployeeDetails whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|EmployeeDetails whereDepartmentId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|EmployeeDetails whereDesignationId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|EmployeeDetails whereEmployeeId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|EmployeeDetails whereHourlyRate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|EmployeeDetails whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|EmployeeDetails whereJoiningDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|EmployeeDetails whereLastDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|EmployeeDetails whereLastUpdatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|EmployeeDetails whereSlackUsername($value)
- * @method static \Illuminate\Database\Eloquent\Builder|EmployeeDetails whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|EmployeeDetails whereUserId($value)
+ * @method static Builder|EmployeeDetails newModelQuery()
+ * @method static Builder|EmployeeDetails newQuery()
+ * @method static Builder|EmployeeDetails query()
+ * @method static Builder|EmployeeDetails whereAddedBy($value)
+ * @method static Builder|EmployeeDetails whereAddress($value)
+ * @method static Builder|EmployeeDetails whereCreatedAt($value)
+ * @method static Builder|EmployeeDetails whereDepartmentId($value)
+ * @method static Builder|EmployeeDetails whereDesignationId($value)
+ * @method static Builder|EmployeeDetails whereEmployeeId($value)
+ * @method static Builder|EmployeeDetails whereHourlyRate($value)
+ * @method static Builder|EmployeeDetails whereId($value)
+ * @method static Builder|EmployeeDetails whereJoiningDate($value)
+ * @method static Builder|EmployeeDetails whereLastDate($value)
+ * @method static Builder|EmployeeDetails whereLastUpdatedBy($value)
+ * @method static Builder|EmployeeDetails whereSlackUsername($value)
+ * @method static Builder|EmployeeDetails whereUpdatedAt($value)
+ * @method static Builder|EmployeeDetails whereUserId($value)
+ * @property string|null $attendance_reminder
+ * @method static Builder|EmployeeDetails whereAttendanceReminder($value)
+ * @property \Illuminate\Support\Carbon|null $date_of_birth
+ * @method static Builder|EmployeeDetails whereDateOfBirth($value)
+ * @property int|null $company_id
+ * @property string|null $calendar_view
+ * @property string|null $about_me
+ * @property int|null $reporting_to
+ * @property-read \App\Models\Company|null $company
+ * @property-read mixed $upcoming_birthday
+ * @property-read \App\Models\User|null $reportingTo
+ * @method static Builder|EmployeeDetails whereAboutMe($value)
+ * @method static Builder|EmployeeDetails whereCalendarView($value)
+ * @method static Builder|EmployeeDetails whereCompanyId($value)
+ * @method static Builder|EmployeeDetails whereReportingTo($value)
+ * @property string|null $contract_end_date
+ * @property string|null $internship_end_date
+ * @property string|null $employment_type
+ * @property string|null $marriage_anniversary_date
+ * @property string|null $marital_status
+ * @property string|null $notice_period_end_date
+ * @property string|null $notice_period_start_date
+ * @property string|null $probation_end_date
+ * @property string|null $name
+ * @property string|null $occassion
+ * @method static Builder|EmployeeDetails whereContractEndDate($value)
+ * @method static Builder|EmployeeDetails whereEmploymentType($value)
+ * @method static Builder|EmployeeDetails whereInternshipEndDate($value)
+ * @method static Builder|EmployeeDetails whereMaritalStatus($value)
+ * @method static Builder|EmployeeDetails whereMarriageAnniversaryDate($value)
+ * @method static Builder|EmployeeDetails whereNoticePeriodEndDate($value)
+ * @method static Builder|EmployeeDetails whereNoticePeriodStartDate($value)
+ * @method static Builder|EmployeeDetails whereProbationEndDate($value)
+ * @mixin \Eloquent
+ * @property int|null $company_address_id
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeDetails whereCompanyAddressId($value)
  */
 	class EmployeeDetails extends \Eloquent {}
 }
@@ -1034,7 +2444,6 @@ namespace App\Models{
 /**
  * Class Holiday
  *
- * @package App\Models
  * @property int $id
  * @property int $user_id
  * @property string $name
@@ -1061,6 +2470,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|EmployeeDocument whereSize($value)
  * @method static \Illuminate\Database\Eloquent\Builder|EmployeeDocument whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|EmployeeDocument whereUserId($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeDocument whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class EmployeeDocument extends \Eloquent {}
 }
@@ -1086,8 +2499,195 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|EmployeeLeaveQuota whereNoOfLeaves($value)
  * @method static \Illuminate\Database\Eloquent\Builder|EmployeeLeaveQuota whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|EmployeeLeaveQuota whereUserId($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeLeaveQuota whereCompanyId($value)
+ * @mixin \Eloquent
+ * @property float $leaves_used
+ * @property float $leaves_remaining
+ * @property array|null $carry_forward_status
+ * @property int $leave_type_impact
+ * @property float $overutilised_leaves
+ * @property float $unused_leaves
+ * @property float $carry_forward_leaves
+ * @property float $carry_forward_applied
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeLeaveQuota whereCarryForwardApplied($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeLeaveQuota whereCarryForwardLeaves($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeLeaveQuota whereCarryForwardStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeLeaveQuota whereLeaveTypeImpact($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeLeaveQuota whereLeavesRemaining($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeLeaveQuota whereLeavesUsed($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeLeaveQuota whereOverutilisedLeaves($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeLeaveQuota whereUnusedLeaves($value)
  */
 	class EmployeeLeaveQuota extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property int $leave_type_id
+ * @property float $no_of_leaves
+ * @property float $leaves_used
+ * @property float $leaves_remaining
+ * @property \Illuminate\Support\Carbon $for_month
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property float $overutilised_leaves
+ * @property float $unused_leaves
+ * @property float $carry_forward_leaves
+ * @property int $carry_forward_applied
+ * @property-read \App\Models\LeaveType $leaveType
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeLeaveQuotaHistory newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeLeaveQuotaHistory newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeLeaveQuotaHistory query()
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeLeaveQuotaHistory whereCarryForwardApplied($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeLeaveQuotaHistory whereCarryForwardLeaves($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeLeaveQuotaHistory whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeLeaveQuotaHistory whereForMonth($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeLeaveQuotaHistory whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeLeaveQuotaHistory whereLeaveTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeLeaveQuotaHistory whereLeavesRemaining($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeLeaveQuotaHistory whereLeavesUsed($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeLeaveQuotaHistory whereNoOfLeaves($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeLeaveQuotaHistory whereOverutilisedLeaves($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeLeaveQuotaHistory whereUnusedLeaves($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeLeaveQuotaHistory whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeLeaveQuotaHistory whereUserId($value)
+ */
+	class EmployeeLeaveQuotaHistory extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\EmployeeShift
+ *
+ * @property int $id
+ * @property int|null $company_id
+ * @property string $shift_name
+ * @property string $shift_short_code
+ * @property string $color
+ * @property string $office_start_time
+ * @property string $office_end_time
+ * @property string $auto_clock_out_time
+ * @property string|null $halfday_mark_time
+ * @property int $late_mark_duration
+ * @property int $clockin_in_day
+ * @property string $office_open_days
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShift newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShift newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShift query()
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShift whereClockinInDay($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShift whereColor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShift whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShift whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShift whereHalfdayMarkTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShift whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShift whereLateMarkDuration($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShift whereOfficeEndTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShift whereOfficeOpenDays($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShift whereOfficeStartTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShift whereShiftName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShift whereShiftShortCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShift whereUpdatedAt($value)
+ * @property-read \App\Models\Company|null $company
+ * @property string|null $early_clock_in
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShift whereEarlyClockIn($value)
+ * @mixin \Eloquent
+ * @property string $shift_type
+ * @property float|null $flexible_total_hours
+ * @property float|null $flexible_auto_clockout
+ * @property float|null $flexible_half_day_hours
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\EmployeeShiftSchedule> $employeeShiftSchedules
+ * @property-read int|null $employee_shift_schedules_count
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShift whereAutoClockOutTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShift whereFlexibleAutoClockout($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShift whereFlexibleHalfDayHours($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShift whereFlexibleTotalHours($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShift whereShiftType($value)
+ */
+	class EmployeeShift extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\EmployeeShiftChangeRequest
+ *
+ * @property int $id
+ * @property int|null $company_id
+ * @property int $shift_schedule_id
+ * @property int $employee_shift_id
+ * @property string $status
+ * @property string|null $reason
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\EmployeeShift $shift
+ * @property-read \App\Models\EmployeeShiftSchedule $shiftSchedule
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShiftChangeRequest newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShiftChangeRequest newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShiftChangeRequest query()
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShiftChangeRequest whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShiftChangeRequest whereEmployeeShiftId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShiftChangeRequest whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShiftChangeRequest whereReason($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShiftChangeRequest whereShiftScheduleId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShiftChangeRequest whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShiftChangeRequest whereUpdatedAt($value)
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShiftChangeRequest whereCompanyId($value)
+ * @mixin \Eloquent
+ */
+	class EmployeeShiftChangeRequest extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\EmployeeShiftSchedule
+ *
+ * @property string|null $color
+ * @property-read \App\Models\EmployeeShift $shift
+ * @property int $id
+ * @property int $user_id
+ * @property \Illuminate\Support\Carbon $date
+ * @property int $employee_shift_id
+ * @property int|null $added_by
+ * @property int|null $last_updated_by
+ * @property \Illuminate\Support\Carbon|null $shift_start_time
+ * @property \Illuminate\Support\Carbon|null $shift_end_time
+ * @property string|null $remarks
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\EmployeeShiftChangeRequest|null $pendingRequestChange
+ * @property-read \App\Models\EmployeeShiftChangeRequest|null $requestChange
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShiftSchedule newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShiftSchedule newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShiftSchedule query()
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShiftSchedule whereAddedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShiftSchedule whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShiftSchedule whereDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShiftSchedule whereEmployeeShiftId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShiftSchedule whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShiftSchedule whereLastUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShiftSchedule whereRemarks($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShiftSchedule whereShiftEndTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShiftSchedule whereShiftStartTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShiftSchedule whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShiftSchedule whereUserId($value)
+ * @property string $file
+ * @property-read mixed $download_file_url
+ * @property-read mixed $file_url
+ * @property-read \App\Models\EmployeeShiftSchedule|null $dates
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeShiftSchedule whereFile($value)
+ * @mixin \Eloquent
+ */
+	class EmployeeShiftSchedule extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -1110,6 +2710,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|EmployeeSkill whereSkillId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|EmployeeSkill whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|EmployeeSkill whereUserId($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeSkill whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class EmployeeSkill extends \Eloquent {}
 }
@@ -1133,6 +2737,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|EmployeeTeam whereTeamId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|EmployeeTeam whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|EmployeeTeam whereUserId($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|EmployeeTeam whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class EmployeeTeam extends \Eloquent {}
 }
@@ -1187,6 +2795,29 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Estimate whereTotal($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Estimate whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Estimate whereValidTill($value)
+ * @property string|null $hash
+ * @property int|null $unit_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Estimate whereHash($value)
+ * @property string $calculate_tax
+ * @method static \Illuminate\Database\Eloquent\Builder|Estimate whereCalculateTax($value)
+ * @property string|null $description
+ * @method static \Illuminate\Database\Eloquent\Builder|Estimate whereDescription($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\ClientDetails $clientdetails
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|Estimate whereCompanyId($value)
+ * @property \Illuminate\Support\Carbon|null $last_viewed
+ * @property string|null $ip_address
+ * @property-read \App\Models\UnitType|null $unit
+ * @method static \Illuminate\Database\Eloquent\Builder|Estimate whereIpAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Estimate whereLastViewed($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Estimate whereUnitId($value)
+ * @property string|null $original_estimate_number
+ * @method static \Illuminate\Database\Eloquent\Builder|Estimate whereOriginalEstimateNumber($value)
+ * @mixin \Eloquent
+ * @property int|null $estimate_request_id
+ * @property-read \App\Models\EstimateRequest|null $estimateRequest
+ * @method static \Illuminate\Database\Eloquent\Builder|Estimate whereEstimateRequestId($value)
  */
 	class Estimate extends \Eloquent {}
 }
@@ -1223,8 +2854,237 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|EstimateItem whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|EstimateItem whereUnitPrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|EstimateItem whereUpdatedAt($value)
+ * @property-read \App\Models\EstimateItemImage|null $estimateItemImage
+ * @property-read mixed $tax_list
+ * @property int|null $product_id
+ * @property int|null $unit_id
+ * @property-read \App\Models\UnitType|null $unit
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateItem whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateItem whereUnitId($value)
+ * @mixin \Eloquent
+ * @property int $field_order
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateItem whereFieldOrder($value)
  */
 	class EstimateItem extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\EstimateItemImage
+ *
+ * @property int $id
+ * @property int $estimate_item_id
+ * @property string $filename
+ * @property string|null $hashname
+ * @property string|null $size
+ * @property string|null $external_link
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read mixed $file_url
+ * @property-read mixed $icon
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateItemImage newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateItemImage newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateItemImage query()
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateItemImage whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateItemImage whereEstimateItemId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateItemImage whereExternalLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateItemImage whereFilename($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateItemImage whereHashname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateItemImage whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateItemImage whereSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateItemImage whereUpdatedAt($value)
+ * @property-read \App\Models\EstimateItem $item
+ * @property-read mixed $file
+ * @mixin \Eloquent
+ */
+	class EstimateItemImage extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property string|null $original_request_number
+ * @property string|null $estimate_request_number
+ * @property int $client_id
+ * @property int|null $company_id
+ * @property int|null $estimate_id
+ * @property string $description
+ * @property float $estimated_budget
+ * @property int|null $project_id
+ * @property string|null $early_requirement
+ * @property int|null $currency_id
+ * @property string $status
+ * @property string $reason
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int|null $added_by
+ * @property-read \App\Models\User $client
+ * @property-read \App\Models\ClientDetails $clientdetails
+ * @property-read \App\Models\Company|null $company
+ * @property-read \App\Models\Currency|null $currency
+ * @property-read \App\Models\Estimate|null $estimate
+ * @property-read \App\Models\Project|null $project
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateRequest newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateRequest newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateRequest query()
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateRequest whereAddedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateRequest whereClientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateRequest whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateRequest whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateRequest whereCurrencyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateRequest whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateRequest whereEarlyRequirement($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateRequest whereEstimateId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateRequest whereEstimateRequestNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateRequest whereEstimatedBudget($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateRequest whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateRequest whereOriginalRequestNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateRequest whereProjectId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateRequest whereReason($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateRequest whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateRequest whereUpdatedAt($value)
+ */
+	class EstimateRequest extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\EstimateTemplate
+ *
+ * @property int|null $unit_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|Estimate whereCompanyId($value)
+ * @property int $id
+ * @property int|null $company_id
+ * @property string $name
+ * @property float $sub_total
+ * @property float $total
+ * @property int|null $currency_id
+ * @property string $discount_type
+ * @property float $discount
+ * @property int $invoice_convert
+ * @property string $status
+ * @property string|null $note
+ * @property string|null $description
+ * @property string $calculate_tax
+ * @property string|null $client_comment
+ * @property int $signature_approval
+ * @property string|null $hash
+ * @property int|null $added_by
+ * @property int|null $last_updated_by
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\ClientDetails|null $clients
+ * @property-read \App\Models\Currency|null $currency
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\EstimateTemplateItem> $items
+ * @property-read int|null $items_count
+ * @property-read \App\Models\UnitType|null $units
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplate newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplate newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplate query()
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplate whereAddedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplate whereCalculateTax($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplate whereClientComment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplate whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplate whereCurrencyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplate whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplate whereDiscount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplate whereDiscountType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplate whereHash($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplate whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplate whereInvoiceConvert($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplate whereLastUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplate whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplate whereNote($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplate whereSignatureApproval($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplate whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplate whereSubTotal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplate whereTotal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplate whereUnitId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplate whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
+	class EstimateTemplate extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\EstimateTemplateItem
+ *
+ * @property int $id
+ * @property int|null $company_id
+ * @property int $estimate_template_id
+ * @property string|null $hsn_sac_code
+ * @property string $item_name
+ * @property string $type
+ * @property int $quantity
+ * @property float $unit_price
+ * @property float $amount
+ * @property string|null $item_summary
+ * @property string|null $taxes
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\EstimateTemplateItemImage|null $estimateTemplateItemImage
+ * @property-read mixed $tax_list
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplateItem newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplateItem newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplateItem query()
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplateItem whereAmount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplateItem whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplateItem whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplateItem whereEstimateTemplateId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplateItem whereHsnSacCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplateItem whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplateItem whereItemName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplateItem whereItemSummary($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplateItem whereQuantity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplateItem whereTaxes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplateItem whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplateItem whereUnitPrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplateItem whereUpdatedAt($value)
+ * @property int|null $product_id
+ * @property int|null $unit_id
+ * @property-read \App\Models\UnitType|null $unit
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplateItem whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplateItem whereUnitId($value)
+ * @mixin \Eloquent
+ */
+	class EstimateTemplateItem extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\EstimateTemplateItemImage
+ *
+ * @property int $id
+ * @property int|null $company_id
+ * @property int $estimate_template_item_id
+ * @property string $filename
+ * @property string|null $hashname
+ * @property string|null $size
+ * @property string|null $external_link
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read mixed $file_url
+ * @property-read mixed $icon
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplateItemImage newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplateItemImage newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplateItemImage query()
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplateItemImage whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplateItemImage whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplateItemImage whereEstimateTemplateItemId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplateItemImage whereExternalLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplateItemImage whereFilename($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplateItemImage whereHashname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplateItemImage whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplateItemImage whereSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EstimateTemplateItemImage whereUpdatedAt($value)
+ * @property-read mixed $file
+ * @mixin \Eloquent
+ */
+	class EstimateTemplateItemImage extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -1274,6 +3134,32 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Event whereStartDateTime($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Event whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Event whereWhere($value)
+ * @property string|null $event_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Event whereEventId($value)
+ * @property int|null $company_id
+ * @property string|null $event_link
+ * @property-read \App\Models\Company|null $company
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\EventFile[] $files
+ * @property-read int|null $files_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Event whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Event whereEventLink($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MentionUser> $mentionEvent
+ * @property-read int|null $mention_event_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $mentionUser
+ * @property-read int|null $mention_user_count
+ * @property int|null $parent_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Event whereParentId($value)
+ * @mixin \Eloquent
+ * @property int|null $host
+ * @property string $status
+ * @property string $note
+ * @property string|null $departments
+ * @property-read \App\Models\MentionUser $pivot
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Event whereDepartments($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Event whereHost($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Event whereNote($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Event whereStatus($value)
  */
 	class Event extends \Eloquent {}
 }
@@ -1297,8 +3183,47 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|EventAttendee whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|EventAttendee whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|EventAttendee whereUserId($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|EventAttendee whereCompanyId($value)
+ * @mixin \Eloquent
+ * @property-read \App\Models\Event $event
  */
 	class EventAttendee extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\EventFile
+ *
+ * @property int $id
+ * @property int|null $company_id
+ * @property int $event_id
+ * @property string|null $filename
+ * @property string|null $hashname
+ * @property string|null $size
+ * @property int|null $added_by
+ * @property int|null $last_updated_by
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read mixed $file_url
+ * @property-read mixed $icon
+ * @method static \Illuminate\Database\Eloquent\Builder|EventFile newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EventFile newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|EventFile query()
+ * @method static \Illuminate\Database\Eloquent\Builder|EventFile whereAddedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EventFile whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EventFile whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EventFile whereEventId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EventFile whereFilename($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EventFile whereHashname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EventFile whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EventFile whereLastUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EventFile whereSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EventFile whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
+	class EventFile extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -1307,13 +3232,20 @@ namespace App\Models{
  *
  * @property int $id
  * @property string $item_name
+ * @property float $total
+ * @property string $date
+ * @property float $total
+ * @property string $exchange_rate
  * @property \Illuminate\Support\Carbon $purchase_date
  * @property string|null $purchase_from
  * @property float $price
+ * @property float $default_currency_price
  * @property int $currency_id
  * @property int|null $project_id
  * @property string|null $bill
  * @property int $user_id
+ * @property int|null $approver_id
+ * @property int|null $default_currency_id
  * @property string $status
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -1334,6 +3266,7 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection|Expense[] $recurrings
  * @property-read int|null $recurrings_count
  * @property-read \App\Models\User $user
+ * @property-read \App\Models\User $approver
  * @method static \Database\Factories\ExpenseFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Expense newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Expense newQuery()
@@ -1357,6 +3290,23 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Expense whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Expense whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Expense whereUserId($value)
+ * @property-read \App\Models\ExpensesCategory|null $category
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense whereApproverId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense whereCompanyId($value)
+ * @property int|null $bank_account_id
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\BankTransaction> $transactions
+ * @property-read int|null $transactions_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense whereBankAccountId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense whereDefaultCurrencyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense whereExchangeRate($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $mentionUser
+ * @property-read int|null $mention_user_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\BankTransaction> $transactions
+ * @mixin \Eloquent
+ * @property-read \App\Models\BankAccount|null $bankAccount
+ * @property-read \App\Models\MentionUser $pivot
  */
 	class Expense extends \Eloquent {}
 }
@@ -1377,11 +3327,14 @@ namespace App\Models{
  * @property string|null $payment_method
  * @property string $rotation
  * @property int|null $billing_cycle
+ * @property \Illuminate\Support\Carbon $issue_date
  * @property int $unlimited_recurring
  * @property float $price
  * @property string|null $bill
+ * @property int $immediate_expense
  * @property string $status
  * @property string|null $description
+ * @property \Illuminate\Support\Carbon $next_invoice_date
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\ExpensesCategory|null $category
@@ -1418,6 +3371,23 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ExpenseRecurring whereUnlimitedRecurring($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ExpenseRecurring whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ExpenseRecurring whereUserId($value)
+ * @property int|null $added_by
+ * @property int|null $last_updated_by
+ * @method static \Illuminate\Database\Eloquent\Builder|ExpenseRecurring whereAddedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExpenseRecurring whereLastUpdatedBy($value)
+ * @property string|null $purchase_from
+ * @method static \Illuminate\Database\Eloquent\Builder|ExpenseRecurring wherePurchaseFrom($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|ExpenseRecurring whereCompanyId($value)
+ * @property \Illuminate\Support\Carbon|null $next_expense_date
+ * @method static \Illuminate\Database\Eloquent\Builder|ExpenseRecurring whereImmediateExpense($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExpenseRecurring whereIssueDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExpenseRecurring whereNextExpenseDate($value)
+ * @property int|null $bank_account_id
+ * @property-read \App\Models\BankAccount|null $bank
+ * @method static \Illuminate\Database\Eloquent\Builder|ExpenseRecurring whereBankAccountId($value)
+ * @mixin \Eloquent
  */
 	class ExpenseRecurring extends \Eloquent {}
 }
@@ -1428,6 +3398,7 @@ namespace App\Models{
  *
  * @property int $id
  * @property string $category_name
+ * @property bigint $category_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int|null $added_by
@@ -1443,8 +3414,125 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ExpensesCategory whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ExpensesCategory whereLastUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ExpensesCategory whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|ExpensesCategoryRole[] $roles
+ * @property-read int|null $roles_count
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @property-read \App\Models\Expense|null $expenses
+ * @method static \Illuminate\Database\Eloquent\Builder|ExpensesCategory whereCompanyId($value)
+ * @property-read int|null $expenses_count
+ * @mixin \Eloquent
  */
 	class ExpensesCategory extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\ExpensesCategoryRole
+ *
+ * @property int $id
+ * @property int|null $expenses_category_id
+ * @property int $role_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\ExpensesCategory $category
+ * @property-read \App\Models\Role $role
+ * @method static \Illuminate\Database\Eloquent\Builder|ExpensesCategoryRole newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ExpensesCategoryRole newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ExpensesCategoryRole query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ExpensesCategoryRole whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExpensesCategoryRole whereExpensesCategoryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExpensesCategoryRole whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExpensesCategoryRole whereRoleId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExpensesCategoryRole whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|ExpensesCategoryRole whereCompanyId($value)
+ * @mixin \Eloquent
+ */
+	class ExpensesCategoryRole extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\FileStorage
+ *
+ * @property int $id
+ * @property string $path
+ * @property string $filename
+ * @property string|null $type
+ * @property int $size
+ * @property string $storage_location
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|FileStorage newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|FileStorage newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|FileStorage query()
+ * @method static \Illuminate\Database\Eloquent\Builder|FileStorage whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|FileStorage whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|FileStorage whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|FileStorage wherePath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|FileStorage whereSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|FileStorage whereStorageLocation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|FileStorage whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|FileStorage whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @property-read mixed $file_url
+ * @property-read mixed $icon
+ * @property-read mixed $size_format
+ * @method static \Illuminate\Database\Eloquent\Builder|FileStorage whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|FileStorage whereFilename($value)
+ * @mixin \Eloquent
+ */
+	class FileStorage extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Flag
+ *
+ * @property int $id
+ * @property string|null $capital
+ * @property string|null $code
+ * @property string|null $continent
+ * @property string|null $name
+ * @method static \Illuminate\Database\Eloquent\Builder|Flag newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Flag newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Flag query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Flag whereCapital($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Flag whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Flag whereContinent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Flag whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Flag whereName($value)
+ * @mixin \Eloquent
+ */
+	class Flag extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property string $type
+ * @property int|null $project_id
+ * @property int $source
+ * @property int $target
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|GanttLink newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|GanttLink newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|GanttLink query()
+ * @method static \Illuminate\Database\Eloquent\Builder|GanttLink whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GanttLink whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GanttLink whereProjectId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GanttLink whereSource($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GanttLink whereTarget($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GanttLink whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GanttLink whereUpdatedAt($value)
+ */
+	class GanttLink extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -1489,15 +3577,239 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|GdprSetting whereTermsCustomerFooter($value)
  * @method static \Illuminate\Database\Eloquent\Builder|GdprSetting whereTopInformationBlock($value)
  * @method static \Illuminate\Database\Eloquent\Builder|GdprSetting whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 	class GdprSetting extends \Eloquent {}
 }
 
 namespace App\Models{
 /**
+ * App\Models\Company
+ *
+ * @property int $id
+ * @property string $global_app_name
+ * @property string $currency_key_version
+ * @property string $license_type
+ * @property string|null $logo
+ * @property string|null $email
+ * @property string|null $login_background
+ * @property string $address
+ * @property string|null $website
+ * @property int|null $currency_id
+ * @property int $rtl
+ * @property int $show_update_popup
+ * @property string $timezone
+ * @property string $date_format
+ * @property string|null $date_picker_format
+ * @property string|null $moment_format
+ * @property string $time_format
+ * @property string $locale
+ * @property string $latitude
+ * @property string $longitude
+ * @property string $leaves_start_from
+ * @property string $active_theme
+ * @property int|null $last_updated_by
+ * @property string|null $currency_converter_key
+ * @property string|null $google_map_key
+ * @property string $task_self
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $purchase_code
+ * @property string|null $supported_until
+ * @property string $google_recaptcha_status
+ * @property string $google_recaptcha_v2_status
+ * @property string|null $google_recaptcha_v2_site_key
+ * @property string|null $google_recaptcha_v2_secret_key
+ * @property string $google_recaptcha_v3_status
+ * @property string|null $google_recaptcha_v3_site_key
+ * @property string|null $google_recaptcha_v3_secret_key
+ * @property string|null $moment_format
+ * @property int $app_debug
+ * @property int $rounded_theme
+ * @property int $hide_cron_message
+ * @property int $system_update
+ * @property string $logo_background_color
+ * @property int $before_days
+ * @property int $after_days
+ * @property string $on_deadline
+ * @property int $default_task_status
+ * @property int $show_review_modal
+ * @property int $dashboard_clock
+ * @property int $taskboard_length
+ * @property string|null $favicon
+ * @property-read \App\Models\Currency|null $currency
+ * @property-read mixed $dark_logo_url
+ * @property-read mixed $favicon_url
+ * @property-read mixed $icon
+ * @property-read mixed $light_logo_url
+ * @property-read mixed $masked_default_logo
+ * @property-read mixed $login_background_url
+ * @property-read mixed $logo_url
+ * @property-read mixed $moment_date_format
+ * @property-read mixed $show_public_message
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereActiveTheme($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereAfterDays($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereAppDebug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereBeforeDays($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereCompanyEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereCompanyName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereCompanyPhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereCurrencyConverterKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereCurrencyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereDashboardClock($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereDateFormat($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereDatePickerFormat($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereDefaultTaskStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereFavicon($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereGoogleMapKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereGoogleRecaptchaStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereGoogleRecaptchaV2SecretKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereGoogleRecaptchaV2SiteKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereGoogleRecaptchaV2Status($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereGoogleRecaptchaV3SecretKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereGoogleRecaptchaV3SiteKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereGoogleRecaptchaV3Status($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereHideCronMessage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereLastUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereLatitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereLeavesStartFrom($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereLocale($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereLoginBackground($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereLogo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereLogoBackgroundColor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereLongitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereMomentFormat($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereOnDeadline($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting wherePurchaseCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereRoundedTheme($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereShowReviewModal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereSupportedUntil($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereSystemUpdate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereTaskSelf($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereTaskboardLength($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereTimeFormat($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereTimezone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereWeatherKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereWebsite($value)
+ * @property int $ticket_form_google_captcha
+ * @property int $lead_form_google_captcha
+ * @property string|null $last_cron_run
+ * @property string $auth_theme
+ * @property string|null $light_logo
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereAuthTheme($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereLastCronRun($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereLeadFormGoogleCaptcha($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereLightLogo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereTicketFormGoogleCaptcha($value)
+ * @property string $sidebar_logo_style
+ * @property string $session_driver
+ * @property int $allow_client_signup
+ * @property int $admin_client_signup_approval
+ * @property string|null $allowed_file_types
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereAdminClientSignupApproval($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereAllowClientSignup($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereAllowedFileTypes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereSessionDriver($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereSidebarLogoStyle($value)
+ * @property string $google_calendar_status
+ * @property string|null $google_client_id
+ * @property string|null $google_client_secret
+ * @property string $google_calendar_verification_status
+ * @property string|null $google_id
+ * @property string|null $name
+ * @property string|null $token
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereGoogleCalendarStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereGoogleCalendarVerificationStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereGoogleClientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereGoogleClientSecret($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereGoogleId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereToken($value)
+ * @property int $allowed_file_size
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereAllowedFileSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GlobalSetting whereCurrencyKeyVersion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GlobalSetting whereGlobalAppName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GlobalSetting whereLicenseType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GlobalSetting whereMomentDateFormat($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GlobalSetting whereRtl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GlobalSetting whereShowUpdatePopup($value)
+ * @property string $header_color
+ * @property string|null $hash
+ * @property string|null $last_license_verified_at
+ * @property int $datatable_row_limit
+ * @method static \Illuminate\Database\Eloquent\Builder|GlobalSetting whereDatatableRowLimit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GlobalSetting whereHash($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GlobalSetting whereHeaderColor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GlobalSetting whereLastLicenseVerifiedAt($value)
+ * @property string $auth_theme_text
+ * @method static \Illuminate\Database\Eloquent\Builder|GlobalSetting whereAuthThemeText($value)
+ * @property string $sign_up_terms
+ * @property string|null $terms_link
+ * @property int $allow_max_no_of_files
+ * @method static \Illuminate\Database\Eloquent\Builder|GlobalSetting whereAllowMaxNoOfFiles($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GlobalSetting whereSignUpTerms($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GlobalSetting whereTermsLink($value)
+ * @property string|null $purchased_on
+ * @method static \Illuminate\Database\Eloquent\Builder|GlobalSetting whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GlobalSetting wherePurchasedOn($value)
+ * @mixin \Eloquent
+ * @property string|null $dedicated_subdomain
+ * @property-read mixed $masked_dark_logo_url
+ * @property-read mixed $masked_favicon_url
+ * @property-read mixed $masked_light_logo_url
+ * @property-read mixed $masked_login_background_url
+ * @property-read mixed $masked_logo_url
+ * @method static \Illuminate\Database\Eloquent\Builder|GlobalSetting whereDedicatedSubdomain($value)
+ */
+	class GlobalSetting extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\GoogleCalendarModule
+ *
+ * @property int $id
+ * @property int $lead_status
+ * @property int $leave_status
+ * @property int $invoice_status
+ * @property int $contract_status
+ * @property int $task_status
+ * @property int $event_status
+ * @property int $holiday_status
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|GoogleCalendarModule newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|GoogleCalendarModule newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|GoogleCalendarModule query()
+ * @method static \Illuminate\Database\Eloquent\Builder|GoogleCalendarModule whereContractStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GoogleCalendarModule whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GoogleCalendarModule whereEventStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GoogleCalendarModule whereHolidayStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GoogleCalendarModule whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GoogleCalendarModule whereInvoiceStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GoogleCalendarModule whereLeadStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GoogleCalendarModule whereLeaveStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GoogleCalendarModule whereTaskStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GoogleCalendarModule whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|GoogleCalendarModule whereCompanyId($value)
+ * @mixin \Eloquent
+ */
+	class GoogleCalendarModule extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * Class Holiday
  *
- * @package App\Models
  * @property int $id
  * @property \Illuminate\Support\Carbon $date
  * @property string|null $occassion
@@ -1517,6 +3829,25 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Holiday whereLastUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Holiday whereOccassion($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Holiday whereUpdatedAt($value)
+ * @property string|null $event_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Holiday whereEventId($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|Holiday whereCompanyId($value)
+ * @property-read \App\Models\Holiday|null $hdate
+ * @property-read \App\Models\Leave|null $ldate
+ * @mixin \Eloquent
+ * @property string|null $department_id_json
+ * @property string|null $designation_id_json
+ * @property string|null $employment_type_json
+ * @property string $notification_sent
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\EmployeeDetails> $employee
+ * @property-read int|null $employee_count
+ * @property-read \App\Models\EmployeeDetails|null $employeeDetails
+ * @method static \Illuminate\Database\Eloquent\Builder|Holiday whereDepartmentIdJson($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Holiday whereDesignationIdJson($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Holiday whereEmploymentTypeJson($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Holiday whereNotificationSent($value)
  */
 	class Holiday extends \Eloquent {}
 }
@@ -1527,8 +3858,10 @@ namespace App\Models{
  *
  * @property int $id
  * @property int|null $project_id
+ * @property int|null $quickbooks_invoice_id
  * @property int|null $client_id
  * @property string $invoice_number
+ * @property string $project_name
  * @property \Illuminate\Support\Carbon $issue_date
  * @property \Illuminate\Support\Carbon $due_date
  * @property float $sub_total
@@ -1536,6 +3869,8 @@ namespace App\Models{
  * @property string $discount_type
  * @property float $total
  * @property int|null $currency_id
+ * @property int|null $default_currency_id
+ * @property float|null $exchange_rate
  * @property string $status
  * @property string $recurring
  * @property int|null $billing_cycle
@@ -1551,6 +3886,7 @@ namespace App\Models{
  * @property int|null $estimate_id
  * @property int $send_status
  * @property float $due_amount
+ * @property float $amount
  * @property int|null $parent_id
  * @property int|null $invoice_recurring_id
  * @property int|null $created_by
@@ -1610,8 +3946,122 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereSubTotal($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereTotal($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereUpdatedAt($value)
+ * @property int|null $order_id
+ * @property string|null $hash
+ * @property-read \App\Models\Order|null $order
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereHash($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereOrderId($value)
+ * @property string $calculate_tax
+ * @property int|null $company_address_id
+ * @property-read \App\Models\CompanyAddress|null $address
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereCalculateTax($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereCompanyAddressId($value)
+ * @property string|null $event_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereEventId($value)
+ * @property int|null $company_id
+ * @property string|null $custom_invoice_number
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereCustomInvoiceNumber($value)
+ * @property int|null $bank_account_id
+ * @property \Illuminate\Support\Carbon|null $last_viewed
+ * @property string|null $ip_address
+ * @property-read \App\Models\UnitType|null $unit
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereBankAccountId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereDefaultCurrencyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereExchangeRate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereIpAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereLastViewed($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereQuickbooksInvoiceId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereUnitId($value)
+ * @property string $payment_status
+ * @property string|null $downloadable_file
+ * @property string|null $default_image
+ * @property int|null $offline_method_id
+ * @property string|null $transaction_id
+ * @property string|null $gateway
+ * @property-read \App\Models\BankAccount|null $bankAccount
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\InvoiceFiles> $files
+ * @property-read int|null $files_count
+ * @property-read mixed $download_file_url
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereGateway($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereOfflineMethodId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice wherePaymentStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereTransactionId($value)
+ * @property string|null $original_invoice_number
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereOriginalInvoiceNumber($value)
+ * @mixin \Eloquent
+ * @property int|null $invoice_payment_id
+ * @property-read \App\Models\InvoicePaymentDetail|null $invoicePaymentDetail
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereInvoicePaymentId($value)
  */
 	class Invoice extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\InvoiceFiles
+ *
+ * @property-read \App\Models\Company|null $company
+ * @property-read mixed $file_url
+ * @property-read mixed $icon
+ * @property-read \App\Models\Invoice|null $invoice
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceFiles newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceFiles newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceFiles query()
+ * @property int $id
+ * @property int $invoice_id
+ * @property int|null $added_by
+ * @property int|null $last_updated_by
+ * @property string|null $filename
+ * @property string|null $hashname
+ * @property string|null $size
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceFiles whereAddedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceFiles whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceFiles whereFilename($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceFiles whereHashname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceFiles whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceFiles whereInvoiceId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceFiles whereLastUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceFiles whereSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceFiles whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
+	class InvoiceFiles extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\InvoiceItemImage
+ *
+ * @property int $id
+ * @property int $invoice_item_id
+ * @property string $filename
+ * @property string|null $hashname
+ * @property string|null $image
+ * @property string|null $size
+ * @property string|null $external_link
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read mixed $file_url
+ * @property-read mixed $icon
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItemImage newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItemImage newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItemImage query()
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItemImage whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItemImage whereExternalLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItemImage whereFilename($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItemImage whereHashname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItemImage whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItemImage whereInvoiceItemId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItemImage whereSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItemImage whereUpdatedAt($value)
+ * @property-read mixed $file
+ * @mixin \Eloquent
+ */
+	class InvoiceItemImage extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -1620,6 +4070,7 @@ namespace App\Models{
  *
  * @property int $id
  * @property int $invoice_id
+ * @property int|null $quickbooks_item_id
  * @property string $item_name
  * @property string|null $item_summary
  * @property string $type
@@ -1646,8 +4097,49 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItems whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItems whereUnitPrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItems whereUpdatedAt($value)
+ * @property-read \App\Models\InvoiceItemImage|null $invoiceItemImage
+ * @property-read mixed $tax_list
+ * @property int|null $product_id
+ * @property int|null $unit_id
+ * @property-read \App\Models\UnitType|null $unit
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItems whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItems whereUnitId($value)
+ * @property-read \App\Models\Invoice $invoice
+ * @mixin \Eloquent
+ * @property int $field_order
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItems whereFieldOrder($value)
  */
 	class InvoiceItems extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property int|null $company_id
+ * @property string $title
+ * @property string|null $image
+ * @property string|null $payment_details
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Company|null $company
+ * @property-read mixed $image_url
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Invoice> $invoices
+ * @property-read int|null $invoices_count
+ * @property-read mixed $masked_image_url
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoicePaymentDetail newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoicePaymentDetail newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoicePaymentDetail query()
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoicePaymentDetail whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoicePaymentDetail whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoicePaymentDetail whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoicePaymentDetail whereImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoicePaymentDetail wherePaymentDetails($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoicePaymentDetail whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoicePaymentDetail whereUpdatedAt($value)
+ */
+	class InvoicePaymentDetail extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -1664,6 +4156,7 @@ namespace App\Models{
  * @property string $template
  * @property int $due_after
  * @property string $invoice_terms
+ * @property string|null $other_info
  * @property string|null $gst_number
  * @property string|null $show_gst
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -1695,6 +4188,72 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|InvoiceSetting whereShowGst($value)
  * @method static \Illuminate\Database\Eloquent\Builder|InvoiceSetting whereTemplate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|InvoiceSetting whereUpdatedAt($value)
+ * @property string|null $estimate_terms
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceSetting whereEstimateTerms($value)
+ * @property int $tax_calculation_msg
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceSetting whereTaxCalculationMsg($value)
+ * @property int|null $company_id
+ * @property string|null $reminder
+ * @property int $send_reminder_after
+ * @property int $show_project
+ * @property string|null $show_client_name
+ * @property string|null $show_client_email
+ * @property string|null $show_client_phone
+ * @property string|null $show_client_company_address
+ * @property string|null $show_client_company_name
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceSetting whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceSetting whereReminder($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceSetting whereSendReminderAfter($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceSetting whereShowClientCompanyAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceSetting whereShowClientCompanyName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceSetting whereShowClientEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceSetting whereShowClientName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceSetting whereShowClientPhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceSetting whereShowProject($value)
+ * @property string $invoice_number_separator
+ * @property string $estimate_number_separator
+ * @property string $credit_note_number_separator
+ * @property string $contract_prefix
+ * @property string $contract_number_separator
+ * @property int $contract_digit
+ * @property int $show_status
+ * @property int $authorised_signatory
+ * @property string|null $authorised_signatory_signature
+ * @property-read mixed $authorised_signatory_signature_url
+ * @property-read mixed $is_chinese_lang
+ * @property-read \App\Models\UnitType|null $unit
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceSetting whereAuthorisedSignatory($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceSetting whereAuthorisedSignatorySignature($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceSetting whereContractDigit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceSetting whereContractNumberSeparator($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceSetting whereContractPrefix($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceSetting whereCreditNoteNumberSeparator($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceSetting whereEstimateNumberSeparator($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceSetting whereInvoiceNumberSeparator($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceSetting whereShowStatus($value)
+ * @property string $order_prefix
+ * @property string $order_number_separator
+ * @property int $order_digit
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceSetting whereOrderDigit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceSetting whereOrderNumberSeparator($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceSetting whereOrderPrefix($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceSetting whereOtherInfo($value)
+ * @mixin \Eloquent
+ * @property string $estimate_request_prefix
+ * @property string $estimate_request_number_separator
+ * @property int $estimate_request_digit
+ * @property string $proposal_prefix
+ * @property string $proposal_number_separator
+ * @property int $proposal_digit
+ * @property-read mixed $masked_authorised_signatory_signature_url
+ * @property-read mixed $masked_logo_url
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceSetting whereEstimateRequestDigit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceSetting whereEstimateRequestNumberSeparator($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceSetting whereEstimateRequestPrefix($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceSetting whereProposalDigit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceSetting whereProposalNumberSeparator($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceSetting whereProposalPrefix($value)
  */
 	class InvoiceSetting extends \Eloquent {}
 }
@@ -1724,8 +4283,111 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Issue whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Issue whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Issue whereUserId($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|Issue whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class Issue extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\KnowledgeBase
+ *
+ * @property protected $appends
+ * @property int $id
+ * @property string $to
+ * @property string $heading
+ * @property int|null $category_id
+ * @property string|null $description
+ * @property int $added_by
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\KnowledgeBaseCategory|null $knowledgebasecategory
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBase newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBase newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBase query()
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBase whereAddedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBase whereCategoryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBase whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBase whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBase whereHeading($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBase whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBase whereTo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBase whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\KnowledgeBaseFile[] $files
+ * @property-read int|null $files_count
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBase whereCompanyId($value)
+ * @mixin \Eloquent
+ */
+	class KnowledgeBase extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\KnowledgeBaseCategory
+ *
+ * @property int $id
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\KnowledgeBase[] $knowledgebase
+ * @property-read int|null $knowledgebase_count
+ * @property string $name
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBaseCategory newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBaseCategory newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBaseCategory query()
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBaseCategory whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBaseCategory whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBaseCategory whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBaseCategory whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBaseCategory whereCompanyId($value)
+ * @mixin \Eloquent
+ */
+	class KnowledgeBaseCategory extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\KnowledgeBaseFile
+ *
+ * @property protected $appends
+ * @property int $id
+ * @property int|null $company_id
+ * @property int $knowledge_base_id
+ * @property string|null $filename
+ * @property string|null $hashname
+ * @property string|null $size
+ * @property string|null $external_link_name
+ * @property string|null $external_link
+ * @property int|null $added_by
+ * @property int|null $last_updated_by
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read mixed $file_url
+ * @property-read mixed $icon
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBaseFile newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBaseFile newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBaseFile query()
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBaseFile whereAddedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBaseFile whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBaseFile whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBaseFile whereExternalLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBaseFile whereExternalLinkName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBaseFile whereFilename($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBaseFile whereHashname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBaseFile whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBaseFile whereKnowledgeBaseId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBaseFile whereLastUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBaseFile whereSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|KnowledgeBaseFile whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
+	class KnowledgeBaseFile extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -1748,6 +4410,12 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|LanguageSetting whereLanguageName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LanguageSetting whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LanguageSetting whereUpdatedAt($value)
+ * @property string|null $flag_code
+ * @method static \Illuminate\Database\Eloquent\Builder|LanguageSetting whereFlagCode($value)
+ * @property-read mixed $label
+ * @property bool $is_rtl
+ * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|LanguageSetting whereIsRtl($value)
  */
 	class LanguageSetting extends \Eloquent {}
 }
@@ -1780,6 +4448,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property float|null $value
+ * @property float|null $total_value
  * @property int|null $currency_id
  * @property int|null $category_id
  * @property int|null $added_by
@@ -1831,6 +4500,22 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Lead whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Lead whereValue($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Lead whereWebsite($value)
+ * @property string|null $hash
+ * @property-read \App\Models\LeadCategory|null $category
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead whereHash($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead whereCompanyId($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Product> $products
+ * @property-read int|null $products_count
+ * @property-read int|null $follow_up_date_next
+ * @property-read int|null $follow_up_date_past
+ * @mixin \Eloquent
+ * @property int|null $lead_owner
+ * @property-read \App\Models\User|null $addedBy
+ * @property-read mixed $client_name_salutation
+ * @property-read \App\Models\User|null $leadOwner
+ * @method static \Illuminate\Database\Eloquent\Builder|Lead whereLeadOwner($value)
  */
 	class Lead extends \Eloquent {}
 }
@@ -1858,6 +4543,14 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|LeadAgent whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LeadAgent whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LeadAgent whereUserId($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadAgent whereCompanyId($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Lead> $leads
+ * @property-read int|null $leads_count
+ * @mixin \Eloquent
+ * @property int|null $lead_category_id
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadAgent whereLeadCategoryId($value)
  */
 	class LeadAgent extends \Eloquent {}
 }
@@ -1881,6 +4574,12 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|LeadCategory whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LeadCategory whereLastUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LeadCategory whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadCategory whereCompanyId($value)
+ * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\LeadAgent> $enabledAgents
+ * @property-read int|null $enabled_agents_count
  */
 	class LeadCategory extends \Eloquent {}
 }
@@ -1910,78 +4609,193 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|LeadCustomForm whereLastUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LeadCustomForm whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LeadCustomForm whereUpdatedAt($value)
+ * @property int $required
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadCustomForm whereRequired($value)
+ * @property int|null $company_id
+ * @property int|null $custom_fields_id
+ * @property-read \App\Models\Company|null $company
+ * @property-read \App\Models\CustomField|null $customField
+ * @property-read mixed $extras
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadCustomForm whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadCustomForm whereCustomFieldsId($value)
+ * @mixin \Eloquent
  */
 	class LeadCustomForm extends \Eloquent {}
 }
 
 namespace App\Models{
 /**
- * Class Holiday
+ * App\Models\ClientNote
  *
- * @package App\Models
  * @property int $id
- * @property int $lead_id
- * @property int $user_id
- * @property string $filename
- * @property string $hashname
- * @property string $size
- * @property string|null $description
- * @property string|null $google_url
- * @property string|null $dropbox_link
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int|null $client_id
+ * @property string $title
+ * @property int $type
+ * @property int|null $member_id
+ * @property int $is_client_show
+ * @property int $ask_password
+ * @property string $details
  * @property int|null $added_by
  * @property int|null $last_updated_by
- * @property-read mixed $file_url
- * @property-read mixed $icon
- * @property-read \App\Models\Lead $lead
- * @method static \Illuminate\Database\Eloquent\Builder|DealFile newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|DealFile newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|DealFile query()
- * @method static \Illuminate\Database\Eloquent\Builder|DealFile whereAddedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|DealFile whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|DealFile whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|DealFile whereDropboxLink($value)
- * @method static \Illuminate\Database\Eloquent\Builder|DealFile whereFilename($value)
- * @method static \Illuminate\Database\Eloquent\Builder|DealFile whereGoogleUrl($value)
- * @method static \Illuminate\Database\Eloquent\Builder|DealFile whereHashname($value)
- * @method static \Illuminate\Database\Eloquent\Builder|DealFile whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|DealFile whereLastUpdatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|DealFile whereLeadId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|DealFile whereSize($value)
- * @method static \Illuminate\Database\Eloquent\Builder|DealFile whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|DealFile whereUserId($value)
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientNote newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientNote newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientNote query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientNote whereAddedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientNote whereAskPassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientNote whereClientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientNote whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientNote whereDetails($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientNote whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientNote whereIsClientShow($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientNote whereLastUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientNote whereMemberId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientNote whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientNote whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClientNote whereUpdatedAt($value)
+ * @property-read \App\Models\User|null $client
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ClientUserNote[] $members
+ * @property-read int|null $members_count
+ * @property int|null $lead_id
+ * @property int $is_lead_show
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadNote whereIsLeadShow($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadNote whereLeadId($value)
+ * @mixin \Eloquent
  */
-	class DealFile extends \Eloquent {}
+	class LeadNote extends \Eloquent {}
 }
 
 namespace App\Models{
 /**
- * App\Models\DealFollowUp
+ * App\Models\LeadCategory
  *
  * @property int $id
- * @property int $lead_id
- * @property string|null $remark
- * @property \Illuminate\Support\Carbon|null $next_follow_up_date
+ * @property string $category_name
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int|null $added_by
  * @property int|null $last_updated_by
- * @property-read mixed $icon
- * @property-read \App\Models\Lead $lead
- * @method static \Illuminate\Database\Eloquent\Builder|DealFollowUp newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|DealFollowUp newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|DealFollowUp query()
- * @method static \Illuminate\Database\Eloquent\Builder|DealFollowUp whereAddedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|DealFollowUp whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|DealFollowUp whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|DealFollowUp whereLastUpdatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|DealFollowUp whereLeadId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|DealFollowUp whereNextFollowUpDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|DealFollowUp whereRemark($value)
- * @method static \Illuminate\Database\Eloquent\Builder|DealFollowUp whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadCategory newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadCategory newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadCategory query()
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadCategory whereAddedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadCategory whereCategoryName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadCategory whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadCategory whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadCategory whereLastUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadCategory whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadCategory whereCompanyId($value)
+ * @property string|null $name
+ * @property string|null $slug
+ * @property int $priority
+ * @property string $label_color
+ * @property int $default
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Deal> $deals
+ * @property-read int|null $deals_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PipelineStage> $stages
+ * @property-read int|null $stages_count
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadPipeline whereDefault($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadPipeline whereLabelColor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadPipeline whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadPipeline wherePriority($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadPipeline whereSlug($value)
+ * @mixin \Eloquent
  */
-	class DealFollowUp extends \Eloquent {}
+	class LeadPipeline extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\LeadStatus
+ *
+ * @property int $id
+ * @property string $type
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $priority
+ * @property int $default
+ * @property string $label_color
+ * @property-read mixed $icon
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Lead[] $leads
+ * @property-read int|null $leads_count
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadStatus newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadStatus newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadStatus query()
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadStatus whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadStatus whereDefault($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadStatus whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadStatus whereLabelColor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadStatus wherePriority($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadStatus whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadStatus whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadStatus whereCompanyId($value)
+ * @property int|null $lead_pipeline_id
+ * @property int|null $pipeline_stages_id
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Deal> $deals
+ * @property-read int|null $deals_count
+ * @property-read \App\Models\LeadPipeline|null $pipeline
+ * @property-read \App\Models\PipelineStage $stage
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadPipelineStages whereLeadPipelineId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadPipelineStages wherePipelineStagesId($value)
+ * @mixin \Eloquent
+ */
+	class LeadPipelineStages extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\LeadProduct
+ *
+ * @property int $id
+ * @property int $deal_id
+ * @property int $product_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Lead $lead
+ * @property-read \App\Models\Product $product
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadProduct newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadProduct newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadProduct query()
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadProduct whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadProduct whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadProduct whereLeadId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadProduct whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadProduct whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadProduct whereDealId($value)
+ * @mixin \Eloquent
+ */
+	class LeadProduct extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property int $status
+ * @property int $user_id
+ * @property int|null $company_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $ticket_round_robin_status
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadSetting newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadSetting newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadSetting query()
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadSetting whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadSetting whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadSetting whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadSetting whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadSetting whereTicketRoundRobinStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadSetting whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadSetting whereUserId($value)
+ */
+	class LeadSetting extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -2006,6 +4820,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|LeadSource whereLastUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LeadSource whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LeadSource whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadSource whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class LeadSource extends \Eloquent {}
 }
@@ -2034,8 +4852,34 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|LeadStatus wherePriority($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LeadStatus whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LeadStatus whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadStatus whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class LeadStatus extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\LeadUserNote
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property int $lead_note_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadUserNote newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadUserNote newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadUserNote query()
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadUserNote whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadUserNote whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadUserNote whereLeadNoteId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadUserNote whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeadUserNote whereUserId($value)
+ * @mixin \Eloquent
+ */
+	class LeadUserNote extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -2045,6 +4889,8 @@ namespace App\Models{
  * @property int $id
  * @property int $user_id
  * @property int $leave_type_id
+ * @property int $count
+ * @property int $halfday
  * @property string $duration
  * @property \Illuminate\Support\Carbon $leave_date
  * @property string $reason
@@ -2077,8 +4923,92 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Leave whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Leave whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Leave whereUserId($value)
+ * @property string|null $event_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Leave whereEventId($value)
+ * @property int|null $company_id
+ * @property int|null $approved_by
+ * @property \Illuminate\Support\Carbon|null $approved_at
+ * @property string|null $half_day_type
+ * @property-read \App\Models\User|null $approvedBy
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|Leave whereApprovedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Leave whereApprovedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Leave whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Leave whereHalfDayType($value)
+ * @property string|null $manager_status_permission
+ * @property string|null $approve_reason
+ * @method static \Illuminate\Database\Eloquent\Builder|Leave whereApproveReason($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Leave whereManagerStatusPermission($value)
+ * @property string|null $unique_id
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\LeaveFile> $files
+ * @property-read int|null $files_count
+ * @property-read \App\Models\Leave|null $ldate
+ * @method static \Illuminate\Database\Eloquent\Builder|Leave whereUniqueId($value)
+ * @mixin \Eloquent
+ * @property int $over_utilized
+ * @method static \Illuminate\Database\Eloquent\Builder|Leave whereOverUtilized($value)
  */
 	class Leave extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\LeaveFile
+ *
+ * @property int $id
+ * @property int|null $company_id
+ * @property int $user_id
+ * @property int $leave_id
+ * @property string $filename
+ * @property string|null $hashname
+ * @property string|null $size
+ * @property int|null $added_by
+ * @property int|null $last_updated_by
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read mixed $file_url
+ * @property-read mixed $icon
+ * @property-read \App\Models\Leave $leave
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveFile newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveFile newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveFile query()
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveFile whereAddedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveFile whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveFile whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveFile whereFilename($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveFile whereHashname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveFile whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveFile whereLastUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveFile whereLeaveId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveFile whereSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveFile whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveFile whereUserId($value)
+ * @mixin \Eloquent
+ */
+	class LeaveFile extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\LeaveSetting
+ *
+ * @property int $id
+ * @property int|null $company_id
+ * @property string $manager_permission
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveSetting newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveSetting newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveSetting query()
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveSetting whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveSetting whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveSetting whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveSetting whereManagerPermission($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveSetting whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
+	class LeaveSetting extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -2105,6 +5035,45 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|LeaveType wherePaid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LeaveType whereTypeName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LeaveType whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property int $monthly_limit
+ * @property-read \App\Models\Company|null $company
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Leave[] $leavesCount
+ * @property-read int|null $leaves_count_count
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveType whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveType whereMonthlyLimit($value)
+ * @property int|null $effective_after
+ * @property string|null $effective_type
+ * @property string|null $unused_leave
+ * @property int $encashed
+ * @property int $allowed_probation
+ * @property int $allowed_notice
+ * @property string|null $gender
+ * @property string|null $marital_status
+ * @property string|null $department
+ * @property string|null $designation
+ * @property string|null $role
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveType whereAllowedNotice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveType whereAllowedProbation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveType whereDepartment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveType whereDesignation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveType whereEffectiveAfter($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveType whereEffectiveType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveType whereEncashed($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveType whereGender($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveType whereMaritalStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveType whereRole($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveType whereUnusedLeave($value)
+ * @mixin \Eloquent
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property string|null $leavetype
+ * @property string $over_utilization
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveType onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveType whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveType whereLeavetype($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveType whereOverUtilization($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveType withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|LeaveType withoutTrashed()
  */
 	class LeaveType extends \Eloquent {}
 }
@@ -2113,7 +5082,6 @@ namespace App\Models{
 /**
  * Class Holiday
  *
- * @package App\Models
  * @property int $id
  * @property string $log_time_for
  * @property string $auto_timer_stop
@@ -2130,8 +5098,64 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|LogTimeFor whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LogTimeFor whereLogTimeFor($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LogTimeFor whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|LogTimeFor whereCompanyId($value)
+ * @property int $tracker_reminder
+ * @property int $timelog_report
+ * @property string|null $daily_report_roles
+ * @property string|null $time
+ * @method static \Illuminate\Database\Eloquent\Builder|LogTimeFor whereDailyReportRoles($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LogTimeFor whereTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LogTimeFor whereTimelogReport($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LogTimeFor whereTrackerReminder($value)
+ * @mixin \Eloquent
  */
 	class LogTimeFor extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\TaskUser
+ *
+ * @property int $id
+ * @property int $task_id
+ * @property int $user_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Task $task
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskUser newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskUser newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskUser query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskUser whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskUser whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskUser whereTaskId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskUser whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskUser whereUserId($value)
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read int|null $notifications_count
+ * @property int|null $task_comment_id
+ * @property int|null $task_note_id
+ * @property int|null $project_id
+ * @property int|null $project_note_id
+ * @property int|null $discussion_id
+ * @property int|null $discussion_reply_id
+ * @method static \Illuminate\Database\Eloquent\Builder|MentionUser whereDiscussionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MentionUser whereDiscussionReplyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MentionUser whereProjectId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MentionUser whereProjectNoteId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MentionUser whereTaskCommentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MentionUser whereTaskNoteId($value)
+ * @property int|null $ticket_id
+ * @property int|null $event_id
+ * @property int|null $user_chat_id
+ * @method static \Illuminate\Database\Eloquent\Builder|MentionUser whereEventId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MentionUser whereTicketId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MentionUser whereUserChatId($value)
+ * @mixin \Eloquent
+ */
+	class MentionUser extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -2159,33 +5183,12 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Menu whereSettingMenu($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Menu whereTranslateName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Menu whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class Menu extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * App\Models\MenuSetting
- *
- * @property int $id
- * @property string|null $main_menu
- * @property string|null $default_main_menu
- * @property string|null $setting_menu
- * @property string|null $default_setting_menu
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|MenuSetting newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|MenuSetting newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|MenuSetting query()
- * @method static \Illuminate\Database\Eloquent\Builder|MenuSetting whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|MenuSetting whereDefaultMainMenu($value)
- * @method static \Illuminate\Database\Eloquent\Builder|MenuSetting whereDefaultSettingMenu($value)
- * @method static \Illuminate\Database\Eloquent\Builder|MenuSetting whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|MenuSetting whereMainMenu($value)
- * @method static \Illuminate\Database\Eloquent\Builder|MenuSetting whereSettingMenu($value)
- * @method static \Illuminate\Database\Eloquent\Builder|MenuSetting whereUpdatedAt($value)
- */
-	class MenuSetting extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -2206,6 +5209,14 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|MessageSetting whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MessageSetting whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MessageSetting whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property string $restrict_client
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|MessageSetting whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MessageSetting whereRestrictClient($value)
+ * @property int $send_sound_notification
+ * @method static \Illuminate\Database\Eloquent\Builder|MessageSetting whereSendSoundNotification($value)
+ * @mixin \Eloquent
  */
 	class MessageSetting extends \Eloquent {}
 }
@@ -2232,6 +5243,9 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Module whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Module whereModuleName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Module whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Permission> $permissionsAll
+ * @property-read int|null $permissions_all_count
+ * @mixin \Eloquent
  */
 	class Module extends \Eloquent {}
 }
@@ -2256,6 +5270,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ModuleSetting whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ModuleSetting whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ModuleSetting whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|ModuleSetting whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class ModuleSetting extends \Eloquent {}
 }
@@ -2293,8 +5311,81 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Notice whereLastUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Notice whereTo($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Notice whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|Notice whereCompanyId($value)
+ * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\NoticeFile> $files
+ * @property-read int|null $files_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\NoticeBoardUser> $noticeClients
+ * @property-read int|null $notice_clients_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\NoticeBoardUser> $noticeEmployees
+ * @property-read int|null $notice_employees_count
  */
 	class Notice extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property int $notice_id
+ * @property string $type
+ * @property int $user_id
+ * @property-read \App\Models\Notice $clients
+ * @property-read \App\Models\Notice $employees
+ * @method static \Illuminate\Database\Eloquent\Builder|NoticeBoardUser newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|NoticeBoardUser newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|NoticeBoardUser query()
+ * @method static \Illuminate\Database\Eloquent\Builder|NoticeBoardUser whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|NoticeBoardUser whereNoticeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|NoticeBoardUser whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|NoticeBoardUser whereUserId($value)
+ */
+	class NoticeBoardUser extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property int $notice_id
+ * @property string $filename
+ * @property string|null $description
+ * @property string|null $google_url
+ * @property string|null $hashname
+ * @property string|null $size
+ * @property string|null $dropbox_link
+ * @property string|null $external_link
+ * @property string|null $external_link_name
+ * @property int|null $added_by
+ * @property int|null $last_updated_by
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read mixed $file
+ * @property-read mixed $file_url
+ * @property-read mixed $icon
+ * @method static \Illuminate\Database\Eloquent\Builder|NoticeFile newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|NoticeFile newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|NoticeFile query()
+ * @method static \Illuminate\Database\Eloquent\Builder|NoticeFile whereAddedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|NoticeFile whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|NoticeFile whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|NoticeFile whereDropboxLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|NoticeFile whereExternalLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|NoticeFile whereExternalLinkName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|NoticeFile whereFilename($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|NoticeFile whereGoogleUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|NoticeFile whereHashname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|NoticeFile whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|NoticeFile whereLastUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|NoticeFile whereNoticeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|NoticeFile whereSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|NoticeFile whereUpdatedAt($value)
+ */
+	class NoticeFile extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -2318,6 +5409,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|NoticeView whereRead($value)
  * @method static \Illuminate\Database\Eloquent\Builder|NoticeView whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|NoticeView whereUserId($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|NoticeView whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class NoticeView extends \Eloquent {}
 }
@@ -2346,6 +5441,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Notification whereReadAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Notification whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Notification whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 	class Notification extends \Eloquent {}
 }
@@ -2370,8 +5466,252 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|OfflinePaymentMethod whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OfflinePaymentMethod whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OfflinePaymentMethod whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|OfflinePaymentMethod whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OfflinePaymentMethod active()
+ * @mixin \Eloquent
+ * @property string|null $image
+ * @property-read mixed $image_url
+ * @property-read mixed $masked_image_url
+ * @method static \Illuminate\Database\Eloquent\Builder|OfflinePaymentMethod whereImage($value)
  */
 	class OfflinePaymentMethod extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Order
+ *
+ * @property int $id
+ * @property int|null $client_id
+ * @property string $order_date
+ * @property float $sub_total
+ * @property float $total
+ * @property float $due_amount
+ * @property string $status
+ * @property int|null $currency_id
+ * @property string $show_shipping_address
+ * @property string|null $note
+ * @property int|null $added_by
+ * @property int|null $last_updated_by
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User|null $client
+ * @property-read \App\Models\ClientDetails|null $clientdetails
+ * @property-read \App\Models\Currency|null $currency
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\OrderItems[] $items
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Invoice[] $invoice
+ * @property-read int|null $items_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Payment[] $payment
+ * @property-read int|null $payment_count
+ * @property-read \App\Models\Project $project
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Invoice[] $recurrings
+ * @property-read int|null $recurrings_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Order newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Order newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Order query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereAddedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereClientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereCurrencyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereDueAmount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereLastUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereNote($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereOrderDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereShowShippingAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereSubTotal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereTotal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereUpdatedAt($value)
+ * @property mixed $order_number
+ * @property float $discount
+ * @property string $discount_type
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereDiscount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereDiscountType($value)
+ * @property int|null $company_id
+ * @property int|null $company_address_id
+ * @property-read \App\Models\CompanyAddress|null $address
+ * @property-read \App\Models\Company|null $company
+ * @property int|null $unit_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereCompanyAddressId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereOrderNumber($value)
+ * @property-read \App\Models\UnitType $unit
+ * @property int|null $unit_id
+ * @property string|null $custom_order_number
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereCustomOrderNumber($value)
+ * @property string|null $original_order_number
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereOriginalOrderNumber($value)
+ * @mixin \Eloquent
+ * @property int|null $project_id
+ * @property-read mixed $extras
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereProjectId($value)
+ */
+	class Order extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\InvoiceItems
+ *
+ * @property int $id
+ * @property int $invoice_id
+ * @property int|null $quickbooks_item_id
+ * @property string $item_name
+ * @property string|null $item_summary
+ * @property string $type
+ * @property float $quantity
+ * @property float $unit_price
+ * @property float $amount
+ * @property string|null $taxes
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $hsn_sac_code
+ * @property-read mixed $icon
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItems newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItems newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItems query()
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItems whereAmount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItems whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItems whereHsnSacCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItems whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItems whereInvoiceId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItems whereItemName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItems whereItemSummary($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItems whereQuantity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItems whereTaxes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItems whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItems whereUnitPrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItems whereUpdatedAt($value)
+ * @property-read \App\Models\InvoiceItemImage|null $invoiceItemImage
+ * @property-read mixed $tax_list
+ * @property int|null $product_id
+ * @property int|null $unit_id
+ * @property-read \App\Models\UnitType|null $unit
+ * @property int|null $client_id
+ * @property string|null $description
+ * @property-read \App\Models\Product $product
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderCart whereClientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderCart whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderCart whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderCart whereUnitId($value)
+ * @mixin \Eloquent
+ */
+	class OrderCart extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\OrderItemImage
+ *
+ * @property int $id
+ * @property int|null $order_item_id
+ * @property string|null $external_link
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read mixed $file_url
+ * @property-read mixed $icon
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderItemImage newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderItemImage newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderItemImage query()
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderItemImage whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderItemImage whereExternalLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderItemImage whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderItemImage whereOrderItemId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderItemImage whereUpdatedAt($value)
+ * @property-read mixed $file
+ * @mixin \Eloquent
+ */
+	class OrderItemImage extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\OrderItems
+ *
+ * @property int $id
+ * @property int $order_id
+ * @property string $item_name
+ * @property string|null $item_summary
+ * @property string $type
+ * @property int $quantity
+ * @property int $unit_price
+ * @property float $amount
+ * @property string|null $hsn_sac_code
+ * @property string|null $taxes
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderItems newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderItems newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderItems query()
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderItems whereAmount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderItems whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderItems whereHsnSacCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderItems whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderItems whereItemName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderItems whereItemSummary($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderItems whereOrderId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderItems whereQuantity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderItems whereTaxes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderItems whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderItems whereUnitPrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderItems whereUpdatedAt($value)
+ * @property int|null $product_id
+ * @property-read \App\Models\OrderItemImage|null $orderItemImage
+ * @property-read \App\Models\Product|null $product
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderItems whereProductId($value)
+ * @property-read mixed $tax_list
+ * @property int|null $product_id
+ * @property int|null $unit_id
+ * @property-read \App\Models\UnitType|null $unit
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderItems whereUnitId($value)
+ * @property string|null $sku
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderItems whereSku($value)
+ * @mixin \Eloquent
+ * @property int $field_order
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderItems whereFieldOrder($value)
+ */
+	class OrderItems extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Passport
+ *
+ * @property int $id
+ * @property int|null $company_id
+ * @property int|null $user_id
+ * @property int|null $country_id
+ * @property int|null $added_by
+ * @property string $passport_number
+ * @property \Illuminate\Support\Carbon $issue_date
+ * @property \Illuminate\Support\Carbon $expiry_date
+ * @property string|null $file
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Company|null $company
+ * @property-read \App\Models\Country|null $country
+ * @property-read mixed $image_url
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Passport newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Passport newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Passport query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Passport whereAddedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Passport whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Passport whereCountryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Passport whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Passport whereExpiryDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Passport whereFile($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Passport whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Passport whereIssueDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Passport wherePassportNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Passport whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Passport whereUserId($value)
+ * @mixin \Eloquent
+ */
+	class Passport extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -2379,14 +5719,22 @@ namespace App\Models{
  * App\Models\Payment
  *
  * @property int $id
+ * @property string $date
+ * @property string $exchange_rate
+ * @property string $total
+ * @property string $project_name
  * @property int|null $project_id
  * @property int|null $invoice_id
  * @property float $amount
  * @property string|null $gateway
  * @property string|null $transaction_id
+ * @property string $exchange_rate
+ * @property float $price
+ * @property float $default_currency_price
  * @property int|null $currency_id
  * @property string|null $plan_id
  * @property string|null $customer_id
+ * @property string|null $client_id
  * @property string|null $event_id
  * @property string $status
  * @property \Illuminate\Support\Carbon|null $paid_on
@@ -2397,6 +5745,7 @@ namespace App\Models{
  * @property string|null $bill
  * @property int|null $added_by
  * @property int|null $last_updated_by
+ * @property int|null $default_currency_id
  * @property-read \App\Models\Currency|null $currency
  * @property-read mixed $file_url
  * @property-read mixed $icon
@@ -2427,6 +5776,30 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Payment whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Payment whereTransactionId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Payment whereUpdatedAt($value)
+ * @property int|null $order_id
+ * @property string|null $payment_gateway_response null = success
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment completed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereOrderId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment wherePaymentGatewayResponse($value)
+ * @property int|null $credit_notes_id
+ * @property string|null $payload_id
+ * @property-read \App\Models\CreditNotes|null $creditNote
+ * @property-read \App\Models\Order|null $order
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereCreditNotesId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment wherePayloadId($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereCompanyId($value)
+ * @property int|null $bank_account_id
+ * @property int|null $quickbooks_payment_id
+ * @property-read OfflinePaymentMethod|null $offlineMethods
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\BankTransaction> $transactions
+ * @property-read int|null $transactions_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereBankAccountId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereDefaultCurrencyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereExchangeRate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereQuickbooksPaymentId($value)
+ * @mixin \Eloquent
  */
 	class Payment extends \Eloquent {}
 }
@@ -2471,6 +5844,114 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereStripeStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereStripeWebhookSecret($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereUpdatedAt($value)
+ * @property string|null $live_stripe_client_id
+ * @property string|null $live_stripe_secret
+ * @property string|null $live_stripe_webhook_secret
+ * @property string|null $live_razorpay_key
+ * @property string|null $live_razorpay_secret
+ * @property string|null $test_stripe_client_id
+ * @property string|null $test_stripe_secret
+ * @property string|null $test_razorpay_key
+ * @property string|null $test_razorpay_secret
+ * @property string|null $test_stripe_webhook_secret
+ * @property string $stripe_mode
+ * @property string $razorpay_mode
+ * @property string|null $paystack_key
+ * @property string|null $paystack_secret
+ * @property string|null $paystack_status
+ * @property string|null $paystack_merchant_email
+ * @property string|null $paystack_payment_url
+ * @property string|null $mollie_api_key
+ * @property string|null $mollie_status
+ * @property string|null $payfast_merchant_id
+ * @property string|null $payfast_merchant_key
+ * @property string|null $payfast_passphrase
+ * @property string $payfast_mode
+ * @property string|null $payfast_status
+ * @property string|null $authorize_api_login_id
+ * @property string|null $authorize_transaction_key
+ * @property string $authorize_environment
+ * @property string $authorize_status
+ * @property string|null $square_application_id
+ * @property string|null $square_access_token
+ * @property string|null $square_location_id
+ * @property string $square_environment
+ * @property string $square_status
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereAuthorizeApiLoginId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereAuthorizeEnvironment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereAuthorizeStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereAuthorizeTransactionKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereLiveRazorpayKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereLiveRazorpaySecret($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereLiveStripeClientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereLiveStripeSecret($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereLiveStripeWebhookSecret($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereMollieApiKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereMollieStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials wherePayfastMerchantId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials wherePayfastMerchantKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials wherePayfastMode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials wherePayfastPassphrase($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials wherePayfastStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials wherePaystackKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials wherePaystackMerchantEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials wherePaystackPaymentUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials wherePaystackSecret($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials wherePaystackStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereRazorpayMode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereSquareAccessToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereSquareApplicationId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereSquareEnvironment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereSquareLocationId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereSquareStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereStripeMode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereTestRazorpayKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereTestRazorpaySecret($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereTestStripeClientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereTestStripeSecret($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereTestStripeWebhookSecret($value)
+ * @property string $paystack_mode
+ * @property string|null $test_paystack_key
+ * @property string|null $test_paystack_secret
+ * @property string|null $test_paystack_merchant_email
+ * @property string $flutterwave_status
+ * @property string $flutterwave_mode
+ * @property string|null $test_flutterwave_key
+ * @property string|null $test_flutterwave_secret
+ * @property string|null $test_flutterwave_hash
+ * @property string|null $live_flutterwave_key
+ * @property string|null $live_flutterwave_secret
+ * @property string|null $live_flutterwave_hash
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereFlutterwaveMode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereFlutterwaveStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereLiveFlutterwaveHash($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereLiveFlutterwaveKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereLiveFlutterwaveSecret($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials wherePaystackMode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereTestFlutterwaveHash($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereTestFlutterwaveKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereTestFlutterwaveSecret($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereTestPaystackKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereTestPaystackMerchantEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereTestPaystackSecret($value)
+ * @property int|null $company_id
+ * @property string|null $flutterwave_webhook_secret_hash
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereFlutterwaveWebhookSecretHash($value)
+ * @property string|null $test_payfast_merchant_id
+ * @property string|null $test_payfast_merchant_key
+ * @property string|null $test_payfast_passphrase
+ * @property-read mixed $show_pay
+ * @property-read bool $show_pay_webhook
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereTestPayfastMerchantId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereTestPayfastMerchantKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereTestPayfastPassphrase($value)
+ * @mixin \Eloquent
+ * @property string|null $live_razorpay_webhook_secret
+ * @property string|null $test_razorpay_webhook_secret
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereLiveRazorpayWebhookSecret($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentGatewayCredentials whereTestRazorpayWebhookSecret($value)
  */
 	class PaymentGatewayCredentials extends \Eloquent {}
 }
@@ -2501,6 +5982,9 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Permission whereModuleId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Permission whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Permission whereUpdatedAt($value)
+ * @property string|null $allowed_permissions
+ * @method static \Illuminate\Database\Eloquent\Builder|Permission whereAllowedPermissions($value)
+ * @mixin \Eloquent
  */
 	class Permission extends \Eloquent {}
 }
@@ -2520,6 +6004,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|PermissionRole wherePermissionId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PermissionRole wherePermissionTypeId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PermissionRole whereRoleId($value)
+ * @property-read \App\Models\Permission $permission
+ * @mixin \Eloquent
  */
 	class PermissionRole extends \Eloquent {}
 }
@@ -2539,6 +6025,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|PermissionType whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PermissionType whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PermissionType whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PermissionType ofType($type)
+ * @mixin \Eloquent
  */
 	class PermissionType extends \Eloquent {}
 }
@@ -2566,8 +6054,53 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Pinned whereTaskId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Pinned whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Pinned whereUserId($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|Pinned whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class Pinned extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\PipelineStage
+ *
+ * @property int $id
+ * @property string $type
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $priority
+ * @property int $default
+ * @property string $label_color
+ * @property-read mixed $icon
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Lead[] $leads
+ * @property-read int|null $leads_count
+ * @method static \Illuminate\Database\Eloquent\Builder|PipelineStage newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PipelineStage newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PipelineStage query()
+ * @method static \Illuminate\Database\Eloquent\Builder|PipelineStage whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PipelineStage whereDefault($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PipelineStage whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PipelineStage whereLabelColor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PipelineStage wherePriority($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PipelineStage whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PipelineStage whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|PipelineStage whereCompanyId($value)
+ * @property int|null $lead_pipeline_id
+ * @property string|null $name
+ * @property string|null $slug
+ * @property-read \App\Models\LeadPipeline|null $pipeline
+ * @method static \Illuminate\Database\Eloquent\Builder|PipelineStage whereLeadPipelineId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PipelineStage whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PipelineStage whereSlug($value)
+ * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Deal> $deals
+ * @property-read int|null $deals_count
+ */
+	class PipelineStage extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -2582,11 +6115,13 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string $description
+ * @property int|null $unit_id
  * @property int|null $category_id
  * @property int|null $sub_category_id
  * @property int|null $added_by
  * @property int|null $last_updated_by
  * @property string|null $hsn_sac_code
+ * @property string|null $sku
  * @property-read mixed $icon
  * @property-read mixed $total_amount
  * @property-read \App\Models\Tax $tax
@@ -2607,6 +6142,58 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereSubCategoryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereTaxes($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereUpdatedAt($value)
+ * @property-read \App\Models\ProductCategory|null $category
+ * @property string|null $image
+ * @property-read mixed $image_url
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereImage($value)
+ * @property int $downloadable
+ * @property string|null $downloadable_file
+ * @property string|null $default_image
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ProductFiles[] $files
+ * @property-read int|null $files_count
+ * @property-read mixed $download_file_url
+ * @property-read mixed $extras
+ * @property-read \App\Models\ProductSubCategory|null $subCategory
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereDefaultImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereDownloadable($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereDownloadableFile($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @property-read mixed $tax_list
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereCompanyId($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Lead> $leads
+ * @property-read int|null $leads_count
+ * @property-read \App\Models\UnitType|null $unit
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereUnitId($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\OrderItems> $orderItem
+ * @property-read int|null $order_item_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Lead> $leads
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\OrderItems> $orderItem
+ * @property string|null $purchase_price
+ * @property string $purchase_information
+ * @property string $track_inventory
+ * @property string|null $sales_description
+ * @property string|null $purchase_description
+ * @property int|null $opening_stock
+ * @property float|null $rate_per_unit
+ * @property string|null $sku
+ * @property string|null $type
+ * @property string $status
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Lead> $leads
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\OrderItems> $orderItem
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereOpeningStock($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product wherePurchaseDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product wherePurchaseInformation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product wherePurchasePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereRatePerUnit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereSalesDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereSku($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereTrackInventory($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereType($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, PurchaseStockAdjustment> $inventory
+ * @property-read int|null $inventory_count
+ * @mixin \Eloquent
  */
 	class Product extends \Eloquent {}
 }
@@ -2627,8 +6214,62 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ProductCategory whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProductCategory whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProductCategory whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ProductSubCategory[] $subCategories
+ * @property-read int|null $sub_categories_count
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductCategory whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class ProductCategory extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * Class Holiday
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string $filename
+ * @property string $hashname
+ * @property string $size
+ * @property string|null $description
+ * @property string|null $google_url
+ * @property string|null $dropbox_link
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int|null $added_by
+ * @property int|null $last_updated_by
+ * @property-read mixed $file_url
+ * @property-read mixed $icon
+ * @property-read \App\Models\Lead $lead
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductFiles newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductFiles newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductFiles query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductFiles whereAddedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductFiles whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductFiles whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductFiles whereDropboxLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductFiles whereFilename($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductFiles whereGoogleUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductFiles whereHashname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductFiles whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductFiles whereLastUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductFiles whereLeadId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductFiles whereSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductFiles whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductFiles whereUserId($value)
+ * @property int $product_id
+ * @property-read \App\Models\Product $product
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductFiles whereProductId($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductFiles whereCompanyId($value)
+ * @property int $default_status
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductFiles whereDefaultStatus($value)
+ * @mixin \Eloquent
+ */
+	class ProductFiles extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -2650,6 +6291,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ProductSubCategory whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProductSubCategory whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProductSubCategory whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductSubCategory whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class ProductSubCategory extends \Eloquent {}
 }
@@ -2753,6 +6398,52 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|Project withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Project withoutTrashed()
+ * @property string|null $hash
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereHash($value)
+ * @property int $public
+ * @method static \Illuminate\Database\Eloquent\Builder|Project wherePublic($value)
+ * @property int|null $company_id
+ * @property string|null $project_short_code
+ * @property int $enable_miroboard
+ * @property string|null $miro_board_id
+ * @property int $client_access
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereClientAccess($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereEnableMiroboard($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereMiroBoardId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereProjectShortCode($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Contract> $contracts
+ * @property-read int|null $contracts_count
+ * @property-read int|null $project_members_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MentionUser> $mentionNote
+ * @property-read int|null $mention_note_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $mentionUser
+ * @property-read int|null $mention_user_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ProjectMilestone> $incompleteMilestones
+ * @property-read int|null $incomplete_milestones_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MentionUser> $mentionProject
+ * @property-read int|null $mention_project_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $mentionUser
+ * @property-read \App\Models\Project|null $due_date
+ * @mixin \Eloquent
+ * @property string $public_taskboard
+ * @property string $public_gantt_chart
+ * @property string $need_approval_by_admin
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ProjectMilestone> $completedMilestones
+ * @property-read int|null $completed_milestones_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ProjectDepartment> $departments
+ * @property-read int|null $departments_count
+ * @property-read \App\Models\ProjectMember $pivot
+ * @property-read \App\Models\User|null $projectAdmin
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Team> $projectDepartments
+ * @property-read int|null $project_departments_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $projectMembersWithoutScope
+ * @property-read int|null $project_members_without_scope_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Project notFinished()
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereNeedApprovalByAdmin($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project wherePublicGanttChart($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project wherePublicTaskboard($value)
  */
 	class Project extends \Eloquent {}
 }
@@ -2776,6 +6467,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectActivity whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectActivity whereProjectId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectActivity whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 	class ProjectActivity extends \Eloquent {}
 }
@@ -2801,8 +6493,35 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectCategory whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectCategory whereLastUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectCategory whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectCategory whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class ProjectCategory extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property int $project_id
+ * @property int $team_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Team $department
+ * @property-read \App\Models\Project $project
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectDepartment newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectDepartment newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectDepartment query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectDepartment whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectDepartment whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectDepartment whereProjectId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectDepartment whereTeamId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectDepartment whereUpdatedAt($value)
+ */
+	class ProjectDepartment extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -2845,6 +6564,9 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectFile whereSize($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectFile whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectFile whereUserId($value)
+ * @property int|null $company_id
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectFile whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class ProjectFile extends \Eloquent {}
 }
@@ -2877,6 +6599,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectMember whereProjectId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectMember whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectMember whereUserId($value)
+ * @mixin \Eloquent
  */
 	class ProjectMember extends \Eloquent {}
 }
@@ -2919,6 +6642,15 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectMilestone whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectMilestone whereSummary($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectMilestone whereUpdatedAt($value)
+ * @property \Illuminate\Support\Carbon|null $start_date
+ * @property \Illuminate\Support\Carbon|null $end_date
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectMilestone whereEndDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectMilestone whereStartDate($value)
+ * @mixin \Eloquent
+ * @property string $add_to_budget
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Task> $completeTasks
+ * @property-read int|null $complete_tasks_count
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectMilestone whereAddToBudget($value)
  */
 	class ProjectMilestone extends \Eloquent {}
 }
@@ -2940,6 +6672,8 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ProjectUserNote[] $members
+ * @property-read \App\Models\Project $project
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ProjectUserNote[] $noteUsers
  * @property-read int|null $members_count
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectNote newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectNote newQuery()
@@ -2956,6 +6690,15 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectNote whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectNote whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectNote whereUpdatedAt($value)
+ * @property-read int|null $note_users_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MentionUser> $mentionNote
+ * @property-read int|null $mention_note_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $mentionUser
+ * @property-read int|null $mention_user_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MentionUser> $mentionNote
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $mentionUser
+ * @mixin \Eloquent
+ * @property-read \App\Models\MentionUser $pivot
  */
 	class ProjectNote extends \Eloquent {}
 }
@@ -2986,6 +6729,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectRating whereRating($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectRating whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectRating whereUserId($value)
+ * @mixin \Eloquent
  */
 	class ProjectRating extends \Eloquent {}
 }
@@ -3012,8 +6756,41 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectSetting whereRemindType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectSetting whereSendReminder($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectSetting whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectSetting whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class ProjectSetting extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\ProjectStatusSetting
+ *
+ * @property int $id
+ * @property int|null $company_id
+ * @property string $status_name
+ * @property string $color
+ * @property string $status
+ * @property string $default_status
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectStatusSetting newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectStatusSetting newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectStatusSetting query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectStatusSetting whereColor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectStatusSetting whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectStatusSetting whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectStatusSetting whereDefaultStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectStatusSetting whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectStatusSetting whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectStatusSetting whereStatusName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectStatusSetting whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
+	class ProjectStatusSetting extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -3055,6 +6832,15 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectTemplate whereProjectName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectTemplate whereProjectSummary($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectTemplate whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $projectMembers
+ * @property-read int|null $members_many_count
+ * @property int|null $company_id
+ * @property int $added_by
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectTemplate whereAddedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectTemplate whereCompanyId($value)
+ * @property-read int|null $project_members_count
+ * @mixin \Eloquent
  */
 	class ProjectTemplate extends \Eloquent {}
 }
@@ -3081,6 +6867,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectTemplateMember whereProjectTemplateId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectTemplateMember whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectTemplateMember whereUserId($value)
+ * @mixin \Eloquent
  */
 	class ProjectTemplateMember extends \Eloquent {}
 }
@@ -3110,6 +6897,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectTemplateSubTask whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectTemplateSubTask whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectTemplateSubTask whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 	class ProjectTemplateSubTask extends \Eloquent {}
 }
@@ -3145,6 +6933,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectTemplateTask whereProjectTemplateId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectTemplateTask whereProjectTemplateTaskCategoryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectTemplateTask whereUpdatedAt($value)
+ * @property-read \App\Models\TaskCategory|null $category
+ * @mixin \Eloquent
+ * @property array|null $task_labels
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectTemplateTask whereTaskLabels($value)
  */
 	class ProjectTemplateTask extends \Eloquent {}
 }
@@ -3168,6 +6960,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectTemplateTaskUser whereProjectTemplateTaskId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectTemplateTaskUser whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectTemplateTaskUser whereUserId($value)
+ * @mixin \Eloquent
  */
 	class ProjectTemplateTaskUser extends \Eloquent {}
 }
@@ -3177,19 +6970,21 @@ namespace App\Models{
  * App\Models\ProjectTimeLog
  *
  * @property int $id
+ * @property string $start
+ * @property string $name
  * @property int|null $project_id
  * @property int|null $task_id
  * @property int $user_id
- * @property \Illuminate\Support\Carbon $start_time
+ * @property \Illuminate\Support\Carbon|null $start_time
  * @property \Illuminate\Support\Carbon|null $end_time
  * @property string $memo
  * @property string|null $total_hours
- * @property string|null $total_minutes
+ * @property int|null $total_minutes
  * @property int|null $edited_by_user
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int $hourly_rate
- * @property int $earnings
+ * @property float $earnings
  * @property int $approved
  * @property int|null $approved_by
  * @property int|null $invoice_id
@@ -3204,7 +6999,6 @@ namespace App\Models{
  * @property-read int|null $notifications_count
  * @property-read \App\Models\Project|null $project
  * @property-read \App\Models\Task|null $task
- * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectTimeLog newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectTimeLog newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectTimeLog query()
@@ -3227,8 +7021,59 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectTimeLog whereTotalMinutes($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectTimeLog whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectTimeLog whereUserId($value)
+ * @property-read \App\Models\User $user
+ * @property string|null $total_break_minutes
+ * @property-read \App\Models\ProjectTimeLogBreak|null $activeBreak
+ * @property-read Collection|\App\Models\ProjectTimeLogBreak[] $breaks
+ * @property-read int|null $breaks_count
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectTimeLog whereTotalBreakMinutes($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @property-read mixed $extras
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectTimeLog whereCompanyId($value)
+ * @property-read mixed $hours_only
+ * @mixin \Eloquent
+ * @property-read \App\Models\Task|null $tasksOnlyTrashed
  */
 	class ProjectTimeLog extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\ProjectTimeLogBreak
+ *
+ * @property int $id
+ * @property int|null $project_time_log_id
+ * @property \Illuminate\Support\Carbon $start_time
+ * @property \Illuminate\Support\Carbon|null $end_time
+ * @property string $reason
+ * @property string|null $total_hours
+ * @property string|null $total_minutes
+ * @property int|null $added_by
+ * @property int|null $last_updated_by
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\ProjectTimeLog|null $timelog
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectTimeLogBreak newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectTimeLogBreak newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectTimeLogBreak query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectTimeLogBreak whereAddedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectTimeLogBreak whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectTimeLogBreak whereEndTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectTimeLogBreak whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectTimeLogBreak whereLastUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectTimeLogBreak whereProjectTimeLogId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectTimeLogBreak whereReason($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectTimeLogBreak whereStartTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectTimeLogBreak whereTotalHours($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectTimeLogBreak whereTotalMinutes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectTimeLogBreak whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|ProjectTimeLogBreak whereCompanyId($value)
+ * @mixin \Eloquent
+ */
+	class ProjectTimeLogBreak extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -3238,6 +7083,8 @@ namespace App\Models{
  * @property int $id
  * @property int $user_id
  * @property int $project_note_id
+ * @property int|null $client_id
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ProjectMember[] $members
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectUserNote newModelQuery()
@@ -3248,8 +7095,48 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectUserNote whereProjectNoteId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectUserNote whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectUserNote whereUserId($value)
+ * @mixin \Eloquent
  */
 	class ProjectUserNote extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property int|null $company_id
+ * @property int|null $employee_id
+ * @property string|null $date
+ * @property int|null $previous_designation_id
+ * @property int|null $current_designation_id
+ * @property string $send_notification
+ * @property int|null $previous_department_id
+ * @property int|null $current_department_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Company|null $company
+ * @property-read \App\Models\Team|null $currentDepartment
+ * @property-read \App\Models\Designation|null $currentDesignation
+ * @property-read \App\Models\User|null $employee
+ * @property-read \App\Models\Team|null $previousDepartment
+ * @property-read \App\Models\Designation|null $previousDesignation
+ * @method static \Illuminate\Database\Eloquent\Builder|Promotion newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Promotion newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Promotion query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Promotion whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Promotion whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Promotion whereCurrentDepartmentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Promotion whereCurrentDesignationId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Promotion whereDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Promotion whereEmployeeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Promotion whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Promotion wherePreviousDepartmentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Promotion wherePreviousDesignationId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Promotion whereSendNotification($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Promotion whereUpdatedAt($value)
+ */
+	class Promotion extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -3257,8 +7144,9 @@ namespace App\Models{
  * App\Models\Proposal
  *
  * @property int $id
- * @property int $lead_id
+ * @property int $deal_id
  * @property \Illuminate\Support\Carbon $valid_till
+ * @property int|null $unit_id
  * @property float $sub_total
  * @property float $total
  * @property int|null $currency_id
@@ -3266,7 +7154,9 @@ namespace App\Models{
  * @property float $discount
  * @property int $invoice_convert
  * @property string $status
+ * @property string $ip_address
  * @property string|null $note
+ * @property \Illuminate\Support\Carbon|null $last_viewed
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $client_comment
@@ -3299,6 +7189,28 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Proposal whereTotal($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Proposal whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Proposal whereValidTill($value)
+ * @property string|null $hash
+ * @method static \Illuminate\Database\Eloquent\Builder|Proposal whereHash($value)
+ * @property string|null $description
+ * @property string $calculate_tax
+ * @method static \Illuminate\Database\Eloquent\Builder|Proposal whereCalculateTax($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Proposal whereDescription($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|Proposal whereCompanyId($value)
+ * @property-read \App\Models\UnitType|null $unit
+ * @method static \Illuminate\Database\Eloquent\Builder|Proposal whereIpAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Proposal whereLastViewed($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Proposal whereUnitId($value)
+ * @property int $send_status
+ * @method static \Illuminate\Database\Eloquent\Builder|Proposal whereSendStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Proposal whereDealId($value)
+ * @mixin \Eloquent
+ * @property string|null $proposal_number
+ * @property string|null $original_proposal_number
+ * @property-read \App\Models\Deal|null $deal
+ * @method static \Illuminate\Database\Eloquent\Builder|Proposal whereOriginalProposalNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Proposal whereProposalNumber($value)
  */
 	class Proposal extends \Eloquent {}
 }
@@ -3335,8 +7247,50 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ProposalItem whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProposalItem whereUnitPrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProposalItem whereUpdatedAt($value)
+ * @property-read \App\Models\ProposalItemImage|null $proposalItemImage
+ * @property-read mixed $tax_list
+ * @property int|null $product_id
+ * @property int|null $unit_id
+ * @property-read \App\Models\UnitType|null $unit
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalItem whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalItem whereUnitId($value)
+ * @mixin \Eloquent
+ * @property int $field_order
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalItem whereFieldOrder($value)
  */
 	class ProposalItem extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\ProposalItemImage
+ *
+ * @property int $id
+ * @property int $proposal_item_id
+ * @property string $filename
+ * @property string|null $hashname
+ * @property string|null $size
+ * @property string|null $external_link
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read mixed $file_url
+ * @property-read mixed $icon
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalItemImage newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalItemImage newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalItemImage query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalItemImage whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalItemImage whereExternalLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalItemImage whereFilename($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalItemImage whereHashname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalItemImage whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalItemImage whereProposalItemId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalItemImage whereSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalItemImage whereUpdatedAt($value)
+ * @property-read \App\Models\ProposalItem $item
+ * @property-read mixed $file
+ * @mixin \Eloquent
+ */
+	class ProposalItemImage extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -3361,8 +7315,140 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ProposalSign whereProposalId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProposalSign whereSignature($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProposalSign whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 	class ProposalSign extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\ProposalTemplate
+ *
+ * @property int $id
+ * @property int|null $company_id
+ * @property string $name
+ * @property int|null $unit_id
+ * @property float $sub_total
+ * @property float $total
+ * @property int|null $currency_id
+ * @property string $discount_type
+ * @property float $discount
+ * @property int $invoice_convert
+ * @property string|null $description
+ * @property string|null $client_comment
+ * @property int $signature_approval
+ * @property string|null $hash
+ * @property int|null $added_by
+ * @property int|null $last_updated_by
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Currency|null $currency
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ProposalTemplateItem[] $items
+ * @property-read int|null $items_count
+ * @property-read \App\Models\Lead $lead
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplate newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplate newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplate query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplate whereAddedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplate whereClientComment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplate whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplate whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplate whereCurrencyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplate whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplate whereDiscount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplate whereDiscountType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplate whereHash($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplate whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplate whereInvoiceConvert($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplate whereLastUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplate whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplate whereSignatureApproval($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplate whereSubTotal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplate whereTotal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplate whereUpdatedAt($value)
+ * @property-read UnitType|null $units
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplate whereUnitId($value)
+ * @property-read \App\Models\Company|null $company
+ * @mixin \Eloquent
+ */
+	class ProposalTemplate extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\ProposalTemplateItem
+ *
+ * @property int $id
+ * @property int|null $company_id
+ * @property int $proposal_template_id
+ * @property string $hsn_sac_code
+ * @property string $item_name
+ * @property string $type
+ * @property int $quantity
+ * @property float $unit_price
+ * @property float $amount
+ * @property string|null $item_summary
+ * @property string|null $taxes
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\ProposalTemplateItemImage|null $proposalTemplateItemImage
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplateItem newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplateItem newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplateItem query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplateItem whereAmount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplateItem whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplateItem whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplateItem whereHsnSacCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplateItem whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplateItem whereItemName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplateItem whereItemSummary($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplateItem whereProposalTemplateId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplateItem whereQuantity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplateItem whereTaxes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplateItem whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplateItem whereUnitPrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplateItem whereUpdatedAt($value)
+ * @property int|null $product_id
+ * @property int|null $unit_id
+ * @property-read \App\Models\UnitType|null $unit
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplateItem whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplateItem whereUnitId($value)
+ * @mixin \Eloquent
+ */
+	class ProposalTemplateItem extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\ProposalTemplateItemImage
+ *
+ * @property int $id
+ * @property int|null $company_id
+ * @property int $proposal_template_item_id
+ * @property string $filename
+ * @property string|null $hashname
+ * @property string|null $size
+ * @property string|null $external_link
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read mixed $file_url
+ * @property-read mixed $icon
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplateItemImage newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplateItemImage newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplateItemImage query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplateItemImage whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplateItemImage whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplateItemImage whereExternalLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplateItemImage whereFilename($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplateItemImage whereHashname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplateItemImage whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplateItemImage whereProposalTemplateItemId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplateItemImage whereSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProposalTemplateItemImage whereUpdatedAt($value)
+ * @property-read mixed $file
+ * @mixin \Eloquent
+ */
+	class ProposalTemplateItemImage extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -3385,6 +7471,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|PurposeConsent whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PurposeConsent whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PurposeConsent whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 	class PurposeConsent extends \Eloquent {}
 }
@@ -3394,7 +7481,7 @@ namespace App\Models{
  * App\Models\PurposeConsentLead
  *
  * @property int $id
- * @property int $lead_id
+ * @property int $deal_id
  * @property int $purpose_consent_id
  * @property string $status
  * @property string|null $ip
@@ -3415,6 +7502,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|PurposeConsentLead whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PurposeConsentLead whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PurposeConsentLead whereUpdatedById($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PurposeConsentLead whereDealId($value)
+ * @mixin \Eloquent
  */
 	class PurposeConsentLead extends \Eloquent {}
 }
@@ -3445,6 +7534,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|PurposeConsentUser whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PurposeConsentUser whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PurposeConsentUser whereUpdatedById($value)
+ * @mixin \Eloquent
  */
 	class PurposeConsentUser extends \Eloquent {}
 }
@@ -3472,6 +7562,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|PushNotificationSetting whereOnesignalRestApiKey($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PushNotificationSetting whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PushNotificationSetting whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 	class PushNotificationSetting extends \Eloquent {}
 }
@@ -3502,8 +7593,73 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|PusherSetting wherePusherCluster($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PusherSetting whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PusherSetting whereUpdatedAt($value)
+ * @property int $taskboard
+ * @property int $messages
+ * @method static \Illuminate\Database\Eloquent\Builder|PusherSetting whereMessages($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PusherSetting whereTaskboard($value)
+ * @mixin \Eloquent
  */
 	class PusherSetting extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property string $qr_enable
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Qrcodes newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Qrcodes newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Qrcodes query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Qrcodes whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Qrcodes whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Qrcodes whereQrEnable($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Qrcodes whereUpdatedAt($value)
+ */
+	class Qrcodes extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\QuickBooksSetting
+ *
+ * @property int $id
+ * @property int|null $company_id
+ * @property string $sandbox_client_id
+ * @property string $sandbox_client_secret
+ * @property string $client_id
+ * @property string $client_secret
+ * @property string $access_token
+ * @property string $refresh_token
+ * @property string $realmid
+ * @property string $sync_type
+ * @property string $environment
+ * @property int $status
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|QuickBooksSetting newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|QuickBooksSetting newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|QuickBooksSetting query()
+ * @method static \Illuminate\Database\Eloquent\Builder|QuickBooksSetting whereAccessToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuickBooksSetting whereClientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuickBooksSetting whereClientSecret($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuickBooksSetting whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuickBooksSetting whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuickBooksSetting whereEnvironment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuickBooksSetting whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuickBooksSetting whereRealmid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuickBooksSetting whereRefreshToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuickBooksSetting whereSandboxClientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuickBooksSetting whereSandboxClientSecret($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuickBooksSetting whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuickBooksSetting whereSyncType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuickBooksSetting whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
+	class QuickBooksSetting extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -3516,7 +7672,9 @@ namespace App\Models{
  * @property int|null $client_id
  * @property int|null $user_id
  * @property int|null $created_by
+ * @property int|null $unit_id
  * @property \Illuminate\Support\Carbon $issue_date
+ * @property \Illuminate\Support\Carbon $next_invoice_date
  * @property \Illuminate\Support\Carbon $due_date
  * @property float $sub_total
  * @property float $total
@@ -3587,8 +7745,55 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|RecurringInvoice whereUnlimitedRecurring($value)
  * @method static \Illuminate\Database\Eloquent\Builder|RecurringInvoice whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|RecurringInvoice whereUserId($value)
+ * @property string $calculate_tax
+ * @method static \Illuminate\Database\Eloquent\Builder|RecurringInvoice whereCalculateTax($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|RecurringInvoice whereCompanyId($value)
+ * @property int $immediate_invoice
+ * @property-read \App\Models\UnitType|null $units
+ * @method static \Illuminate\Database\Eloquent\Builder|RecurringInvoice whereImmediateInvoice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RecurringInvoice whereNextInvoiceDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RecurringInvoice whereUnitId($value)
+ * @property int|null $bank_account_id
+ * @method static \Illuminate\Database\Eloquent\Builder|RecurringInvoice whereBankAccountId($value)
+ * @mixin \Eloquent
  */
 	class RecurringInvoice extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\InvoiceItemImage
+ *
+ * @property int $id
+ * @property int $invoice_item_id
+ * @property string $filename
+ * @property string|null $hashname
+ * @property string|null $image
+ * @property string|null $size
+ * @property string|null $external_link
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read mixed $file_url
+ * @property-read mixed $icon
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItemImage newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItemImage newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItemImage query()
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItemImage whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItemImage whereExternalLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItemImage whereFilename($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItemImage whereHashname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItemImage whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItemImage whereInvoiceItemId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItemImage whereSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|InvoiceItemImage whereUpdatedAt($value)
+ * @property int $invoice_recurring_item_id
+ * @method static \Illuminate\Database\Eloquent\Builder|RecurringInvoiceItemImage whereInvoiceRecurringItemId($value)
+ * @property-read mixed $file
+ * @mixin \Eloquent
+ */
+	class RecurringInvoiceItemImage extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -3607,6 +7812,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $hsn_sac_code
+ * @property mixed $recurringInvoiceItemImage
  * @property-read mixed $icon
  * @method static \Illuminate\Database\Eloquent\Builder|RecurringInvoiceItems newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|RecurringInvoiceItems newQuery()
@@ -3623,6 +7829,12 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|RecurringInvoiceItems whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|RecurringInvoiceItems whereUnitPrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|RecurringInvoiceItems whereUpdatedAt($value)
+ * @property int|null $product_id
+ * @property int|null $unit_id
+ * @property \App\Models\UnitType|null $unit
+ * @method static \Illuminate\Database\Eloquent\Builder|RecurringInvoiceItems whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RecurringInvoiceItems whereUnitId($value)
+ * @mixin \Eloquent
  */
 	class RecurringInvoiceItems extends \Eloquent {}
 }
@@ -3650,6 +7862,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|RemovalRequest whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|RemovalRequest whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|RemovalRequest whereUserId($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|RemovalRequest whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class RemovalRequest extends \Eloquent {}
 }
@@ -3677,6 +7893,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|RemovalRequestLead whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|RemovalRequestLead whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|RemovalRequestLead whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|RemovalRequestLead whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class RemovalRequestLead extends \Eloquent {}
 }
@@ -3708,6 +7928,14 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Role whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Role whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Role whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Permission[] $rolePermissions
+ * @property-read int|null $role_permissions_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $unsyncedUsers
+ * @property-read int|null $unsynced_users_count
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|Role whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class Role extends \Eloquent {}
 }
@@ -3726,8 +7954,39 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|RoleUser query()
  * @method static \Illuminate\Database\Eloquent\Builder|RoleUser whereRoleId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|RoleUser whereUserId($value)
+ * @mixin \Eloquent
  */
 	class RoleUser extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property int|null $company_id
+ * @property int $user_id
+ * @property int|null $employee_shift_rotation_id
+ * @property int|null $employee_shift_id
+ * @property int|null $sequence
+ * @property string|null $cron_run_date
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|RotationAutomateLog newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|RotationAutomateLog newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|RotationAutomateLog query()
+ * @method static \Illuminate\Database\Eloquent\Builder|RotationAutomateLog whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RotationAutomateLog whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RotationAutomateLog whereCronRunDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RotationAutomateLog whereEmployeeShiftId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RotationAutomateLog whereEmployeeShiftRotationId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RotationAutomateLog whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RotationAutomateLog whereSequence($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RotationAutomateLog whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RotationAutomateLog whereUserId($value)
+ */
+	class RotationAutomateLog extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -3749,123 +8008,87 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Session wherePayload($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Session whereUserAgent($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Session whereUserId($value)
+ * @mixin \Eloquent
  */
 	class Session extends \Eloquent {}
 }
 
 namespace App\Models{
 /**
- * App\Models\Company
+ * 
  *
  * @property int $id
- * @property string $company_name
- * @property string $company_email
- * @property string $company_phone
- * @property string|null $logo
- * @property string|null $login_background
- * @property string $address
- * @property string|null $website
- * @property int|null $currency_id
- * @property string $timezone
- * @property string $date_format
- * @property string|null $date_picker_format
- * @property string|null $moment_format
- * @property string $time_format
- * @property string $locale
- * @property string $latitude
- * @property string $longitude
- * @property string $leaves_start_from
- * @property string $active_theme
- * @property int|null $last_updated_by
- * @property string|null $currency_converter_key
- * @property string|null $google_map_key
- * @property string $task_self
+ * @property int|null $company_id
+ * @property string|null $rotation_name
+ * @property string|null $rotation_frequency
+ * @property string|null $schedule_on
+ * @property int|null $rotation_date
+ * @property string|null $color_code
+ * @property string $override_shift
+ * @property string $status
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $purchase_code
- * @property string|null $supported_until
- * @property string $google_recaptcha_status
- * @property string $google_recaptcha_v2_status
- * @property string|null $google_recaptcha_v2_site_key
- * @property string|null $google_recaptcha_v2_secret_key
- * @property string $google_recaptcha_v3_status
- * @property string|null $google_recaptcha_v3_site_key
- * @property string|null $google_recaptcha_v3_secret_key
- * @property int $app_debug
- * @property int $rounded_theme
- * @property int $hide_cron_message
- * @property int $system_update
- * @property string $logo_background_color
- * @property int $before_days
- * @property int $after_days
- * @property string $on_deadline
- * @property int $default_task_status
- * @property int $show_review_modal
- * @property int $dashboard_clock
- * @property int $taskboard_length
- * @property string|null $favicon
- * @property-read \App\Models\Currency|null $currency
- * @property-read mixed $dark_logo_url
- * @property-read mixed $favicon_url
- * @property-read mixed $icon
- * @property-read mixed $light_logo_url
- * @property-read mixed $login_background_url
- * @property-read mixed $logo_url
- * @property-read mixed $moment_format
- * @property-read mixed $show_public_message
- * @method static \Illuminate\Database\Eloquent\Builder|Setting newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Setting newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Setting query()
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereActiveTheme($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereAddress($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereAfterDays($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereAppDebug($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereBeforeDays($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereCompanyEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereCompanyName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereCompanyPhone($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereCurrencyConverterKey($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereCurrencyId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereDashboardClock($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereDateFormat($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereDatePickerFormat($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereDefaultTaskStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereFavicon($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereGoogleMapKey($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereGoogleRecaptchaStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereGoogleRecaptchaV2SecretKey($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereGoogleRecaptchaV2SiteKey($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereGoogleRecaptchaV2Status($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereGoogleRecaptchaV3SecretKey($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereGoogleRecaptchaV3SiteKey($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereGoogleRecaptchaV3Status($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereHideCronMessage($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereLastUpdatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereLatitude($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereLeavesStartFrom($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereLocale($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereLoginBackground($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereLogo($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereLogoBackgroundColor($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereLongitude($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereMomentFormat($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereOnDeadline($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting wherePurchaseCode($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereRoundedTheme($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereShowReviewModal($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereSupportedUntil($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereSystemUpdate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereTaskSelf($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereTaskboardLength($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereTimeFormat($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereTimezone($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereWeatherKey($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereWebsite($value)
+ * @property string $send_mail
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\AutomateShift> $automateShifts
+ * @property-read int|null $automate_shifts_count
+ * @property-read \App\Models\Company|null $company
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ShiftRotationSequence> $sequences
+ * @property-read int|null $sequences_count
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftRotation active()
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftRotation newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftRotation newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftRotation query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftRotation whereColorCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftRotation whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftRotation whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftRotation whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftRotation whereOverrideShift($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftRotation whereRotationDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftRotation whereRotationFrequency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftRotation whereRotationName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftRotation whereScheduleOn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftRotation whereSendMail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftRotation whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftRotation whereUpdatedAt($value)
  */
-	class Setting extends \Eloquent {}
+	class ShiftRotation extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property int|null $employee_shift_rotation_id
+ * @property int|null $employee_shift_id
+ * @property int|null $sequence
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\ShiftRotation|null $rotation
+ * @property-read \App\Models\EmployeeShift|null $shift
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftRotationSequence newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftRotationSequence newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftRotationSequence query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftRotationSequence whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftRotationSequence whereEmployeeShiftId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftRotationSequence whereEmployeeShiftRotationId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftRotationSequence whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftRotationSequence whereSequence($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ShiftRotationSequence whereUpdatedAt($value)
+ */
+	class ShiftRotationSequence extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\SignUpSetting
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|SignUpSetting newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|SignUpSetting newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|SignUpSetting query()
+ * @mixin \Eloquent
+ */
+	class SignUpSetting extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -3884,6 +8107,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Skill whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Skill whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Skill whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|Skill whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class Skill extends \Eloquent {}
 }
@@ -3909,6 +8136,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|SlackSetting whereSlackWebhook($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SlackSetting whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SlackSetting whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|SlackSetting whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class SlackSetting extends \Eloquent {}
 }
@@ -3929,6 +8160,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int $verified
+ * @property int $email_verified
  * @property-read mixed $icon
  * @property-read mixed $set_smtp_message
  * @method static \Illuminate\Database\Eloquent\Builder|SmtpSetting newModelQuery()
@@ -3946,6 +8178,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|SmtpSetting whereMailUsername($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SmtpSetting whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SmtpSetting whereVerified($value)
+ * @property string $mail_connection
+ * @method static \Illuminate\Database\Eloquent\Builder|SmtpSetting whereMailConnection($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SmtpSetting whereEmailVerified($value)
+ * @mixin \Eloquent
  */
 	class SmtpSetting extends \Eloquent {}
 }
@@ -3969,6 +8205,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Social whereSocialService($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Social whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Social whereUserId($value)
+ * @mixin \Eloquent
  */
 	class Social extends \Eloquent {}
 }
@@ -4011,6 +8248,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|SocialAuthSetting whereTwitterSecretId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SocialAuthSetting whereTwitterStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SocialAuthSetting whereUpdatedAt($value)
+ * @mixin \Eloquent
+ * @property-read mixed $social_auth_enable_count
  */
 	class SocialAuthSetting extends \Eloquent {}
 }
@@ -4019,7 +8258,6 @@ namespace App\Models{
 /**
  * Class StickyNote
  *
- * @package App
  * @property int $id
  * @property int $user_id
  * @property string $note_text
@@ -4037,6 +8275,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|StickyNote whereNoteText($value)
  * @method static \Illuminate\Database\Eloquent\Builder|StickyNote whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|StickyNote whereUserId($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|StickyNote whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class StickyNote extends \Eloquent {}
 }
@@ -4061,6 +8303,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|StorageSetting whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|StorageSetting whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|StorageSetting whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 	class StorageSetting extends \Eloquent {}
 }
@@ -4094,8 +8337,63 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|SubTask whereTaskId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SubTask whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SubTask whereUpdatedAt($value)
+ * @property string|null $description
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\SubTaskFile[] $files
+ * @property-read int|null $files_count
+ * @method static \Illuminate\Database\Eloquent\Builder|SubTask whereDescription($value)
+ * @property int|null $assigned_to
+ * @property-read \App\Models\User|null $assignedTo
+ * @method static \Illuminate\Database\Eloquent\Builder|SubTask whereAssignedTo($value)
+ * @mixin \Eloquent
  */
 	class SubTask extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\TaskFile
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property int $task_id
+ * @property string $filename
+ * @property string|null $description
+ * @property string|null $google_url
+ * @property string|null $hashname
+ * @property string|null $size
+ * @property string|null $dropbox_link
+ * @property string|null $external_link
+ * @property string|null $external_link_name
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int|null $added_by
+ * @property int|null $last_updated_by
+ * @property-read mixed $file_url
+ * @property-read mixed $icon
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskFile newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskFile newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskFile query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskFile whereAddedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskFile whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskFile whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskFile whereDropboxLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskFile whereExternalLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskFile whereExternalLinkName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskFile whereFilename($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskFile whereGoogleUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskFile whereHashname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskFile whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskFile whereLastUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskFile whereSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskFile whereTaskId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskFile whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskFile whereUserId($value)
+ * @property int $sub_task_id
+ * @method static \Illuminate\Database\Eloquent\Builder|SubTaskFile whereSubTaskId($value)
+ * @property-read mixed $file
+ * @mixin \Eloquent
+ */
+	class SubTaskFile extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -4105,7 +8403,7 @@ namespace App\Models{
  * @property int $id
  * @property string $heading
  * @property string|null $description
- * @property \Illuminate\Support\Carbon $due_date
+ * @property \Illuminate\Support\Carbon|null $due_date
  * @property \Illuminate\Support\Carbon|null $start_date
  * @property int|null $project_id
  * @property int|null $task_category_id
@@ -4116,6 +8414,8 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $completed_on
  * @property int|null $created_by
  * @property int|null $recurring_task_id
+ * @property-read \Illuminate\Database\Eloquent\Collection|Task[] $recurrings
+ * @property-read int|null $recurrings_count
  * @property int|null $dependent_task_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -4137,6 +8437,8 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\SubTask[] $completedSubtasks
  * @property-read int|null $completed_subtasks_count
  * @property-read \App\Models\User|null $createBy
+ * @property-read \App\Models\User|null $addedByUser
+ * @property-read \App\Models\ProjectMilestone|null $milestone
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\TaskFile[] $files
  * @property-read int|null $files_count
  * @property-read mixed $create_on
@@ -4150,6 +8452,7 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\SubTask[] $incompleteSubtasks
  * @property-read int|null $incomplete_subtasks_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\TaskLabel[] $label
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\TaskUser[] $taskUsers
  * @property-read int|null $label_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\TaskLabelList[] $labels
  * @property-read int|null $labels_count
@@ -4192,6 +8495,45 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Task whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Task whereTaskCategoryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Task whereUpdatedAt($value)
+ * @property string|null $hash
+ * @method static \Illuminate\Database\Eloquent\Builder|Task whereHash($value)
+ * @property int $repeat
+ * @property int $repeat_complete
+ * @property int|null $repeat_count
+ * @property string $repeat_type
+ * @property int|null $repeat_cycles
+ * @property-read \App\Models\ProjectTimeLog|null $activeTimer
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $activeUsers
+ * @property-read int|null $active_users_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Task whereRepeat($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Task whereRepeatComplete($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Task whereRepeatCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Task whereRepeatCycles($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Task whereRepeatType($value)
+ * @property string|null $event_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Task whereEventId($value)
+ * @property int|null $company_id
+ * @property string|null $task_short_code
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\Project|null $activeProject
+ * @property-read \App\Models\Company|null $company
+ * @property-read int|null $task_users_count
+ * @method static \Illuminate\Database\Query\Builder|Task onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Task whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Task whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Task whereTaskShortCode($value)
+ * @method static \Illuminate\Database\Query\Builder|Task withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Task withoutTrashed()
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MentionUser> $mentionTask
+ * @property-read int|null $mention_task_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $mentionUser
+ * @property-read int|null $mention_user_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MentionUser> $mentionTask
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $mentionUser
+ * @mixin \Eloquent
+ * @property int $approval_send
+ * @property-read \App\Models\TaskUser $pivot
+ * @method static \Illuminate\Database\Eloquent\Builder|Task whereApprovalSend($value)
  */
 	class Task extends \Eloquent {}
 }
@@ -4216,6 +8558,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|TaskCategory whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TaskCategory whereLastUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TaskCategory whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskCategory whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class TaskCategory extends \Eloquent {}
 }
@@ -4246,8 +8592,94 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|TaskComment whereTaskId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TaskComment whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TaskComment whereUserId($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TaskCommentEmoji> $commentEmoji
+ * @property-read int|null $comment_emoji_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TaskCommentEmoji> $dislike
+ * @property-read int|null $dislike_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $dislikeUsers
+ * @property-read int|null $dislike_users_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TaskCommentEmoji> $like
+ * @property-read int|null $like_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $likeUsers
+ * @property-read int|null $like_users_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TaskCommentEmoji> $commentEmoji
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TaskCommentEmoji> $dislike
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $dislikeUsers
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TaskCommentEmoji> $like
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $likeUsers
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TaskCommentEmoji> $commentEmoji
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TaskCommentEmoji> $dislike
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $dislikeUsers
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TaskCommentEmoji> $like
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $likeUsers
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TaskCommentEmoji> $commentEmoji
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TaskCommentEmoji> $dislike
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $dislikeUsers
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TaskCommentEmoji> $like
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $likeUsers
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TaskCommentEmoji> $commentEmoji
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TaskCommentEmoji> $dislike
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $dislikeUsers
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TaskCommentEmoji> $like
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $likeUsers
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TaskCommentEmoji> $commentEmoji
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TaskCommentEmoji> $dislike
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $dislikeUsers
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TaskCommentEmoji> $like
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $likeUsers
+ * @property string|null $mention_user_id
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TaskCommentEmoji> $commentEmoji
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TaskCommentEmoji> $dislike
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $dislikeUsers
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TaskCommentEmoji> $like
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $likeUsers
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskComment whereMentionUserId($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TaskCommentEmoji> $commentEmoji
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TaskCommentEmoji> $dislike
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $dislikeUsers
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TaskCommentEmoji> $like
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $likeUsers
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MentionUser> $mentionComment
+ * @property-read int|null $mention_comment_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $mentionUser
+ * @property-read int|null $mention_user_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TaskCommentEmoji> $commentEmoji
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TaskCommentEmoji> $dislike
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $dislikeUsers
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TaskCommentEmoji> $like
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $likeUsers
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MentionUser> $mentionComment
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $mentionUser
+ * @mixin \Eloquent
+ * @property-read \App\Models\MentionUser $pivot
  */
 	class TaskComment extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\TaskCommentEmoji
+ *
+ * @property int $id
+ * @property int|null $user_id
+ * @property int|null $comment_id
+ * @property string|null $emoji_name
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\TaskComment|null $taskComment
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskCommentEmoji newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskCommentEmoji newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskCommentEmoji query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskCommentEmoji whereCommentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskCommentEmoji whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskCommentEmoji whereEmojiName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskCommentEmoji whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskCommentEmoji whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskCommentEmoji whereUserId($value)
+ * @mixin \Eloquent
+ */
+	class TaskCommentEmoji extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -4289,6 +8721,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|TaskFile whereTaskId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TaskFile whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TaskFile whereUserId($value)
+ * @property-read mixed $file
+ * @mixin \Eloquent
  */
 	class TaskFile extends \Eloquent {}
 }
@@ -4321,6 +8755,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|TaskHistory whereTaskId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TaskHistory whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TaskHistory whereUserId($value)
+ * @mixin \Eloquent
  */
 	class TaskHistory extends \Eloquent {}
 }
@@ -4344,6 +8779,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|TaskLabel whereLabelId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TaskLabel whereTaskId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TaskLabel whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 	class TaskLabel extends \Eloquent {}
 }
@@ -4369,6 +8805,12 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|TaskLabelList whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TaskLabelList whereLabelName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TaskLabelList whereUpdatedAt($value)
+ * @property int|null $project_id
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskLabelList whereProjectId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskLabelList whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class TaskLabelList extends \Eloquent {}
 }
@@ -4399,8 +8841,79 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|TaskNote whereTaskId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TaskNote whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TaskNote whereUserId($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MentionUser> $mentionNote
+ * @property-read int|null $mention_note_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $mentionUser
+ * @property-read int|null $mention_user_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MentionUser> $mentionNote
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $mentionUser
+ * @mixin \Eloquent
+ * @property-read \App\Models\MentionUser $pivot
  */
 	class TaskNote extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\TaskSetting
+ *
+ * @property int $id
+ * @property int|null $company_id
+ * @property string $task_category
+ * @property string $project
+ * @property string $start_date
+ * @property string $due_date
+ * @property string $assigned_to
+ * @property string $assigned_by
+ * @property string $description
+ * @property string $label
+ * @property string $status
+ * @property string $priority
+ * @property string $make_private
+ * @property string $time_estimate
+ * @property string $hours_logged
+ * @property string $custom_fields
+ * @property string $copy_task_link
+ * @property string $files
+ * @property string $sub_task
+ * @property string $comments
+ * @property string $time_logs
+ * @property string $notes
+ * @property string $history
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskSetting newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskSetting newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskSetting query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskSetting whereAssignedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskSetting whereAssignedTo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskSetting whereComments($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskSetting whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskSetting whereCopyTaskLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskSetting whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskSetting whereCustomFields($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskSetting whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskSetting whereDueDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskSetting whereFiles($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskSetting whereHistory($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskSetting whereHoursLogged($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskSetting whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskSetting whereLabel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskSetting whereMakePrivate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskSetting whereNotes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskSetting wherePriority($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskSetting whereProject($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskSetting whereStartDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskSetting whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskSetting whereSubTask($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskSetting whereTaskCategory($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskSetting whereTimeEstimate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskSetting whereTimeLogs($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskSetting whereUpdatedAt($value)
+ * @property-read \App\Models\Company|null $company
+ * @mixin \Eloquent
+ */
+	class TaskSetting extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -4412,6 +8925,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|TaskTag newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TaskTag newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TaskTag query()
+ * @mixin \Eloquent
  */
 	class TaskTag extends \Eloquent {}
 }
@@ -4424,6 +8938,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|TaskTagList newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TaskTagList newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TaskTagList query()
+ * @mixin \Eloquent
  */
 	class TaskTagList extends \Eloquent {}
 }
@@ -4447,6 +8962,9 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|TaskUser whereTaskId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TaskUser whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TaskUser whereUserId($value)
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read int|null $notifications_count
+ * @mixin \Eloquent
  */
 	class TaskUser extends \Eloquent {}
 }
@@ -4475,6 +8993,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|TaskboardColumn wherePriority($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TaskboardColumn whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TaskboardColumn whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskboardColumn whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class TaskboardColumn extends \Eloquent {}
 }
@@ -4497,6 +9019,15 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Tax whereRatePercent($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Tax whereTaxName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Tax whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Query\Builder|Tax onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Tax whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Tax whereDeletedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|Tax withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Tax withoutTrashed()
+ * @mixin \Eloquent
  */
 	class Tax extends \Eloquent {}
 }
@@ -4505,8 +9036,6 @@ namespace App\Models{
 /**
  * App\Models\Team
  *
- * @property Collection $members
- * @mixin \Eloquent
  * @property int $id
  * @property string $team_name
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -4516,6 +9045,7 @@ namespace App\Models{
  * @property-read mixed $icon
  * @property-read int|null $members_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\EmployeeDetails[] $teamMembers
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Team[] $childs
  * @property-read int|null $team_members_count
  * @method static \Illuminate\Database\Eloquent\Builder|Team newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Team newQuery()
@@ -4526,6 +9056,14 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Team whereLastUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Team whereTeamName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Team whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\EmployeeTeam[] $members
+ * @property int|null $company_id
+ * @property int|null $parent_id
+ * @property-read int|null $childs_count
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|Team whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Team whereParentId($value)
+ * @mixin \Eloquent
  */
 	class Team extends \Eloquent {}
 }
@@ -4558,6 +9096,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ThemeSetting whereSidebarTheme($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ThemeSetting whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ThemeSetting whereUserCss($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|ThemeSetting whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class ThemeSetting extends \Eloquent {}
 }
@@ -4610,8 +9152,80 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereUserId($value)
  * @method static \Illuminate\Database\Query\Builder|Ticket withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Ticket withoutTrashed()
+ * @property string|null $mobile
+ * @property int|null $country_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereCountryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereMobile($value)
+ * @property string|null $close_date
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereCloseDate($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @property-read mixed $extras
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereCompanyId($value)
+ * @property int|null $ticket_number
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereTicketNumber($value)
+ * @property int|null $group_id
+ * @property-read \App\Models\TicketReply|null $latestReply
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereGroupId($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $mentionUser
+ * @property-read int|null $mention_user_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MentionUser> $ticketMention
+ * @property-read int|null $ticket_mention_count
+ * @property int|null $project_id
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TicketActivity> $activities
+ * @property-read int|null $activities_count
+ * @property-read \App\Models\Project|null $project
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereProjectId($value)
+ * @mixin \Eloquent
+ * @property-read \App\Models\TicketGroup|null $group
+ * @property-read \App\Models\MentionUser $pivot
  */
 	class Ticket extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\TicketActivity
+ *
+ * @property int $id
+ * @property int $ticket_id
+ * @property int $user_id
+ * @property int|null $assigned_to
+ * @property int|null $channel_id
+ * @property int|null $group_id
+ * @property int|null $type_id
+ * @property string $status
+ * @property string $priority
+ * @property string $type
+ * @property string|null $content
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User|null $assignedTo
+ * @property-read \App\Models\TicketChannel|null $channel
+ * @property-read \App\Models\TicketGroup|null $group
+ * @property-read \App\Models\Ticket $ticket
+ * @property-read \App\Models\TicketType|null $ticketType
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketActivity newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketActivity newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketActivity query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketActivity whereAssignedTo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketActivity whereChannelId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketActivity whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketActivity whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketActivity whereGroupId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketActivity whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketActivity wherePriority($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketActivity whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketActivity whereTicketId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketActivity whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketActivity whereTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketActivity whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketActivity whereUserId($value)
+ * @mixin \Eloquent
+ * @property-read mixed $details
+ */
+	class TicketActivity extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -4636,6 +9250,14 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|TicketAgentGroups whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TicketAgentGroups whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TicketAgentGroups whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property int|null $added_by
+ * @property int|null $last_updated_by
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketAgentGroups whereAddedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketAgentGroups whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketAgentGroups whereLastUpdatedBy($value)
+ * @mixin \Eloquent
  */
 	class TicketAgentGroups extends \Eloquent {}
 }
@@ -4658,6 +9280,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|TicketChannel whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TicketChannel whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TicketChannel whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketChannel whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class TicketChannel extends \Eloquent {}
 }
@@ -4685,8 +9311,59 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|TicketCustomForm whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TicketCustomForm whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TicketCustomForm whereUpdatedAt($value)
+ * @property int $required
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketCustomForm whereRequired($value)
+ * @property int|null $company_id
+ * @property int|null $custom_fields_id
+ * @property-read \App\Models\Company|null $company
+ * @property-read \App\Models\CustomField|null $customField
+ * @property-read mixed $extras
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketCustomForm whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketCustomForm whereCustomFieldsId($value)
+ * @mixin \Eloquent
  */
 	class TicketCustomForm extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\TicketEmailSetting
+ *
+ * @property int $id
+ * @property int|null $company_id
+ * @property string|null $mail_username
+ * @property string|null $mail_password
+ * @property string|null $mail_from_name
+ * @property string|null $mail_from_email
+ * @property string|null $imap_host
+ * @property string|null $imap_port
+ * @property string|null $imap_encryption
+ * @property int $status
+ * @property int $verified
+ * @property int $sync_interval
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketEmailSetting newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketEmailSetting newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketEmailSetting query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketEmailSetting whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketEmailSetting whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketEmailSetting whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketEmailSetting whereImapEncryption($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketEmailSetting whereImapHost($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketEmailSetting whereImapPort($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketEmailSetting whereMailFromEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketEmailSetting whereMailFromName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketEmailSetting whereMailPassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketEmailSetting whereMailUsername($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketEmailSetting whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketEmailSetting whereSyncInterval($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketEmailSetting whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketEmailSetting whereVerified($value)
+ * @property-read \App\Models\Company|null $company
+ * @mixin \Eloquent
+ */
+	class TicketEmailSetting extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -4725,6 +9402,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|TicketFile whereTicketReplyId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TicketFile whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TicketFile whereUserId($value)
+ * @property-read mixed $file
+ * @mixin \Eloquent
  */
 	class TicketFile extends \Eloquent {}
 }
@@ -4740,6 +9419,7 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\TicketAgentGroups[] $agents
  * @property-read int|null $agents_count
  * @property-read mixed $icon
+ * @property-read mixed $enabledAgents
  * @method static \Illuminate\Database\Eloquent\Builder|TicketGroup newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TicketGroup newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TicketGroup query()
@@ -4747,6 +9427,14 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|TicketGroup whereGroupName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TicketGroup whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TicketGroup whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @property-read int|null $enabled_agents_count
+ * @method static \Database\Factories\TicketGroupFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketGroup whereCompanyId($value)
+ * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Ticket> $tickets
+ * @property-read int|null $tickets_count
  */
 	class TicketGroup extends \Eloquent {}
 }
@@ -4759,6 +9447,8 @@ namespace App\Models{
  * @property int $ticket_id
  * @property int $user_id
  * @property string|null $message
+ * @property int|null $added_by
+ * @property int|null $agent_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -4780,6 +9470,20 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|TicketReply whereUserId($value)
  * @method static \Illuminate\Database\Query\Builder|TicketReply withTrashed()
  * @method static \Illuminate\Database\Query\Builder|TicketReply withoutTrashed()
+ * @property int|null $company_id
+ * @property string|null $imap_message_id
+ * @property string|null $imap_message_uid
+ * @property string|null $imap_in_reply_to
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketReply whereImapInReplyTo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketReply whereImapMessageId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketReply whereImapMessageUid($value)
+ * @mixin \Eloquent
+ * @property string $type
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TicketReplyUser> $ticketReplyUsers
+ * @property-read int|null $ticket_reply_users_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $users
+ * @property-read int|null $users_count
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketReply whereType($value)
  */
 	class TicketReply extends \Eloquent {}
 }
@@ -4802,8 +9506,63 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|TicketReplyTemplate whereReplyHeading($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TicketReplyTemplate whereReplyText($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TicketReplyTemplate whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketReplyTemplate whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class TicketReplyTemplate extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property int $ticket_reply_id
+ * @property int $user_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\TicketReply $ticketReply
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketReplyUser newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketReplyUser newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketReplyUser query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketReplyUser whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketReplyUser whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketReplyUser whereTicketReplyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketReplyUser whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketReplyUser whereUserId($value)
+ */
+	class TicketReplyUser extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property int|null $user_id
+ * @property int|null $company_id
+ * @property string|null $ticket_scope
+ * @property array|null $group_id
+ * @property int|null $updated_by
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketSettingForAgents newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketSettingForAgents newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketSettingForAgents query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketSettingForAgents whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketSettingForAgents whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketSettingForAgents whereGroupId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketSettingForAgents whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketSettingForAgents whereTicketScope($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketSettingForAgents whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketSettingForAgents whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketSettingForAgents whereUserId($value)
+ */
+	class TicketSettingForAgents extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -4825,6 +9584,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|TicketTag whereTagId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TicketTag whereTicketId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TicketTag whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketTag whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class TicketTag extends \Eloquent {}
 }
@@ -4845,6 +9608,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|TicketTagList whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TicketTagList whereTagName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TicketTagList whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketTagList whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class TicketTagList extends \Eloquent {}
 }
@@ -4867,8 +9634,137 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|TicketType whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TicketType whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TicketType whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketType whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class TicketType extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\TranslateSetting
+ *
+ * @property int $id
+ * @property string|null $google_key
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|TranslateSetting newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TranslateSetting newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TranslateSetting query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TranslateSetting whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TranslateSetting whereGoogleKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TranslateSetting whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TranslateSetting whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
+	class TranslateSetting extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\UnitType
+ *
+ * @property int $id
+ * @property int|null $company_id
+ * @property string $unit_type
+ * @property int $default
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Company|null $company
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CreditNotes> $creditnoteitems
+ * @property-read int|null $creditnoteitems_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, EstimateItem> $estimateitems
+ * @property-read int|null $estimateitems_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\EstimateTemplate> $estimatetemplate
+ * @property-read int|null $estimatetemplate_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, InvoiceItems> $invoicesItems
+ * @property-read int|null $invoices_items_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Order> $orders
+ * @property-read int|null $orders_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, ProposalItem> $proposalitems
+ * @property-read int|null $proposalitems_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, ProposalTemplate> $proposaltemplate
+ * @property-read int|null $proposaltemplate_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\RecurringInvoice> $recurringInvoice
+ * @property-read int|null $recurring_invoice_count
+ * @method static \Illuminate\Database\Eloquent\Builder|UnitType newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|UnitType newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|UnitType query()
+ * @method static \Illuminate\Database\Eloquent\Builder|UnitType whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UnitType whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UnitType whereDefault($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UnitType whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UnitType whereUnitType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UnitType whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CreditNotes> $creditnoteitems
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, EstimateItem> $estimateitems
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\EstimateTemplate> $estimatetemplate
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, InvoiceItems> $invoicesItems
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Order> $orders
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, ProposalItem> $proposalitems
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, ProposalTemplate> $proposaltemplate
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\RecurringInvoice> $recurringInvoice
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CreditNotes> $creditnoteitems
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, EstimateItem> $estimateitems
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\EstimateTemplate> $estimatetemplate
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, InvoiceItems> $invoicesItems
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Order> $orders
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, ProposalItem> $proposalitems
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, ProposalTemplate> $proposaltemplate
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\RecurringInvoice> $recurringInvoice
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CreditNotes> $creditnoteitems
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, EstimateItem> $estimateitems
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\EstimateTemplate> $estimatetemplate
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, InvoiceItems> $invoicesItems
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Order> $orders
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, ProposalItem> $proposalitems
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, ProposalTemplate> $proposaltemplate
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\RecurringInvoice> $recurringInvoice
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CreditNotes> $creditnoteitems
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, EstimateItem> $estimateitems
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\EstimateTemplate> $estimatetemplate
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, InvoiceItems> $invoicesItems
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Order> $orders
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, ProposalItem> $proposalitems
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, ProposalTemplate> $proposaltemplate
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\RecurringInvoice> $recurringInvoice
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CreditNotes> $creditnoteitems
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, EstimateItem> $estimateitems
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\EstimateTemplate> $estimatetemplate
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, InvoiceItems> $invoicesItems
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Order> $orders
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, ProposalItem> $proposalitems
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, ProposalTemplate> $proposaltemplate
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\RecurringInvoice> $recurringInvoice
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CreditNotes> $creditnoteitems
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, EstimateItem> $estimateitems
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\EstimateTemplate> $estimatetemplate
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, InvoiceItems> $invoicesItems
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Order> $orders
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, ProposalItem> $proposalitems
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, ProposalTemplate> $proposaltemplate
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\RecurringInvoice> $recurringInvoice
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CreditNotes> $creditnoteitems
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, EstimateItem> $estimateitems
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\EstimateTemplate> $estimatetemplate
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, InvoiceItems> $invoicesItems
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Order> $orders
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, ProposalItem> $proposalitems
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, ProposalTemplate> $proposaltemplate
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\RecurringInvoice> $recurringInvoice
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CreditNotes> $creditnoteitems
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, EstimateItem> $estimateitems
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\EstimateTemplate> $estimatetemplate
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, InvoiceItems> $invoicesItems
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Order> $orders
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, ProposalItem> $proposalitems
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, ProposalTemplate> $proposaltemplate
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\RecurringInvoice> $recurringInvoice
+ * @mixin \Eloquent
+ */
+	class UnitType extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -4893,6 +9789,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|UniversalSearch whereSearchableId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UniversalSearch whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UniversalSearch whereUpdatedAt($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|UniversalSearch whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class UniversalSearch extends \Eloquent {}
 }
@@ -4902,6 +9802,7 @@ namespace App\Models{
  * App\Models\User
  *
  * @property int $id
+ * @property int|null $telegram_user_id
  * @property string $name
  * @property string $email
  * @property string $password
@@ -4922,21 +9823,22 @@ namespace App\Models{
  * @property int|null $country_id
  * @property int $dark_theme
  * @property int $rtl
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\TicketAgentGroups[] $agent
+ * @property-read Collection|\App\Models\TicketAgentGroups[] $agent
  * @property-read int|null $agent_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Ticket[] $agents
+ * @property-read Collection|\App\Models\Ticket[] $agents
  * @property-read int|null $agents_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Attendance[] $attendance
+ * @property-read Collection|\App\Models\Attendance[] $attendance
+ * @property-read Collection|\App\Models\Leave[] $leaves
  * @property-read int|null $attendance_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\EventAttendee[] $attendee
+ * @property-read Collection|\App\Models\EventAttendee[] $attendee
  * @property-read int|null $attendee_count
  * @property-read \App\Models\ClientDetails|null $clientDetails
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Contract[] $contracts
+ * @property-read Collection|\App\Models\Contract[] $contracts
  * @property-read int|null $contracts_count
  * @property-read \App\Models\Country|null $country
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\EmployeeDocument[] $documents
+ * @property-read Collection|\App\Models\EmployeeDocument[] $documents
  * @property-read int|null $documents_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\EmployeeDetails[] $employee
+ * @property-read Collection|\App\Models\EmployeeDetails[] $employee
  * @property-read int|null $employee_count
  * @property-read \App\Models\EmployeeDetails|null $employeeDetail
  * @property-read \App\Models\EmployeeDetails|null $employeeDetails
@@ -4945,60 +9847,167 @@ namespace App\Models{
  * @property-read mixed $modules
  * @property-read mixed $unread_notifications
  * @property-read mixed $user_other_role
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\EmployeeTeam[] $group
+ * @property-read Collection|\App\Models\EmployeeTeam[] $group
  * @property-read int|null $group_count
  * @property-read \App\Models\Lead|null $lead
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\LeadAgent[] $leadAgent
+ * @property-read Collection|\App\Models\LeadAgent[] $leadAgent
  * @property-read int|null $lead_agent_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\EmployeeLeaveQuota[] $leaveTypes
+ * @property-read Collection|\App\Models\EmployeeLeaveQuota[] $leaveTypes
  * @property-read int|null $leave_types_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ProjectMember[] $member
+ * @property-read Collection|\App\Models\ProjectMember[] $member
  * @property-read int|null $member_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Permission[] $permissionTypes
+ * @property-read Collection|\App\Models\Permission[] $permissionTypes
  * @property-read int|null $permission_types_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Project[] $projects
+ * @property-read Collection|\App\Models\Project[] $projects
  * @property-read int|null $projects_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\RoleUser[] $role
+ * @property-read Collection|\App\Models\Estimate[] $estimates
+ * @property-read int|null $estimates_count
+ * @property-read Collection|\App\Models\Invoice[] $invoices
+ * @property-read int|null $invoices_count
+ * @property-read Collection|\App\Models\RoleUser[] $role
  * @property-read int|null $role_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Role[] $roles
+ * @property-read Collection|\App\Models\Role[] $roles
  * @property-read int|null $roles_count
  * @property-read \App\Models\Session|null $session
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\StickyNote[] $sticky
+ * @property-read Collection|\App\Models\StickyNote[] $sticky
  * @property-read int|null $sticky_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Task[] $tasks
+ * @property-read Collection|\App\Models\Task[] $tasks
  * @property-read int|null $tasks_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Ticket[] $tickets
+ * @property-read Collection|\App\Models\Ticket[] $tickets
  * @property-read int|null $tickets_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\UserChat[] $userChat
+ * @property-read Collection|\App\Models\UserChat[] $userChat
  * @property-read int|null $user_chat_count
  * @method static \Database\Factories\UserFactory factory(...$parameters)
- * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|User query()
- * @method static \Illuminate\Database\Eloquent\Builder|User whereCountryId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereDarkTheme($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereEmailNotifications($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereGender($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereImage($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereLastLogin($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereLocale($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereLogin($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereMobile($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereOnesignalPlayerId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereRtl($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereTwoFactorRecoveryCodes($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereTwoFactorSecret($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User withRole(string $role)
+ * @method static Builder|User newModelQuery()
+ * @method static Builder|User newQuery()
+ * @method static Builder|User query()
+ * @method static Builder|User whereCountryId($value)
+ * @method static Builder|User whereCreatedAt($value)
+ * @method static Builder|User whereDarkTheme($value)
+ * @method static Builder|User whereEmail($value)
+ * @method static Builder|User whereEmailNotifications($value)
+ * @method static Builder|User whereGender($value)
+ * @method static Builder|User whereId($value)
+ * @method static Builder|User whereImage($value)
+ * @method static Builder|User whereLastLogin($value)
+ * @method static Builder|User whereLocale($value)
+ * @method static Builder|User whereLogin($value)
+ * @method static Builder|User whereMobile($value)
+ * @method static Builder|User whereName($value)
+ * @method static Builder|User whereOnesignalPlayerId($value)
+ * @method static Builder|User wherePassword($value)
+ * @method static Builder|User whereRememberToken($value)
+ * @method static Builder|User whereRtl($value)
+ * @method static Builder|User whereStatus($value)
+ * @method static Builder|User whereTwoFactorRecoveryCodes($value)
+ * @method static Builder|User whereTwoFactorSecret($value)
+ * @method static Builder|User whereUpdatedAt($value)
+ * @method static Builder|User withRole(string $role)
+ * @property int $two_factor_confirmed
+ * @property int $two_factor_email_confirmed
+ * @property string|null $salutation
+ * @property string|null $two_fa_verify_via
+ * @property string|null $two_factor_code when authenticator is email
+ * @property \Illuminate\Support\Carbon|null $two_factor_expires_at
+ * @property int $admin_approval
+ * @property int $permission_sync
+ * @property-read int|null $leaves_count
+ * @method static Builder|User whereAdminApproval($value)
+ * @method static Builder|User wherePermissionSync($value)
+ * @method static Builder|User whereSalutation($value)
+ * @method static Builder|User whereTwoFaVerifyVia($value)
+ * @method static Builder|User whereTwoFactorCode($value)
+ * @method static Builder|User whereTwoFactorConfirmed($value)
+ * @method static Builder|User whereTwoFactorEmailConfirmed($value)
+ * @method static Builder|User whereTwoFactorExpiresAt($value)
+ * @property-read Collection|\App\Models\ClientDocument[] $clientDocuments
+ * @property-read Collection|\App\Models\EmployeeShiftSchedule[] $shifts
+ * @property-read int|null $client_documents_count
+ * @property-read Collection|\App\Models\Task[] $openTasks
+ * @property-read int|null $open_tasks_count
+ * @property-read Collection|\App\Models\EmergencyContact[] $emergencyContacts
+ * @property-read int|null $emergency_contacts_count
+ * @property int|null $company_id
+ * @property int $google_calendar_status
+ * @property int $customised_permissions
+ * @property-read \App\Models\Company|null $company
+ * @property-read Collection|\App\Models\EmployeeShift[] $employeeShift
+ * @property-read int|null $employee_shift_count
+ * @property-read Collection|\App\Models\EmployeeDetails[] $reportingTeam
+ * @property-read int|null $reporting_team_count
+ * @property-read int|null $shifts_count
+ * @property-read Collection|\App\Models\ProjectTemplateMember[] $templateMember
+ * @property-read int|null $template_member_count
+ * @method static Builder|User whereCompanyId($value)
+ * @method static Builder|User whereCustomisedPermissions($value)
+ * @method static Builder|User whereGoogleCalendarStatus($value)
+ * @property-read Collection|\App\Models\Appreciation[] $appreciations
+ * @property-read int|null $appreciations_count
+ * @property-read Collection|\App\Models\Appreciation[] $appreciationsGrouped
+ * @property-read int|null $appreciations_grouped_count
+ * @property-read Collection|\App\Models\ProjectTimeLog[] $projectTimeLog
+ * @property string|null $stripe_id
+ * @property string|null $pm_type
+ * @property string|null $pm_last_four
+ * @property string|null $trial_ends_at
+ * @property-read Collection<int, \App\Models\ProjectTimeLog> $timeLogs
+ * @property-read int|null $time_logs_count
+ * @property-read Collection<int, \App\Models\VisaDetail> $visa
+ * @property-read int|null $visa_count
+ * @method static Builder|User onlyEmployee()
+ * @method static Builder|User wherePmLastFour($value)
+ * @method static Builder|User wherePmType($value)
+ * @method static Builder|User whereStripeId($value)
+ * @method static Builder|User whereTelegramUserId($value)
+ * @method static Builder|User whereTrialEndsAt($value)
+ * @property-read Collection<int, \App\Models\ProjectTimeLog> $timeLogs
+ * @property-read Collection<int, \App\Models\VisaDetail> $visa
+ * @property-read Collection<int, \App\Models\ProjectTimeLog> $timeLogs
+ * @property-read Collection<int, \App\Models\VisaDetail> $visa
+ * @property-read Collection<int, \App\Models\ProjectTimeLog> $timeLogs
+ * @property-read Collection<int, \App\Models\VisaDetail> $visa
+ * @property-read Collection<int, \App\Models\ProjectTimeLog> $timeLogs
+ * @property-read Collection<int, \App\Models\VisaDetail> $visa
+ * @property-read Collection<int, \App\Models\ProjectTimeLog> $timeLogs
+ * @property-read Collection<int, \App\Models\VisaDetail> $visa
+ * @property int|null $country_phonecode
+ * @property-read Collection<int, \App\Models\TicketGroup> $agentGroup
+ * @property-read int|null $agent_group_count
+ * @property-read mixed $mobile_with_phone_code
+ * @property-read Collection<int, \App\Models\ProjectTimeLog> $timeLogs
+ * @property-read Collection<int, \App\Models\VisaDetail> $visa
+ * @method static Builder|User whereCountryPhonecode($value)
+ * @property-read Collection<int, \App\Models\TicketGroup> $agentGroup
+ * @property-read Collection<int, \App\Models\ProjectTimeLog> $timeLogs
+ * @property-read Collection<int, \App\Models\VisaDetail> $visa
+ * @property-read Collection<int, \App\Models\TicketGroup> $agentGroup
+ * @property-read Collection<int, \App\Models\ProjectTimeLog> $timeLogs
+ * @property-read Collection<int, \App\Models\VisaDetail> $visa
+ * @mixin \Eloquent
+ * @property string|null $headers
+ * @property string|null $register_ip
+ * @property string|null $location_details
+ * @property string|null $inactive_date
+ * @property string|null $twitter_id
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \IvanoMatteo\LaravelDeviceTracking\Models\Device> $device
+ * @property-read int|null $device_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\LeaveType> $employeeLeaveTypes
+ * @property-read int|null $employee_leave_types_count
+ * @property-read mixed $name_salutation
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\LeadCategory> $leadAgentCategory
+ * @property-read int|null $lead_agent_category_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\EmployeeLeaveQuotaHistory> $leaveQuotaHistory
+ * @property-read int|null $leave_quota_history_count
+ * @property-read mixed $masked_image_url
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\TicketReply> $ticketReply
+ * @property-read int|null $ticket_reply_count
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereHeaders($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereInactiveDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereLocationDetails($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereRegisterIp($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereTwitterId($value)
  */
 	class User extends \Eloquent implements \Illuminate\Contracts\Auth\Authenticatable, \Illuminate\Contracts\Auth\Access\Authorizable, \Illuminate\Contracts\Auth\CanResetPassword {}
 }
@@ -5022,6 +10031,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|UserActivity whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UserActivity whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UserActivity whereUserId($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|UserActivity whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class UserActivity extends \Eloquent {}
 }
@@ -5033,6 +10046,7 @@ namespace App\Models{
  * @property int $id
  * @property int $user_one
  * @property int $user_id
+ * @property int $notification_sent
  * @property string $message
  * @property int|null $from
  * @property int|null $to
@@ -5042,19 +10056,32 @@ namespace App\Models{
  * @property-read \App\Models\User|null $fromUser
  * @property-read mixed $icon
  * @property-read \App\Models\User|null $toUser
- * @method static \Illuminate\Database\Eloquent\Builder|UserChat lastPerGroup(?array $fields = null)
- * @method static \Illuminate\Database\Eloquent\Builder|UserChat newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|UserChat newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|UserChat query()
- * @method static \Illuminate\Database\Eloquent\Builder|UserChat whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|UserChat whereFrom($value)
- * @method static \Illuminate\Database\Eloquent\Builder|UserChat whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|UserChat whereMessage($value)
- * @method static \Illuminate\Database\Eloquent\Builder|UserChat whereMessageSeen($value)
- * @method static \Illuminate\Database\Eloquent\Builder|UserChat whereTo($value)
- * @method static \Illuminate\Database\Eloquent\Builder|UserChat whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|UserChat whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|UserChat whereUserOne($value)
+ * @method static Builder|UserChat lastPerGroup(?array $fields = null)
+ * @method static Builder|UserChat newModelQuery()
+ * @method static Builder|UserChat newQuery()
+ * @method static Builder|UserChat query()
+ * @method static Builder|UserChat whereCreatedAt($value)
+ * @method static Builder|UserChat whereFrom($value)
+ * @method static Builder|UserChat whereId($value)
+ * @method static Builder|UserChat whereMessage($value)
+ * @method static Builder|UserChat whereMessageSeen($value)
+ * @method static Builder|UserChat whereTo($value)
+ * @method static Builder|UserChat whereUpdatedAt($value)
+ * @method static Builder|UserChat whereUserId($value)
+ * @method static Builder|UserChat whereUserOne($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\UserchatFile[] $files
+ * @property-read int|null $files_count
+ * @method static \Database\Factories\UserChatFactory factory(...$parameters)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static Builder|UserChat whereCompanyId($value)
+ * @method static Builder|UserChat whereNotificationSent($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MentionUser> $mentionProject
+ * @property-read int|null $mention_project_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $mentionUser
+ * @property-read int|null $mention_user_count
+ * @mixin \Eloquent
+ * @property-read \App\Models\MentionUser $pivot
  */
 	class UserChat extends \Eloquent {}
 }
@@ -5089,6 +10116,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|UserInvitation whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UserInvitation whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UserInvitation whereUserId($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|UserInvitation whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class UserInvitation extends \Eloquent {}
 }
@@ -5112,6 +10143,12 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|UserLeadboardSetting whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UserLeadboardSetting whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UserLeadboardSetting whereUserId($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|UserLeadboardSetting whereCompanyId($value)
+ * @property int|null $pipeline_stage_id
+ * @method static \Illuminate\Database\Eloquent\Builder|UserLeadboardSetting wherePipelineStageId($value)
+ * @mixin \Eloquent
  */
 	class UserLeadboardSetting extends \Eloquent {}
 }
@@ -5124,6 +10161,8 @@ namespace App\Models{
  * @property int $user_id
  * @property int $permission_id
  * @property int $permission_type_id
+ * @property int $customised_permissions
+ * @property string $name
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Permission $permission
@@ -5137,6 +10176,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|UserPermission wherePermissionTypeId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UserPermission whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UserPermission whereUserId($value)
+ * @property-read \App\Models\User $user
+ * @mixin \Eloquent
  */
 	class UserPermission extends \Eloquent {}
 }
@@ -5160,7 +10201,93 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|UserTaskboardSetting whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UserTaskboardSetting whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UserTaskboardSetting whereUserId($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|UserTaskboardSetting whereCompanyId($value)
+ * @mixin \Eloquent
  */
 	class UserTaskboardSetting extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\UserchatFile
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property int $users_chat_id
+ * @property string $filename
+ * @property string|null $description
+ * @property string|null $google_url
+ * @property string|null $hashname
+ * @property string|null $size
+ * @property string|null $external_link
+ * @property string|null $external_link_name
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\UserChat $chat
+ * @property-read mixed $file_url
+ * @property-read mixed $icon
+ * @method static \Illuminate\Database\Eloquent\Builder|UserchatFile newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|UserchatFile newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|UserchatFile query()
+ * @method static \Illuminate\Database\Eloquent\Builder|UserchatFile whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserchatFile whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserchatFile whereExternalLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserchatFile whereExternalLinkName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserchatFile whereFilename($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserchatFile whereGoogleUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserchatFile whereHashname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserchatFile whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserchatFile whereSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserchatFile whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserchatFile whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserchatFile whereUsersChatId($value)
+ * @property int|null $company_id
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|UserchatFile whereCompanyId($value)
+ * @property-read mixed $file
+ * @mixin \Eloquent
+ */
+	class UserchatFile extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\VisaDetail
+ *
+ * @property string|null $image
+ * @property-read \App\Models\Company|null $company
+ * @method static \Illuminate\Database\Eloquent\Builder|Estimate whereCompanyId($value)
+ * @property int $id
+ * @property int|null $company_id
+ * @property int|null $user_id
+ * @property int|null $country_id
+ * @property int|null $added_by
+ * @property string $visa_number
+ * @property \Illuminate\Support\Carbon $issue_date
+ * @property \Illuminate\Support\Carbon $expiry_date
+ * @property string|null $file
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Country|null $country
+ * @property-read mixed $image_url
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|VisaDetail newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|VisaDetail newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|VisaDetail query()
+ * @method static \Illuminate\Database\Eloquent\Builder|VisaDetail whereAddedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|VisaDetail whereCountryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|VisaDetail whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|VisaDetail whereExpiryDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|VisaDetail whereFile($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|VisaDetail whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|VisaDetail whereIssueDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|VisaDetail whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|VisaDetail whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|VisaDetail whereVisaNumber($value)
+ * @mixin \Eloquent
+ */
+	class VisaDetail extends \Eloquent {}
 }
 

@@ -5,7 +5,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 10.48.22.
+ * Generated for Laravel 10.48.24.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -14642,7 +14642,7 @@ namespace Illuminate\Support\Facades {
          * Get a filesystem instance.
          *
          * @param string|null $name
-         * @return \Illuminate\Filesystem\AwsS3V3Adapter 
+         * @return \Illuminate\Filesystem\FilesystemAdapter 
          * @static 
          */        public static function drive($name = null)
         {
@@ -14653,7 +14653,7 @@ namespace Illuminate\Support\Facades {
          * Get a filesystem instance.
          *
          * @param string|null $name
-         * @return \Illuminate\Filesystem\AwsS3V3Adapter 
+         * @return \Illuminate\Filesystem\FilesystemAdapter 
          * @static 
          */        public static function disk($name = null)
         {
@@ -14674,7 +14674,7 @@ namespace Illuminate\Support\Facades {
          * Build an on-demand disk.
          *
          * @param string|array $config
-         * @return \Illuminate\Filesystem\AwsS3V3Adapter 
+         * @return \Illuminate\Filesystem\FilesystemAdapter 
          * @static 
          */        public static function build($config)
         {
@@ -14685,7 +14685,7 @@ namespace Illuminate\Support\Facades {
          * Create an instance of the local driver.
          *
          * @param array $config
-         * @return \Illuminate\Filesystem\AwsS3V3Adapter 
+         * @return \Illuminate\Filesystem\FilesystemAdapter 
          * @static 
          */        public static function createLocalDriver($config)
         {
@@ -14696,7 +14696,7 @@ namespace Illuminate\Support\Facades {
          * Create an instance of the ftp driver.
          *
          * @param array $config
-         * @return \Illuminate\Filesystem\AwsS3V3Adapter 
+         * @return \Illuminate\Filesystem\FilesystemAdapter 
          * @static 
          */        public static function createFtpDriver($config)
         {
@@ -14707,7 +14707,7 @@ namespace Illuminate\Support\Facades {
          * Create an instance of the sftp driver.
          *
          * @param array $config
-         * @return \Illuminate\Filesystem\AwsS3V3Adapter 
+         * @return \Illuminate\Filesystem\FilesystemAdapter 
          * @static 
          */        public static function createSftpDriver($config)
         {
@@ -14729,7 +14729,7 @@ namespace Illuminate\Support\Facades {
          * Create a scoped driver.
          *
          * @param array $config
-         * @return \Illuminate\Filesystem\AwsS3V3Adapter 
+         * @return \Illuminate\Filesystem\FilesystemAdapter 
          * @static 
          */        public static function createScopedDriver($config)
         {
@@ -14814,95 +14814,37 @@ namespace Illuminate\Support\Facades {
                         return $instance->setApplication($app);
         }
                     /**
-         * Get the URL for the file at the given path.
-         *
-         * @param string $path
-         * @return string 
-         * @throws \RuntimeException
-         * @static 
-         */        public static function url($path)
-        {
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
-                        return $instance->url($path);
-        }
-                    /**
-         * Determine if temporary URLs can be generated.
-         *
-         * @return bool 
-         * @static 
-         */        public static function providesTemporaryUrls()
-        {
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
-                        return $instance->providesTemporaryUrls();
-        }
-                    /**
-         * Get a temporary URL for the file at the given path.
-         *
-         * @param string $path
-         * @param \DateTimeInterface $expiration
-         * @param array $options
-         * @return string 
-         * @static 
-         */        public static function temporaryUrl($path, $expiration, $options = [])
-        {
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
-                        return $instance->temporaryUrl($path, $expiration, $options);
-        }
-                    /**
-         * Get a temporary upload URL for the file at the given path.
-         *
-         * @param string $path
-         * @param \DateTimeInterface $expiration
-         * @param array $options
-         * @return array 
-         * @static 
-         */        public static function temporaryUploadUrl($path, $expiration, $options = [])
-        {
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
-                        return $instance->temporaryUploadUrl($path, $expiration, $options);
-        }
-                    /**
-         * Get the underlying S3 client.
-         *
-         * @return \Aws\S3\S3Client 
-         * @static 
-         */        public static function getClient()
-        {
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
-                        return $instance->getClient();
-        }
-                    /**
          * Assert that the given file or directory exists.
          *
          * @param string|array $path
          * @param string|null $content
-         * @return \Illuminate\Filesystem\AwsS3V3Adapter 
+         * @return \Illuminate\Filesystem\FilesystemAdapter 
          * @static 
          */        public static function assertExists($path, $content = null)
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->assertExists($path, $content);
         }
                     /**
          * Assert that the given file or directory does not exist.
          *
          * @param string|array $path
-         * @return \Illuminate\Filesystem\AwsS3V3Adapter 
+         * @return \Illuminate\Filesystem\FilesystemAdapter 
          * @static 
          */        public static function assertMissing($path)
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->assertMissing($path);
         }
                     /**
          * Assert that the given directory is empty.
          *
          * @param string $path
-         * @return \Illuminate\Filesystem\AwsS3V3Adapter 
+         * @return \Illuminate\Filesystem\FilesystemAdapter 
          * @static 
          */        public static function assertDirectoryEmpty($path)
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->assertDirectoryEmpty($path);
         }
                     /**
@@ -14912,8 +14854,8 @@ namespace Illuminate\Support\Facades {
          * @return bool 
          * @static 
          */        public static function exists($path)
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->exists($path);
         }
                     /**
@@ -14923,8 +14865,8 @@ namespace Illuminate\Support\Facades {
          * @return bool 
          * @static 
          */        public static function missing($path)
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->missing($path);
         }
                     /**
@@ -14934,8 +14876,8 @@ namespace Illuminate\Support\Facades {
          * @return bool 
          * @static 
          */        public static function fileExists($path)
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->fileExists($path);
         }
                     /**
@@ -14945,8 +14887,8 @@ namespace Illuminate\Support\Facades {
          * @return bool 
          * @static 
          */        public static function fileMissing($path)
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->fileMissing($path);
         }
                     /**
@@ -14956,8 +14898,8 @@ namespace Illuminate\Support\Facades {
          * @return bool 
          * @static 
          */        public static function directoryExists($path)
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->directoryExists($path);
         }
                     /**
@@ -14967,8 +14909,8 @@ namespace Illuminate\Support\Facades {
          * @return bool 
          * @static 
          */        public static function directoryMissing($path)
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->directoryMissing($path);
         }
                     /**
@@ -14978,8 +14920,8 @@ namespace Illuminate\Support\Facades {
          * @return string 
          * @static 
          */        public static function path($path)
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->path($path);
         }
                     /**
@@ -14989,8 +14931,8 @@ namespace Illuminate\Support\Facades {
          * @return string|null 
          * @static 
          */        public static function get($path)
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->get($path);
         }
                     /**
@@ -15001,8 +14943,8 @@ namespace Illuminate\Support\Facades {
          * @return array|null 
          * @static 
          */        public static function json($path, $flags = 0)
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->json($path, $flags);
         }
                     /**
@@ -15015,8 +14957,8 @@ namespace Illuminate\Support\Facades {
          * @return \Symfony\Component\HttpFoundation\StreamedResponse 
          * @static 
          */        public static function response($path, $name = null, $headers = [], $disposition = 'inline')
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->response($path, $name, $headers, $disposition);
         }
                     /**
@@ -15027,8 +14969,8 @@ namespace Illuminate\Support\Facades {
          * @return \Symfony\Component\HttpFoundation\StreamedResponse 
          * @static 
          */        public static function download($path, $name = null, $headers = [])
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->download($path, $name, $headers);
         }
                     /**
@@ -15040,8 +14982,8 @@ namespace Illuminate\Support\Facades {
          * @return string|bool 
          * @static 
          */        public static function put($path, $contents, $options = [])
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->put($path, $contents, $options);
         }
                     /**
@@ -15053,8 +14995,8 @@ namespace Illuminate\Support\Facades {
          * @return string|false 
          * @static 
          */        public static function putFile($path, $file = null, $options = [])
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->putFile($path, $file, $options);
         }
                     /**
@@ -15067,8 +15009,8 @@ namespace Illuminate\Support\Facades {
          * @return string|false 
          * @static 
          */        public static function putFileAs($path, $file, $name = null, $options = [])
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->putFileAs($path, $file, $name, $options);
         }
                     /**
@@ -15078,8 +15020,8 @@ namespace Illuminate\Support\Facades {
          * @return string 
          * @static 
          */        public static function getVisibility($path)
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->getVisibility($path);
         }
                     /**
@@ -15090,8 +15032,8 @@ namespace Illuminate\Support\Facades {
          * @return bool 
          * @static 
          */        public static function setVisibility($path, $visibility)
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->setVisibility($path, $visibility);
         }
                     /**
@@ -15104,8 +15046,8 @@ namespace Illuminate\Support\Facades {
          * @static 
          */        public static function prepend($path, $data, $separator = '
 ')
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->prepend($path, $data, $separator);
         }
                     /**
@@ -15118,8 +15060,8 @@ namespace Illuminate\Support\Facades {
          * @static 
          */        public static function append($path, $data, $separator = '
 ')
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->append($path, $data, $separator);
         }
                     /**
@@ -15129,8 +15071,8 @@ namespace Illuminate\Support\Facades {
          * @return bool 
          * @static 
          */        public static function delete($paths)
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->delete($paths);
         }
                     /**
@@ -15141,8 +15083,8 @@ namespace Illuminate\Support\Facades {
          * @return bool 
          * @static 
          */        public static function copy($from, $to)
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->copy($from, $to);
         }
                     /**
@@ -15153,8 +15095,8 @@ namespace Illuminate\Support\Facades {
          * @return bool 
          * @static 
          */        public static function move($from, $to)
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->move($from, $to);
         }
                     /**
@@ -15164,8 +15106,8 @@ namespace Illuminate\Support\Facades {
          * @return int 
          * @static 
          */        public static function size($path)
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->size($path);
         }
                     /**
@@ -15175,8 +15117,8 @@ namespace Illuminate\Support\Facades {
          * @throws UnableToProvideChecksum
          * @static 
          */        public static function checksum($path, $options = [])
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->checksum($path, $options);
         }
                     /**
@@ -15186,8 +15128,8 @@ namespace Illuminate\Support\Facades {
          * @return string|false 
          * @static 
          */        public static function mimeType($path)
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->mimeType($path);
         }
                     /**
@@ -15197,8 +15139,8 @@ namespace Illuminate\Support\Facades {
          * @return int 
          * @static 
          */        public static function lastModified($path)
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->lastModified($path);
         }
                     /**
@@ -15208,8 +15150,8 @@ namespace Illuminate\Support\Facades {
          * @return resource|null The path resource or null on failure.
          * @static 
          */        public static function readStream($path)
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->readStream($path);
         }
                     /**
@@ -15221,9 +15163,59 @@ namespace Illuminate\Support\Facades {
          * @return bool 
          * @static 
          */        public static function writeStream($path, $resource, $options = [])
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->writeStream($path, $resource, $options);
+        }
+                    /**
+         * Get the URL for the file at the given path.
+         *
+         * @param string $path
+         * @return string 
+         * @throws \RuntimeException
+         * @static 
+         */        public static function url($path)
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
+                        return $instance->url($path);
+        }
+                    /**
+         * Determine if temporary URLs can be generated.
+         *
+         * @return bool 
+         * @static 
+         */        public static function providesTemporaryUrls()
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
+                        return $instance->providesTemporaryUrls();
+        }
+                    /**
+         * Get a temporary URL for the file at the given path.
+         *
+         * @param string $path
+         * @param \DateTimeInterface $expiration
+         * @param array $options
+         * @return string 
+         * @throws \RuntimeException
+         * @static 
+         */        public static function temporaryUrl($path, $expiration, $options = [])
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
+                        return $instance->temporaryUrl($path, $expiration, $options);
+        }
+                    /**
+         * Get a temporary upload URL for the file at the given path.
+         *
+         * @param string $path
+         * @param \DateTimeInterface $expiration
+         * @param array $options
+         * @return array 
+         * @throws \RuntimeException
+         * @static 
+         */        public static function temporaryUploadUrl($path, $expiration, $options = [])
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
+                        return $instance->temporaryUploadUrl($path, $expiration, $options);
         }
                     /**
          * Get an array of all files in a directory.
@@ -15233,8 +15225,8 @@ namespace Illuminate\Support\Facades {
          * @return array 
          * @static 
          */        public static function files($directory = null, $recursive = false)
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->files($directory, $recursive);
         }
                     /**
@@ -15244,8 +15236,8 @@ namespace Illuminate\Support\Facades {
          * @return array 
          * @static 
          */        public static function allFiles($directory = null)
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->allFiles($directory);
         }
                     /**
@@ -15256,8 +15248,8 @@ namespace Illuminate\Support\Facades {
          * @return array 
          * @static 
          */        public static function directories($directory = null, $recursive = false)
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->directories($directory, $recursive);
         }
                     /**
@@ -15267,8 +15259,8 @@ namespace Illuminate\Support\Facades {
          * @return array 
          * @static 
          */        public static function allDirectories($directory = null)
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->allDirectories($directory);
         }
                     /**
@@ -15278,8 +15270,8 @@ namespace Illuminate\Support\Facades {
          * @return bool 
          * @static 
          */        public static function makeDirectory($path)
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->makeDirectory($path);
         }
                     /**
@@ -15289,8 +15281,8 @@ namespace Illuminate\Support\Facades {
          * @return bool 
          * @static 
          */        public static function deleteDirectory($directory)
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->deleteDirectory($directory);
         }
                     /**
@@ -15299,8 +15291,8 @@ namespace Illuminate\Support\Facades {
          * @return \League\Flysystem\FilesystemOperator 
          * @static 
          */        public static function getDriver()
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->getDriver();
         }
                     /**
@@ -15309,8 +15301,8 @@ namespace Illuminate\Support\Facades {
          * @return \League\Flysystem\FilesystemAdapter 
          * @static 
          */        public static function getAdapter()
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->getAdapter();
         }
                     /**
@@ -15319,8 +15311,8 @@ namespace Illuminate\Support\Facades {
          * @return array 
          * @static 
          */        public static function getConfig()
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->getConfig();
         }
                     /**
@@ -15330,8 +15322,8 @@ namespace Illuminate\Support\Facades {
          * @return void 
          * @static 
          */        public static function buildTemporaryUrlsUsing($callback)
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         $instance->buildTemporaryUrlsUsing($callback);
         }
                     /**
@@ -15346,7 +15338,7 @@ namespace Illuminate\Support\Facades {
          * @static 
          */        public static function when($value = null, $callback = null, $default = null)
         {
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->when($value, $callback, $default);
         }
                     /**
@@ -15361,7 +15353,7 @@ namespace Illuminate\Support\Facades {
          * @static 
          */        public static function unless($value = null, $callback = null, $default = null)
         {
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->unless($value, $callback, $default);
         }
                     /**
@@ -15372,8 +15364,8 @@ namespace Illuminate\Support\Facades {
          * @return void 
          * @static 
          */        public static function macro($name, $macro)
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        \Illuminate\Filesystem\AwsS3V3Adapter::macro($name, $macro);
+        {
+                        \Illuminate\Filesystem\FilesystemAdapter::macro($name, $macro);
         }
                     /**
          * Mix another object into the class.
@@ -15384,8 +15376,8 @@ namespace Illuminate\Support\Facades {
          * @throws \ReflectionException
          * @static 
          */        public static function mixin($mixin, $replace = true)
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        \Illuminate\Filesystem\AwsS3V3Adapter::mixin($mixin, $replace);
+        {
+                        \Illuminate\Filesystem\FilesystemAdapter::mixin($mixin, $replace);
         }
                     /**
          * Checks if macro is registered.
@@ -15394,8 +15386,8 @@ namespace Illuminate\Support\Facades {
          * @return bool 
          * @static 
          */        public static function hasMacro($name)
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        return \Illuminate\Filesystem\AwsS3V3Adapter::hasMacro($name);
+        {
+                        return \Illuminate\Filesystem\FilesystemAdapter::hasMacro($name);
         }
                     /**
          * Flush the existing macros.
@@ -15403,8 +15395,8 @@ namespace Illuminate\Support\Facades {
          * @return void 
          * @static 
          */        public static function flushMacros()
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        \Illuminate\Filesystem\AwsS3V3Adapter::flushMacros();
+        {
+                        \Illuminate\Filesystem\FilesystemAdapter::flushMacros();
         }
                     /**
          * Dynamically handle calls to the class.
@@ -15415,8 +15407,8 @@ namespace Illuminate\Support\Facades {
          * @throws \BadMethodCallException
          * @static 
          */        public static function macroCall($method, $parameters)
-        {            //Method inherited from \Illuminate\Filesystem\FilesystemAdapter         
-                        /** @var \Illuminate\Filesystem\AwsS3V3Adapter $instance */
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->macroCall($method, $parameters);
         }
             }
@@ -19149,162 +19141,6 @@ namespace Barryvdh\Debugbar\Facades {
     }
 
 namespace Barryvdh\DomPDF\Facade {
-            /**
-     * 
-     *
-     * @method static \Barryvdh\DomPDF\PDF setPaper($paper, $orientation = 'portrait')
-     * @method static \Barryvdh\DomPDF\PDF setBaseHost(string $baseHost)
-     * @method static \Barryvdh\DomPDF\PDF setProtocol(string $protocol)
-     * @method static \Barryvdh\DomPDF\PDF setHttpContext($httpContext)
-     * @method static \Barryvdh\DomPDF\PDF setCallbacks(array $callbacks)
-     */        class Pdf {
-                    /**
-         * Get the DomPDF instance
-         *
-         * @return \Dompdf\Dompdf 
-         * @static 
-         */        public static function getDomPDF()
-        {
-                        /** @var \Barryvdh\DomPDF\PDF $instance */
-                        return $instance->getDomPDF();
-        }
-                    /**
-         * Show or hide warnings
-         *
-         * @static 
-         */        public static function setWarnings($warnings)
-        {
-                        /** @var \Barryvdh\DomPDF\PDF $instance */
-                        return $instance->setWarnings($warnings);
-        }
-                    /**
-         * Load a HTML string
-         *
-         * @param string|null $encoding Not used yet
-         * @static 
-         */        public static function loadHTML($string, $encoding = null)
-        {
-                        /** @var \Barryvdh\DomPDF\PDF $instance */
-                        return $instance->loadHTML($string, $encoding);
-        }
-                    /**
-         * Load a HTML file
-         *
-         * @static 
-         */        public static function loadFile($file)
-        {
-                        /** @var \Barryvdh\DomPDF\PDF $instance */
-                        return $instance->loadFile($file);
-        }
-                    /**
-         * Add metadata info
-         *
-         * @param array<string, string> $info
-         * @return static 
-         * @static 
-         */        public static function addInfo($info)
-        {
-                        /** @var \Barryvdh\DomPDF\PDF $instance */
-                        return $instance->addInfo($info);
-        }
-                    /**
-         * Load a View and convert to HTML
-         *
-         * @param array<string, mixed> $data
-         * @param array<string, mixed> $mergeData
-         * @param string|null $encoding Not used yet
-         * @static 
-         */        public static function loadView($view, $data = [], $mergeData = [], $encoding = null)
-        {
-                        /** @var \Barryvdh\DomPDF\PDF $instance */
-                        return $instance->loadView($view, $data, $mergeData, $encoding);
-        }
-                    /**
-         * Set/Change an option (or array of options) in Dompdf
-         *
-         * @param array<string, mixed>|string $attribute
-         * @param null|mixed $value
-         * @return \Barryvdh\DomPDF\PDF 
-         * @static 
-         */        public static function setOption($attribute, $value = null)
-        {
-                        /** @var \Barryvdh\DomPDF\PDF $instance */
-                        return $instance->setOption($attribute, $value);
-        }
-                    /**
-         * Replace all the Options from DomPDF
-         *
-         * @deprecated Use setOption to override individual options.
-         * @param array<string, mixed> $options
-         * @static 
-         */        public static function setOptions($options)
-        {
-                        /** @var \Barryvdh\DomPDF\PDF $instance */
-                        return $instance->setOptions($options);
-        }
-                    /**
-         * Output the PDF as a string.
-         * 
-         * The options parameter controls the output. Accepted options are:
-         * 
-         * 'compress' = > 1 or 0 - apply content stream compression, this is
-         *    on (1) by default
-         *
-         * @param array<string, int> $options
-         * @return string The rendered PDF as string
-         * @static 
-         */        public static function output($options = [])
-        {
-                        /** @var \Barryvdh\DomPDF\PDF $instance */
-                        return $instance->output($options);
-        }
-                    /**
-         * Save the PDF to a file
-         *
-         * @static 
-         */        public static function save($filename, $disk = null)
-        {
-                        /** @var \Barryvdh\DomPDF\PDF $instance */
-                        return $instance->save($filename, $disk);
-        }
-                    /**
-         * Make the PDF downloadable by the user
-         *
-         * @static 
-         */        public static function download($filename = 'document.pdf')
-        {
-                        /** @var \Barryvdh\DomPDF\PDF $instance */
-                        return $instance->download($filename);
-        }
-                    /**
-         * Return a response with the PDF to show in the browser
-         *
-         * @static 
-         */        public static function stream($filename = 'document.pdf')
-        {
-                        /** @var \Barryvdh\DomPDF\PDF $instance */
-                        return $instance->stream($filename);
-        }
-                    /**
-         * Render the PDF
-         *
-         * @static 
-         */        public static function render()
-        {
-                        /** @var \Barryvdh\DomPDF\PDF $instance */
-                        return $instance->render();
-        }
-                    /**
-         * 
-         *
-         * @param array<string> $pc
-         * @static 
-         */        public static function setEncryption($password, $ownerpassword = '', $pc = [])
-        {
-                        /** @var \Barryvdh\DomPDF\PDF $instance */
-                        return $instance->setEncryption($password, $ownerpassword, $pc);
-        }
-            }
             /**
      * 
      *
@@ -23271,397 +23107,6 @@ namespace Stevebauman\Location\Facades {
             }
     }
 
-namespace Unicodeveloper\Paystack\Facades {
-            /**
-     * 
-     *
-     */        class Paystack {
-                    /**
-         * Get Base Url from Paystack config file
-         *
-         * @static 
-         */        public static function setBaseUrl()
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->setBaseUrl();
-        }
-                    /**
-         * Get secret key from Paystack config file
-         *
-         * @static 
-         */        public static function setKey()
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->setKey();
-        }
-                    /**
-         * Initiate a payment request to Paystack
-         * Included the option to pass the payload to this method for situations
-         * when the payload is built on the fly (not passed to the controller from a view)
-         *
-         * @return \Paystack 
-         * @static 
-         */        public static function makePaymentRequest($data = null)
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->makePaymentRequest($data);
-        }
-                    /**
-         * Get the authorization url from the callback response
-         *
-         * @return \Paystack 
-         * @static 
-         */        public static function getAuthorizationUrl($data = null)
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->getAuthorizationUrl($data);
-        }
-                    /**
-         * Get the authorization callback response
-         * In situations where Laravel serves as an backend for a detached UI, the api cannot redirect
-         * and might need to take different actions based on the success or not of the transaction
-         *
-         * @return array 
-         * @static 
-         */        public static function getAuthorizationResponse($data)
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->getAuthorizationResponse($data);
-        }
-                    /**
-         * True or false condition whether the transaction is verified
-         *
-         * @return boolean 
-         * @static 
-         */        public static function isTransactionVerificationValid($transaction_id = null)
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->isTransactionVerificationValid($transaction_id);
-        }
-                    /**
-         * Get Payment details if the transaction was verified successfully
-         *
-         * @return \Unicodeveloper\Paystack\json 
-         * @throws PaymentVerificationFailedException
-         * @static 
-         */        public static function getPaymentData()
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->getPaymentData();
-        }
-                    /**
-         * Fluent method to redirect to Paystack Payment Page
-         *
-         * @static 
-         */        public static function redirectNow()
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->redirectNow();
-        }
-                    /**
-         * Get Access code from transaction callback respose
-         *
-         * @return string 
-         * @static 
-         */        public static function getAccessCode()
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->getAccessCode();
-        }
-                    /**
-         * Generate a Unique Transaction Reference
-         *
-         * @return string 
-         * @static 
-         */        public static function genTranxRef()
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->genTranxRef();
-        }
-                    /**
-         * Get all the customers that have made transactions on your platform
-         *
-         * @return array 
-         * @static 
-         */        public static function getAllCustomers()
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->getAllCustomers();
-        }
-                    /**
-         * Get all the plans that you have on Paystack
-         *
-         * @return array 
-         * @static 
-         */        public static function getAllPlans()
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->getAllPlans();
-        }
-                    /**
-         * Get all the transactions that have happened overtime
-         *
-         * @return array 
-         * @static 
-         */        public static function getAllTransactions()
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->getAllTransactions();
-        }
-                    /**
-         * Create a plan
-         *
-         * @static 
-         */        public static function createPlan()
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->createPlan();
-        }
-                    /**
-         * Fetch any plan based on its plan id or code
-         *
-         * @param $plan_code
-         * @return array 
-         * @static 
-         */        public static function fetchPlan($plan_code)
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->fetchPlan($plan_code);
-        }
-                    /**
-         * Update any plan's details based on its id or code
-         *
-         * @param $plan_code
-         * @return array 
-         * @static 
-         */        public static function updatePlan($plan_code)
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->updatePlan($plan_code);
-        }
-                    /**
-         * Create a customer
-         *
-         * @static 
-         */        public static function createCustomer($data = null)
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->createCustomer($data);
-        }
-                    /**
-         * Fetch a customer based on id or code
-         *
-         * @param $customer_id
-         * @return array 
-         * @static 
-         */        public static function fetchCustomer($customer_id)
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->fetchCustomer($customer_id);
-        }
-                    /**
-         * Update a customer's details based on their id or code
-         *
-         * @param $customer_id
-         * @return array 
-         * @static 
-         */        public static function updateCustomer($customer_id)
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->updateCustomer($customer_id);
-        }
-                    /**
-         * Export transactions in .CSV
-         *
-         * @return array 
-         * @static 
-         */        public static function exportTransactions()
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->exportTransactions();
-        }
-                    /**
-         * Create a subscription to a plan from a customer.
-         *
-         * @static 
-         */        public static function createSubscription()
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->createSubscription();
-        }
-                    /**
-         * Get all the subscriptions made on Paystack.
-         *
-         * @return array 
-         * @static 
-         */        public static function getAllSubscriptions()
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->getAllSubscriptions();
-        }
-                    /**
-         * Get customer subscriptions
-         *
-         * @param integer $customer_id
-         * @return array 
-         * @static 
-         */        public static function getCustomerSubscriptions($customer_id)
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->getCustomerSubscriptions($customer_id);
-        }
-                    /**
-         * Get plan subscriptions
-         *
-         * @param integer $plan_id
-         * @return array 
-         * @static 
-         */        public static function getPlanSubscriptions($plan_id)
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->getPlanSubscriptions($plan_id);
-        }
-                    /**
-         * Enable a subscription using the subscription code and token
-         *
-         * @return array 
-         * @static 
-         */        public static function enableSubscription()
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->enableSubscription();
-        }
-                    /**
-         * Disable a subscription using the subscription code and token
-         *
-         * @return array 
-         * @static 
-         */        public static function disableSubscription()
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->disableSubscription();
-        }
-                    /**
-         * Fetch details about a certain subscription
-         *
-         * @param mixed $subscription_id
-         * @return array 
-         * @static 
-         */        public static function fetchSubscription($subscription_id)
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->fetchSubscription($subscription_id);
-        }
-                    /**
-         * Create pages you can share with users using the returned slug
-         *
-         * @static 
-         */        public static function createPage()
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->createPage();
-        }
-                    /**
-         * Fetches all the pages the merchant has
-         *
-         * @return array 
-         * @static 
-         */        public static function getAllPages()
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->getAllPages();
-        }
-                    /**
-         * Fetch details about a certain page using its id or slug
-         *
-         * @param mixed $page_id
-         * @return array 
-         * @static 
-         */        public static function fetchPage($page_id)
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->fetchPage($page_id);
-        }
-                    /**
-         * Update the details about a particular page
-         *
-         * @param $page_id
-         * @return array 
-         * @static 
-         */        public static function updatePage($page_id)
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->updatePage($page_id);
-        }
-                    /**
-         * Creates a subaccount to be used for split payments . Required    params are business_name , settlement_bank , account_number ,   percentage_charge
-         *
-         * @return array 
-         * @static 
-         */        public static function createSubAccount()
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->createSubAccount();
-        }
-                    /**
-         * Fetches details of a subaccount
-         *
-         * @param \Unicodeveloper\Paystack\subaccount  code
-         * @return array 
-         * @static 
-         */        public static function fetchSubAccount($subaccount_code)
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->fetchSubAccount($subaccount_code);
-        }
-                    /**
-         * Lists all the subaccounts associated with the account
-         *
-         * @param $per_page - Specifies how many records to retrieve per page , $page - SPecifies exactly what page to retrieve
-         * @return array 
-         * @static 
-         */        public static function listSubAccounts($per_page, $page)
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->listSubAccounts($per_page, $page);
-        }
-                    /**
-         * Updates a subaccount to be used for split payments . Required params are business_name , settlement_bank , account_number , percentage_charge
-         *
-         * @param \Unicodeveloper\Paystack\subaccount  code
-         * @return array 
-         * @static 
-         */        public static function updateSubAccount($subaccount_code)
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->updateSubAccount($subaccount_code);
-        }
-                    /**
-         * Get a list of all supported banks and their properties
-         *
-         * @param $country - The country from which to obtain the list of supported banks, $per_page - Specifies how many records to retrieve per page ,
-         * $use_cursor - Flag to enable cursor pagination on the endpoint
-         * @return array 
-         * @static 
-         */        public static function getBanks($country, $per_page = 50, $use_cursor = false)
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->getBanks($country, $per_page, $use_cursor);
-        }
-                    /**
-         * Confirm an account belongs to the right customer
-         *
-         * @param $account_number - Account Number, $bank_code - You can get the list of bank codes by calling the List Banks endpoint
-         * @return array 
-         * @static 
-         */        public static function confirmAccount($account_number, $bank_code)
-        {
-                        /** @var \Unicodeveloper\Paystack\Paystack $instance */
-                        return $instance->confirmAccount($account_number, $bank_code);
-        }
-            }
-    }
-
 namespace Webklex\IMAP\Facades {
             /**
      * Class Client
@@ -23909,14 +23354,6 @@ namespace Illuminate\Console\Scheduling {
         {
                         return \Illuminate\Console\Scheduling\Event::sentryMonitor($monitorSlug, $checkInMargin, $maxRuntime, $updateMonitorConfig, $failureIssueThreshold, $recoveryThreshold);
         }
-            }
-    }
-
-namespace Nwidart\Modules {
-            /**
-     * 
-     *
-     */        class Collection {
             }
     }
 
@@ -27473,7 +26910,6 @@ namespace  {
             class PDFMerger extends \Webklex\PDFMerger\Facades\PDFMergerFacade {}
             class Debugbar extends \Barryvdh\Debugbar\Facades\Debugbar {}
             class Pdf extends \Barryvdh\DomPDF\Facade\Pdf {}
-            class PDF extends \Barryvdh\DomPDF\Facade\Pdf {}
             class Msg91 extends \Craftsys\Msg91\Facade\Msg91 {}
             class PushNotification extends \Edujugon\PushNotification\Facades\PushNotification {}
             class Browser extends \hisorange\BrowserDetect\Facade {}
@@ -27493,7 +26929,6 @@ namespace  {
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
             class Signal extends \Spatie\SignalAwareCommand\Facades\Signal {}
             class Location extends \Stevebauman\Location\Facades\Location {}
-            class Paystack extends \Unicodeveloper\Paystack\Facades\Paystack {}
             class Client extends \Webklex\IMAP\Facades\Client {}
     }
 

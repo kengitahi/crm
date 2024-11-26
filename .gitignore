@@ -35,3 +35,6 @@ froiden-verify/
 resources/views/sections/custom_script.blade.php
 demo_db_copy.sql
 database/maxmind/
+_ide_helper.php
+_ide_helper_models.php
+.phpstorm.meta.php
