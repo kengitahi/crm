@@ -28,12 +28,15 @@ class StoreClientRequest extends CoreRequest
     {
         $rules = [
             'name' => 'required',
-            'email' => 'nullable|email:rfc,strict|required_if:login,enable|unique:users,email,null,id,company_id,'.company()->id,
+            'email' => 'nullable|email:rfc,strict|required_if:login,enable|unique:users,email,null,id,company_id,' . company()->id,
             'password' => 'nullable|required_if:login,enable|min:8',
             'slack_username' => 'nullable',
             'website' => 'nullable|url',
             'country' => 'required_with:mobile',
             'mobile' => 'nullable|numeric',
+
+            'contacts.*.contactName' => 'required|string|max:255',
+            'contacts.*.contactEmail' => 'required|email',
         ];
 
         $rules = $this->customFieldRules($rules);

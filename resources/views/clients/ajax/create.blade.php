@@ -308,26 +308,7 @@
                     <h4 class="f-21 font-weight-normal border-top-grey mb-0 p-20">
                         @lang('modules.client.contacts')
                     </h4>
-                    <div class="row align-items-end mb-3 flex px-4" id="contactId-1">
-                        <div class="row col-md-9 flex">
-                            <div class="col-md-6">
-                                <x-forms.text :fieldLabel="__('modules.client.contactName')" :fieldPlaceholder="__('placeholders.name')" fieldId="contactName"
-                                    fieldName="contactName" fieldRequired="true"></x-forms.text>
-                            </div>
-                            <div class="col-md-6">
-                                <x-forms.email :fieldLabel="__('modules.client.contactEmail')" :fieldPlaceholder="__('placeholders.email')" :popover="__('modules.client.contactEmailNote')"
-                                    fieldId="contactEmail" fieldName="contactEmail">
-                                </x-forms.email>
-                            </div>
-                        </div>
-                        <div className="col-md-3">
-                            <x-forms.button-secondary class="d-block my-3 mr-3" icon="trash"
-                                onClick="clearContactFields('contactId-1')">
-                                @lang('app.deleteContactFields')
-                            </x-forms.button-secondary>
-                        </div>
-                    </div>
-                    {{-- Append additiona fields here --}}
+                    {{-- Append contact fields here --}}
                 </div>
 
                 <div class="mb-3 px-4">
@@ -355,14 +336,25 @@
 @if (function_exists('sms_setting') && sms_setting()->telegram_status)
     <script src="{{ asset('vendor/jquery/clipboard.min.js') }}"></script>
 @endif
+
 <script>
     var add_client_note_permission = "{{ $addClientNotePermission }}";
-    var fieldId = 1;
+    let clientContacts = document.getElementById('clientContacts');
+    let contactCount = 0;
 
-    function clearContactField(id) {
+    function clearContactFields(id) {
         const fieldToClear = document.getElementById(id);
+
         if (fieldToClear) {
-            
+            const nameInput = fieldToClear.querySelector('input[name^="contacts["][name$="[contactName]"]');
+            const emailInput = fieldToClear.querySelector('input[name^="contacts["][name$="[contactEmail]"]');;
+
+            if (nameInput) {
+                nameInput.value = '';
+            }
+            if (emailInput) {
+                emailInput.value = '';
+            }
         }
     }
 
@@ -376,35 +368,63 @@
     }
 
     $(document).ready(function() {
-        $('#add-contact-fields').click(function() {
-            let clientContacts = document.getElementById('clientContacts');
+        // Create a unique id for the first client contact field
+        // Then create that field and append it to the clientContacts div
+        // I did it this way so that the first element would always have a unique id onload
+        // and a clear instead of delete function so we always have at least one contact field when the page loads
+        // As in we cannot delete this first field, we can only clear it
+        // Also, using randomUUID() instead of Math.random() is more secure and avoids database conflicts
+        // when we eventually save contacts data to the database
+        let elementId = crypto.randomUUID();
 
-            let elementId = 'contactId-' + fieldId;
-
-            let newContactHtml = `
-            <div class="row mb-3 px-4 flex align-items-end" id="${elementId}">
+        let newContactHtml = `
+            <div class="row mb-3 px-4 flex align-items-end" id="contactId-${elementId}">
+                <input hidden name="contacts[${contactCount}][contactId]" value="${elementId}">
                 <div class="row col-md-9 flex">
                     <div class="col-md-6">
-                        <x-forms.text :fieldLabel="__('modules.client.contactName')" :fieldPlaceholder="__('placeholders.name')" fieldId="contactName"
-                            fieldName="contactName" fieldRequired="true"></x-forms.text>
+                        <x-forms.text :fieldLabel="__('modules.client.contactName')" :fieldPlaceholder="__('placeholders.name')" fieldId="contacts[${contactCount}][contactName]" fieldName="contacts[${contactCount}][contactName]" fieldRequired="true"></x-forms.text>
                     </div>
                     <div class="col-md-6">
-                        <x-forms.email :fieldLabel="__('modules.client.contactEmail')" :fieldPlaceholder="__('placeholders.email')" :popover="__('modules.client.contactEmailNote')"
-                            fieldId="contactEmail" fieldName="contactEmail">
+                        <x-forms.email :fieldLabel="__('modules.client.contactEmail')" :fieldPlaceholder="__('placeholders.email')" :popover="__('modules.client.contactEmailNote')" fieldId="contacts[${contactCount}][contactEmail]" fieldName="contacts[${contactCount}][contactEmail]">
                         </x-forms.email>
                     </div>
                 </div>
-                <div className="col-md-3">
-                    <x-forms.button-secondary class="mr-3 my-3 d-block" icon="trash" onClick="deleteContactField('${elementId}')">
+                <div class="col-md-3">
+                    <x-forms.button-secondary class="mr-3 my-3 d-block" icon="trash" onClick="clearContactFields('contactId-${elementId}')">
                         @lang('app.deleteContactFields')
                     </x-forms.button-secondary>
                 </div>                
-            </div>`;
+            </div>
+        `;
+        clientContacts.insertAdjacentHTML('beforeend', newContactHtml);
+        contactCount++;
+        //end creating the first contact field
+
+        $('#add-contact-fields').click(function() {
+            let elementId = crypto.randomUUID();
+
+            let newContactHtml = `
+                <div class="row mb-3 px-4 flex align-items-end" id="contactId-${elementId}">
+                    <input hidden name="contacts[${contactCount}][contactId]" value="${elementId}">
+                    <div class="row col-md-9 flex">
+                        <div class="col-md-6">
+                            <x-forms.text :fieldLabel="__('modules.client.contactName')" :fieldPlaceholder="__('placeholders.name')" fieldId="contacts[${contactCount}][contactName]" fieldName="contacts[${contactCount}][contactName]" fieldRequired="true"></x-forms.text>
+                        </div>
+                        <div class="col-md-6">
+                            <x-forms.email :fieldLabel="__('modules.client.contactEmail')" :fieldPlaceholder="__('placeholders.email')" :popover="__('modules.client.contactEmailNote')" fieldId="contacts[${contactCount}][contactEmail]" fieldName="contacts[${contactCount}][contactEmail]" fieldRequired="true">
+                            </x-forms.email>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <x-forms.button-secondary class="mr-3 my-3 d-block" icon="trash" onClick="deleteContactField('contactId-${elementId}')">
+                            @lang('app.deleteContactFields')
+                        </x-forms.button-secondary>
+                    </div>                
+                </div>
+            `;
 
             clientContacts.insertAdjacentHTML('beforeend', newContactHtml);
-
-            fieldId++;
-            console.log(`add a new contact field, ${fieldId}`);
+            contactCount++;
         });
 
 

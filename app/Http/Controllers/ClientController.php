@@ -119,7 +119,7 @@ class ClientController extends AccountBaseController
         $this->salutations = Salutation::cases();
         $this->languages = LanguageSetting::where('status', 'enabled')->get();
 
-        $client = new ClientDetails;
+        $client = new ClientDetails();
         $getCustomFieldGroupsWithFields = $client->getCustomFieldGroupsWithFields();
 
         if ($getCustomFieldGroupsWithFields) {
@@ -149,7 +149,15 @@ class ClientController extends AccountBaseController
 
         DB::beginTransaction();
 
-        $data = $request->all();
+        // $data = $request->all();
+
+        $data = $request->except('contacts');
+        $contacts = $request->only(['contacts']) ?? null;
+
+
+        \Illuminate\Support\Facades\Log::info($contacts);
+        dd($contacts);
+
         unset($data['country']);
         $data['password'] = bcrypt($request->password);
         $data['country_id'] = $request->country;
@@ -174,7 +182,7 @@ class ClientController extends AccountBaseController
         $user->clientDetails()->create($data);
         $client_id = $user->id;
 
-        $client_note = new ClientNote;
+        $client_note = new ClientNote();
         $note = trim_editor($request->note);
 
         if ($note != '') {
@@ -397,7 +405,8 @@ class ClientController extends AccountBaseController
         $this->deletePermission = user()->permission('delete_clients');
 
         abort_403(
-            ! ($this->deletePermission == 'all'
+            ! (
+                $this->deletePermission == 'all'
                 || ($this->deletePermission == 'added' && $this->client->clientDetails->added_by == user()->id)
                 || ($this->deletePermission == 'both' && $this->client->clientDetails->added_by == user()->id)
             )
@@ -716,7 +725,7 @@ class ClientController extends AccountBaseController
 
         $this->view = 'clients.ajax.projects';
 
-        $dataTable = new ProjectsDataTable;
+        $dataTable = new ProjectsDataTable();
 
         return $dataTable->render('clients.show', $this->data);
 
@@ -724,7 +733,7 @@ class ClientController extends AccountBaseController
 
     public function invoices()
     {
-        $dataTable = new InvoicesDataTable;
+        $dataTable = new InvoicesDataTable();
         $viewPermission = user()->permission('view_invoices');
 
         abort_403(! in_array($viewPermission, ['all', 'added', 'owned', 'both']));
@@ -739,7 +748,7 @@ class ClientController extends AccountBaseController
 
     public function payments()
     {
-        $dataTable = new PaymentsDataTable;
+        $dataTable = new PaymentsDataTable();
         $viewPermission = user()->permission('view_payments');
 
         abort_403(! ($viewPermission == 'all' || $viewPermission == 'added'));
@@ -754,7 +763,7 @@ class ClientController extends AccountBaseController
 
     public function estimates()
     {
-        $dataTable = new EstimatesDataTable;
+        $dataTable = new EstimatesDataTable();
         $viewPermission = user()->permission('view_estimates');
 
         abort_403(! in_array($viewPermission, ['all', 'added', 'owned', 'both']));
@@ -768,7 +777,7 @@ class ClientController extends AccountBaseController
 
     public function creditnotes()
     {
-        $dataTable = new CreditNotesDataTable;
+        $dataTable = new CreditNotesDataTable();
         $viewPermission = user()->permission('view_invoices');
 
         abort_403($viewPermission == 'none');
@@ -781,7 +790,7 @@ class ClientController extends AccountBaseController
 
     public function contacts()
     {
-        $dataTable = new ClientContactsDataTable;
+        $dataTable = new ClientContactsDataTable();
         $tab = request('tab');
         $this->activeTab = $tab ?: 'profile';
 
@@ -792,7 +801,7 @@ class ClientController extends AccountBaseController
 
     public function notes()
     {
-        $dataTable = new ClientNotesDataTable;
+        $dataTable = new ClientNotesDataTable();
         $viewPermission = user()->permission('view_client_note');
 
         abort_403(($viewPermission == 'none'));
@@ -805,7 +814,7 @@ class ClientController extends AccountBaseController
 
     public function tickets()
     {
-        $dataTable = new TicketDataTable;
+        $dataTable = new TicketDataTable();
         $viewPermission = user()->permission('view_clients');
 
         abort_403(! ($viewPermission == 'all' || $viewPermission == 'added' || $viewPermission == 'both'));
@@ -819,7 +828,7 @@ class ClientController extends AccountBaseController
 
     public function gdpr()
     {
-        $dataTable = new ClientGDPRDataTable;
+        $dataTable = new ClientGDPRDataTable();
         $tab = request('tab');
         $this->activeTab = $tab ?: 'gdpr';
 
@@ -855,7 +864,7 @@ class ClientController extends AccountBaseController
         }
 
         // Saving Consent Data
-        $newConsentLead = new PurposeConsentUser;
+        $newConsentLead = new PurposeConsentUser();
         $newConsentLead->client_id = $user->id;
         $newConsentLead->purpose_consent_id = $consent->id;
         $newConsentLead->status = trim($request->status);
@@ -875,7 +884,7 @@ class ClientController extends AccountBaseController
             ['admin_approval' => 1]
         );
 
-        $userSession = new AppSettingController;
+        $userSession = new AppSettingController();
         $userSession->deleteSessions([$id]);
 
         return Reply::success(__('messages.updateSuccess'));
@@ -996,7 +1005,7 @@ class ClientController extends AccountBaseController
 
     public function orders()
     {
-        $dataTable = new OrdersDataTable;
+        $dataTable = new OrdersDataTable();
         $viewPermission = user()->permission('view_order');
         abort_403(! in_array($viewPermission, ['all', 'added', 'owned', 'both']));
 
