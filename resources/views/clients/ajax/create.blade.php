@@ -304,11 +304,13 @@
 
                 </div>
 
-                <div id="clientContacts">
+                <div>
                     <h4 class="f-21 font-weight-normal border-top-grey mb-0 p-20">
                         @lang('modules.client.contacts')
                     </h4>
+                    <div  id="clientContacts">
                     {{-- Append contact fields here --}}
+                    </div>
                 </div>
 
                 <div class="mb-3 px-4">
@@ -410,7 +412,7 @@
                         <div class="col-md-6">
                             <x-forms.text :fieldLabel="__('modules.client.contactName')" :fieldPlaceholder="__('placeholders.name')" fieldId="contacts[${contactCount}][contactName]" fieldName="contacts[${contactCount}][contactName]" fieldRequired="true"></x-forms.text>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 input-group">
                             <x-forms.email :fieldLabel="__('modules.client.contactEmail')" :fieldPlaceholder="__('placeholders.email')" :popover="__('modules.client.contactEmailNote')" fieldId="contacts[${contactCount}][contactEmail]" fieldName="contacts[${contactCount}][contactEmail]" fieldRequired="true">
                             </x-forms.email>
                         </div>

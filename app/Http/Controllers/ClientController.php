@@ -57,7 +57,7 @@ class ClientController extends AccountBaseController
         parent::__construct();
         $this->pageTitle = 'app.menu.clients';
         $this->middleware(function ($request, $next) {
-            abort_403(! in_array('clients', $this->user->modules));
+            abort_403(!in_array('clients', $this->user->modules));
 
             return $next($request);
         });
@@ -73,9 +73,9 @@ class ClientController extends AccountBaseController
         $viewPermission = user()->permission('view_clients');
         $this->addClientPermission = user()->permission('add_clients');
 
-        abort_403(! in_array($viewPermission, ['all', 'added', 'both']));
+        abort_403(!in_array($viewPermission, ['all', 'added', 'both']));
 
-        if (! request()->ajax()) {
+        if (!request()->ajax()) {
             $this->clients = User::allClients(active: false);
             $this->subcategories = ClientSubCategory::all();
             $this->categories = ClientCategory::all();
@@ -97,7 +97,7 @@ class ClientController extends AccountBaseController
     {
         $this->addPermission = user()->permission('add_clients');
 
-        abort_403(! in_array($this->addPermission, User::ALL_ADDED_BOTH));
+        abort_403(!in_array($this->addPermission, User::ALL_ADDED_BOTH));
 
         if ($leadID) {
             $this->leadDetail = Lead::findOrFail($leadID);
@@ -154,7 +154,6 @@ class ClientController extends AccountBaseController
         $data = $request->except('contacts');
         $contacts = $request->only(['contacts']) ?? null;
 
-
         \Illuminate\Support\Facades\Log::info($contacts);
         dd($contacts);
 
@@ -206,11 +205,11 @@ class ClientController extends AccountBaseController
         // Log search
         $this->logSearchEntry($user->id, $user->name, 'clients.show', 'client');
 
-        if (! is_null($user->email)) {
+        if (!is_null($user->email)) {
             $this->logSearchEntry($user->id, $user->email, 'clients.show', 'client');
         }
 
-        if (! is_null($user->clientDetails->company_name)) {
+        if (!is_null($user->clientDetails->company_name)) {
             $this->logSearchEntry($user->id, $user->clientDetails->company_name, 'clients.show', 'client');
         }
 
@@ -244,20 +243,20 @@ class ClientController extends AccountBaseController
             foreach ($teams as $team) {
                 $selected = ($team->id == $user->id) ? 'selected' : '';
 
-                $teamData .= '<option '.$selected.' data-content="';
+                $teamData .= '<option ' . $selected . ' data-content="';
 
                 $teamData .= '<div class=\'media align-items-center mw-250\'>';
 
-                $teamData .= '<div class=\'position-relative\'><img src='.$team->image_url.' class=\'mr-2 taskEmployeeImg rounded-circle\'></div>';
+                $teamData .= '<div class=\'position-relative\'><img src=' . $team->image_url . ' class=\'mr-2 taskEmployeeImg rounded-circle\'></div>';
                 $teamData .= '<div class=\'media-body\'>';
-                $teamData .= '<h5 class=\'mb-0 f-13\'>'.$team->name.'</h5>';
-                $teamData .= '<p class=\'my-0 f-11 text-dark-grey\'>'.$team->email.'</p>';
+                $teamData .= '<h5 class=\'mb-0 f-13\'>' . $team->name . '</h5>';
+                $teamData .= '<p class=\'my-0 f-11 text-dark-grey\'>' . $team->email . '</p>';
 
-                $teamData .= (! is_null($team->clientDetails->company_name)) ? '<p class=\'my-0 f-11 text-dark-grey\'>'.$team->clientDetails->company_name.'</p>' : '';
+                $teamData .= (!is_null($team->clientDetails->company_name)) ? '<p class=\'my-0 f-11 text-dark-grey\'>' . $team->clientDetails->company_name . '</p>' : '';
                 $teamData .= '</div>';
                 $teamData .= '</div>"';
 
-                $teamData .= 'value="'.$team->id.'"> '.$team->name.'';
+                $teamData .= 'value="' . $team->id . '"> ' . $team->name . '';
 
                 $teamData .= '</option>';
             }
@@ -278,7 +277,7 @@ class ClientController extends AccountBaseController
         $this->client = User::withoutGlobalScope(ActiveScope::class)->with('clientDetails')->findOrFail($id);
         $this->editPermission = user()->permission('edit_clients');
 
-        abort_403(! ($this->editPermission == 'all' || ($this->editPermission == 'added' && $this->client->clientDetails->added_by == user()->id) || ($this->editPermission == 'both' && $this->client->clientDetails->added_by == user()->id)));
+        abort_403(!($this->editPermission == 'all' || ($this->editPermission == 'added' && $this->client->clientDetails->added_by == user()->id) || ($this->editPermission == 'both' && $this->client->clientDetails->added_by == user()->id)));
 
         $this->countries = countries();
         $this->categories = ClientCategory::all();
@@ -287,11 +286,11 @@ class ClientController extends AccountBaseController
             $this->employees = User::allEmployees();
         }
 
-        $this->pageTitle = __('app.update').' '.__('app.client');
+        $this->pageTitle = __('app.update') . ' ' . __('app.client');
         $this->salutations = Salutation::cases();
         $this->languages = LanguageSetting::where('status', 'enabled')->get();
 
-        if (! is_null($this->client->clientDetails)) {
+        if (!is_null($this->client->clientDetails)) {
             $this->clientDetail = $this->client->clientDetails->withCustomFields();
 
             $getCustomFieldGroupsWithFields = $this->clientDetail->getCustomFieldGroupsWithFields();
@@ -405,7 +404,7 @@ class ClientController extends AccountBaseController
         $this->deletePermission = user()->permission('delete_clients');
 
         abort_403(
-            ! (
+            !(
                 $this->deletePermission == 'all'
                 || ($this->deletePermission == 'added' && $this->client->clientDetails->added_by == user()->id)
                 || ($this->deletePermission == 'both' && $this->client->clientDetails->added_by == user()->id)
@@ -429,10 +428,10 @@ class ClientController extends AccountBaseController
 
         Notification::whereNull('read_at')
             ->where(function ($q) use ($user) {
-                $q->where('data', 'like', '{"id":'.$user->id.',%');
-                $q->orWhere('data', 'like', '%,"name":'.$user->name.',%');
-                $q->orWhere('data', 'like', '%,"user_one":'.$user->id.',%');
-                $q->orWhere('data', 'like', '%,"client_id":'.$user->id.'%');
+                $q->where('data', 'like', '{"id":' . $user->id . ',%');
+                $q->orWhere('data', 'like', '%,"name":' . $user->name . ',%');
+                $q->orWhere('data', 'like', '%,"user_one":' . $user->id . ',%');
+                $q->orWhere('data', 'like', '%,"client_id":' . $user->id . '%');
             })->delete();
 
         $user->delete();
@@ -497,11 +496,11 @@ class ClientController extends AccountBaseController
         $this->viewPermission = user()->permission('view_clients');
         $this->viewDocumentPermission = user()->permission('view_client_document');
 
-        if (! $this->client->hasRole('client')) {
+        if (!$this->client->hasRole('client')) {
             abort(404);
         }
 
-        abort_403(! ($this->viewPermission == 'all'
+        abort_403(!($this->viewPermission == 'all'
             || ($this->viewPermission == 'added' && $this->client->clientDetails->added_by == user()->id)
             || ($this->viewPermission == 'both' && $this->client->clientDetails->added_by == user()->id)));
 
@@ -538,7 +537,7 @@ class ClientController extends AccountBaseController
             case 'orders':
                 return $this->orders();
             case 'documents':
-                abort_403(! ($this->viewDocumentPermission == 'all'
+                abort_403(!($this->viewDocumentPermission == 'all'
                     || ($this->viewDocumentPermission == 'added' && $this->client->clientDetails->added_by == user()->id)
                     || ($this->viewDocumentPermission == 'owned' && $this->client->clientDetails->user_id == user()->id)
                     || ($this->viewDocumentPermission == 'both' && ($this->client->clientDetails->added_by == user()->id || $this->client->clientDetails->user_id == user()->id))));
@@ -551,16 +550,18 @@ class ClientController extends AccountBaseController
                 return $this->tickets();
             case 'gdpr':
                 $this->client = User::withoutGlobalScope(ActiveScope::class)->findOrFail($id);
-                $this->consents = PurposeConsent::with(['user' => function ($query) use ($id) {
-                    $query->where('client_id', $id)
-                        ->orderByDesc('created_at');
-                }])->get();
+                $this->consents = PurposeConsent::with([
+                    'user' => function ($query) use ($id) {
+                        $query->where('client_id', $id)
+                            ->orderByDesc('created_at');
+                    }
+                ])->get();
 
                 return $this->gdpr();
             default:
                 $this->clientDetail = ClientDetails::where('user_id', '=', $this->client->id)->first();
 
-                if (! is_null($this->clientDetail)) {
+                if (!is_null($this->clientDetail)) {
                     $this->clientDetail = $this->clientDetail->withCustomFields();
 
                     $getCustomFieldGroupsWithFields = $this->clientDetail->getCustomFieldGroupsWithFields();
@@ -588,11 +589,11 @@ class ClientController extends AccountBaseController
     {
         return DB::table('users')
             ->select(
-                DB::raw('(select count(projects.id) from `projects` WHERE projects.client_id = '.$id.' and deleted_at IS NULL) as totalProjects'),
-                DB::raw('(select count(invoices.id) from `invoices` left join projects on projects.id=invoices.project_id WHERE invoices.status != "paid" and invoices.status != "canceled" and (projects.client_id = '.$id.' or invoices.client_id = '.$id.')) as totalUnpaidInvoices'),
-                DB::raw('(select sum(payments.amount) from `payments` left join projects on projects.id=payments.project_id WHERE payments.status = "complete" and projects.client_id = '.$id.') as projectPayments'),
-                DB::raw('(select sum(payments.amount) from `payments` inner join invoices on invoices.id=payments.invoice_id  WHERE payments.status = "complete" and invoices.client_id = '.$id.') as invoicePayments'),
-                DB::raw('(select count(contracts.id) from `contracts` WHERE contracts.client_id = '.$id.') as totalContracts')
+                DB::raw('(select count(projects.id) from `projects` WHERE projects.client_id = ' . $id . ' and deleted_at IS NULL) as totalProjects'),
+                DB::raw('(select count(invoices.id) from `invoices` left join projects on projects.id=invoices.project_id WHERE invoices.status != "paid" and invoices.status != "canceled" and (projects.client_id = ' . $id . ' or invoices.client_id = ' . $id . ')) as totalUnpaidInvoices'),
+                DB::raw('(select sum(payments.amount) from `payments` left join projects on projects.id=payments.project_id WHERE payments.status = "complete" and projects.client_id = ' . $id . ') as projectPayments'),
+                DB::raw('(select sum(payments.amount) from `payments` inner join invoices on invoices.id=payments.invoice_id  WHERE payments.status = "complete" and invoices.client_id = ' . $id . ') as invoicePayments'),
+                DB::raw('(select count(contracts.id) from `contracts` WHERE contracts.client_id = ' . $id . ') as totalContracts')
             )
             ->first();
     }
@@ -706,7 +707,7 @@ class ClientController extends AccountBaseController
 
         foreach ($clientProjects as $project) {
 
-            $options .= '<option value="'.$project->id.'"> '.$project->project_name.' </option>';
+            $options .= '<option value="' . $project->id . '"> ' . $project->project_name . ' </option>';
         }
 
         $data = $client ?: null;
@@ -719,7 +720,7 @@ class ClientController extends AccountBaseController
 
         $viewPermission = user()->permission('view_projects');
 
-        abort_403(! ($viewPermission == 'all' || $viewPermission == 'added'));
+        abort_403(!($viewPermission == 'all' || $viewPermission == 'added'));
         $tab = request('tab');
         $this->activeTab = $tab ?: 'profile';
 
@@ -736,7 +737,7 @@ class ClientController extends AccountBaseController
         $dataTable = new InvoicesDataTable();
         $viewPermission = user()->permission('view_invoices');
 
-        abort_403(! in_array($viewPermission, ['all', 'added', 'owned', 'both']));
+        abort_403(!in_array($viewPermission, ['all', 'added', 'owned', 'both']));
         $tab = request('tab');
 
         $this->activeTab = $tab ?: 'profile';
@@ -751,7 +752,7 @@ class ClientController extends AccountBaseController
         $dataTable = new PaymentsDataTable();
         $viewPermission = user()->permission('view_payments');
 
-        abort_403(! ($viewPermission == 'all' || $viewPermission == 'added'));
+        abort_403(!($viewPermission == 'all' || $viewPermission == 'added'));
         $tab = request('tab');
         $this->activeTab = $tab ?: 'profile';
 
@@ -766,7 +767,7 @@ class ClientController extends AccountBaseController
         $dataTable = new EstimatesDataTable();
         $viewPermission = user()->permission('view_estimates');
 
-        abort_403(! in_array($viewPermission, ['all', 'added', 'owned', 'both']));
+        abort_403(!in_array($viewPermission, ['all', 'added', 'owned', 'both']));
 
         $tab = request('tab');
         $this->activeTab = $tab ?: 'profile';
@@ -817,7 +818,7 @@ class ClientController extends AccountBaseController
         $dataTable = new TicketDataTable();
         $viewPermission = user()->permission('view_clients');
 
-        abort_403(! ($viewPermission == 'all' || $viewPermission == 'added' || $viewPermission == 'both'));
+        abort_403(!($viewPermission == 'all' || $viewPermission == 'added' || $viewPermission == 'both'));
         $tab = request('tab');
         $this->activeTab = $tab ?: 'profile';
 
@@ -843,10 +844,12 @@ class ClientController extends AccountBaseController
         $this->consentId = $request->consentId;
         $this->clientId = $clientId;
 
-        $this->consent = PurposeConsent::with(['user' => function ($query) use ($request) {
-            $query->where('client_id', $request->clientId)
-                ->orderByDesc('created_at');
-        }])
+        $this->consent = PurposeConsent::with([
+            'user' => function ($query) use ($request) {
+                $query->where('client_id', $request->clientId)
+                    ->orderByDesc('created_at');
+            }
+        ])
             ->where('id', $request->consentId)
             ->first();
 
@@ -878,7 +881,7 @@ class ClientController extends AccountBaseController
 
     public function approve($id)
     {
-        abort_403(! in_array('admin', user_roles()));
+        abort_403(!in_array('admin', user_roles()));
 
         User::where('id', $id)->update(
             ['admin_approval' => 1]
@@ -892,10 +895,10 @@ class ClientController extends AccountBaseController
 
     public function importClient()
     {
-        $this->pageTitle = __('app.importExcel').' '.__('app.client');
+        $this->pageTitle = __('app.importExcel') . ' ' . __('app.client');
 
         $addPermission = user()->permission('add_clients');
-        abort_403(! in_array($addPermission, ['all', 'added', 'both']));
+        abort_403(!in_array($addPermission, ['all', 'added', 'both']));
 
         $this->view = 'clients.ajax.import';
 
@@ -960,16 +963,16 @@ class ClientController extends AccountBaseController
 
                 $teamData .= '<div class=\'media align-items-center mw-250\'>';
 
-                $teamData .= '<div class=\'position-relative\'><img src='.$client->image_url.' class=\'mr-2 taskEmployeeImg rounded-circle\'></div>';
+                $teamData .= '<div class=\'position-relative\'><img src=' . $client->image_url . ' class=\'mr-2 taskEmployeeImg rounded-circle\'></div>';
                 $teamData .= '<div class=\'media-body\'>';
-                $teamData .= '<h5 class=\'mb-0 f-13\'>'.$client->name.'</h5>';
-                $teamData .= '<p class=\'my-0 f-11 text-dark-grey\'>'.$client->email.'</p>';
+                $teamData .= '<h5 class=\'mb-0 f-13\'>' . $client->name . '</h5>';
+                $teamData .= '<p class=\'my-0 f-11 text-dark-grey\'>' . $client->email . '</p>';
 
-                $teamData .= (! is_null($client->clientDetails->company_name)) ? '<p class=\'my-0 f-11 text-dark-grey\'>'.$client->clientDetails->company_name.'</p>' : '';
+                $teamData .= (!is_null($client->clientDetails->company_name)) ? '<p class=\'my-0 f-11 text-dark-grey\'>' . $client->clientDetails->company_name . '</p>' : '';
                 $teamData .= '</div>';
                 $teamData .= '</div>"';
 
-                $teamData .= 'value="'.$client->id.'"> '.$client->name.'';
+                $teamData .= 'value="' . $client->id . '"> ' . $client->name . '';
 
                 $teamData .= '</option>';
 
@@ -984,16 +987,16 @@ class ClientController extends AccountBaseController
 
                 $teamData .= '<div class=\'media align-items-center mw-250\'>';
 
-                $teamData .= '<div class=\'position-relative\'><img src='.$project->client->image_url.' class=\'mr-2 taskEmployeeImg rounded-circle\'></div>';
+                $teamData .= '<div class=\'position-relative\'><img src=' . $project->client->image_url . ' class=\'mr-2 taskEmployeeImg rounded-circle\'></div>';
                 $teamData .= '<div class=\'media-body\'>';
-                $teamData .= '<h5 class=\'mb-0 f-13\'>'.$project->client->name.'</h5>';
-                $teamData .= '<p class=\'my-0 f-11 text-dark-grey\'>'.$project->client->email.'</p>';
+                $teamData .= '<h5 class=\'mb-0 f-13\'>' . $project->client->name . '</h5>';
+                $teamData .= '<p class=\'my-0 f-11 text-dark-grey\'>' . $project->client->email . '</p>';
 
-                $teamData .= (! is_null($project->client->company->company_name)) ? '<p class=\'my-0 f-11 text-dark-grey\'>'.$project->client->company->company_name.'</p>' : '';
+                $teamData .= (!is_null($project->client->company->company_name)) ? '<p class=\'my-0 f-11 text-dark-grey\'>' . $project->client->company->company_name . '</p>' : '';
                 $teamData .= '</div>';
                 $teamData .= '</div>"';
 
-                $teamData .= 'value="'.$project->client->id.'"> '.$project->client->name.'';
+                $teamData .= 'value="' . $project->client->id . '"> ' . $project->client->name . '';
 
                 $teamData .= '</option>';
             }
@@ -1007,7 +1010,7 @@ class ClientController extends AccountBaseController
     {
         $dataTable = new OrdersDataTable();
         $viewPermission = user()->permission('view_order');
-        abort_403(! in_array($viewPermission, ['all', 'added', 'owned', 'both']));
+        abort_403(!in_array($viewPermission, ['all', 'added', 'owned', 'both']));
 
         $tab = request('tab');
 

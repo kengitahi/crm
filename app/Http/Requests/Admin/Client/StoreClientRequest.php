@@ -35,7 +35,7 @@ class StoreClientRequest extends CoreRequest
             'country' => 'required_with:mobile',
             'mobile' => 'nullable|numeric',
 
-            'contacts.*.contactName' => 'required|string|max:255',
+            'contacts.*.contactName' => 'required',
             'contacts.*.contactEmail' => 'required|email',
         ];
 
@@ -48,6 +48,14 @@ class StoreClientRequest extends CoreRequest
     {
         return [
             'website.url' => 'The website format is invalid. Add https:// or http to url',
+            'contacts.*.contactName' => [
+                'required' => 'The contact\'s name is required. index :index position :position',
+                'string' => 'Enter a valid name.',
+            ],
+            'contacts.*.contactEmail' => [
+                'required' => 'The contact\'s email is required. index :index position :position',
+                'email:rfc,strict' => 'Enter a valid email address.',
+            ],
         ];
     }
 
