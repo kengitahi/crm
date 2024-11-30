@@ -381,7 +381,7 @@
 
         let newContactHtml = `
             <div class="row mb-3 px-4 flex align-items-end" id="contactId-${elementId}">
-                <input hidden name="contacts[${contactCount}][contactId]" value="${elementId}">
+                <input type="hidden" name="contacts[${contactCount}][contactId]" value="${elementId}">
                 <div class="row col-md-9 flex">
                     <div class="col-md-6">
                         <x-forms.text :fieldLabel="__('modules.client.contactName')" :fieldPlaceholder="__('placeholders.name')" fieldId="contacts[${contactCount}][contactName]" fieldName="contacts[${contactCount}][contactName]" fieldRequired="true"></x-forms.text>
@@ -407,7 +407,7 @@
 
             let newContactHtml = `
                 <div class="row mb-3 px-4 flex align-items-end" id="contactId-${elementId}">
-                    <input hidden name="contacts[${contactCount}][contactId]" value="${elementId}">
+                    <input type="hidden" name="contacts[${contactCount}][contactId]" value="${elementId}">
                     <div class="row col-md-9 flex">
                         <div class="col-md-6">
                             <x-forms.text :fieldLabel="__('modules.client.contactName')" :fieldPlaceholder="__('placeholders.name')" fieldId="contacts[${contactCount}][contactName]" fieldName="contacts[${contactCount}][contactName]" fieldRequired="true"></x-forms.text>

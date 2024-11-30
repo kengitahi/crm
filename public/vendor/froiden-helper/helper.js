@@ -288,7 +288,7 @@
                         var ele = $(opt.container).find("[name='" + key + "']");
 
                         // If cannot find by name, then find by id
-                        if (ele.length == 0) {
+                        if (ele.length == 0 ) {
                             try {
                                 ele = $(opt.container).find("[name='" + key.replace('[]', '[' + keyIndex + ']') + "']");
 
