@@ -50,7 +50,12 @@ class ClientContact extends BaseModel
 {
     use HasCompany;
 
-    protected $fillable = ['user_id', 'contact_name', 'email', 'phone', 'title'];
+    protected $fillable = [
+        'user_id', //The id of client the contact belongs to
+        'contact_id', //The id of the contact being added
+        'contact_name',
+        'email',
+    ];
 
     public function client(): BelongsTo
     {

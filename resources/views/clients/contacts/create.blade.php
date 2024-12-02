@@ -1,36 +1,35 @@
 <div class="row">
     <div class="col-sm-12">
         <x-form id="save-client-data-form">
-            <div class="add-client bg-white rounded">
-                <h4 class="mb-0 p-20 f-21 font-weight-normal  border-bottom-grey">
+            <div class="add-client rounded bg-white">
+                <h4 class="f-21 font-weight-normal border-bottom-grey mb-0 p-20">
                     @lang('app.contactDetails')</h4>
 
-                <input type="hidden" name="user_id" value="{{ $clientId }}">
+                <input name="user_id" type="hidden" value="{{ $clientId }}">
+                <input id="contactId" name="contact_id" type="hidden">
 
                 <div class="row p-20">
                     <div class="col-md-4">
-                        <x-forms.text fieldId="title" :fieldLabel="__('app.title')" fieldName="title"
-                            :fieldPlaceholder="__('placeholders.title')">
-                            </x-forms.text>
-                    </div>
-                    <div class="col-md-4">
-                        <x-forms.text fieldId="contact_name" :fieldLabel="__('modules.contacts.contactName')"
-                            fieldName="contact_name" fieldRequired="true" :fieldPlaceholder="__('placeholders.name')">
+                        <x-forms.text :fieldLabel="__('app.title')" :fieldPlaceholder="__('placeholders.title')" fieldId="title" fieldName="title">
                         </x-forms.text>
                     </div>
                     <div class="col-md-4">
-                        <x-forms.email fieldId="email" :fieldLabel="__('app.email')" fieldName="email"
-                            fieldRequired="true" :fieldPlaceholder="__('placeholders.email')"></x-forms.email>
+                        <x-forms.text :fieldLabel="__('modules.contacts.contactName')" :fieldPlaceholder="__('placeholders.name')" fieldId="contact_name"
+                            fieldName="contact_name" fieldRequired="true">
+                        </x-forms.text>
                     </div>
                     <div class="col-md-4">
-                        <x-forms.text fieldId="phone" :fieldLabel="__('app.phone')" fieldName="phone"
-                            :fieldPlaceholder="__('placeholders.mobile')">
-                            </x-forms.text>
+                        <x-forms.email :fieldLabel="__('app.email')" :fieldPlaceholder="__('placeholders.email')" fieldId="email" fieldName="email"
+                            fieldRequired="true"></x-forms.email>
+                    </div>
+                    <div class="col-md-4">
+                        <x-forms.text :fieldLabel="__('app.phone')" :fieldPlaceholder="__('placeholders.mobile')" fieldId="phone" fieldName="phone">
+                        </x-forms.text>
                     </div>
                 </div>
 
                 <x-form-actions>
-                    <x-forms.button-primary id="save-client-form" class="mr-3" icon="check">@lang('app.save')
+                    <x-forms.button-primary class="mr-3" icon="check" id="save-client-form">@lang('app.save')
                     </x-forms.button-primary>
                     <x-forms.button-cancel :link="route('clients.show', $clientId) . '?tab=contacts'" class="border-0">
                         @lang('app.cancel')
@@ -42,8 +41,13 @@
     </div>
 </div>
 
-
 <script>
+    var elementId = crypto.randomUUID();
+    var contactIdElement = document.getElementById('contactId');
+    if (contactIdElement) {
+        contactIdElement.setAttribute('value', elementId);
+    }
+
     $(document).ready(function() {
 
         $('#save-client-form').click(function() {

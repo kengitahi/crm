@@ -6,6 +6,7 @@ use App\Helper\Reply;
 use App\Http\Requests\ClientContacts\StoreContact;
 use App\Http\Requests\ClientContacts\UpdateContact;
 use App\Models\ClientContact;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ClientContactController extends AccountBaseController
@@ -41,7 +42,17 @@ class ClientContactController extends AccountBaseController
 
     public function store(StoreContact $request)
     {
-        $contact = ClientContact::create($request->all());
+        $data = $request->all();
+        \Illuminate\Support\Facades\Log::info($data);
+        $contact = ClientContact::create(
+            [
+                'company_id' => User::where('id', $data['user_id'])->first()->company_id,
+                'user_id' => $data['user_id'],
+                'contact_id' => $data['contact_id'],
+                'contact_name' => $data['contact_name'],
+                'email' => $data['email'],
+            ]
+        );
 
         return Reply::successWithData(__('messages.recordSaved'), ['redirectUrl' => route('clients.show', $contact->user_id).'?tab=contacts']);
     }
