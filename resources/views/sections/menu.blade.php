@@ -163,9 +163,12 @@
                     <x-sub-menu-item :link="route('creditnotes.index')"
                                      :text="__('app.menu.credit-note')" />
                 @endif
-
                 @if (in_array('expenses', user_modules()) && $sidebarUserPermissions['view_expenses'] != 5 && $sidebarUserPermissions['view_expenses'] != 'none')
                     <x-sub-menu-item :link="route('expenses.index')" :text="__('app.menu.expenses')" />
+                @endif
+
+                @if (in_array('payments', user_modules()) && $sidebarUserPermissions['view_payments'] != 5 && $sidebarUserPermissions['view_payments'] != 'none')
+                    <x-sub-menu-item :link="route('projectfinances.index')" :text="__('modules.projects.menu.finances')" />
                 @endif
 
                 @if (in_array('bankaccount', user_modules()) && $sidebarUserPermissions['view_bankaccount'] != 5 && $sidebarUserPermissions['view_bankaccount'] != 'none')

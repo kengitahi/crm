@@ -1,80 +1,76 @@
 .project-header {
-
-    a{
-
+    a {
         font-size: 14px;
 
-        @include media-breakpoint-down(lg){
+        @include media-breakpoint-down(lg) {
             padding: 10px 8px;
             font-size: 11px;
         }
 
-        @include media-breakpoint-down(md){
+        @include media-breakpoint-down(md) {
             padding: 13px 15px;
             font-size: 14px;
         }
 
-        &:hover{
-            color: #616E80 !important;
+        &:hover {
+            color: #616e80 !important;
         }
     }
 
-    .project-menu{
+    .project-menu {
+        .p-sub-menu {
+            position: relative;
+            font-size: 14px;
+            display: block;
 
-            .p-sub-menu{
-                position: relative;
-                font-size: 14px;
-                display: block;
-
-                @include media-breakpoint-down(md){
-                    padding: 0px !important;
-                }
+            @include media-breakpoint-down(md) {
+                padding: 0px !important;
             }
+        }
 
-            .p-sub-menu.active:after, .p-sub-menu.active:hover:after{
-                width: 100%;
-                height: 3px;
-                background: $blue;
-                transition: width .3s, height .3s;
-                bottom: 0;
-                position: absolute;
-                content: '';
+        .p-sub-menu.active:after,
+        .p-sub-menu.active:hover:after {
+            width: 100%;
+            height: 3px;
+            background: $blue;
+            transition: width 0.3s, height 0.3s;
+            bottom: 0;
+            position: absolute;
+            content: "";
+        }
+
+        // .p-sub-menu:nth-child(2) span {
+        //     padding: 13px 24px;
+        // }
+
+        .p-sub-menu span {
+            padding: 13px 26px;
+            display: block;
+            white-space: nowrap;
+            text-align: center;
+
+            @include media-breakpoint-down(md) {
+                text-align: left;
             }
+        }
 
-            // .p-sub-menu:nth-child(2) span {
-            //     padding: 13px 24px;
-            // }
+        .p-sub-menu::after {
+            content: "";
+            width: 0;
+            height: 0;
+            background: #1d82f585;
+            transition: width 0.3s, height 0.3s;
+            bottom: 0;
+            position: absolute;
+        }
 
-            .p-sub-menu span{
-                padding: 13px 26px;
-                display: block;
-                white-space: nowrap;
-                text-align: center;
+        .p-sub-menu:hover::after {
+            width: 100%;
+            transition: width 0.3s, height 0.3s;
+            height: 3px;
+        }
 
-                @include media-breakpoint-down(md){
-                    text-align: left;
-                }
-            }
-
-            .p-sub-menu::after {
-                content: '';
-                width: 0;
-                height: 0;
-                background: #1d82f585;
-                transition: width .3s, height .3s;
-                bottom: 0;
-                position: absolute;
-            }
-
-            .p-sub-menu:hover::after {
-                width: 100%;
-                transition: width .3s, height .3s;
-                height: 3px;
-            }
-
-
-
-        @include media-breakpoint-down(md){
+        @include media-breakpoint-down(md) {
             // width: 0px;
             width: 100%;
             max-width: 0px;
@@ -90,14 +86,15 @@
         }
     }
 }
-@include media-breakpoint-down(md){
-    .project-menu.in{
+@include media-breakpoint-down(md) {
+    .project-menu.in {
         // width: 14rem;
         max-width: 14rem;
         transition: 0.3s;
         white-space: nowrap;
+        overflow: auto;
 
-        a{
+        a {
             display: block !important;
         }
 
@@ -110,110 +107,107 @@
     }
 }
 
-.project-left{
+.project-left {
     margin-right: 270px;
 
-    .p-client-msg{
-        button{
-
-            &:hover{
-                background-color: #00E073 !important;
-                border: 1px solid #00E073 !important;
+    .p-client-msg {
+        button {
+            &:hover {
+                background-color: #00e073 !important;
+                border: 1px solid #00e073 !important;
             }
         }
     }
 }
 
-.project-right{
+.project-right {
     max-width: 270px;
     width: 270px;
     height: calc(100vh - 107px);
     position: fixed;
     right: 0;
 
-    @include media-breakpoint-down(md){
+    @include media-breakpoint-down(md) {
         position: relative;
         width: 100%;
         max-width: 100%;
         height: auto;
 
-        .bg-white{
+        .bg-white {
             border-radius: 4px;
         }
     }
 
-    .p-activity-heading{
-        span{
+    .p-activity-heading {
+        span {
             width: 35px;
             height: 35px;
             background-color: $additional_grey;
 
-            &:hover{
+            &:hover {
                 background-color: $grey;
             }
         }
     }
-    .p-activity-detail.cal-info{
+    .p-activity-detail.cal-info {
         height: calc(100vh - 175px);
         overflow-y: auto !important;
 
-        @include media-breakpoint-down(md){
+        @include media-breakpoint-down(md) {
             height: auto !important;
         }
-        @include media-breakpoint-down(sm){
+        @include media-breakpoint-down(sm) {
             height: calc(100vh - 175px) !important;
         }
     }
 }
 
-.cal-info{
+.cal-info {
+    .card-header {
+        height: 45px;
+        width: 37px;
+        border: 1px solid #616e80 !important;
 
-        .card-header{
-            height: 45px;
-            width: 37px;
-            border: 1px solid #616E80 !important;
-
-            span{
-                display: block;
-                text-align: center;
-                line-height: 17px;
-            }
-
-            span:nth-child(1){
-                border-bottom: 1px solid #616E80 !important;
-            }
+        span {
+            display: block;
+            text-align: center;
+            line-height: 17px;
         }
 
-        @include media-breakpoint-down(md){
-            .card{
-                width: 50%;
-                float: left;
-            }
+        span:nth-child(1) {
+            border-bottom: 1px solid #616e80 !important;
         }
-        @include media-breakpoint-down(sm){
-            .card{
-                width: 100%;
-                float: none;
-            }
+    }
+
+    @include media-breakpoint-down(md) {
+        .card {
+            width: 50%;
+            float: left;
         }
+    }
+    @include media-breakpoint-down(sm) {
+        .card {
+            width: 100%;
+            float: none;
+        }
+    }
 }
 
-@include media-breakpoint-down(md){
-    .project-header{
+@include media-breakpoint-down(md) {
+    .project-header {
         z-index: 0;
         position: initial;
     }
 }
 
-.more-projects{
+.more-projects {
     padding: 13px 15px;
     display: block;
 
-    a{
+    a {
         border-bottom: 1px solid $grey;
     }
 }
-
 
 // defaults
 
@@ -228,9 +222,9 @@
 // }
 
 button {
-  cursor: pointer;
-  border: 0;
-  padding: 0;
+    cursor: pointer;
+    border: 0;
+    padding: 0;
 }
 
 // tabs
@@ -255,23 +249,23 @@ button {
         display: flex;
 
         > li {
-        flex-grow: 1;
-        // background-color: $color-bg;
-    }
+            flex-grow: 1;
+            // background-color: $color-bg;
+        }
 
-    .-more {
-    //   background-color: $color-bg--dark;
+        .-more {
+            //   background-color: $color-bg--dark;
 
-      > button span {
-        display: inline-block;
-        transition: transform 0.2s;
-      }
-    }
+            > button span {
+                display: inline-block;
+                transition: transform 0.2s;
+            }
+        }
     }
 
     &.--show-secondary .-primary {
         .-more > button span {
-        transform: rotate(180deg);
+            transform: rotate(180deg);
         }
     }
 
@@ -293,12 +287,12 @@ button {
         // }
     }
 
-    .-secondary.in{
+    .-secondary.in {
         display: block;
         width: 100%;
         height: 100%;
 
-        li{
+        li {
             border-bottom: 1px solid $grey;
         }
     }
@@ -307,10 +301,10 @@ button {
         display: block;
         z-index: 9;
 
-        li{
+        li {
             border-bottom: 1px solid $grey;
 
-            span{
+            span {
                 text-align: left;
             }
         }
@@ -320,12 +314,12 @@ button {
 // keyframes
 
 @keyframes nav-secondary {
-  0% {
-    opacity: 0;
-    transform: translateY(-1em);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    0% {
+        opacity: 0;
+        transform: translateY(-1em);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
