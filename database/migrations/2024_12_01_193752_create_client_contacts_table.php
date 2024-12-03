@@ -11,10 +11,9 @@ class CreateClientContactsTable extends Migration
      *
      * @return void
      */
-
     public function up()
     {
-        if (!Schema::hasTable('client_contacts')) {
+        if (! Schema::hasTable('client_contacts')) {
             Schema::create('client_contacts', function (Blueprint $table) {
                 $table->increments('id');
                 $table->unsignedInteger('company_id')->nullable();
