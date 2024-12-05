@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Reply;
 use App\Http\Requests\ProjectFinancesRequest;
 use App\Models\ProjectFinance;
 use App\Models\ProjectFinances\LicensesAndPermits;
@@ -495,7 +496,10 @@ class ProjectFinancesController extends AccountBaseController
     public function storeLicenses(ProjectFinancesRequest $request)
     {
         $validatedData = $request->validated();
+        $redirectUrl = route('projectfinances.index').'?tab=licenses';
         // Process licenses form data
         $licenses = LicensesAndPermits::create($validatedData);
+
+        return Reply::successWithData(__('messages.recordSaved'), ['redirectUrl' => $redirectUrl]);
     }
 }
