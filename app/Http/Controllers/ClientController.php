@@ -154,10 +154,6 @@ class ClientController extends AccountBaseController
         //$data = $request->except('contacts');
         $contacts = array_collapse($request->only('contacts')) ?? 'null';
 
-        // \Illuminate\Support\Facades\Log::info($contacts);
-
-        // dd($contacts);
-
         unset($data['country']);
         $data['password'] = bcrypt($request->password);
         $data['country_id'] = $request->country;

@@ -9,13 +9,13 @@ class LicensesAndPermits extends Model
 {
     use HasFactory;
 
-    protected $table = 'licenses';
+    protected $table = 'project_finances_licenses';
 
     protected $fillable = [
         'who',
         'cfe',
-        'condominiumRegime',
-        'licenseAndAlignment',
+        'condominium_regime',
+        'license_and_alignment',
         'rooms',
         'mobility',
     ];

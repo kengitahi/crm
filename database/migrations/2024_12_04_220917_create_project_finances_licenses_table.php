@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('licenses', function (Blueprint $table) {
+        Schema::create('project_finances_licenses', function (Blueprint $table) {
             $table->id();
             $table->decimal('who', 16, 2)->nullable();
             $table->decimal('cfe', 16, 2)->nullable();
-            $table->decimal('condominiumRegime', 16, 2)->nullable();
-            $table->decimal('licenseAndAlignment', 16, 2)->nullable();
+            $table->decimal('condominium_regime', 16, 2)->nullable();
+            $table->decimal('license_and_alignment', 16, 2)->nullable();
             $table->decimal('rooms', 16, 2)->nullable();
             $table->decimal('mobility', 16, 2)->nullable();
             $table->timestamps();

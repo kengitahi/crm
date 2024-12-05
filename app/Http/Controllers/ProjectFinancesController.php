@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProjectFinancesRequest;
 use App\Models\ProjectFinance;
+use App\Models\ProjectFinances\LicensesAndPermits;
 use Illuminate\Http\Request;
 
 class ProjectFinancesController extends AccountBaseController
@@ -67,10 +69,7 @@ class ProjectFinancesController extends AccountBaseController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
-    }
+    public function store(Request $request) {}
 
     /**
      * Display the specified resource.
@@ -489,5 +488,14 @@ class ProjectFinancesController extends AccountBaseController
         }
 
         return view('project-finances.index', $this->data);
+    }
+
+    //Requests and saving data
+
+    public function storeLicenses(ProjectFinancesRequest $request)
+    {
+        $validatedData = $request->validated();
+        // Process licenses form data
+        $licenses = LicensesAndPermits::create($validatedData);
     }
 }

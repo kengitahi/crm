@@ -323,6 +323,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'account'], function () {
             Route::get('additional-osts', 'additionalCosts')->name('additionalCosts');
             Route::get('other-costs', 'otherCosts')->name('otherCosts');
             Route::get('operation', 'operation')->name('operation');
+
+            //Stores
+            Route::post('store-licenses', 'storeLicenses')->name('storeLicenses');
         }
     );
 
