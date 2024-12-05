@@ -186,4 +186,8 @@ return [
         'reason' => 'e.g. Not within budget',
     ],
     'twitterId' => 'e.g. 182180xxxxxx1843842',
+
+    'projects' => [
+        'amount' => 'e.g. 10000',
+    ],
 ];

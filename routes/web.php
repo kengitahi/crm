@@ -292,7 +292,39 @@ Route::group(['middleware' => 'auth', 'prefix' => 'account'], function () {
     );
 
     //Project Finances
-    Route::resource('projectfinances', ProjectFinancesController::class);
+    Route::group(
+        [
+            'prefix' => 'project-finances',
+            'as' => 'projectfinances.',
+            'controller' => ProjectFinancesController::class,
+        ],
+        function () {
+            Route::get('/', 'index')->name('index');
+
+            //Tabs
+            Route::get('licenses', 'licenses')->name('licenses');
+            Route::get('urbanization', 'urbanization')->name('urbanization');
+            Route::get('building', 'building')->name('building');
+            Route::get('concrete', 'concrete')->name('concrete');
+            Route::get('steel, ', 'steel')->name('steel');
+            Route::get('masonry', 'masonry')->name('masonry');
+            Route::get('materials', 'materials')->name('materials');
+            Route::get('finishes', 'finishes')->name('finishes');
+            Route::get('plumbing', 'urbanization')->name('urbanization');
+            Route::get('wiring', 'plumbing')->name('plumbing');
+            Route::get('kitchens', 'kitchens')->name('kitchens');
+            Route::get('capentry', 'capentry')->name('capentry');
+            Route::get('metalworking', 'metalworking')->name('metalworking');
+            Route::get('painting', 'painting')->name('painting');
+            Route::get('aircon', 'aircon')->name('aircon');
+            Route::get('waterproofing', 'waterproofing')->name('waterproofing');
+            Route::get('gardening', 'gardening')->name('gardening');
+            Route::get('walls', 'walls')->name('walls');
+            Route::get('additional-osts', 'additionalCosts')->name('additionalCosts');
+            Route::get('other-costs', 'otherCosts')->name('otherCosts');
+            Route::get('operation', 'operation')->name('operation');
+        }
+    );
 
     Route::get('project-notes/ask-for-password/{id}', [ProjectNoteController::class, 'askForPassword'])->name('project_notes.ask_for_password');
     Route::post('project-notes/check-password', [ProjectNoteController::class, 'checkPassword'])->name('project_notes.check_password');

@@ -29,10 +29,6 @@
                     </li>
 
                     <li>
-                        <x-tab :href="route('projectfinances.index') . '?tab=building'" :text="__('modules.projects.tabs.building')" ajax="false" class="building" />
-                    </li>
-
-                    <li>
                         <x-tab :href="route('projectfinances.index') . '?tab=concrete'" :text="__('modules.projects.tabs.concrete')" ajax="false" class="concrete" />
                     </li>
 
@@ -151,9 +147,9 @@
     </script>
     <script>
         /*******************************************************
-                            
-                            More btn in projects menu Start
-                                                        *******************************************************/
+                                
+                                More btn in projects menu Start
+                                                            *******************************************************/
 
         const container = document.querySelector('.tabs');
         const primary = container.querySelector('.-primary');

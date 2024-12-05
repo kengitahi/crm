@@ -43,7 +43,7 @@ class ClientContactController extends AccountBaseController
     public function store(StoreContact $request)
     {
         $data = $request->all();
-        \Illuminate\Support\Facades\Log::info($data);
+
         $contact = ClientContact::create(
             [
                 'company_id' => User::where('id', $data['user_id'])->first()->company_id,

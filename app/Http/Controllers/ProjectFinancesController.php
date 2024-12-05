@@ -23,8 +23,7 @@ class ProjectFinancesController extends AccountBaseController
      */
     public function index()
     {
-
-        $this->view = 'project-finances.ajax.show';
+        $this->view = 'project-finances.preliminary';
         $tab = request('tab');
         $this->activeTab = $tab ?: 'preliminary';
 
@@ -54,10 +53,7 @@ class ProjectFinancesController extends AccountBaseController
         };
 
         //Return view for now
-        return view(
-            'project-finances.index',
-            $this->data
-        );
+        return view('project-finances.index', $this->data);
     }
 
     /**
@@ -81,47 +77,9 @@ class ProjectFinancesController extends AccountBaseController
      */
     public function show()
     {
-        $this->viewPermission = user()->user_role('admin');
+        $this->view = 'project-finances.index';
 
-        abort_403(! user()->user_role('admin'));
-
-        $this->view = 'projectfinances.index';
-
-        $tab = request('tab');
-
-        return match ($tab) {
-            'licenses' => $this->licenses(),
-            'urbanization' => $this->urbanization(),
-            'building' => $this->building(),
-            'concrete' => $this->concrete(),
-            'steel' => $this->steel(),
-            'masonry' => $this->masonry(),
-            'materials' => $this->materials(),
-            'finishes' => $this->finishes(),
-            'plumbing' => $this->plumbing(),
-            'wiring' => $this->wiring(),
-            'kitchens' => $this->kitchens(),
-            'capentry' => $this->capentry(),
-            'metalworking' => $this->metalworking(),
-            'painting' => $this->painting(),
-            'aircon' => $this->aircon(),
-            'waterproofing' => $this->waterproofing(),
-            'gardening' => $this->gardening(),
-            'walls' => $this->walls(),
-            'additionalCosts' => $this->additionalCosts(),
-            'otherCosts' => $this->otherCosts(),
-            'operation' => $this->operation(),
-            default => $this->preliminary(),
-        };
-
-        if (request()->ajax()) {
-            return $this->returnAjax($this->view);
-        }
-
-        $this->activeTab = $tab ?: 'preliminary';
-
-        return view('projectfinances.index', $this->data);
-
+        return view('project-finances.index', $this->data);
     }
 
     /**
@@ -148,6 +106,9 @@ class ProjectFinancesController extends AccountBaseController
         //
     }
 
+    //Main views will show tables
+    //Ajax views will show forms
+
     public function preliminary()
     {
         return view('project-finances.index', $this->data);
@@ -155,168 +116,377 @@ class ProjectFinancesController extends AccountBaseController
 
     public function licenses()
     {
-        $this->pageTitle = 'Project Finances - '.__('modules.projects.tabs.licenses');
-        $this->view = 'project-finances.ajax.licenses';
+        $this->pageTitle =
+            'Project Finances - '.__('modules.projects.tabs.licenses');
+        $this->view = 'project-finances.licenses';
+        $this->activeTab = 'licenses';
+
+        if (request()->ajax()) {
+            $this->pageTitle =
+                __('modules.projects.addNew').' '.__('modules.projects.tabs.licenses').' '.__('modules.projects.record');
+            $this->view = 'project-finances.ajax.licenses';
+
+            return $this->returnAjax($this->view);
+        }
 
         return view('project-finances.index', $this->data);
     }
 
     public function urbanization()
     {
-        $this->pageTitle = 'Project Finances - '.__('modules.projects.tabs.urbanization');
-        $this->view = 'project-finances.ajax.urbanization';
+        $this->pageTitle =
+            'Project Finances - '.__('modules.projects.tabs.urbanization');
+        $this->view = 'project-finances.urbanization';
+
+        if (request()->ajax()) {
+            $this->pageTitle =
+                __('modules.projects.addNew').' '.__('modules.projects.tabs.urbanization').' '.__('modules.projects.record');
+            $this->view = 'project-finances.ajax.licenses';
+            $this->view = 'project-finances.ajax.urbanization';
+
+            return $this->returnAjax($this->view);
+        }
 
         return view('project-finances.index', $this->data);
     }
 
     public function building()
     {
-        $this->pageTitle = 'Project Finances - '.__('modules.projects.tabs.building');
-        $this->view = 'project-finances.ajax.building';
+        $this->pageTitle =
+            'Project Finances - '.__('modules.projects.tabs.building');
+        $this->view = 'project-finances.building';
+
+        if (request()->ajax()) {
+            $this->pageTitle =
+                __('modules.projects.addNew').' '.__('modules.projects.tabs.building').' '.__('modules.projects.record');
+            $this->view = 'project-finances.ajax.licenses';
+            $this->view = 'project-finances.ajax.building';
+
+            return $this->returnAjax($this->view);
+        }
 
         return view('project-finances.index', $this->data);
     }
 
     public function concrete()
     {
-        $this->pageTitle = 'Project Finances - '.__('modules.projects.tabs.concrete');
-        $this->view = 'project-finances.ajax.concrete';
+        $this->pageTitle =
+            'Project Finances - '.__('modules.projects.tabs.concrete');
+        $this->view = 'project-finances.concrete';
+
+        if (request()->ajax()) {
+            $this->pageTitle =
+                __('modules.projects.addNew').' '.__('modules.projects.tabs.concrete').' '.__('modules.projects.record');
+            $this->view = 'project-finances.ajax.licenses';
+            $this->view = 'project-finances.ajax.concrete';
+
+            return $this->returnAjax($this->view);
+        }
 
         return view('project-finances.index', $this->data);
     }
 
     public function steel()
     {
-        $this->pageTitle = 'Project Finances - '.__('modules.projects.tabs.steel');
-        $this->view = 'project-finances.ajax.steel';
+        $this->pageTitle =
+            'Project Finances - '.__('modules.projects.tabs.steel');
+        $this->view = 'project-finances.steel';
+
+        if (request()->ajax()) {
+            $this->pageTitle =
+                __('modules.projects.addNew').' '.__('modules.projects.tabs.steel').' '.__('modules.projects.record');
+            $this->view = 'project-finances.ajax.licenses';
+            $this->view = 'project-finances.ajax.steel';
+
+            return $this->returnAjax($this->view);
+        }
 
         return view('project-finances.index', $this->data);
     }
 
     public function masonry()
     {
-        $this->pageTitle = 'Project Finances - '.__('modules.projects.tabs.masonry');
-        $this->view = 'project-finances.ajax.masonry';
+        $this->pageTitle =
+            'Project Finances - '.__('modules.projects.tabs.masonry');
+        $this->view = 'project-finances.masonry';
+
+        if (request()->ajax()) {
+            $this->pageTitle =
+                __('modules.projects.addNew').' '.__('modules.projects.tabs.masonry').' '.__('modules.projects.record');
+            $this->view = 'project-finances.ajax.licenses';
+            $this->view = 'project-finances.ajax.masonry';
+
+            return $this->returnAjax($this->view);
+        }
 
         return view('project-finances.index', $this->data);
     }
 
     public function materials()
     {
-        $this->pageTitle = 'Project Finances - '.__('modules.projects.tabs.materials');
-        $this->view = 'project-finances.ajax.materials';
+        $this->pageTitle =
+            'Project Finances - '.__('modules.projects.tabs.materials');
+        $this->view = 'project-finances.materials';
+
+        if (request()->ajax()) {
+            $this->pageTitle =
+                __('modules.projects.addNew').' '.__('modules.projects.tabs.materials').' '.__('modules.projects.record');
+            $this->view = 'project-finances.ajax.licenses';
+            $this->view = 'project-finances.ajax.materials';
+
+            return $this->returnAjax($this->view);
+        }
 
         return view('project-finances.index', $this->data);
     }
 
     public function finishes()
     {
-        $this->pageTitle = 'Project Finances - '.__('modules.projects.tabs.finishes');
-        $this->view = 'project-finances.ajax.finishes';
+        $this->pageTitle =
+            'Project Finances - '.__('modules.projects.tabs.finishes');
+        $this->view = 'project-finances.finishes';
+
+        if (request()->ajax()) {
+            $this->pageTitle =
+                __('modules.projects.addNew').' '.__('modules.projects.tabs.finishes').' '.__('modules.projects.record');
+            $this->view = 'project-finances.ajax.licenses';
+            $this->view = 'project-finances.ajax.finishes';
+
+            return $this->returnAjax($this->view);
+        }
 
         return view('project-finances.index', $this->data);
     }
 
     public function plumbing()
     {
-        $this->pageTitle = 'Project Finances - '.__('modules.projects.tabs.plumbing');
-        $this->view = 'project-finances.ajax.plumbing';
+        $this->pageTitle =
+            'Project Finances - '.__('modules.projects.tabs.plumbing');
+        $this->view = 'project-finances.plumbing';
+
+        if (request()->ajax()) {
+            $this->pageTitle =
+                __('modules.projects.addNew').' '.__('modules.projects.tabs.plumbing').' '.__('modules.projects.record');
+            $this->view = 'project-finances.ajax.licenses';
+            $this->view = 'project-finances.ajax.plumbing';
+
+            return $this->returnAjax($this->view);
+        }
 
         return view('project-finances.index', $this->data);
     }
 
     public function wiring()
     {
-        $this->pageTitle = 'Project Finances - '.__('modules.projects.tabs.wiring');
-        $this->view = 'project-finances.ajax.wiring';
+        $this->pageTitle =
+            'Project Finances - '.__('modules.projects.tabs.wiring');
+        $this->view = 'project-finances.wiring';
+
+        if (request()->ajax()) {
+            $this->pageTitle =
+                __('modules.projects.addNew').' '.__('modules.projects.tabs.wiring').' '.__('modules.projects.record');
+            $this->view = 'project-finances.ajax.licenses';
+            $this->view = 'project-finances.ajax.wiring';
+
+            return $this->returnAjax($this->view);
+        }
 
         return view('project-finances.index', $this->data);
     }
 
     public function kitchens()
     {
-        $this->pageTitle = 'Project Finances - '.__('modules.projects.tabs.kitchens');
-        $this->view = 'project-finances.ajax.kitchens';
+        $this->pageTitle =
+            'Project Finances - '.__('modules.projects.tabs.kitchens');
+        $this->view = 'project-finances.kitchens';
+
+        if (request()->ajax()) {
+            $this->pageTitle =
+                __('modules.projects.addNew').' '.__('modules.projects.tabs.kitchens').' '.__('modules.projects.record');
+            $this->view = 'project-finances.ajax.licenses';
+            $this->view = 'project-finances.ajax.kitchens';
+
+            return $this->returnAjax($this->view);
+        }
 
         return view('project-finances.index', $this->data);
     }
 
     public function capentry()
     {
-        $this->pageTitle = 'Project Finances - '.__('modules.projects.tabs.capentry');
-        $this->view = 'project-finances.ajax.capentry';
+        $this->pageTitle =
+            'Project Finances - '.__('modules.projects.tabs.capentry');
+        $this->view = 'project-finances.capentry';
+
+        if (request()->ajax()) {
+            $this->pageTitle =
+                __('modules.projects.addNew').' '.__('modules.projects.tabs.capentry').' '.__('modules.projects.record');
+            $this->view = 'project-finances.ajax.licenses';
+            $this->view = 'project-finances.ajax.capentry';
+
+            return $this->returnAjax($this->view);
+        }
 
         return view('project-finances.index', $this->data);
     }
 
     public function metalworking()
     {
-        $this->pageTitle = 'Project Finances - '.__('modules.projects.tabs.metalworking');
-        $this->view = 'project-finances.ajax.metalworking';
+        $this->pageTitle =
+            'Project Finances - '.__('modules.projects.tabs.metalworking');
+        $this->view = 'project-finances.metalworking';
+
+        if (request()->ajax()) {
+            $this->pageTitle =
+                __('modules.projects.addNew').' '.__('modules.projects.tabs.metalworking').' '.__('modules.projects.record');
+            $this->view = 'project-finances.ajax.licenses';
+            $this->view = 'project-finances.ajax.metalworking';
+
+            return $this->returnAjax($this->view);
+        }
 
         return view('project-finances.index', $this->data);
     }
 
     public function painting()
     {
-        $this->pageTitle = 'Project Finances - '.__('modules.projects.tabs.painting');
-        $this->view = 'project-finances.ajax.painting';
+        $this->pageTitle =
+            'Project Finances - '.__('modules.projects.tabs.painting');
+        $this->view = 'project-finances.painting';
+
+        if (request()->ajax()) {
+            $this->pageTitle =
+                __('modules.projects.addNew').' '.__('modules.projects.tabs.painting').' '.__('modules.projects.record');
+            $this->view = 'project-finances.ajax.licenses';
+            $this->view = 'project-finances.ajax.painting';
+
+            return $this->returnAjax($this->view);
+        }
 
         return view('project-finances.index', $this->data);
     }
 
     public function aircon()
     {
-        $this->pageTitle = 'Project Finances - '.__('modules.projects.tabs.aircon');
-        $this->view = 'project-finances.ajax.aircon';
+        $this->pageTitle =
+            'Project Finances - '.__('modules.projects.tabs.aircon');
+        $this->view = 'project-finances.aircon';
+
+        if (request()->ajax()) {
+            $this->pageTitle =
+                __('modules.projects.addNew').' '.__('modules.projects.tabs.aircon').' '.__('modules.projects.record');
+            $this->view = 'project-finances.ajax.aircon';
+
+            return $this->returnAjax($this->view);
+        }
 
         return view('project-finances.index', $this->data);
     }
 
     public function waterproofing()
     {
-        $this->pageTitle = 'Project Finances - '.__('modules.projects.tabs.waterproofing');
-        $this->view = 'project-finances.ajax.waterproofing';
+        $this->pageTitle =
+            'Project Finances - '.__('modules.projects.tabs.waterproofing');
+        $this->view = 'project-finances.waterproofing';
+
+        if (request()->ajax()) {
+            $this->pageTitle =
+                __('modules.projects.addNew').' '.__('modules.projects.tabs.waterproofing').' '.__('modules.projects.record');
+            $this->view = 'project-finances.ajax.licenses';
+            $this->view = 'project-finances.ajax.waterproofing';
+
+            return $this->returnAjax($this->view);
+        }
 
         return view('project-finances.index', $this->data);
     }
 
     public function gardening()
     {
-        $this->pageTitle = 'Project Finances - '.__('modules.projects.tabs.gardening');
-        $this->view = 'project-finances.ajax.gardening';
+        $this->pageTitle =
+            'Project Finances - '.__('modules.projects.tabs.gardening');
+        $this->view = 'project-finances.gardening';
+
+        if (request()->ajax()) {
+            $this->pageTitle =
+                __('modules.projects.addNew').' '.__('modules.projects.tabs.gardening').' '.__('modules.projects.record');
+            $this->view = 'project-finances.ajax.licenses';
+            $this->view = 'project-finances.ajax.gardening';
+
+            return $this->returnAjax($this->view);
+        }
 
         return view('project-finances.index', $this->data);
     }
 
     public function walls()
     {
-        $this->pageTitle = 'Project Finances - '.__('modules.projects.tabs.walls');
-        $this->view = 'project-finances.ajax.walls';
+        $this->pageTitle =
+            'Project Finances - '.__('modules.projects.tabs.walls');
+        $this->view = 'project-finances.walls';
+
+        if (request()->ajax()) {
+            $this->pageTitle =
+                __('modules.projects.addNew').' '.__('modules.projects.tabs.walls').' '.__('modules.projects.record');
+            $this->view = 'project-finances.ajax.licenses';
+            $this->view = 'project-finances.ajax.walls';
+
+            return $this->returnAjax($this->view);
+        }
 
         return view('project-finances.index', $this->data);
     }
 
     public function additionalCosts()
     {
-        $this->pageTitle = 'Project Finances - '.__('modules.projects.tabs.additionalCosts');
-        $this->view = 'project-finances.ajax.additionalCosts';
+        $this->pageTitle =
+            'Project Finances - '.__('modules.projects.tabs.additionalCosts');
+        $this->view = 'project-finances.additionalCosts';
+
+        if (request()->ajax()) {
+            $this->pageTitle =
+                __('modules.projects.addNew').' '.__('modules.projects.tabs.additionalCosts').' '.__('modules.projects.record');
+            $this->view = 'project-finances.ajax.licenses';
+            $this->view = 'project-finances.ajax.additionalCosts';
+
+            return $this->returnAjax($this->view);
+        }
 
         return view('project-finances.index', $this->data);
     }
 
     public function otherCosts()
     {
-        $this->pageTitle = 'Project Finances - '.__('modules.projects.tabs.otherCosts');
-        $this->view = 'project-finances.ajax.otherCosts';
+        $this->pageTitle =
+            'Project Finances - '.__('modules.projects.tabs.otherCosts');
+        $this->view = 'project-finances.otherCosts';
+
+        if (request()->ajax()) {
+            $this->pageTitle =
+                __('modules.projects.addNew').' '.__('modules.projects.tabs.otherCosts').' '.__('modules.projects.record');
+            $this->view = 'project-finances.ajax.licenses';
+            $this->view = 'project-finances.ajax.otherCosts';
+
+            return $this->returnAjax($this->view);
+        }
 
         return view('project-finances.index', $this->data);
     }
 
     public function operation()
     {
-        $this->pageTitle = 'Project Finances - '.__('modules.projects.tabs.operation');
-        $this->view = 'project-finances.ajax.operation';
+        $this->pageTitle =
+            'Project Finances - '.__('modules.projects.tabs.operation');
+        $this->view = 'project-finances.operation';
+
+        if (request()->ajax()) {
+            $this->pageTitle =
+                __('modules.projects.addNew').' '.__('modules.projects.tabs.operation').' '.__('modules.projects.record');
+            $this->view = 'project-finances.ajax.licenses';
+            $this->view = 'project-finances.ajax.operation';
+
+            return $this->returnAjax($this->view);
+        }
 
         return view('project-finances.index', $this->data);
     }
