@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('additional_costs', function (Blueprint $table) {
+        Schema::create('project_finances_concrete_structure', function (
+            Blueprint $table
+        ) {
             $table->id();
+            $table->decimal('concrete_suppliers', 16, 2)->nullable();
             $table->timestamps();
         });
     }
@@ -22,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('additional_osts');
+        Schema::dropIfExists('concrete');
     }
 };

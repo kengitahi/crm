@@ -75,7 +75,9 @@ class ProjectFinancesRequest extends FormRequest
 
     public function concreteRules(): array
     {
-        return [];
+        return [
+            'concrete_suppliers' => 'nullable|numeric',
+        ];
     }
 
     public function steelRules(): array
@@ -95,7 +97,20 @@ class ProjectFinancesRequest extends FormRequest
 
     public function finishesRules(): array
     {
-        return [];
+        return [
+            'wooden_stairs' => 'nullable|numeric',
+            'marble_and_granites' => 'nullable|numeric',
+            'wooden_stave' => 'nullable|numeric',
+            'wall_covering' => 'nullable|numeric',
+            'kitchens' => 'nullable|numeric',
+            'carpentry' => 'nullable|numeric',
+            'bathroom_furniture' => 'nullable|numeric',
+            'outdoor_areas' => 'nullable|numeric',
+            'marble_slabs' => 'nullable|numeric',
+            'floors' => 'nullable|numeric',
+            'finishes_labour' => 'nullable|numeric',
+            'finishes_suppliers' => 'nullable|numeric',
+        ];
     }
 
     public function plumbingRules(): array
@@ -156,7 +171,11 @@ class ProjectFinancesRequest extends FormRequest
 
     public function additionalCostsRules(): array
     {
-        return [];
+        return [
+            'imss' => 'numeric|nullable',
+            'infornavit' => 'numeric|nullable',
+            'accounting' => 'numeric|nullable',
+        ];
     }
 
     public function otherCostsRules(): array

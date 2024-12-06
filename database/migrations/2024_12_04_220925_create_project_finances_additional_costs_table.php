@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('concrete', function (Blueprint $table) {
+        Schema::create('project_finances_additional_costs', function (
+            Blueprint $table
+        ) {
             $table->id();
+            $table->decimal('imss', 16, 2)->nullable();
+            $table->decimal('infornavit', 16, 2)->nullable();
+            $table->decimal('accounting', 16, 2)->nullable();
             $table->timestamps();
         });
     }
@@ -22,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('concrete');
+        Schema::dropIfExists('additional_osts');
     }
 };
