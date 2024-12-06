@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('capentry', function (Blueprint $table) {
+        Schema::create('project_finances_capentry', function (
+            Blueprint $table
+        ) {
             $table->id();
+            $table->decimal('locks_and_fittings', 16, 2)->nullable();
+            $table->decimal('closet_bathroom_stairs', 16, 2)->nullable();
+            $table->decimal('capentry_suppliers', 16, 2)->nullable();
             $table->timestamps();
         });
     }

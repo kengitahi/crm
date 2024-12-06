@@ -35,7 +35,7 @@ class ProjectFinancesRequest extends FormRequest
             'plumbing' => $this->plumbingRules(),
             'wiring' => $this->wiringRules(),
             'kitchens' => $this->kitchensRules(),
-            'Capentry' => $this->capentryRules(),
+            'capentry' => $this->capentryRules(),
             'metalworking' => $this->metalworkingRules(),
             'painting' => $this->paintingRules(),
             'aircon' => $this->airconRules(),
@@ -49,7 +49,7 @@ class ProjectFinancesRequest extends FormRequest
         };
     }
 
-    public function LicensesRules(): array
+    public function licensesRules(): array
     {
         return [
             'who' => 'nullable|numeric',
@@ -61,19 +61,19 @@ class ProjectFinancesRequest extends FormRequest
         ];
     }
 
-    public function UrbanizationRules(): array
+    public function urbanizationRules(): array
     {
         return [
             'urbanization_suppliers' => 'nullable|numeric',
         ];
     }
 
-    public function BuildingRules(): array
+    public function buildingRules(): array
     {
         return [];
     }
 
-    public function ConcreteRules(): array
+    public function concreteRules(): array
     {
         return [];
     }
@@ -93,7 +93,7 @@ class ProjectFinancesRequest extends FormRequest
         return [];
     }
 
-    public function FinishesRules(): array
+    public function finishesRules(): array
     {
         return [];
     }
@@ -113,9 +113,13 @@ class ProjectFinancesRequest extends FormRequest
         return [];
     }
 
-    public function CapentryRules(): array
+    public function capentryRules(): array
     {
-        return [];
+        return [
+            'locks_and_fittings' => 'nullable|numeric',
+            'closet_bathroom_stairs' => 'nullable|numeric',
+            'capentry_suppliers' => 'nullable|numeric',
+        ];
     }
 
     public function metalworkingRules(): array
