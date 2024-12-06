@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('urbanization', function (Blueprint $table) {
+        Schema::create('project_finances_urbanization', function (Blueprint $table) {
             $table->id();
+            $table->decimal('urbanization_suppliers', 16, 2)->nullable();
             $table->timestamps();
         });
     }

@@ -310,7 +310,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'account'], function () {
             Route::get('masonry', 'masonry')->name('masonry');
             Route::get('materials', 'materials')->name('materials');
             Route::get('finishes', 'finishes')->name('finishes');
-            Route::get('plumbing', 'urbanization')->name('urbanization');
+            Route::get('plumbing', 'plumbing')->name('plumbing');
             Route::get('wiring', 'plumbing')->name('plumbing');
             Route::get('kitchens', 'kitchens')->name('kitchens');
             Route::get('capentry', 'capentry')->name('capentry');
@@ -320,12 +320,32 @@ Route::group(['middleware' => 'auth', 'prefix' => 'account'], function () {
             Route::get('waterproofing', 'waterproofing')->name('waterproofing');
             Route::get('gardening', 'gardening')->name('gardening');
             Route::get('walls', 'walls')->name('walls');
-            Route::get('additional-osts', 'additionalCosts')->name('additionalCosts');
+            Route::get('additional-costs', 'additionalCosts')->name('additionalCosts');
             Route::get('other-costs', 'otherCosts')->name('otherCosts');
             Route::get('operation', 'operation')->name('operation');
 
             //Stores
             Route::post('store-licenses', 'storeLicenses')->name('storeLicenses');
+            Route::post('store-urbanization', 'storeUrbanization')->name('storeUrbanization');
+            Route::post('store-building', 'storeBuilding')->name('storeBuilding');
+            Route::post('store-concrete', 'storeConcrete')->name('storeConcrete');
+            Route::post('store-steel', 'storeSteel')->name('storeSteel');
+            Route::post('store-masonry', 'storeMasonry')->name('storeMasonry');
+            Route::post('store-materials', 'storeMaterials')->name('storeMaterials');
+            Route::post('store-finishes', 'storeFinishes')->name('storeFinishes');
+            Route::post('store-plumbing', 'storePlumbing')->name('storePlumbing');
+            Route::post('store-wiring', 'storeWiring')->name('storeWiring');
+            Route::post('store-kitchens', 'storeKitchens')->name('storeKitchens');
+            Route::post('store-capentry', 'storeCapentry')->name('storeCapentry');
+            Route::post('store-metalworking', 'storeMetalworking')->name('storeMetalworking');
+            Route::post('store-painting', 'storePainting')->name('storePainting');
+            Route::post('store-aircon', 'storeAircon')->name('storeAircon');
+            Route::post('store-waterproofing', 'storeWaterproofing')->name('storeWaterproofing');
+            Route::post('store-gardening', 'storeGardening')->name('storeGardening');
+            Route::post('store-walls', 'storeWalls')->name('storeWalls');
+            Route::post('store-additional-costs', 'storeAdditionalCosts')->name('storeAdditionalCosts');
+            Route::post('store-other-costs', 'storeOtherCosts')->name('storeOtherCosts');
+            Route::post('store-operation', 'storeOperation')->name('storeOperation');
         }
     );
 

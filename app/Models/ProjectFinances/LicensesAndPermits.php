@@ -11,12 +11,14 @@ class LicensesAndPermits extends Model
 
     protected $table = 'project_finances_licenses';
 
-    protected $fillable = [
-        'who',
-        'cfe',
-        'condominium_regime',
-        'license_and_alignment',
-        'rooms',
-        'mobility',
-    ];
+    // protected $fillable = [
+    //     'who',
+    //     'cfe',
+    //     'condominium_regime',
+    //     'license_and_alignment',
+    //     'rooms',
+    //     'mobility',
+    // ];
+    //
+    protected $guarded = ['id'];
 }

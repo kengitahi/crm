@@ -73,7 +73,7 @@
                     </li>
 
                     <li>
-                        <x-tab :href="route('projectfinances.index') . '?tab=creditnotes'" :text="__('modules.projects.tabs.aircon')" ajax="false" class="creditnotes" />
+                        <x-tab :href="route('projectfinances.index') . '?tab=aircon'" :text="__('modules.projects.tabs.aircon')" ajax="false" class="aircon" />
                     </li>
 
                     <li>
@@ -147,7 +147,7 @@
     </script>
     <script>
         /*******************************************************
-                                
+
                                 More btn in projects menu Start
                                                             *******************************************************/
 
