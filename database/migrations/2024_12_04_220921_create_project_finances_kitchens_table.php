@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('gardening', function (Blueprint $table) {
+        Schema::create('project_finances_kitchens', function (Blueprint $table) {
             $table->id();
+            $table->decimal('furniture', 16, 2)->nullable();
+            $table->decimal('quartz_cover', 16, 2)->nullable();
+            $table->decimal('suppliers', 16, 2)->nullable();
+            $table->decimal('team', 16, 2)->nullable();
             $table->timestamps();
         });
     }
@@ -22,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('gardening');
+        Schema::dropIfExists('kitchens');
     }
 };

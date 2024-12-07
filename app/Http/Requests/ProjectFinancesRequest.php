@@ -39,7 +39,7 @@ class ProjectFinancesRequest extends FormRequest
             'metalworking' => $this->metalworkingRules(),
             'painting' => $this->paintingRules(),
             'aircon' => $this->airconRules(),
-            'waterproofing' => $this->waterprofingRules(),
+            'waterproofing' => $this->waterproofingRules(),
             'gardening' => $this->gardeningRules(),
             'walls' => $this->wallsRules(),
             'additionalCosts' => $this->additionalCostsRules(),
@@ -82,7 +82,9 @@ class ProjectFinancesRequest extends FormRequest
 
     public function steelRules(): array
     {
-        return [];
+        return [
+            'steel_suppliers' => 'numeric|nullable',
+        ];
     }
 
     public function masonryRules(): array
@@ -156,7 +158,12 @@ class ProjectFinancesRequest extends FormRequest
 
     public function kitchensRules(): array
     {
-        return [];
+        return [
+            'furniture' => 'numeric|nullable',
+            'quartz_cover' => 'numeric|nullable',
+            'suppliers' => 'numeric|nullable',
+            'team' => 'numeric|nullable',
+        ];
     }
 
     public function capentryRules(): array
@@ -170,12 +177,20 @@ class ProjectFinancesRequest extends FormRequest
 
     public function metalworkingRules(): array
     {
-        return [];
+        return [
+            'suppliers' => 'numeric|nullable',
+            'materials' => 'numeric|nullable',
+            'labour' => 'numeric|nullable',
+        ];
     }
 
     public function paintingRules(): array
     {
-        return [];
+        return [
+            'suppliers' => 'numeric|nullable',
+            'materials' => 'numeric|nullable',
+            'labour' => 'numeric|nullable',
+        ];
     }
 
     public function airconRules(): array
@@ -187,17 +202,24 @@ class ProjectFinancesRequest extends FormRequest
 
     public function waterproofingRules(): array
     {
-        return [];
+        return [
+            'waterproofing' => 'numeric|nullable',
+        ];
     }
 
     public function gardeningRules(): array
     {
-        return [];
+        return [
+            'plants_and_pots' => 'nullable|numeric',
+            'suppliers' => 'nullable|numeric',
+        ];
     }
 
     public function wallsRules(): array
     {
-        return [];
+        return [
+            'lightweight_prefabricated_walls' => 'nullable|numeric',
+        ];
     }
 
     public function additionalCostsRules(): array
@@ -211,11 +233,20 @@ class ProjectFinancesRequest extends FormRequest
 
     public function otherCostsRules(): array
     {
-        return [];
+        return [
+            'other_costs' => 'numeric|nullable',
+        ];
     }
 
     public function operationRules(): array
     {
-        return [];
+        return [
+            'administration' => 'nullable|numeric',
+            'accounting' => 'nullable|numeric',
+            'legal' => 'nullable|numeric',
+            'sales_suppliers' => 'nullable|numeric',
+            'advertising_suppliers' => 'nullable|numeric',
+            'tax_redial' => 'nullable|numeric',
+        ];
     }
 }

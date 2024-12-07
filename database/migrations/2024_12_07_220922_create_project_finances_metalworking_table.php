@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('steel', function (Blueprint $table) {
+        Schema::create('project_finances_metalworking', function (
+            Blueprint $table
+        ) {
             $table->id();
+            $table->decimal('suppliers', 16, 2)->nullable();
+            $table->decimal('materials', 16, 2)->nullable();
+            $table->decimal('labour', 16, 2)->nullable();
             $table->timestamps();
         });
     }
@@ -22,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('steel');
+        Schema::dropIfExists('metalworking');
     }
 };

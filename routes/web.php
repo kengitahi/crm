@@ -306,7 +306,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'account'], function () {
             Route::get('urbanization', 'urbanization')->name('urbanization');
             Route::get('building', 'building')->name('building');
             Route::get('concrete', 'concrete')->name('concrete');
-            Route::get('steel, ', 'steel')->name('steel');
+            Route::get('steel', 'steel')->name('steel');
             Route::get('masonry', 'masonry')->name('masonry');
             Route::get('materials', 'materials')->name('materials');
             Route::get('finishes', 'finishes')->name('finishes');
