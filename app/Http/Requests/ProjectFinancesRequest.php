@@ -132,12 +132,26 @@ class ProjectFinancesRequest extends FormRequest
 
     public function plumbingRules(): array
     {
-        return [];
+        return [
+            'labour' => 'nullable|numeric',
+            'materials' => 'nullable|numeric',
+            'hydropneumatic_system' => 'nullable|numeric',
+            'automated_sprinkler' => 'nullable|numeric',
+            'tank' => 'nullable|numeric',
+            'basic_material' => 'nullable|numeric',
+            'heater' => 'nullable|numeric',
+            'bathroom' => 'nullable|numeric',
+        ];
     }
 
     public function wiringRules(): array
     {
-        return [];
+        return [
+            'labour' => 'nullable|numeric',
+            'lighting_fixtures_and_accessories' => 'nullable|numeric',
+            'intercommunication' => 'nullable|numeric',
+            'various_materials' => 'nullable|numeric',
+        ];
     }
 
     public function kitchensRules(): array

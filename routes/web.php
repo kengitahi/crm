@@ -311,7 +311,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'account'], function () {
             Route::get('materials', 'materials')->name('materials');
             Route::get('finishes', 'finishes')->name('finishes');
             Route::get('plumbing', 'plumbing')->name('plumbing');
-            Route::get('wiring', 'plumbing')->name('plumbing');
+            Route::get('wiring', 'wiring')->name('wiring');
             Route::get('kitchens', 'kitchens')->name('kitchens');
             Route::get('capentry', 'capentry')->name('capentry');
             Route::get('metalworking', 'metalworking')->name('metalworking');

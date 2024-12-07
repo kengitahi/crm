@@ -11,8 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('wiring', function (Blueprint $table) {
+        Schema::create('project_finances_wiring', function (Blueprint $table) {
             $table->id();
+            $table->decimal('labour', 16, 2)->nullable();
+            $table
+                ->decimal('lighting_fixtures_and_accessories', 16, 2)
+                ->nullable();
+            $table->decimal('intercommunication', 16, 2)->nullable();
+            $table->decimal('various_materials', 16, 2)->nullable();
             $table->timestamps();
         });
     }
