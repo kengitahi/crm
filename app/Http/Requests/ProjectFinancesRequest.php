@@ -92,7 +92,17 @@ class ProjectFinancesRequest extends FormRequest
 
     public function materialsRules(): array
     {
-        return [];
+        return [
+            'rod_wire_armex' => 'nullable|numeric',
+            'prefabricated_systems' => 'nullable|numeric',
+            'cement_mortar' => 'nullable|numeric',
+            'premixed_concrete' => 'nullable|numeric',
+            'block_and_brick' => 'nullable|numeric',
+            'basic_material' => 'nullable|numeric',
+            'sand_and_material_freight' => 'nullable|numeric',
+            'waterproofing' => 'nullable|numeric',
+            'miscellaneous' => 'nullable|numeric',
+        ];
     }
 
     public function finishesRules(): array
