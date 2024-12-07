@@ -12,7 +12,7 @@ use App\Models\ProjectFinances\Capentry;
 use App\Models\ProjectFinances\ConcreteStructure;
 use App\Models\ProjectFinances\Finishes;
 use App\Models\ProjectFinances\Gardening;
-use App\Models\ProjectFinances\GrayMassonryWork;
+use App\Models\ProjectFinances\GrayMasonryWork;
 use App\Models\ProjectFinances\Kitchens;
 use App\Models\ProjectFinances\LicensesAndPermits;
 use App\Models\ProjectFinances\Materials;
@@ -663,7 +663,7 @@ class ProjectFinancesController extends AccountBaseController
         $validatedData = $request->validated();
         $redirectUrl = route('projectfinances.index').'?tab=masonry';
 
-        GrayMassonryWork::create($validatedData);
+        GrayMasonryWork::create($validatedData);
 
         return Reply::successWithData(__('messages.recordSaved'), [
             'redirectUrl' => $redirectUrl,

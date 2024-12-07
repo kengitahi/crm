@@ -87,7 +87,14 @@ class ProjectFinancesRequest extends FormRequest
 
     public function masonryRules(): array
     {
-        return [];
+        return [
+            'masonry_suppliers' => 'nullable|numeric',
+            'masonry_labour' => 'numeric|nullable',
+            'supervision' => 'numeric|nullable',
+            'several' => 'numeric|nullable',
+            'scaffolding' => 'numeric|nullable',
+            'mixer_and_equipment' => 'numeric|nullable',
+        ];
     }
 
     public function materialsRules(): array
