@@ -48,18 +48,18 @@ class AdditionalCostsDataTable extends DataTable
      */
     public function html(): HtmlBuilder
     {
-        return $this->builder()
-            ->setTableId('additionalcosts-table')
-            ->columns($this->getColumns())
-            ->orderBy(1)
-            ->selectStyleSingle()
-            ->buttons([
-                Button::make('create'),
-                Button::make('export'),
-                Button::make('print'),
-                Button::make('reset'),
-                Button::make('reload'),
-            ]);
+        // return $this->builder()
+        //     ->setTableId('additionalcosts-table')
+        //     ->columns($this->getColumns())
+        //     ->orderBy(1)
+        //     ->selectStyleSingle()
+        //     ->buttons([
+        //         Button::make('create'),
+        //         Button::make('export'),
+        //         Button::make('print'),
+        //         Button::make('reset'),
+        //         Button::make('reload'),
+        //     ]);
     }
 
     /**
