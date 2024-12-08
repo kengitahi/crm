@@ -20,15 +20,6 @@
                         </div>
                     </div>
                 </div>
-                
-                
-                'administration' => 'administration',
-                // Accounting
-                'legal' => 'legal',
-                'sales' => 'sales',
-                //Suppliers
-                'advertising' => 'advertising',
-                'taxRedial' => 'tax_redial',
 
                 <h4 class="f-21 font-weight-normal border-top-grey mb-0 p-20">
                     Add button for adding more fields

@@ -1,3 +1,7 @@
+@php
+    dd($dataTable);
+@endphp
+
 @section('content')
     <!-- CONTENT WRAPPER START -->
     <div class="content-wrapper">
@@ -48,10 +52,14 @@
         <!-- Task Box Start -->
         <div class="d-flex flex-column w-tables table-responsive mt-3 rounded bg-white">
 
-            {{-- {!! $dataTable->table(['class' => 'table table-hover border-0 w-100']) !!} --}}
+            {!! $dataTable->table(['class' => 'table table-hover border-0 w-100']) !!}
 
         </div>
         <!-- Task Box End -->
     </div>
     <!-- CONTENT WRAPPER END -->
 @endsection
+
+@push('scripts')
+    @include('sections.datatable_js')
+@endpush

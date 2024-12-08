@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\AdditionalCostsDataTable;
 use App\Helper\Reply;
 use App\Http\Requests\ProjectFinancesRequest;
 use App\Models\ProjectFinance;
@@ -69,7 +70,7 @@ class ProjectFinancesController extends AccountBaseController
             'waterproofing' => $this->waterproofing(),
             'gardening' => $this->gardening(),
             'walls' => $this->walls(),
-            'additionalCosts' => $this->additionalCosts(),
+            'additionalCosts' => $this->additionalCosts(new AdditionalCostsDataTable),
             'otherCosts' => $this->otherCosts(),
             'operation' => $this->operation(),
             default => $this->preliminary(),
@@ -132,6 +133,41 @@ class ProjectFinancesController extends AccountBaseController
     public function preliminary()
     {
         return view('project-finances.index', $this->data);
+    }
+
+    public function additionalCosts(AdditionalCostsDataTable $dataTable)
+    {
+        $this->pageTitle =
+            'Project Finances - '.__('modules.projects.tabs.additionalCosts');
+        $this->view = 'project-finances.additionalCosts';
+        $this->activeTab = 'additionalCosts';
+
+        if (request()->ajax()) {
+            $this->pageTitle =
+                __('modules.projects.addNew').
+                ' '.
+                __('modules.projects.tabs.additionalCosts').
+                ' '.
+                __('modules.projects.record');
+            $this->view = 'project-finances.ajax.additionalCosts';
+
+            return $this->returnAjax($this->view);
+        }
+
+        // return view('project-finances.index', $this->data);
+        return $dataTable->render('project-finances.index', $this->data);
+    }
+
+    public function storeAdditionalCosts(ProjectFinancesRequest $request)
+    {
+        $validatedData = $request->validated();
+        $redirectUrl = route('projectfinances.index').'?tab=additionalCosts';
+
+        AdditionalCosts::create($validatedData);
+
+        return Reply::successWithData(__('messages.recordSaved'), [
+            'redirectUrl' => $redirectUrl,
+        ]);
     }
 
     public function licenses()
@@ -530,28 +566,6 @@ class ProjectFinancesController extends AccountBaseController
         return view('project-finances.index', $this->data);
     }
 
-    public function additionalCosts()
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.additionalCosts');
-        $this->view = 'project-finances.additionalCosts';
-        $this->activeTab = 'additionalCosts';
-
-        if (request()->ajax()) {
-            $this->pageTitle =
-                __('modules.projects.addNew').
-                ' '.
-                __('modules.projects.tabs.additionalCosts').
-                ' '.
-                __('modules.projects.record');
-            $this->view = 'project-finances.ajax.additionalCosts';
-
-            return $this->returnAjax($this->view);
-        }
-
-        return view('project-finances.index', $this->data);
-    }
-
     public function otherCosts()
     {
         $this->pageTitle =
@@ -808,18 +822,6 @@ class ProjectFinancesController extends AccountBaseController
         $redirectUrl = route('projectfinances.index').'?tab=walls';
 
         Walls::create($validatedData);
-
-        return Reply::successWithData(__('messages.recordSaved'), [
-            'redirectUrl' => $redirectUrl,
-        ]);
-    }
-
-    public function storeAdditionalCosts(ProjectFinancesRequest $request)
-    {
-        $validatedData = $request->validated();
-        $redirectUrl = route('projectfinances.index').'?tab=additionalCosts';
-
-        AdditionalCosts::create($validatedData);
 
         return Reply::successWithData(__('messages.recordSaved'), [
             'redirectUrl' => $redirectUrl,

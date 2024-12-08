@@ -40,7 +40,8 @@
                 <x-forms.custom-field :fields="$fields"></x-forms.custom-field>
 
                 <x-form-actions>
-                    <x-forms.button-primary class="mr-3" icon="check" id="save-additional-costs-form">@lang('app.save')
+                    <x-forms.button-primary class="mr-3" icon="check"
+                        id="save-additional-costs-form">@lang('app.save')
                     </x-forms.button-primary>
                     <x-forms.button-cancel :link="route('projectfinances.index') . '?tab=additional-costs'" class="border-0">@lang('app.cancel')
                     </x-forms.button-cancel>
