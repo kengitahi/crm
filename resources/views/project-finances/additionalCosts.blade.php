@@ -1,7 +1,3 @@
-@php
-    dd($dataTable);
-@endphp
-
 @section('content')
     <!-- CONTENT WRAPPER START -->
     <div class="content-wrapper">
@@ -20,30 +16,6 @@
                     @lang('app.importExcel')
                 </x-forms.link-secondary>
 
-            </div>
-
-            <x-datatable.actions>
-                <div class="select-status mr-3">
-                    <select class="form-control select-picker" disabled id="quick-action-type" name="action_type">
-                        <option value="">@lang('app.selectAction')</option>
-                        <option value="change-status">@lang('modules.tasks.changeStatus')</option>
-                        <option value="delete">@lang('app.delete')</option>
-                    </select>
-                </div>
-                <div class="select-status d-none quick-action-field mr-3" id="change-status-action">
-                    <select class="form-control select-picker" name="status">
-                        <option value="deactive">@lang('app.inactive')</option>
-                        <option value="active">@lang('app.active')</option>
-                    </select>
-                </div>
-            </x-datatable.actions>
-
-            <div class="btn-group mt-lg-0 mt-md-0 ml-lg-3 ml-md-3 ml-0 mt-2" role="group">
-                <a class="btn btn-secondary f-14 btn-active show-clients" data-original-title="@lang('app.menu.clients')"
-                    data-toggle="tooltip" href="{{ route('clients.index') }}"><i class="side-icon bi bi-list-ul"></i></a>
-
-                <a class="btn btn-secondary f-14 show-unverified" data-original-title="@lang('modules.dashboard.verificationPending')"
-                    data-toggle="tooltip" href="javascript:;"><i class="side-icon bi bi-person-x"></i></a>
             </div>
 
         </div>
