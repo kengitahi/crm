@@ -300,6 +300,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'account'], function () {
         ],
         function () {
             Route::get('/', 'index')->name('index');
+            Route::delete('/delete', 'destroy')->name('destroy');
 
             //Tabs
             Route::get('licenses', 'licenses')->name('licenses');
@@ -346,6 +347,29 @@ Route::group(['middleware' => 'auth', 'prefix' => 'account'], function () {
             Route::post('store-additional-costs', 'storeAdditionalCosts')->name('storeAdditionalCosts');
             Route::post('store-other-costs', 'storeOtherCosts')->name('storeOtherCosts');
             Route::post('store-operation', 'storeOperation')->name('storeOperation');
+
+            //Forms
+            // Route::get('licenses', 'licenses')->name('licenses');
+            // Route::get('urbanization', 'urbanization')->name('urbanization');
+            // Route::get('building', 'building')->name('building');
+            // Route::get('concrete', 'concrete')->name('concrete');
+            // Route::get('steel', 'steel')->name('steel');
+            // Route::get('masonry', 'masonry')->name('masonry');
+            // Route::get('materials', 'materials')->name('materials');
+            // Route::get('finishes', 'finishes')->name('finishes');
+            // Route::get('plumbing', 'plumbing')->name('plumbing');
+            // Route::get('wiring', 'wiring')->name('wiring');
+            // Route::get('kitchens', 'kitchens')->name('kitchens');
+            // Route::get('capentry', 'capentry')->name('capentry');
+            // Route::get('metalworking', 'metalworking')->name('metalworking');
+            // Route::get('painting', 'painting')->name('painting');
+            // Route::get('aircon', 'aircon')->name('aircon');
+            // Route::get('waterproofing', 'waterproofing')->name('waterproofing');
+            // Route::get('gardening', 'gardening')->name('gardening');
+            // Route::get('walls', 'walls')->name('walls');
+            Route::get('additional-costs-form', 'additionalCostsForm')->name('additionalCostsForm');
+            // Route::get('other-costs', 'otherCosts')->name('otherCosts');
+            // Route::get('operation', 'operation')->name('operation');
         }
     );
 

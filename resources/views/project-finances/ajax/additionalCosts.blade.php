@@ -12,19 +12,19 @@
                         <div class="row">
                             <input name="form_type" type="hidden" value="additionalCosts">
                             <div class="col-md-4">
-                                <x-forms.number :fieldLabel="__('modules.projects.formLabels.imss')" :fieldPlaceholder="__('placeholders.projects.amount')" :fieldValue="$lead->client_name ?? ''"
+                                <x-forms.number :fieldLabel="__('modules.projects.formLabels.imss')" :fieldPlaceholder="__('placeholders.projects.amount')" :fieldValue="$costToEdit->imss ?? ''"
                                     fieldId="{{ __('modules.projects.formFields.imss') }}"
                                     fieldName="{{ __('modules.projects.formFields.imss') }}">
                                 </x-forms.number>
                             </div>
                             <div class="col-md-4">
-                                <x-forms.number :fieldLabel="__('modules.projects.formLabels.infornavit')" :fieldPlaceholder="__('placeholders.projects.amount')" :fieldValue="$lead->client_name ?? ''"
+                                <x-forms.number :fieldLabel="__('modules.projects.formLabels.infornavit')" :fieldPlaceholder="__('placeholders.projects.amount')" :fieldValue="$costToEdit->infornavit ?? ''"
                                     fieldId="{{ __('modules.projects.formFields.infornavit') }}"
                                     fieldName="{{ __('modules.projects.formFields.infornavit') }}">
                                 </x-forms.number>
                             </div>
                             <div class="col-md-4">
-                                <x-forms.number :fieldLabel="__('modules.projects.formLabels.accounting')" :fieldPlaceholder="__('placeholders.projects.amount')" :fieldValue="$lead->client_name ?? ''"
+                                <x-forms.number :fieldLabel="__('modules.projects.formLabels.accounting')" :fieldPlaceholder="__('placeholders.projects.amount')" :fieldValue="$costToEdit->accounting ?? ''"
                                     fieldId="{{ __('modules.projects.formFields.accounting') }}"
                                     fieldName="{{ __('modules.projects.formFields.accounting') }}">
                                 </x-forms.number>

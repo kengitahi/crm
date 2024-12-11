@@ -6,7 +6,7 @@
 
             <div class="flex-grow-1 align-items-center" id="table-actions">
 
-                <x-forms.link-primary :link="route('projectfinances.additionalCosts')" class="openRightModal mb-lg-0 mb-md-0 float-left mb-2 mr-3"
+                <x-forms.link-primary :link="route('projectfinances.additionalCostsForm')" class="openRightModal mb-lg-0 mb-md-0 float-left mb-2 mr-3"
                     icon="plus">
                     @lang('modules.projects.addRecord')
                 </x-forms.link-primary>
@@ -34,4 +34,66 @@
 
 @push('scripts')
     @include('sections.datatable_js')
+
+    <script>
+        const showTable = () => {
+            window.LaravelDataTables["additionalcosts-table"].draw(true);
+        }
+
+        $('body').on('click', '.delete-table-row', function() {
+            const id = $(this).data('row-id');
+            var url = "{{ route('projectfinances.additionalCostsForm', ':id') }}";
+            url = url.replace(':id', id)
+            var token = "{{ csrf_token() }}";
+            $.easyAjax({
+                type: 'GET',
+                url: url,
+                data: {
+                    '_token': token
+                },
+                success: function(response) {
+                    if (response.status == "success") {
+                        Swal.fire({
+                            title: "@lang('messages.sweetAlertTitle')",
+                            text: "@lang('messages.recoverRecord')",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            focusConfirm: false,
+                            confirmButtonText: "@lang('messages.confirmDelete')",
+                            cancelButtonText: "@lang('app.cancel')",
+                            customClass: {
+                                confirmButton: 'btn btn-primary mr-3',
+                                cancelButton: 'btn btn-secondary'
+                            },
+                            showClass: {
+                                popup: 'swal2-noanimation',
+                                backdrop: 'swal2-noanimation'
+                            },
+                            buttonsStyling: false
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+
+                                var url =
+                                    "{!! route('projectfinances.destroy') . '?id=:id&model=AdditionalCosts' !!}";
+                                url = url.replace(':id', id);
+                                $.easyAjax({
+                                    type: 'POST',
+                                    url: url,
+                                    data: {
+                                        '_token': token,
+                                        '_method': 'DELETE'
+                                    },
+                                    success: function(response) {
+                                        if (response.status == "success") {
+                                            showTable();
+                                        }
+                                    }
+                                });
+                            }
+                        });
+                    }
+                }
+            });
+        });
+    </script>
 @endpush

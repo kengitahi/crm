@@ -70,14 +70,13 @@ class ProjectFinancesController extends AccountBaseController
             'waterproofing' => $this->waterproofing(),
             'gardening' => $this->gardening(),
             'walls' => $this->walls(),
-            'additionalCosts' => $this->additionalCosts(new AdditionalCostsDataTable),
+            'additionalCosts' => $this->additionalCosts(
+                new AdditionalCostsDataTable
+            ),
             'otherCosts' => $this->otherCosts(),
             'operation' => $this->operation(),
-            default => $this->preliminary(),
+            default => view('project-finances.index', $this->data),
         };
-
-        //Return view for now
-        return view('project-finances.index', $this->data);
     }
 
     /**
@@ -116,15 +115,39 @@ class ProjectFinancesController extends AccountBaseController
      */
     public function update(Request $request, ProjectFinance $projectFinance)
     {
-        //
+        $redirectUrl = route('projectfinances.index').'?tab=additionalCosts';
+
+        $model = request('model');
+        $id = request('id');
+
+        $costToDelete = "App\Models\ProjectFinances\\$model";
+
+        $this->costToDelete = $costToDelete::find($id);
+        $this->costToDelete->delete();
+
+        return Reply::successWithData(__('messages.deleteSuccess'), [
+            'redirectUrl' => $redirectUrl,
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProjectFinance $projectFinance)
+    public function destroy()
     {
-        //
+        $redirectUrl = route('projectfinances.index').'?tab=additionalCosts';
+
+        $model = request('model');
+        $id = request('id');
+
+        $costToDelete = "App\Models\ProjectFinances\\$model";
+
+        $this->costToDelete = $costToDelete::find($id);
+        $this->costToDelete->delete();
+
+        return Reply::successWithData(__('messages.deleteSuccess'), [
+            'redirectUrl' => $redirectUrl,
+        ]);
     }
 
     //Main views will show tables
@@ -142,23 +165,25 @@ class ProjectFinancesController extends AccountBaseController
         $this->view = 'project-finances.additionalCosts';
         $this->activeTab = 'additionalCosts';
 
-        if (request()->ajax()) {
-            $this->pageTitle =
-                __('modules.projects.addNew').
-                ' '.
-                __('modules.projects.tabs.additionalCosts').
-                ' '.
-                __('modules.projects.record');
-            $this->view = 'project-finances.ajax.additionalCosts';
-
-            return $this->returnAjax($this->view);
-        }
-
-        // return view('project-finances.index', $this->data);
         return $dataTable->render('project-finances.index', $this->data);
     }
 
-    public function storeAdditionalCosts(ProjectFinancesRequest $request)
+    public function additionalCostsForm()
+    {
+        $this->pageTitle =
+            __('modules.projects.addNew').
+            ' '.
+            __('modules.projects.tabs.additionalCosts').
+            ' '.
+            __('modules.projects.record');
+        $this->view = 'project-finances.ajax.additionalCosts';
+
+        $this->costToEdit = AdditionalCosts::find(request('id'));
+
+        return $this->returnAjax($this->view);
+    }
+
+    public function storeAdditionalCosts(ProjectFinancesRequest $request, $action = null, $id = null)
     {
         $validatedData = $request->validated();
         $redirectUrl = route('projectfinances.index').'?tab=additionalCosts';
