@@ -36,7 +36,7 @@ class ProjectFinancesController extends AccountBaseController
         parent::__construct();
         $this->pageTitle = 'Project Finances';
         $this->middleware(function ($request, $next) {
-            abort_403(!in_array('payments', $this->user->modules));
+            abort_403(! in_array('payments', $this->user->modules));
 
             return $next($request);
         });
@@ -90,9 +90,7 @@ class ProjectFinancesController extends AccountBaseController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-    }
+    public function store(Request $request) {}
 
     /**
      * Display the specified resource.
@@ -118,7 +116,7 @@ class ProjectFinancesController extends AccountBaseController
     public function update(ProjectFinancesRequest $request)
     {
         $validatedData = $request->validated();
-        $redirectUrl = route('projectfinances.index') . '?tab=additionalCosts';
+        $redirectUrl = route('projectfinances.index').'?tab=additionalCosts';
 
         $model = request('model');
         $id = request('id');
@@ -139,7 +137,7 @@ class ProjectFinancesController extends AccountBaseController
      */
     public function destroy()
     {
-        $redirectUrl = route('projectfinances.index') . '?tab=additionalCosts';
+        $redirectUrl = route('projectfinances.index').'?tab=additionalCosts';
 
         $model = request('model');
         $id = request('id');
@@ -165,7 +163,7 @@ class ProjectFinancesController extends AccountBaseController
     public function additionalCosts(AdditionalCostsDataTable $dataTable)
     {
         $this->pageTitle =
-            'Project Finances - ' . __('modules.projects.tabs.additionalCosts');
+            'Project Finances - '.__('modules.projects.tabs.additionalCosts');
         $this->view = 'project-finances.additionalCosts';
         $this->activeTab = 'additionalCosts';
 
@@ -175,10 +173,10 @@ class ProjectFinancesController extends AccountBaseController
     public function additionalCostsForm()
     {
         $this->pageTitle =
-            __('modules.projects.addNew') .
-            ' ' .
-            __('modules.projects.tabs.additionalCosts') .
-            ' ' .
+            __('modules.projects.addNew').
+            ' '.
+            __('modules.projects.tabs.additionalCosts').
+            ' '.
             __('modules.projects.record');
         $this->view = 'project-finances.ajax.additionalCosts';
 
@@ -190,7 +188,7 @@ class ProjectFinancesController extends AccountBaseController
     public function storeAdditionalCosts(ProjectFinancesRequest $request, $action = null, $id = null)
     {
         $validatedData = $request->validated();
-        $redirectUrl = route('projectfinances.index') . '?tab=additionalCosts';
+        $redirectUrl = route('projectfinances.index').'?tab=additionalCosts';
 
         AdditionalCosts::create($validatedData);
 
@@ -202,16 +200,16 @@ class ProjectFinancesController extends AccountBaseController
     public function licenses()
     {
         $this->pageTitle =
-            'Project Finances - ' . __('modules.projects.tabs.licenses');
+            'Project Finances - '.__('modules.projects.tabs.licenses');
         $this->view = 'project-finances.licenses';
         $this->activeTab = 'licenses';
 
         if (request()->ajax()) {
             $this->pageTitle =
-                __('modules.projects.addNew') .
-                ' ' .
-                __('modules.projects.tabs.licenses') .
-                ' ' .
+                __('modules.projects.addNew').
+                ' '.
+                __('modules.projects.tabs.licenses').
+                ' '.
                 __('modules.projects.record');
             $this->view = 'project-finances.ajax.licenses';
 
@@ -224,16 +222,16 @@ class ProjectFinancesController extends AccountBaseController
     public function urbanization()
     {
         $this->pageTitle =
-            'Project Finances - ' . __('modules.projects.tabs.urbanization');
+            'Project Finances - '.__('modules.projects.tabs.urbanization');
         $this->view = 'project-finances.urbanization';
         $this->activeTab = 'urbanization';
 
         if (request()->ajax()) {
             $this->pageTitle =
-                __('modules.projects.addNew') .
-                ' ' .
-                __('modules.projects.tabs.urbanization') .
-                ' ' .
+                __('modules.projects.addNew').
+                ' '.
+                __('modules.projects.tabs.urbanization').
+                ' '.
                 __('modules.projects.record');
             $this->view = 'project-finances.ajax.urbanization';
 
@@ -246,16 +244,16 @@ class ProjectFinancesController extends AccountBaseController
     public function building()
     {
         $this->pageTitle =
-            'Project Finances - ' . __('modules.projects.tabs.building');
+            'Project Finances - '.__('modules.projects.tabs.building');
         $this->view = 'project-finances.building';
         $this->activeTab = 'building';
 
         if (request()->ajax()) {
             $this->pageTitle =
-                __('modules.projects.addNew') .
-                ' ' .
-                __('modules.projects.tabs.building') .
-                ' ' .
+                __('modules.projects.addNew').
+                ' '.
+                __('modules.projects.tabs.building').
+                ' '.
                 __('modules.projects.record');
             $this->view = 'project-finances.ajax.building';
 
@@ -268,16 +266,16 @@ class ProjectFinancesController extends AccountBaseController
     public function concrete()
     {
         $this->pageTitle =
-            'Project Finances - ' . __('modules.projects.tabs.concrete');
+            'Project Finances - '.__('modules.projects.tabs.concrete');
         $this->view = 'project-finances.concrete';
         $this->activeTab = 'concrete';
 
         if (request()->ajax()) {
             $this->pageTitle =
-                __('modules.projects.addNew') .
-                ' ' .
-                __('modules.projects.tabs.concrete') .
-                ' ' .
+                __('modules.projects.addNew').
+                ' '.
+                __('modules.projects.tabs.concrete').
+                ' '.
                 __('modules.projects.record');
             $this->view = 'project-finances.ajax.concrete';
 
@@ -290,16 +288,16 @@ class ProjectFinancesController extends AccountBaseController
     public function steel()
     {
         $this->pageTitle =
-            'Project Finances - ' . __('modules.projects.tabs.steel');
+            'Project Finances - '.__('modules.projects.tabs.steel');
         $this->view = 'project-finances.steel';
         $this->activeTab = 'steel';
 
         if (request()->ajax()) {
             $this->pageTitle =
-                __('modules.projects.addNew') .
-                ' ' .
-                __('modules.projects.tabs.steel') .
-                ' ' .
+                __('modules.projects.addNew').
+                ' '.
+                __('modules.projects.tabs.steel').
+                ' '.
                 __('modules.projects.record');
             $this->view = 'project-finances.ajax.steel';
 
@@ -312,16 +310,16 @@ class ProjectFinancesController extends AccountBaseController
     public function masonry()
     {
         $this->pageTitle =
-            'Project Finances - ' . __('modules.projects.tabs.masonry');
+            'Project Finances - '.__('modules.projects.tabs.masonry');
         $this->activeTab = 'masonry';
         $this->view = 'project-finances.masonry';
 
         if (request()->ajax()) {
             $this->pageTitle =
-                __('modules.projects.addNew') .
-                ' ' .
-                __('modules.projects.tabs.masonry') .
-                ' ' .
+                __('modules.projects.addNew').
+                ' '.
+                __('modules.projects.tabs.masonry').
+                ' '.
                 __('modules.projects.record');
             $this->view = 'project-finances.ajax.masonry';
 
@@ -334,16 +332,16 @@ class ProjectFinancesController extends AccountBaseController
     public function materials()
     {
         $this->pageTitle =
-            'Project Finances - ' . __('modules.projects.tabs.materials');
+            'Project Finances - '.__('modules.projects.tabs.materials');
         $this->view = 'project-finances.materials';
         $this->activeTab = 'materials';
 
         if (request()->ajax()) {
             $this->pageTitle =
-                __('modules.projects.addNew') .
-                ' ' .
-                __('modules.projects.tabs.materials') .
-                ' ' .
+                __('modules.projects.addNew').
+                ' '.
+                __('modules.projects.tabs.materials').
+                ' '.
                 __('modules.projects.record');
             $this->view = 'project-finances.ajax.materials';
 
@@ -356,16 +354,16 @@ class ProjectFinancesController extends AccountBaseController
     public function finishes()
     {
         $this->pageTitle =
-            'Project Finances - ' . __('modules.projects.tabs.finishes');
+            'Project Finances - '.__('modules.projects.tabs.finishes');
         $this->view = 'project-finances.finishes';
         $this->activeTab = 'finishes';
 
         if (request()->ajax()) {
             $this->pageTitle =
-                __('modules.projects.addNew') .
-                ' ' .
-                __('modules.projects.tabs.finishes') .
-                ' ' .
+                __('modules.projects.addNew').
+                ' '.
+                __('modules.projects.tabs.finishes').
+                ' '.
                 __('modules.projects.record');
             $this->view = 'project-finances.ajax.finishes';
 
@@ -378,16 +376,16 @@ class ProjectFinancesController extends AccountBaseController
     public function plumbing()
     {
         $this->pageTitle =
-            'Project Finances - ' . __('modules.projects.tabs.plumbing');
+            'Project Finances - '.__('modules.projects.tabs.plumbing');
         $this->view = 'project-finances.plumbing';
         $this->activeTab = 'plumbing';
 
         if (request()->ajax()) {
             $this->pageTitle =
-                __('modules.projects.addNew') .
-                ' ' .
-                __('modules.projects.tabs.plumbing') .
-                ' ' .
+                __('modules.projects.addNew').
+                ' '.
+                __('modules.projects.tabs.plumbing').
+                ' '.
                 __('modules.projects.record');
             $this->view = 'project-finances.ajax.plumbing';
 
@@ -400,16 +398,16 @@ class ProjectFinancesController extends AccountBaseController
     public function wiring()
     {
         $this->pageTitle =
-            'Project Finances - ' . __('modules.projects.tabs.wiring');
+            'Project Finances - '.__('modules.projects.tabs.wiring');
         $this->view = 'project-finances.wiring';
         $this->activeTab = 'wiring';
 
         if (request()->ajax()) {
             $this->pageTitle =
-                __('modules.projects.addNew') .
-                ' ' .
-                __('modules.projects.tabs.wiring') .
-                ' ' .
+                __('modules.projects.addNew').
+                ' '.
+                __('modules.projects.tabs.wiring').
+                ' '.
                 __('modules.projects.record');
             $this->view = 'project-finances.ajax.wiring';
 
@@ -422,16 +420,16 @@ class ProjectFinancesController extends AccountBaseController
     public function kitchens()
     {
         $this->pageTitle =
-            'Project Finances - ' . __('modules.projects.tabs.kitchens');
+            'Project Finances - '.__('modules.projects.tabs.kitchens');
         $this->view = 'project-finances.kitchens';
         $this->activeTab = 'kitchens';
 
         if (request()->ajax()) {
             $this->pageTitle =
-                __('modules.projects.addNew') .
-                ' ' .
-                __('modules.projects.tabs.kitchens') .
-                ' ' .
+                __('modules.projects.addNew').
+                ' '.
+                __('modules.projects.tabs.kitchens').
+                ' '.
                 __('modules.projects.record');
             $this->view = 'project-finances.ajax.kitchens';
 
@@ -444,16 +442,16 @@ class ProjectFinancesController extends AccountBaseController
     public function capentry()
     {
         $this->pageTitle =
-            'Project Finances - ' . __('modules.projects.tabs.capentry');
+            'Project Finances - '.__('modules.projects.tabs.capentry');
         $this->view = 'project-finances.capentry';
         $this->activeTab = 'capentry';
 
         if (request()->ajax()) {
             $this->pageTitle =
-                __('modules.projects.addNew') .
-                ' ' .
-                __('modules.projects.tabs.capentry') .
-                ' ' .
+                __('modules.projects.addNew').
+                ' '.
+                __('modules.projects.tabs.capentry').
+                ' '.
                 __('modules.projects.record');
             $this->view = 'project-finances.ajax.capentry';
 
@@ -466,16 +464,16 @@ class ProjectFinancesController extends AccountBaseController
     public function metalworking()
     {
         $this->pageTitle =
-            'Project Finances - ' . __('modules.projects.tabs.metalworking');
+            'Project Finances - '.__('modules.projects.tabs.metalworking');
         $this->view = 'project-finances.metalworking';
         $this->activeTab = 'metalworking';
 
         if (request()->ajax()) {
             $this->pageTitle =
-                __('modules.projects.addNew') .
-                ' ' .
-                __('modules.projects.tabs.metalworking') .
-                ' ' .
+                __('modules.projects.addNew').
+                ' '.
+                __('modules.projects.tabs.metalworking').
+                ' '.
                 __('modules.projects.record');
             $this->view = 'project-finances.ajax.metalworking';
 
@@ -488,16 +486,16 @@ class ProjectFinancesController extends AccountBaseController
     public function painting()
     {
         $this->pageTitle =
-            'Project Finances - ' . __('modules.projects.tabs.painting');
+            'Project Finances - '.__('modules.projects.tabs.painting');
         $this->view = 'project-finances.painting';
         $this->activeTab = 'painting';
 
         if (request()->ajax()) {
             $this->pageTitle =
-                __('modules.projects.addNew') .
-                ' ' .
-                __('modules.projects.tabs.painting') .
-                ' ' .
+                __('modules.projects.addNew').
+                ' '.
+                __('modules.projects.tabs.painting').
+                ' '.
                 __('modules.projects.record');
             $this->view = 'project-finances.ajax.painting';
 
@@ -510,16 +508,16 @@ class ProjectFinancesController extends AccountBaseController
     public function aircon()
     {
         $this->pageTitle =
-            'Project Finances - ' . __('modules.projects.tabs.aircon');
+            'Project Finances - '.__('modules.projects.tabs.aircon');
         $this->view = 'project-finances.aircon';
         $this->activeTab = 'aircon';
 
         if (request()->ajax()) {
             $this->pageTitle =
-                __('modules.projects.addNew') .
-                ' ' .
-                __('modules.projects.tabs.aircon') .
-                ' ' .
+                __('modules.projects.addNew').
+                ' '.
+                __('modules.projects.tabs.aircon').
+                ' '.
                 __('modules.projects.record');
             $this->view = 'project-finances.ajax.aircon';
 
@@ -532,16 +530,16 @@ class ProjectFinancesController extends AccountBaseController
     public function waterproofing()
     {
         $this->pageTitle =
-            'Project Finances - ' . __('modules.projects.tabs.waterproofing');
+            'Project Finances - '.__('modules.projects.tabs.waterproofing');
         $this->view = 'project-finances.waterproofing';
         $this->activeTab = 'waterproofing';
 
         if (request()->ajax()) {
             $this->pageTitle =
-                __('modules.projects.addNew') .
-                ' ' .
-                __('modules.projects.tabs.waterproofing') .
-                ' ' .
+                __('modules.projects.addNew').
+                ' '.
+                __('modules.projects.tabs.waterproofing').
+                ' '.
                 __('modules.projects.record');
             $this->view = 'project-finances.ajax.waterproofing';
 
@@ -554,16 +552,16 @@ class ProjectFinancesController extends AccountBaseController
     public function gardening()
     {
         $this->pageTitle =
-            'Project Finances - ' . __('modules.projects.tabs.gardening');
+            'Project Finances - '.__('modules.projects.tabs.gardening');
         $this->view = 'project-finances.gardening';
         $this->activeTab = 'gardening';
 
         if (request()->ajax()) {
             $this->pageTitle =
-                __('modules.projects.addNew') .
-                ' ' .
-                __('modules.projects.tabs.gardening') .
-                ' ' .
+                __('modules.projects.addNew').
+                ' '.
+                __('modules.projects.tabs.gardening').
+                ' '.
                 __('modules.projects.record');
             $this->view = 'project-finances.ajax.gardening';
 
@@ -576,16 +574,16 @@ class ProjectFinancesController extends AccountBaseController
     public function walls()
     {
         $this->pageTitle =
-            'Project Finances - ' . __('modules.projects.tabs.walls');
+            'Project Finances - '.__('modules.projects.tabs.walls');
         $this->view = 'project-finances.walls';
         $this->activeTab = 'walls';
 
         if (request()->ajax()) {
             $this->pageTitle =
-                __('modules.projects.addNew') .
-                ' ' .
-                __('modules.projects.tabs.walls') .
-                ' ' .
+                __('modules.projects.addNew').
+                ' '.
+                __('modules.projects.tabs.walls').
+                ' '.
                 __('modules.projects.record');
             $this->view = 'project-finances.ajax.walls';
 
@@ -598,16 +596,16 @@ class ProjectFinancesController extends AccountBaseController
     public function otherCosts()
     {
         $this->pageTitle =
-            'Project Finances - ' . __('modules.projects.tabs.otherCosts');
+            'Project Finances - '.__('modules.projects.tabs.otherCosts');
         $this->view = 'project-finances.otherCosts';
         $this->activeTab = 'otherCosts';
 
         if (request()->ajax()) {
             $this->pageTitle =
-                __('modules.projects.addNew') .
-                ' ' .
-                __('modules.projects.tabs.otherCosts') .
-                ' ' .
+                __('modules.projects.addNew').
+                ' '.
+                __('modules.projects.tabs.otherCosts').
+                ' '.
                 __('modules.projects.record');
             $this->view = 'project-finances.ajax.otherCosts';
 
@@ -620,16 +618,16 @@ class ProjectFinancesController extends AccountBaseController
     public function operation()
     {
         $this->pageTitle =
-            'Project Finances - ' . __('modules.projects.tabs.operation');
+            'Project Finances - '.__('modules.projects.tabs.operation');
         $this->view = 'project-finances.operation';
         $this->activeTab = 'operation';
 
         if (request()->ajax()) {
             $this->pageTitle =
-                __('modules.projects.addNew') .
-                ' ' .
-                __('modules.projects.tabs.operation') .
-                ' ' .
+                __('modules.projects.addNew').
+                ' '.
+                __('modules.projects.tabs.operation').
+                ' '.
                 __('modules.projects.record');
             $this->view = 'project-finances.ajax.operation';
 
@@ -644,7 +642,7 @@ class ProjectFinancesController extends AccountBaseController
     public function storeLicenses(ProjectFinancesRequest $request)
     {
         $validatedData = $request->validated();
-        $redirectUrl = route('projectfinances.index') . '?tab=licenses';
+        $redirectUrl = route('projectfinances.index').'?tab=licenses';
 
         LicensesAndPermits::create($validatedData);
 
@@ -656,7 +654,7 @@ class ProjectFinancesController extends AccountBaseController
     public function storeUrbanization(ProjectFinancesRequest $request)
     {
         $validatedData = $request->validated();
-        $redirectUrl = route('projectfinances.index') . '?tab=urbanization';
+        $redirectUrl = route('projectfinances.index').'?tab=urbanization';
 
         UrbanizationCost::create($validatedData);
 
@@ -668,7 +666,7 @@ class ProjectFinancesController extends AccountBaseController
     public function storeBuilding(ProjectFinancesRequest $request)
     {
         $validatedData = $request->validated();
-        $redirectUrl = route('projectfinances.index') . '?tab=building';
+        $redirectUrl = route('projectfinances.index').'?tab=building';
 
         BuildingCost::create($validatedData);
 
@@ -680,7 +678,7 @@ class ProjectFinancesController extends AccountBaseController
     public function storeConcrete(ProjectFinancesRequest $request)
     {
         $validatedData = $request->validated();
-        $redirectUrl = route('projectfinances.index') . '?tab=concrete';
+        $redirectUrl = route('projectfinances.index').'?tab=concrete';
 
         ConcreteStructure::create($validatedData);
 
@@ -692,7 +690,7 @@ class ProjectFinancesController extends AccountBaseController
     public function storeSteel(ProjectFinancesRequest $request)
     {
         $validatedData = $request->validated();
-        $redirectUrl = route('projectfinances.index') . '?tab=steel';
+        $redirectUrl = route('projectfinances.index').'?tab=steel';
 
         SteelStructure::create($validatedData);
 
@@ -704,7 +702,7 @@ class ProjectFinancesController extends AccountBaseController
     public function storeMasonry(ProjectFinancesRequest $request)
     {
         $validatedData = $request->validated();
-        $redirectUrl = route('projectfinances.index') . '?tab=masonry';
+        $redirectUrl = route('projectfinances.index').'?tab=masonry';
 
         GrayMasonryWork::create($validatedData);
 
@@ -716,7 +714,7 @@ class ProjectFinancesController extends AccountBaseController
     public function storeMaterials(ProjectFinancesRequest $request)
     {
         $validatedData = $request->validated();
-        $redirectUrl = route('projectfinances.index') . '?tab=materials';
+        $redirectUrl = route('projectfinances.index').'?tab=materials';
 
         Materials::create($validatedData);
 
@@ -728,7 +726,7 @@ class ProjectFinancesController extends AccountBaseController
     public function storeFinishes(ProjectFinancesRequest $request)
     {
         $validatedData = $request->validated();
-        $redirectUrl = route('projectfinances.index') . '?tab=finishes';
+        $redirectUrl = route('projectfinances.index').'?tab=finishes';
 
         Finishes::create($validatedData);
 
@@ -740,7 +738,7 @@ class ProjectFinancesController extends AccountBaseController
     public function storePlumbing(ProjectFinancesRequest $request)
     {
         $validatedData = $request->validated();
-        $redirectUrl = route('projectfinances.index') . '?tab=plumbing';
+        $redirectUrl = route('projectfinances.index').'?tab=plumbing';
 
         Plumbing::create($validatedData);
 
@@ -752,7 +750,7 @@ class ProjectFinancesController extends AccountBaseController
     public function storeWiring(ProjectFinancesRequest $request)
     {
         $validatedData = $request->validated();
-        $redirectUrl = route('projectfinances.index') . '?tab=wiring';
+        $redirectUrl = route('projectfinances.index').'?tab=wiring';
 
         Wiring::create($validatedData);
 
@@ -764,7 +762,7 @@ class ProjectFinancesController extends AccountBaseController
     public function storeKitchens(ProjectFinancesRequest $request)
     {
         $validatedData = $request->validated();
-        $redirectUrl = route('projectfinances.index') . '?tab=kitchens';
+        $redirectUrl = route('projectfinances.index').'?tab=kitchens';
 
         Kitchens::create($validatedData);
 
@@ -776,7 +774,7 @@ class ProjectFinancesController extends AccountBaseController
     public function storeCapentry(ProjectFinancesRequest $request)
     {
         $validatedData = $request->validated();
-        $redirectUrl = route('projectfinances.index') . '?tab=capentry';
+        $redirectUrl = route('projectfinances.index').'?tab=capentry';
 
         Capentry::create($validatedData);
 
@@ -788,7 +786,7 @@ class ProjectFinancesController extends AccountBaseController
     public function storeMetalworking(ProjectFinancesRequest $request)
     {
         $validatedData = $request->validated();
-        $redirectUrl = route('projectfinances.index') . '?tab=metalworking';
+        $redirectUrl = route('projectfinances.index').'?tab=metalworking';
 
         Metalworking::create($validatedData);
 
@@ -800,7 +798,7 @@ class ProjectFinancesController extends AccountBaseController
     public function storePainting(ProjectFinancesRequest $request)
     {
         $validatedData = $request->validated();
-        $redirectUrl = route('projectfinances.index') . '?tab=painting';
+        $redirectUrl = route('projectfinances.index').'?tab=painting';
 
         Painting::create($validatedData);
 
@@ -812,7 +810,7 @@ class ProjectFinancesController extends AccountBaseController
     public function storeAircon(ProjectFinancesRequest $request)
     {
         $validatedData = $request->validated();
-        $redirectUrl = route('projectfinances.index') . '?tab=aircon';
+        $redirectUrl = route('projectfinances.index').'?tab=aircon';
 
         AirCon::create($validatedData);
 
@@ -824,7 +822,7 @@ class ProjectFinancesController extends AccountBaseController
     public function storeWaterproofing(ProjectFinancesRequest $request)
     {
         $validatedData = $request->validated();
-        $redirectUrl = route('projectfinances.index') . '?tab=waterproofing';
+        $redirectUrl = route('projectfinances.index').'?tab=waterproofing';
 
         Waterproofing::create($validatedData);
 
@@ -836,7 +834,7 @@ class ProjectFinancesController extends AccountBaseController
     public function storeGardening(ProjectFinancesRequest $request)
     {
         $validatedData = $request->validated();
-        $redirectUrl = route('projectfinances.index') . '?tab=gardening';
+        $redirectUrl = route('projectfinances.index').'?tab=gardening';
 
         Gardening::create($validatedData);
 
@@ -848,7 +846,7 @@ class ProjectFinancesController extends AccountBaseController
     public function storeWalls(ProjectFinancesRequest $request)
     {
         $validatedData = $request->validated();
-        $redirectUrl = route('projectfinances.index') . '?tab=walls';
+        $redirectUrl = route('projectfinances.index').'?tab=walls';
 
         Walls::create($validatedData);
 
@@ -860,7 +858,7 @@ class ProjectFinancesController extends AccountBaseController
     public function storeOtherCosts(ProjectFinancesRequest $request)
     {
         $validatedData = $request->validated();
-        $redirectUrl = route('projectfinances.index') . '?tab=otherCosts';
+        $redirectUrl = route('projectfinances.index').'?tab=otherCosts';
 
         OtherCosts::create($validatedData);
 
@@ -872,7 +870,7 @@ class ProjectFinancesController extends AccountBaseController
     public function storeOperation(ProjectFinancesRequest $request)
     {
         $validatedData = $request->validated();
-        $redirectUrl = route('projectfinances.index') . '?tab=operation';
+        $redirectUrl = route('projectfinances.index').'?tab=operation';
 
         Operation::create($validatedData);
 

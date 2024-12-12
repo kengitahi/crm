@@ -28,19 +28,19 @@ class AdditionalCostsDataTable extends BaseDataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         $datatables = datatables()->eloquent($query);
-        $datatables->setRowId(fn($row) => 'row-' . $row->id);
+        $datatables->setRowId(fn ($row) => 'row-'.$row->id);
         $datatables->addColumn('action', function ($row) {
             $action =
                 '<div class="task_view">
                     <div class="dropdown">
                         <a class="task_view_more d-flex align-items-center justify-content-center dropdown-toggle" type="link"
-                            id="dropdownMenuLink-' .
-                $row->id .
+                            id="dropdownMenuLink-'.
+                $row->id.
                 '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="icon-options-vertical icons"></i>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink-' .
-                $row->id .
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink-'.
+                $row->id.
                 '" tabindex="0">';
 
             // $action .=
@@ -51,21 +51,21 @@ class AdditionalCostsDataTable extends BaseDataTable
             //     "</a>";
 
             $action .=
-                '<a class="dropdown-item openRightModal" href="' .
-                route('projectfinances.update', ['id' => $row->id, 'model' => 'AdditionalCosts']) .
+                '<a class="dropdown-item openRightModal" href="'.
+                route('projectfinances.additionalCostsForm', ['action' => 'edit', 'model' => 'AdditionalCosts', 'id' => $row->id]).
                 '">
                                 <i class="fa fa-edit mr-2"></i>
-                                ' .
-                trans('app.edit') .
+                                '.
+                trans('app.edit').
                 '</a>';
 
             $action .=
-                '<a class="dropdown-item delete-table-row" href="javascript:;" data-row-id="' .
-                $row->id .
+                '<a class="dropdown-item delete-table-row" href="javascript:;" data-row-id="'.
+                $row->id.
                 '">
                     <i class="fa fa-trash mr-2"></i>
-                        ' .
-                trans('app.delete') .
+                        '.
+                trans('app.delete').
                 '</a>';
 
             $action .= '</div>
@@ -75,10 +75,10 @@ class AdditionalCostsDataTable extends BaseDataTable
             return $action;
         });
 
-        $datatables->addColumn('imss', fn($row) => optional($row->imss) ? $row->imss : '--');
-        $datatables->addColumn('infornavit', fn($row) => optional($row->infornavit) ? $row->infornavit : '--');
-        $datatables->addColumn('accounting', fn($row) => optional($row->accounting) ? $row->accounting : '--');
-        $datatables->editColumn('created_at', fn($row) => Carbon::parse($row->created_at)->translatedFormat($this->company->date_format));
+        $datatables->addColumn('imss', fn ($row) => $row->imss ?: '--');
+        $datatables->addColumn('infornavit', fn ($row) => $row->infornavit ?: '--');
+        $datatables->addColumn('accounting', fn ($row) => $row->accounting ?: '--');
+        $datatables->editColumn('created_at', fn ($row) => Carbon::parse($row->created_at)->translatedFormat($this->company->date_format));
 
         $customFieldColumns = CustomField::customFieldData($datatables, AdditionalCosts::CUSTOM_FIELD_MODEL);
 
@@ -117,7 +117,7 @@ class AdditionalCostsDataTable extends BaseDataTable
                   //
                 }',
         ]);
-        $dataTable->buttons(Button::make(['extend' => 'excel', 'text' => '<i class="fa fa-file-export"></i> ' . trans('app.exportExcel')]));
+        $dataTable->buttons(Button::make(['extend' => 'excel', 'text' => '<i class="fa fa-file-export"></i> '.trans('app.exportExcel')]));
 
         return $dataTable;
     }
@@ -153,6 +153,6 @@ class AdditionalCostsDataTable extends BaseDataTable
      */
     protected function filename(): string
     {
-        return 'AdditionalCosts_' . date('YmdHis');
+        return 'AdditionalCosts_'.date('YmdHis');
     }
 }

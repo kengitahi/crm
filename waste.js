@@ -101,3 +101,8 @@
         </div>
     </div>
 </div>
+
+// const url = "{{ route('projectfinances.update') }}";
+// var data = $('#save-additional-costs-data-form').serialize();
+
+// saveClient(data, url, "#save-additional-costs-form");

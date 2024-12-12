@@ -40,9 +40,16 @@
                 <x-forms.custom-field :fields="$fields"></x-forms.custom-field>
 
                 <x-form-actions>
-                    <x-forms.button-primary class="mr-3" icon="check"
-                        id="save-additional-costs-form">@lang('app.save')
-                    </x-forms.button-primary>
+
+                    @if (request()->action == 'edit')
+                        <x-forms.button-primary class="mr-3" icon="pencil"
+                            id="update-additional-costs-form">@lang('app.save')
+                        </x-forms.button-primary>
+                    @else
+                        <x-forms.button-primary class="mr-3" icon="check"
+                            id="save-additional-costs-form">@lang('app.save')
+                        </x-forms.button-primary>
+                    @endif
                     <x-forms.button-cancel :link="route('projectfinances.index') . '?tab=additional-costs'" class="border-0">@lang('app.cancel')
                     </x-forms.button-cancel>
                 </x-form-actions>
@@ -53,9 +60,30 @@
 
 <script>
     $(document).ready(function() {
+
         $('#save-additional-costs-form').click(function() {
             const url = "{{ route('projectfinances.storeAdditionalCosts') }}";
             var data = $('#save-additional-costs-data-form').serialize();
+
+            saveClient(data, url, "#save-additional-costs-form");
+
+        });
+
+        $('#update-additional-costs-form').click(function() {
+            // Get the current URL
+            const currentUrl = window.location.href;
+
+            // Extract all query parameters
+            const urlParams = new URLSearchParams(currentUrl);
+
+            // Extract the desired parameters
+            const id = urlParams.get('id');
+
+            const url = "{!! route('projectfinances.update') . '?id=' !!}" + id + "{!! '&model=AdditionalCosts' !!}";
+            var data = $('#save-additional-costs-data-form').serialize();
+
+            console.log(url);
+            console.log(data);
 
             saveClient(data, url, "#save-additional-costs-form");
 

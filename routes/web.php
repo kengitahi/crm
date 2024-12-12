@@ -300,6 +300,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'account'], function () {
         ],
         function () {
             Route::get('/', 'index')->name('index');
+            Route::post('/update', 'update')->name('update');
             Route::delete('/delete', 'destroy')->name('destroy');
 
             //Tabs
