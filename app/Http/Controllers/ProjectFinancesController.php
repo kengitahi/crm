@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\DataTables\AdditionalCostsDataTable;
 use App\DataTables\AirconDataTable;
 use App\DataTables\CarpentryDataTable;
+use App\DataTables\ConcreteDataTable;
+use App\DataTables\FinishesDataTable;
 use App\Helper\Reply;
 use App\Http\Requests\ProjectFinancesRequest;
 use App\Models\ProjectFinance;
@@ -56,11 +58,15 @@ class ProjectFinancesController extends AccountBaseController
             'licenses' => $this->licenses(),
             'urbanization' => $this->urbanization(),
             'building' => $this->building(),
-            'concrete' => $this->concrete(),
+            'concrete' => $this->concrete(
+                new ConcreteDataTable
+            ),
             'steel' => $this->steel(),
             'masonry' => $this->masonry(),
             'materials' => $this->materials(),
-            'finishes' => $this->finishes(),
+            'finishes' => $this->finishes(
+                new FinishesDataTable
+            ),
             'plumbing' => $this->plumbing(),
             'wiring' => $this->wiring(),
             'kitchens' => $this->kitchens(),
@@ -210,10 +216,32 @@ class ProjectFinancesController extends AccountBaseController
         return $dataTable->render('project-finances.index', $this->data);
     }
 
-    public function additionalCostsForm()
+    public function concrete($dataTable)
     {
         $this->pageTitle =
-            __('modules.projects.addNew').
+            'Project Finances - '.__('modules.projects.tabs.concrete');
+        $this->view = 'project-finances.concrete';
+        $this->activeTab = 'concrete';
+
+        return $dataTable->render('project-finances.index', $this->data);
+    }
+
+    public function finishes($dataTable)
+    {
+        $this->pageTitle =
+            'Project Finances - '.__('modules.projects.tabs.finishes');
+        $this->view = 'project-finances.finishes';
+        $this->activeTab = 'finishes';
+
+        return $dataTable->render('project-finances.index', $this->data);
+    }
+
+    public function additionalCostsForm()
+    {
+        request()->action == 'edit' ? $titleAction = __('modules.projects.edit') : $titleAction = __('modules.projects.addNew');
+
+        $this->pageTitle =
+            $titleAction.
             ' '.
             __('modules.projects.tabs.additionalCosts').
             ' '.
@@ -227,8 +255,10 @@ class ProjectFinancesController extends AccountBaseController
 
     public function airconForm()
     {
+        request()->action == 'edit' ? $titleAction = __('modules.projects.edit') : $titleAction = __('modules.projects.addNew');
+
         $this->pageTitle =
-            __('modules.projects.addNew').
+            $titleAction.
             ' '.
             __('modules.projects.tabs.aircon').
             ' '.
@@ -242,8 +272,10 @@ class ProjectFinancesController extends AccountBaseController
 
     public function capentryForm()
     {
+        request()->action == 'edit' ? $titleAction = __('modules.projects.edit') : $titleAction = __('modules.projects.addNew');
+
         $this->pageTitle =
-            __('modules.projects.addNew').
+            $titleAction.
             ' '.
             __('modules.projects.tabs.capentry').
             ' '.
@@ -251,6 +283,40 @@ class ProjectFinancesController extends AccountBaseController
         $this->view = 'project-finances.ajax.capentry';
 
         $this->costToEdit = Capentry::find(request('id'));
+
+        return $this->returnAjax($this->view);
+    }
+
+    public function concreteForm()
+    {
+        request()->action == 'edit' ? $titleAction = __('modules.projects.edit') : $titleAction = __('modules.projects.addNew');
+
+        $this->pageTitle =
+            $titleAction.
+            ' '.
+            __('modules.projects.tabs.concrete').
+            ' '.
+            __('modules.projects.record');
+        $this->view = 'project-finances.ajax.concrete';
+
+        $this->costToEdit = ConcreteStructure::find(request('id'));
+
+        return $this->returnAjax($this->view);
+    }
+
+    public function finishesForm()
+    {
+        request()->action == 'edit' ? $titleAction = __('modules.projects.edit') : $titleAction = __('modules.projects.addNew');
+
+        $this->pageTitle =
+            $titleAction.
+            ' '.
+            __('modules.projects.tabs.finishes').
+            ' '.
+            __('modules.projects.record');
+        $this->view = 'project-finances.ajax.finishes';
+
+        $this->costToEdit = Finishes::find(request('id'));
 
         return $this->returnAjax($this->view);
     }
@@ -333,28 +399,6 @@ class ProjectFinancesController extends AccountBaseController
         return view('project-finances.index', $this->data);
     }
 
-    public function concrete()
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.concrete');
-        $this->view = 'project-finances.concrete';
-        $this->activeTab = 'concrete';
-
-        if (request()->ajax()) {
-            $this->pageTitle =
-                __('modules.projects.addNew').
-                ' '.
-                __('modules.projects.tabs.concrete').
-                ' '.
-                __('modules.projects.record');
-            $this->view = 'project-finances.ajax.concrete';
-
-            return $this->returnAjax($this->view);
-        }
-
-        return view('project-finances.index', $this->data);
-    }
-
     public function steel()
     {
         $this->pageTitle =
@@ -414,28 +458,6 @@ class ProjectFinancesController extends AccountBaseController
                 ' '.
                 __('modules.projects.record');
             $this->view = 'project-finances.ajax.materials';
-
-            return $this->returnAjax($this->view);
-        }
-
-        return view('project-finances.index', $this->data);
-    }
-
-    public function finishes()
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.finishes');
-        $this->view = 'project-finances.finishes';
-        $this->activeTab = 'finishes';
-
-        if (request()->ajax()) {
-            $this->pageTitle =
-                __('modules.projects.addNew').
-                ' '.
-                __('modules.projects.tabs.finishes').
-                ' '.
-                __('modules.projects.record');
-            $this->view = 'project-finances.ajax.finishes';
 
             return $this->returnAjax($this->view);
         }

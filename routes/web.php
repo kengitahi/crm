@@ -301,6 +301,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'account'], function () {
         function () {
             Route::get('/', 'index')->name('index');
             Route::post('/update', 'update')->name('update');
+            Route::post('/store', 'store')->name('store');
             Route::delete('/delete', 'destroy')->name('destroy');
 
             //Tabs
@@ -353,11 +354,11 @@ Route::group(['middleware' => 'auth', 'prefix' => 'account'], function () {
             // Route::get('licenses', 'licenses')->name('licenses');
             // Route::get('urbanization', 'urbanization')->name('urbanization');
             // Route::get('building', 'building')->name('building');
-            // Route::get('concrete', 'concrete')->name('concrete');
+            Route::get('concrete-costs-form', 'concreteForm')->name('concreteForm');
             // Route::get('steel', 'steel')->name('steel');
             // Route::get('masonry', 'masonry')->name('masonry');
             // Route::get('materials', 'materials')->name('materials');
-            // Route::get('finishes', 'finishes')->name('finishes');
+            Route::get('finishes-form', 'finishesForm')->name('finishesForm');
             // Route::get('plumbing', 'plumbing')->name('plumbing');
             // Route::get('wiring', 'wiring')->name('wiring');
             // Route::get('kitchens', 'kitchens')->name('kitchens');
