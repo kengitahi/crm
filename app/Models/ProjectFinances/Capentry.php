@@ -11,5 +11,7 @@ class Capentry extends Model
 
     protected $table = 'project_finances_capentry';
 
+    const CUSTOM_FIELD_MODEL = 'App\Models\ProjectFinances\Capentry';
+
     protected $guarded = ['id'];
 }

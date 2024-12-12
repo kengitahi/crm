@@ -12,19 +12,19 @@
                         <div class="row">
                             <input name="form_type" type="hidden" value="capentry">
                             <div class="col-md-4">
-                                <x-forms.number :fieldLabel="__('modules.projects.formLabels.closetBathroomsStairs')" :fieldPlaceholder="__('placeholders.projects.amount')" :fieldValue="$lead->client_name ?? ''"
+                                <x-forms.number :fieldLabel="__('modules.projects.formLabels.closetBathroomsStairs')" :fieldPlaceholder="__('placeholders.projects.amount')" :fieldValue="$costToEdit->locks_and_fittings ?? ''"
                                     fieldId="{{ __('modules.projects.formFields.closetBathroomsStairs') }}"
                                     fieldName="{{ __('modules.projects.formFields.closetBathroomsStairs') }}">
                                 </x-forms.number>
                             </div>
                             <div class="col-md-4">
-                                <x-forms.number :fieldLabel="__('modules.projects.formLabels.suppliers')" :fieldPlaceholder="__('placeholders.projects.amount')" :fieldValue="$lead->client_name ?? ''"
+                                <x-forms.number :fieldLabel="__('modules.projects.formLabels.suppliers')" :fieldPlaceholder="__('placeholders.projects.amount')" :fieldValue="$costToEdit->closet_bathroom_stairs ?? ''"
                                     fieldId="capentry_{{ __('modules.projects.formFields.suppliers') }}"
                                     fieldName="capentry_{{ __('modules.projects.formFields.suppliers') }}">
                                 </x-forms.number>
                             </div>
                             <div class="col-md-4">
-                                <x-forms.number :fieldLabel="__('modules.projects.formLabels.lockFittings')" :fieldPlaceholder="__('placeholders.projects.amount')" :fieldValue="$lead->client_name ?? ''"
+                                <x-forms.number :fieldLabel="__('modules.projects.formLabels.lockFittings')" :fieldPlaceholder="__('placeholders.projects.amount')" :fieldValue="$costToEdit->capentry_suppliers ?? ''"
                                     fieldId="{{ __('modules.projects.formFields.lockFittings') }}"
                                     fieldName="{{ __('modules.projects.formFields.lockFittings') }}">
                                 </x-forms.number>

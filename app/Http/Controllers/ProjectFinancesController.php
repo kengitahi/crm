@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\AdditionalCostsDataTable;
+use App\DataTables\AirconDataTable;
+use App\DataTables\CarpentryDataTable;
 use App\Helper\Reply;
 use App\Http\Requests\ProjectFinancesRequest;
 use App\Models\ProjectFinance;
@@ -27,7 +29,6 @@ use App\Models\ProjectFinances\UrbanizationCost;
 use App\Models\ProjectFinances\Walls;
 use App\Models\ProjectFinances\Waterproofing;
 use App\Models\ProjectFinances\Wiring;
-use Illuminate\Http\Request;
 
 class ProjectFinancesController extends AccountBaseController
 {
@@ -63,10 +64,14 @@ class ProjectFinancesController extends AccountBaseController
             'plumbing' => $this->plumbing(),
             'wiring' => $this->wiring(),
             'kitchens' => $this->kitchens(),
-            'capentry' => $this->capentry(),
+            'capentry' => $this->capentry(
+                new CarpentryDataTable
+            ),
             'metalworking' => $this->metalworking(),
             'painting' => $this->painting(),
-            'aircon' => $this->aircon(),
+            'aircon' => $this->aircon(
+                new AirconDataTable
+            ),
             'waterproofing' => $this->waterproofing(),
             'gardening' => $this->gardening(),
             'walls' => $this->walls(),
@@ -90,7 +95,20 @@ class ProjectFinancesController extends AccountBaseController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) {}
+    public function store(ProjectFinancesRequest $request)
+    {
+        $model = request('model');
+        $modelToStore = "App\Models\ProjectFinances\\$model";
+
+        $validatedData = $request->validated();
+        $redirectUrl = route('projectfinances.index').'?tab=additionalCosts';
+
+        $modelToStore::create($validatedData);
+
+        return Reply::successWithData(__('messages.recordSaved'), [
+            'redirectUrl' => $redirectUrl,
+        ]);
+    }
 
     /**
      * Display the specified resource.
@@ -116,15 +134,17 @@ class ProjectFinancesController extends AccountBaseController
     public function update(ProjectFinancesRequest $request)
     {
         $validatedData = $request->validated();
-        $redirectUrl = route('projectfinances.index').'?tab=additionalCosts';
 
         $model = request('model');
         $id = request('id');
+        $tab = request('tab');
 
         $costToUpdate = "App\Models\ProjectFinances\\$model";
 
         $this->costToUpdate = $costToUpdate::find($id);
         $this->costToUpdate->update($validatedData);
+
+        $redirectUrl = route('projectfinances.index')."?tab=$tab";
 
         return Reply::successWithData(__('messages.recordSaved'), [
             'redirectUrl' => $redirectUrl,
@@ -170,6 +190,26 @@ class ProjectFinancesController extends AccountBaseController
         return $dataTable->render('project-finances.index', $this->data);
     }
 
+    public function aircon($dataTable)
+    {
+        $this->pageTitle =
+            'Project Finances - '.__('modules.projects.tabs.aircon');
+        $this->view = 'project-finances.aircon';
+        $this->activeTab = 'aircon';
+
+        return $dataTable->render('project-finances.index', $this->data);
+    }
+
+    public function capentry(CarpentryDataTable $dataTable)
+    {
+        $this->pageTitle =
+            'Project Finances - '.__('modules.projects.tabs.capentry');
+        $this->view = 'project-finances.capentry';
+        $this->activeTab = 'capentry';
+
+        return $dataTable->render('project-finances.index', $this->data);
+    }
+
     public function additionalCostsForm()
     {
         $this->pageTitle =
@@ -181,6 +221,36 @@ class ProjectFinancesController extends AccountBaseController
         $this->view = 'project-finances.ajax.additionalCosts';
 
         $this->costToEdit = AdditionalCosts::find(request('id'));
+
+        return $this->returnAjax($this->view);
+    }
+
+    public function airconForm()
+    {
+        $this->pageTitle =
+            __('modules.projects.addNew').
+            ' '.
+            __('modules.projects.tabs.aircon').
+            ' '.
+            __('modules.projects.record');
+        $this->view = 'project-finances.ajax.aircon';
+
+        $this->costToEdit = Aircon::find(request('id'));
+
+        return $this->returnAjax($this->view);
+    }
+
+    public function capentryForm()
+    {
+        $this->pageTitle =
+            __('modules.projects.addNew').
+            ' '.
+            __('modules.projects.tabs.capentry').
+            ' '.
+            __('modules.projects.record');
+        $this->view = 'project-finances.ajax.capentry';
+
+        $this->costToEdit = Capentry::find(request('id'));
 
         return $this->returnAjax($this->view);
     }
@@ -439,28 +509,6 @@ class ProjectFinancesController extends AccountBaseController
         return view('project-finances.index', $this->data);
     }
 
-    public function capentry()
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.capentry');
-        $this->view = 'project-finances.capentry';
-        $this->activeTab = 'capentry';
-
-        if (request()->ajax()) {
-            $this->pageTitle =
-                __('modules.projects.addNew').
-                ' '.
-                __('modules.projects.tabs.capentry').
-                ' '.
-                __('modules.projects.record');
-            $this->view = 'project-finances.ajax.capentry';
-
-            return $this->returnAjax($this->view);
-        }
-
-        return view('project-finances.index', $this->data);
-    }
-
     public function metalworking()
     {
         $this->pageTitle =
@@ -498,28 +546,6 @@ class ProjectFinancesController extends AccountBaseController
                 ' '.
                 __('modules.projects.record');
             $this->view = 'project-finances.ajax.painting';
-
-            return $this->returnAjax($this->view);
-        }
-
-        return view('project-finances.index', $this->data);
-    }
-
-    public function aircon()
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.aircon');
-        $this->view = 'project-finances.aircon';
-        $this->activeTab = 'aircon';
-
-        if (request()->ajax()) {
-            $this->pageTitle =
-                __('modules.projects.addNew').
-                ' '.
-                __('modules.projects.tabs.aircon').
-                ' '.
-                __('modules.projects.record');
-            $this->view = 'project-finances.ajax.aircon';
 
             return $this->returnAjax($this->view);
         }

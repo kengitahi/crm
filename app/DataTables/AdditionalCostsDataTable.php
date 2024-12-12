@@ -52,7 +52,7 @@ class AdditionalCostsDataTable extends BaseDataTable
 
             $action .=
                 '<a class="dropdown-item openRightModal" href="'.
-                route('projectfinances.additionalCostsForm', ['action' => 'edit', 'model' => 'AdditionalCosts', 'id' => $row->id]).
+                route('projectfinances.additionalCostsForm', ['action' => 'edit', 'model' => 'AirCon', 'id' => $row->id]).
                 '">
                                 <i class="fa fa-edit mr-2"></i>
                                 '.

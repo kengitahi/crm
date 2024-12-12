@@ -79,13 +79,13 @@
             // Extract the desired parameters
             const id = urlParams.get('id');
 
-            const url = "{!! route('projectfinances.update') . '?id=' !!}" + id + "{!! '&model=AdditionalCosts' !!}";
+            const url = "{!! route('projectfinances.update') . '?tab=additionalCosts&id=' !!}" + id + "{!! '&model=AdditionalCosts' !!}";
             var data = $('#save-additional-costs-data-form').serialize();
 
             console.log(url);
             console.log(data);
 
-            saveClient(data, url, "#save-additional-costs-form");
+            saveClient(data, url, "#update-additional-costs-form");
 
         });
 

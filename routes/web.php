@@ -361,10 +361,10 @@ Route::group(['middleware' => 'auth', 'prefix' => 'account'], function () {
             // Route::get('plumbing', 'plumbing')->name('plumbing');
             // Route::get('wiring', 'wiring')->name('wiring');
             // Route::get('kitchens', 'kitchens')->name('kitchens');
-            // Route::get('capentry', 'capentry')->name('capentry');
+            Route::get('capentry-costs-form', 'capentryForm')->name('capentryForm');
             // Route::get('metalworking', 'metalworking')->name('metalworking');
             // Route::get('painting', 'painting')->name('painting');
-            // Route::get('aircon', 'aircon')->name('aircon');
+            Route::get('aircon-costs-form', 'airconForm')->name('airconForm');
             // Route::get('waterproofing', 'waterproofing')->name('waterproofing');
             // Route::get('gardening', 'gardening')->name('gardening');
             // Route::get('walls', 'walls')->name('walls');

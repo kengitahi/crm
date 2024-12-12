@@ -11,7 +11,8 @@ class AirCon extends Model
 
     protected $table = 'project_finances_aircon';
 
-    // protected $fillable = ["air_conditioning_system"];
+    const CUSTOM_FIELD_MODEL = 'App\Models\ProjectFinances\AirCon';
+
     protected $guarded = [
         'id',
     ];
