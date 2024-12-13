@@ -15,6 +15,7 @@ use App\DataTables\MaterialsDataTable;
 use App\DataTables\MetalworkingDataTable;
 use App\DataTables\OperationDataTable;
 use App\DataTables\OtherCostsDataTable;
+use App\DataTables\PaintingDataTable;
 use App\Helper\Reply;
 use App\Http\Requests\ProjectFinancesRequest;
 use App\Models\ProjectFinance;
@@ -76,7 +77,7 @@ class ProjectFinancesController extends AccountBaseController
             'kitchens' => $this->kitchens(new KitchensDataTable),
             'capentry' => $this->capentry(new CarpentryDataTable),
             'metalworking' => $this->metalworking(new MetalworkingDataTable),
-            'painting' => $this->painting(),
+            'painting' => $this->painting(new PaintingDataTable),
             'aircon' => $this->aircon(new AirconDataTable),
             'waterproofing' => $this->waterproofing(),
             'gardening' => $this->gardening(new GardeningDataTable),
@@ -311,6 +312,16 @@ class ProjectFinancesController extends AccountBaseController
             'Project Finances - '.__('modules.projects.tabs.otherCosts');
         $this->view = 'project-finances.otherCosts';
         $this->activeTab = 'otherCosts';
+
+        return $dataTable->render('project-finances.index', $this->data);
+    }
+
+    public function painting(PaintingDataTable $dataTable)
+    {
+        $this->pageTitle =
+            'Project Finances - '.__('modules.projects.tabs.painting');
+        $this->view = 'project-finances.painting';
+        $this->activeTab = 'painting';
 
         return $dataTable->render('project-finances.index', $this->data);
     }
@@ -562,6 +573,25 @@ class ProjectFinancesController extends AccountBaseController
         return $this->returnAjax($this->view);
     }
 
+    public function paintingForm()
+    {
+        request()->action == 'edit'
+            ? ($titleAction = __('modules.projects.edit'))
+            : ($titleAction = __('modules.projects.addNew'));
+
+        $this->pageTitle =
+            $titleAction.
+            ' '.
+            __('modules.projects.tabs.painting').
+            ' '.
+            __('modules.projects.record');
+        $this->view = 'project-finances.ajax.painting';
+
+        $this->costToEdit = Painting::find(request('id'));
+
+        return $this->returnAjax($this->view);
+    }
+
     public function storeAdditionalCosts(
         ProjectFinancesRequest $request,
         $action = null,
@@ -680,28 +710,6 @@ class ProjectFinancesController extends AccountBaseController
                 ' '.
                 __('modules.projects.record');
             $this->view = 'project-finances.ajax.wiring';
-
-            return $this->returnAjax($this->view);
-        }
-
-        return view('project-finances.index', $this->data);
-    }
-
-    public function painting()
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.painting');
-        $this->view = 'project-finances.painting';
-        $this->activeTab = 'painting';
-
-        if (request()->ajax()) {
-            $this->pageTitle =
-                __('modules.projects.addNew').
-                ' '.
-                __('modules.projects.tabs.painting').
-                ' '.
-                __('modules.projects.record');
-            $this->view = 'project-finances.ajax.painting';
 
             return $this->returnAjax($this->view);
         }

@@ -684,7 +684,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'account'], function () {
             Route::get('metalworking-costs-form', 'metalworkingForm')->name(
                 'metalworkingForm'
             );
-            // Route::get('painting', 'painting')->name('painting');
+            Route::get('painting-cost-form', 'paintingForm')->name(
+                'paintingForm'
+            );
             Route::get('aircon-costs-form', 'airconForm')->name('airconForm');
             // Route::get('waterproofing', 'waterproofing')->name('waterproofing');
             Route::get('gardening-form', 'gardeningForm')->name(

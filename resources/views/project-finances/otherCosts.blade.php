@@ -48,7 +48,7 @@
         <!-- Task Box Start -->
         <div class="d-flex flex-column w-tables table-responsive mt-3 rounded bg-white">
 
-            {!! $dataTable->table(['class' => 'table table-hover border-0 w-100']) !!}
+            {{--{!! $dataTable->table(['class' => 'table table-hover border-0 w-100']) !!}--}}
 
         </div>
         <!-- Task Box End -->
