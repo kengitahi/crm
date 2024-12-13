@@ -64,29 +64,36 @@ class ProjectFinancesController extends AccountBaseController
         $this->activeTab = $tab ?: 'preliminary';
 
         return match ($tab) {
-            'licenses' => $this->licenses(new LicensesDataTable),
+            'licenses' => $this->show(new LicensesDataTable, 'licenses'),
             'urbanization' => $this->urbanization(),
             'building' => $this->building(),
-            'concrete' => $this->concrete(new ConcreteDataTable),
+            'concrete' => $this->show(new ConcreteDataTable, 'concrete'),
             'steel' => $this->steel(),
-            'masonry' => $this->masonry(new MasonryDataTable),
-            'materials' => $this->materials(new MaterialsDataTable),
-            'finishes' => $this->finishes(new FinishesDataTable),
+            'masonry' => $this->show(new MasonryDataTable, 'masonry'),
+            'materials' => $this->show(new MaterialsDataTable, 'materials'),
+            'finishes' => $this->show(new FinishesDataTable, 'finishes'),
             'plumbing' => $this->plumbing(),
             'wiring' => $this->wiring(),
-            'kitchens' => $this->kitchens(new KitchensDataTable),
-            'capentry' => $this->capentry(new CarpentryDataTable),
-            'metalworking' => $this->metalworking(new MetalworkingDataTable),
-            'painting' => $this->painting(new PaintingDataTable),
-            'aircon' => $this->aircon(new AirconDataTable),
-            'waterproofing' => $this->waterproofing(),
-            'gardening' => $this->gardening(new GardeningDataTable),
-            'walls' => $this->walls(),
-            'additionalCosts' => $this->additionalCosts(
-                new AdditionalCostsDataTable
+            'kitchens' => $this->show(new KitchensDataTable, 'kitchens'),
+            'capentry' => $this->show(new CarpentryDataTable, 'capentry'),
+            'metalworking' => $this->show(
+                new MetalworkingDataTable,
+                'metalworking'
             ),
-            'otherCosts' => $this->otherCosts(new OtherCostsDataTable),
-            'operation' => $this->operation(new OperationDataTable),
+            'painting' => $this->show(new PaintingDataTable, 'painting'),
+            'aircon' => $this->show(new AirconDataTable, 'aircon'),
+            'waterproofing' => $this->waterproofing(),
+            'gardening' => $this->show(new GardeningDataTable, 'gardening'),
+            'walls' => $this->walls(),
+            'additionalCosts' => $this->show(
+                new AdditionalCostsDataTable,
+                'additionalCosts'
+            ),
+            'otherCosts' => $this->show(
+                new OtherCostsDataTable,
+                'otherCosts'
+            ),
+            'operation' => $this->show(new OperationDataTable, 'operation'),
             default => view('project-finances.index', $this->data),
         };
     }
@@ -120,11 +127,14 @@ class ProjectFinancesController extends AccountBaseController
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show($dataTable, $title)
     {
-        $this->view = 'project-finances.index';
+        $this->pageTitle =
+            'Project Finances - '.__("modules.projects.tabs.$title");
+        $this->view = "project-finances.$title";
+        $this->activeTab = $title;
 
-        return view('project-finances.index', $this->data);
+        return $dataTable->render('project-finances.index', $this->data);
     }
 
     /**
