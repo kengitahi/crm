@@ -9,6 +9,8 @@ class Metalworking extends Model
 {
     use HasFactory;
 
+    const CUSTOM_FIELD_MODEL = "App\Models\ProjectFinances\Metalworking";
+
     protected $table = 'project_finances_metalworking';
 
     protected $guarded = ['id'];

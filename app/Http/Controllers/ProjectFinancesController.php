@@ -11,6 +11,8 @@ use App\DataTables\GardeningDataTable;
 use App\DataTables\KitchensDataTable;
 use App\DataTables\LicensesDataTable;
 use App\DataTables\MasonryDataTable;
+use App\DataTables\MaterialsDataTable;
+use App\DataTables\MetalworkingDataTable;
 use App\Helper\Reply;
 use App\Http\Requests\ProjectFinancesRequest;
 use App\Models\ProjectFinance;
@@ -59,39 +61,23 @@ class ProjectFinancesController extends AccountBaseController
         $this->activeTab = $tab ?: 'preliminary';
 
         return match ($tab) {
-            'licenses' => $this->licenses(
-                new LicensesDataTable
-            ),
+            'licenses' => $this->licenses(new LicensesDataTable),
             'urbanization' => $this->urbanization(),
             'building' => $this->building(),
-            'concrete' => $this->concrete(
-                new ConcreteDataTable
-            ),
+            'concrete' => $this->concrete(new ConcreteDataTable),
             'steel' => $this->steel(),
-            'masonry' => $this->masonry(
-                new MasonryDataTable
-            ),
-            'materials' => $this->materials(),
-            'finishes' => $this->finishes(
-                new FinishesDataTable
-            ),
+            'masonry' => $this->masonry(new MasonryDataTable),
+            'materials' => $this->materials(new MaterialsDataTable),
+            'finishes' => $this->finishes(new FinishesDataTable),
             'plumbing' => $this->plumbing(),
             'wiring' => $this->wiring(),
-            'kitchens' => $this->kitchens(
-                new KitchensDataTable
-            ),
-            'capentry' => $this->capentry(
-                new CarpentryDataTable
-            ),
-            'metalworking' => $this->metalworking(),
+            'kitchens' => $this->kitchens(new KitchensDataTable),
+            'capentry' => $this->capentry(new CarpentryDataTable),
+            'metalworking' => $this->metalworking(new MetalworkingDataTable),
             'painting' => $this->painting(),
-            'aircon' => $this->aircon(
-                new AirconDataTable
-            ),
+            'aircon' => $this->aircon(new AirconDataTable),
             'waterproofing' => $this->waterproofing(),
-            'gardening' => $this->gardening(
-                new GardeningDataTable
-            ),
+            'gardening' => $this->gardening(new GardeningDataTable),
             'walls' => $this->walls(),
             'additionalCosts' => $this->additionalCosts(
                 new AdditionalCostsDataTable
@@ -167,7 +153,6 @@ class ProjectFinancesController extends AccountBaseController
         return Reply::successWithData(__('messages.recordSaved'), [
             'redirectUrl' => $redirectUrl,
         ]);
-
     }
 
     /**
@@ -288,9 +273,31 @@ class ProjectFinancesController extends AccountBaseController
         return $dataTable->render('project-finances.index', $this->data);
     }
 
+    public function materials($dataTable)
+    {
+        $this->pageTitle =
+            'Project Finances - '.__('modules.projects.tabs.materials');
+        $this->view = 'project-finances.materials';
+        $this->activeTab = 'materials';
+
+        return $dataTable->render('project-finances.index', $this->data);
+    }
+
+    public function metalworking(MetalworkingDataTable $dataTable)
+    {
+        $this->pageTitle =
+            'Project Finances - '.__('modules.projects.tabs.metalworking');
+        $this->view = 'project-finances.metalworking';
+        $this->activeTab = 'metalworking';
+
+        return $dataTable->render('project-finances.index', $this->data);
+    }
+
     public function additionalCostsForm()
     {
-        request()->action == 'edit' ? $titleAction = __('modules.projects.edit') : $titleAction = __('modules.projects.addNew');
+        request()->action == 'edit'
+            ? ($titleAction = __('modules.projects.edit'))
+            : ($titleAction = __('modules.projects.addNew'));
 
         $this->pageTitle =
             $titleAction.
@@ -307,7 +314,9 @@ class ProjectFinancesController extends AccountBaseController
 
     public function airconForm()
     {
-        request()->action == 'edit' ? $titleAction = __('modules.projects.edit') : $titleAction = __('modules.projects.addNew');
+        request()->action == 'edit'
+            ? ($titleAction = __('modules.projects.edit'))
+            : ($titleAction = __('modules.projects.addNew'));
 
         $this->pageTitle =
             $titleAction.
@@ -324,7 +333,9 @@ class ProjectFinancesController extends AccountBaseController
 
     public function capentryForm()
     {
-        request()->action == 'edit' ? $titleAction = __('modules.projects.edit') : $titleAction = __('modules.projects.addNew');
+        request()->action == 'edit'
+            ? ($titleAction = __('modules.projects.edit'))
+            : ($titleAction = __('modules.projects.addNew'));
 
         $this->pageTitle =
             $titleAction.
@@ -341,7 +352,9 @@ class ProjectFinancesController extends AccountBaseController
 
     public function concreteForm()
     {
-        request()->action == 'edit' ? $titleAction = __('modules.projects.edit') : $titleAction = __('modules.projects.addNew');
+        request()->action == 'edit'
+            ? ($titleAction = __('modules.projects.edit'))
+            : ($titleAction = __('modules.projects.addNew'));
 
         $this->pageTitle =
             $titleAction.
@@ -358,7 +371,9 @@ class ProjectFinancesController extends AccountBaseController
 
     public function finishesForm()
     {
-        request()->action == 'edit' ? $titleAction = __('modules.projects.edit') : $titleAction = __('modules.projects.addNew');
+        request()->action == 'edit'
+            ? ($titleAction = __('modules.projects.edit'))
+            : ($titleAction = __('modules.projects.addNew'));
 
         $this->pageTitle =
             $titleAction.
@@ -375,7 +390,9 @@ class ProjectFinancesController extends AccountBaseController
 
     public function gardeningForm()
     {
-        request()->action == 'edit' ? $titleAction = __('modules.projects.edit') : $titleAction = __('modules.projects.addNew');
+        request()->action == 'edit'
+            ? ($titleAction = __('modules.projects.edit'))
+            : ($titleAction = __('modules.projects.addNew'));
 
         $this->pageTitle =
             $titleAction.
@@ -392,7 +409,9 @@ class ProjectFinancesController extends AccountBaseController
 
     public function kitchensForm()
     {
-        request()->action == 'edit' ? $titleAction = __('modules.projects.edit') : $titleAction = __('modules.projects.addNew');
+        request()->action == 'edit'
+            ? ($titleAction = __('modules.projects.edit'))
+            : ($titleAction = __('modules.projects.addNew'));
 
         $this->pageTitle =
             $titleAction.
@@ -409,7 +428,9 @@ class ProjectFinancesController extends AccountBaseController
 
     public function licensesForm()
     {
-        request()->action == 'edit' ? $titleAction = __('modules.projects.edit') : $titleAction = __('modules.projects.addNew');
+        request()->action == 'edit'
+            ? ($titleAction = __('modules.projects.edit'))
+            : ($titleAction = __('modules.projects.addNew'));
 
         $this->pageTitle =
             $titleAction.
@@ -426,7 +447,9 @@ class ProjectFinancesController extends AccountBaseController
 
     public function masonryForm()
     {
-        request()->action == 'edit' ? $titleAction = __('modules.projects.edit') : $titleAction = __('modules.projects.addNew');
+        request()->action == 'edit'
+            ? ($titleAction = __('modules.projects.edit'))
+            : ($titleAction = __('modules.projects.addNew'));
 
         $this->pageTitle =
             $titleAction.
@@ -441,8 +464,49 @@ class ProjectFinancesController extends AccountBaseController
         return $this->returnAjax($this->view);
     }
 
-    public function storeAdditionalCosts(ProjectFinancesRequest $request, $action = null, $id = null)
+    public function materialsForm()
     {
+        request()->action == 'edit'
+            ? ($titleAction = __('modules.projects.edit'))
+            : ($titleAction = __('modules.projects.addNew'));
+
+        $this->pageTitle =
+            $titleAction.
+            ' '.
+            __('modules.projects.tabs.materials').
+            ' '.
+            __('modules.projects.record');
+        $this->view = 'project-finances.ajax.materials';
+
+        $this->costToEdit = Materials::find(request('id'));
+
+        return $this->returnAjax($this->view);
+    }
+
+    public function metalworkingForm()
+    {
+        request()->action == 'edit'
+            ? ($titleAction = __('modules.projects.edit'))
+            : ($titleAction = __('modules.projects.addNew'));
+
+        $this->pageTitle =
+            $titleAction.
+            ' '.
+            __('modules.projects.tabs.materials').
+            ' '.
+            __('modules.projects.record');
+        $this->view = 'project-finances.ajax.metalworking';
+
+        $this->costToEdit = Metalworking::find(request('id'));
+
+        return $this->returnAjax($this->view);
+    }
+
+    public function storeAdditionalCosts(
+        ProjectFinancesRequest $request,
+        $action = null,
+        $id = null
+    ) {
         $validatedData = $request->validated();
         $redirectUrl = route('projectfinances.index').'?tab=additionalCosts';
 
@@ -519,28 +583,6 @@ class ProjectFinancesController extends AccountBaseController
         return view('project-finances.index', $this->data);
     }
 
-    public function materials()
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.materials');
-        $this->view = 'project-finances.materials';
-        $this->activeTab = 'materials';
-
-        if (request()->ajax()) {
-            $this->pageTitle =
-                __('modules.projects.addNew').
-                ' '.
-                __('modules.projects.tabs.materials').
-                ' '.
-                __('modules.projects.record');
-            $this->view = 'project-finances.ajax.materials';
-
-            return $this->returnAjax($this->view);
-        }
-
-        return view('project-finances.index', $this->data);
-    }
-
     public function plumbing()
     {
         $this->pageTitle =
@@ -578,28 +620,6 @@ class ProjectFinancesController extends AccountBaseController
                 ' '.
                 __('modules.projects.record');
             $this->view = 'project-finances.ajax.wiring';
-
-            return $this->returnAjax($this->view);
-        }
-
-        return view('project-finances.index', $this->data);
-    }
-
-    public function metalworking()
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.metalworking');
-        $this->view = 'project-finances.metalworking';
-        $this->activeTab = 'metalworking';
-
-        if (request()->ajax()) {
-            $this->pageTitle =
-                __('modules.projects.addNew').
-                ' '.
-                __('modules.projects.tabs.metalworking').
-                ' '.
-                __('modules.projects.record');
-            $this->view = 'project-finances.ajax.metalworking';
 
             return $this->returnAjax($this->view);
         }
