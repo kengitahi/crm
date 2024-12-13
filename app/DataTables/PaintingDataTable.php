@@ -45,10 +45,11 @@ class PaintingDataTable extends BaseDataTable
 
             $action .=
                 '<a class="dropdown-item openRightModal" href="'.
-                route('projectfinances.paintingForm', [
+                route('projectfinances.form', [
                     'action' => 'edit',
                     'model' => 'Painting',
                     'id' => $row->id,
+                    'tab' => 'painting',
                 ]).
                 '">
                                 <i class="fa fa-edit mr-2"></i>

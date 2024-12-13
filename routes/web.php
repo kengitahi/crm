@@ -574,6 +574,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'account'], function () {
             Route::get('/', 'index')->name('index');
             Route::post('/update', 'update')->name('update');
             Route::post('/store', 'store')->name('store');
+            Route::get('/form', 'form')->name('form');
             Route::delete('/delete', 'destroy')->name('destroy');
 
             //Tabs
@@ -693,9 +694,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'account'], function () {
                 'gardeningForm'
             );
             // Route::get('walls', 'walls')->name('walls');
-            Route::get('additional-costs-form', 'additionalCostsForm')->name(
-                'additionalCostsForm'
-            );
+            // Route::get("additional-costs-form", "additionalCostsForm")->name(
+            //     "additionalCostsForm"
+            // );
             Route::get('other-costs-form', 'otherCostsForm')->name(
                 'otherCostsForm'
             );

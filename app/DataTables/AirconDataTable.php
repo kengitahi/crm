@@ -46,7 +46,12 @@ class AirconDataTable extends BaseDataTable
 
             $action .=
                 '<a class="dropdown-item openRightModal" href="'.
-                route('projectfinances.airconForm', ['action' => 'edit', 'model' => 'AirCon', 'id' => $row->id]).
+                route('projectfinances.form', [
+                    'action' => 'edit',
+                    'model' => 'AirCon',
+                    'id' => $row->id,
+                    'tab' => 'aircon',
+                ]).
                 '">
                                 <i class="fa fa-edit mr-2"></i>
                                 '.
@@ -69,10 +74,21 @@ class AirconDataTable extends BaseDataTable
             return $action;
         });
 
-        $datatables->addColumn('aircon', fn ($row) => $row->air_conditioning_system ?: '--');
-        $datatables->editColumn('created_at', fn ($row) => Carbon::parse($row->created_at)->translatedFormat($this->company->date_format));
+        $datatables->addColumn(
+            'aircon',
+            fn ($row) => $row->air_conditioning_system ?: '--'
+        );
+        $datatables->editColumn(
+            'created_at',
+            fn ($row) => Carbon::parse($row->created_at)->translatedFormat(
+                $this->company->date_format
+            )
+        );
 
-        $customFieldColumns = CustomField::customFieldData($datatables, AirCon::CUSTOM_FIELD_MODEL);
+        $customFieldColumns = CustomField::customFieldData(
+            $datatables,
+            AirCon::CUSTOM_FIELD_MODEL
+        );
 
         $datatables->rawColumns(array_merge(['action'], $customFieldColumns));
 
@@ -109,7 +125,13 @@ class AirconDataTable extends BaseDataTable
                   //
                 }',
         ]);
-        $dataTable->buttons(Button::make(['extend' => 'excel', 'text' => '<i class="fa fa-file-export"></i> '.trans('app.exportExcel')]));
+        $dataTable->buttons(
+            Button::make([
+                'extend' => 'excel',
+                'text' => '<i class="fa fa-file-export"></i> '.
+                    trans('app.exportExcel'),
+            ])
+        );
 
         return $dataTable;
     }
@@ -121,9 +143,23 @@ class AirconDataTable extends BaseDataTable
     {
         $columns = [
             Column::make('id'),
-            __('modules.projects.formLabels.aircon') => ['data' => 'aircon', 'name' => 'aircon', 'title' => __('modules.projects.formLabels.aircon'), 'visible' => showId(), 'orderable' => false],
-            __('app.createdAt') => ['data' => 'created_at', 'name' => 'created_at', 'title' => __('app.createdAt')],
-            __('app.updatedOn') => ['data' => 'created_at', 'name' => 'created_at', 'title' => __('app.updatedOn')],
+            __('modules.projects.formLabels.aircon') => [
+                'data' => 'aircon',
+                'name' => 'aircon',
+                'title' => __('modules.projects.formLabels.aircon'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            __('app.createdAt') => [
+                'data' => 'created_at',
+                'name' => 'created_at',
+                'title' => __('app.createdAt'),
+            ],
+            __('app.updatedOn') => [
+                'data' => 'created_at',
+                'name' => 'created_at',
+                'title' => __('app.updatedOn'),
+            ],
         ];
 
         $action = [
@@ -135,7 +171,11 @@ class AirconDataTable extends BaseDataTable
                 ->addClass('text-right pr-20'),
         ];
 
-        return array_merge($columns, CustomFieldGroup::customFieldsDataMerge(new AdditionalCosts), $action);
+        return array_merge(
+            $columns,
+            CustomFieldGroup::customFieldsDataMerge(new AdditionalCosts),
+            $action
+        );
     }
 
     /**
@@ -143,6 +183,6 @@ class AirconDataTable extends BaseDataTable
      */
     protected function filename(): string
     {
-        return 'Aircontitioning_'.date('YmdHis');
+        return 'Airconditioning_'.date('YmdHis');
     }
 }

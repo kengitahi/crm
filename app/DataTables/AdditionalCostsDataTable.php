@@ -52,7 +52,12 @@ class AdditionalCostsDataTable extends BaseDataTable
 
             $action .=
                 '<a class="dropdown-item openRightModal" href="'.
-                route('projectfinances.additionalCostsForm', ['action' => 'edit', 'model' => 'AirCon', 'id' => $row->id]).
+                route('projectfinances.form', [
+                    'action' => 'edit',
+                    'model' => 'AdditionalCosts',
+                    'id' => $row->id,
+                    'tab' => 'additionalCosts',
+                ]).
                 '">
                                 <i class="fa fa-edit mr-2"></i>
                                 '.
@@ -76,11 +81,25 @@ class AdditionalCostsDataTable extends BaseDataTable
         });
 
         $datatables->addColumn('imss', fn ($row) => $row->imss ?: '--');
-        $datatables->addColumn('infornavit', fn ($row) => $row->infornavit ?: '--');
-        $datatables->addColumn('accounting', fn ($row) => $row->accounting ?: '--');
-        $datatables->editColumn('created_at', fn ($row) => Carbon::parse($row->created_at)->translatedFormat($this->company->date_format));
+        $datatables->addColumn(
+            'infornavit',
+            fn ($row) => $row->infornavit ?: '--'
+        );
+        $datatables->addColumn(
+            'accounting',
+            fn ($row) => $row->accounting ?: '--'
+        );
+        $datatables->editColumn(
+            'created_at',
+            fn ($row) => Carbon::parse($row->created_at)->translatedFormat(
+                $this->company->date_format
+            )
+        );
 
-        $customFieldColumns = CustomField::customFieldData($datatables, AdditionalCosts::CUSTOM_FIELD_MODEL);
+        $customFieldColumns = CustomField::customFieldData(
+            $datatables,
+            AdditionalCosts::CUSTOM_FIELD_MODEL
+        );
 
         $datatables->rawColumns(array_merge(['action'], $customFieldColumns));
 
@@ -117,7 +136,13 @@ class AdditionalCostsDataTable extends BaseDataTable
                   //
                 }',
         ]);
-        $dataTable->buttons(Button::make(['extend' => 'excel', 'text' => '<i class="fa fa-file-export"></i> '.trans('app.exportExcel')]));
+        $dataTable->buttons(
+            Button::make([
+                'extend' => 'excel',
+                'text' => '<i class="fa fa-file-export"></i> '.
+                    trans('app.exportExcel'),
+            ])
+        );
 
         return $dataTable;
     }
@@ -129,11 +154,37 @@ class AdditionalCostsDataTable extends BaseDataTable
     {
         $columns = [
             Column::make('id'),
-            __('modules.projects.formLabels.imss') => ['data' => 'imss', 'name' => 'imss', 'title' => __('modules.projects.formLabels.imss'), 'visible' => showId(), 'orderable' => false],
-            __('modules.projects.formLabels.infornavit') => ['data' => 'infornavit', 'name' => 'infornavit', 'title' => __('modules.projects.formLabels.infornavit'), 'visible' => showId(), 'orderable' => false],
-            __('modules.projects.formLabels.accounting') => ['data' => 'accounting', 'name' => 'accounting', 'title' => __('modules.projects.formLabels.accounting'), 'visible' => showId(), 'orderable' => false],
-            __('app.createdAt') => ['data' => 'created_at', 'name' => 'created_at', 'title' => __('app.createdAt')],
-            __('app.updatedOn') => ['data' => 'created_at', 'name' => 'created_at', 'title' => __('app.updatedOn')],
+            __('modules.projects.formLabels.imss') => [
+                'data' => 'imss',
+                'name' => 'imss',
+                'title' => __('modules.projects.formLabels.imss'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            __('modules.projects.formLabels.infornavit') => [
+                'data' => 'infornavit',
+                'name' => 'infornavit',
+                'title' => __('modules.projects.formLabels.infornavit'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            __('modules.projects.formLabels.accounting') => [
+                'data' => 'accounting',
+                'name' => 'accounting',
+                'title' => __('modules.projects.formLabels.accounting'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            __('app.createdAt') => [
+                'data' => 'created_at',
+                'name' => 'created_at',
+                'title' => __('app.createdAt'),
+            ],
+            __('app.updatedOn') => [
+                'data' => 'created_at',
+                'name' => 'created_at',
+                'title' => __('app.updatedOn'),
+            ],
         ];
 
         $action = [
@@ -145,7 +196,11 @@ class AdditionalCostsDataTable extends BaseDataTable
                 ->addClass('text-right pr-20'),
         ];
 
-        return array_merge($columns, CustomFieldGroup::customFieldsDataMerge(new AdditionalCosts), $action);
+        return array_merge(
+            $columns,
+            CustomFieldGroup::customFieldsDataMerge(new AdditionalCosts),
+            $action
+        );
     }
 
     /**

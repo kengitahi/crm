@@ -19,7 +19,6 @@ use App\DataTables\PaintingDataTable;
 use App\Helper\Reply;
 use App\Http\Requests\ProjectFinancesRequest;
 use App\Models\ProjectFinance;
-use App\Models\ProjectFinances\AdditionalCosts;
 use App\Models\ProjectFinances\AirCon;
 use App\Models\ProjectFinances\BuildingCost;
 use App\Models\ProjectFinances\Capentry;
@@ -111,11 +110,12 @@ class ProjectFinancesController extends AccountBaseController
      */
     public function store(ProjectFinancesRequest $request)
     {
+        $tab = request('tab');
         $model = request('model');
         $modelToStore = "App\Models\ProjectFinances\\$model";
 
         $validatedData = $request->validated();
-        $redirectUrl = route('projectfinances.index').'?tab=additionalCosts';
+        $redirectUrl = route('projectfinances.index')."?tab=$tab";
 
         $modelToStore::create($validatedData);
 
@@ -135,6 +135,34 @@ class ProjectFinancesController extends AccountBaseController
         $this->activeTab = $title;
 
         return $dataTable->render('project-finances.index', $this->data);
+    }
+
+    public function form()
+    {
+        $title = request('tab');
+        $tab = request('tab');
+        $id = request('id');
+
+        if (request()->action == 'edit') {
+            $model = request('model');
+            $modelToUpdate = "App\Models\ProjectFinances\\$model";
+            $this->costToEdit = $modelToUpdate::find($id);
+        }
+
+        request()->action == 'edit'
+            ? ($titleAction = __('modules.projects.edit'))
+            : ($titleAction = __('modules.projects.addNew'));
+
+        $this->pageTitle =
+            $titleAction.
+            ' '.
+            __("modules.projects.tabs.$title").
+            ' '.
+            __('modules.projects.record');
+
+        $this->view = "project-finances.ajax.$tab";
+
+        return $this->returnAjax($this->view);
     }
 
     /**
@@ -194,427 +222,6 @@ class ProjectFinancesController extends AccountBaseController
     public function preliminary()
     {
         return view('project-finances.index', $this->data);
-    }
-
-    public function additionalCosts(AdditionalCostsDataTable $dataTable)
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.additionalCosts');
-        $this->view = 'project-finances.additionalCosts';
-        $this->activeTab = 'additionalCosts';
-
-        return $dataTable->render('project-finances.index', $this->data);
-    }
-
-    public function aircon($dataTable)
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.aircon');
-        $this->view = 'project-finances.aircon';
-        $this->activeTab = 'aircon';
-
-        return $dataTable->render('project-finances.index', $this->data);
-    }
-
-    public function capentry(CarpentryDataTable $dataTable)
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.capentry');
-        $this->view = 'project-finances.capentry';
-        $this->activeTab = 'capentry';
-
-        return $dataTable->render('project-finances.index', $this->data);
-    }
-
-    public function concrete($dataTable)
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.concrete');
-        $this->view = 'project-finances.concrete';
-        $this->activeTab = 'concrete';
-
-        return $dataTable->render('project-finances.index', $this->data);
-    }
-
-    public function finishes($dataTable)
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.finishes');
-        $this->view = 'project-finances.finishes';
-        $this->activeTab = 'finishes';
-
-        return $dataTable->render('project-finances.index', $this->data);
-    }
-
-    public function gardening($dataTable)
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.gardening');
-        $this->view = 'project-finances.gardening';
-        $this->activeTab = 'gardening';
-
-        return $dataTable->render('project-finances.index', $this->data);
-    }
-
-    public function kitchens(KitchensDataTable $dataTable)
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.kitchens');
-        $this->view = 'project-finances.kitchens';
-        $this->activeTab = 'kitchens';
-
-        return $dataTable->render('project-finances.index', $this->data);
-    }
-
-    public function licenses($dataTable)
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.licenses');
-        $this->view = 'project-finances.licenses';
-        $this->activeTab = 'licenses';
-
-        return $dataTable->render('project-finances.index', $this->data);
-    }
-
-    public function masonry($dataTable)
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.masonry');
-        $this->activeTab = 'masonry';
-        $this->view = 'project-finances.masonry';
-
-        return $dataTable->render('project-finances.index', $this->data);
-    }
-
-    public function materials($dataTable)
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.materials');
-        $this->view = 'project-finances.materials';
-        $this->activeTab = 'materials';
-
-        return $dataTable->render('project-finances.index', $this->data);
-    }
-
-    public function metalworking(MetalworkingDataTable $dataTable)
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.metalworking');
-        $this->view = 'project-finances.metalworking';
-        $this->activeTab = 'metalworking';
-
-        return $dataTable->render('project-finances.index', $this->data);
-    }
-
-    public function operation(OperationDataTable $dataTable)
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.operation');
-        $this->view = 'project-finances.operation';
-        $this->activeTab = 'operation';
-
-        return $dataTable->render('project-finances.index', $this->data);
-    }
-
-    public function otherCosts(OtherCostsDataTable $dataTable)
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.otherCosts');
-        $this->view = 'project-finances.otherCosts';
-        $this->activeTab = 'otherCosts';
-
-        return $dataTable->render('project-finances.index', $this->data);
-    }
-
-    public function painting(PaintingDataTable $dataTable)
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.painting');
-        $this->view = 'project-finances.painting';
-        $this->activeTab = 'painting';
-
-        return $dataTable->render('project-finances.index', $this->data);
-    }
-
-    public function additionalCostsForm()
-    {
-        request()->action == 'edit'
-            ? ($titleAction = __('modules.projects.edit'))
-            : ($titleAction = __('modules.projects.addNew'));
-
-        $this->pageTitle =
-            $titleAction.
-            ' '.
-            __('modules.projects.tabs.additionalCosts').
-            ' '.
-            __('modules.projects.record');
-        $this->view = 'project-finances.ajax.additionalCosts';
-
-        $this->costToEdit = AdditionalCosts::find(request('id'));
-
-        return $this->returnAjax($this->view);
-    }
-
-    public function airconForm()
-    {
-        request()->action == 'edit'
-            ? ($titleAction = __('modules.projects.edit'))
-            : ($titleAction = __('modules.projects.addNew'));
-
-        $this->pageTitle =
-            $titleAction.
-            ' '.
-            __('modules.projects.tabs.aircon').
-            ' '.
-            __('modules.projects.record');
-        $this->view = 'project-finances.ajax.aircon';
-
-        $this->costToEdit = Aircon::find(request('id'));
-
-        return $this->returnAjax($this->view);
-    }
-
-    public function capentryForm()
-    {
-        request()->action == 'edit'
-            ? ($titleAction = __('modules.projects.edit'))
-            : ($titleAction = __('modules.projects.addNew'));
-
-        $this->pageTitle =
-            $titleAction.
-            ' '.
-            __('modules.projects.tabs.capentry').
-            ' '.
-            __('modules.projects.record');
-        $this->view = 'project-finances.ajax.capentry';
-
-        $this->costToEdit = Capentry::find(request('id'));
-
-        return $this->returnAjax($this->view);
-    }
-
-    public function concreteForm()
-    {
-        request()->action == 'edit'
-            ? ($titleAction = __('modules.projects.edit'))
-            : ($titleAction = __('modules.projects.addNew'));
-
-        $this->pageTitle =
-            $titleAction.
-            ' '.
-            __('modules.projects.tabs.concrete').
-            ' '.
-            __('modules.projects.record');
-        $this->view = 'project-finances.ajax.concrete';
-
-        $this->costToEdit = ConcreteStructure::find(request('id'));
-
-        return $this->returnAjax($this->view);
-    }
-
-    public function finishesForm()
-    {
-        request()->action == 'edit'
-            ? ($titleAction = __('modules.projects.edit'))
-            : ($titleAction = __('modules.projects.addNew'));
-
-        $this->pageTitle =
-            $titleAction.
-            ' '.
-            __('modules.projects.tabs.finishes').
-            ' '.
-            __('modules.projects.record');
-        $this->view = 'project-finances.ajax.finishes';
-
-        $this->costToEdit = Finishes::find(request('id'));
-
-        return $this->returnAjax($this->view);
-    }
-
-    public function gardeningForm()
-    {
-        request()->action == 'edit'
-            ? ($titleAction = __('modules.projects.edit'))
-            : ($titleAction = __('modules.projects.addNew'));
-
-        $this->pageTitle =
-            $titleAction.
-            ' '.
-            __('modules.projects.tabs.gardening').
-            ' '.
-            __('modules.projects.record');
-        $this->view = 'project-finances.ajax.gardening';
-
-        $this->costToEdit = Gardening::find(request('id'));
-
-        return $this->returnAjax($this->view);
-    }
-
-    public function kitchensForm()
-    {
-        request()->action == 'edit'
-            ? ($titleAction = __('modules.projects.edit'))
-            : ($titleAction = __('modules.projects.addNew'));
-
-        $this->pageTitle =
-            $titleAction.
-            ' '.
-            __('modules.projects.tabs.kitchens').
-            ' '.
-            __('modules.projects.record');
-        $this->view = 'project-finances.ajax.kitchens';
-
-        $this->costToEdit = Kitchens::find(request('id'));
-
-        return $this->returnAjax($this->view);
-    }
-
-    public function licensesForm()
-    {
-        request()->action == 'edit'
-            ? ($titleAction = __('modules.projects.edit'))
-            : ($titleAction = __('modules.projects.addNew'));
-
-        $this->pageTitle =
-            $titleAction.
-            ' '.
-            __('modules.projects.tabs.licenses').
-            ' '.
-            __('modules.projects.record');
-        $this->view = 'project-finances.ajax.licenses';
-
-        $this->costToEdit = LicensesAndPermits::find(request('id'));
-
-        return $this->returnAjax($this->view);
-    }
-
-    public function masonryForm()
-    {
-        request()->action == 'edit'
-            ? ($titleAction = __('modules.projects.edit'))
-            : ($titleAction = __('modules.projects.addNew'));
-
-        $this->pageTitle =
-            $titleAction.
-            ' '.
-            __('modules.projects.tabs.masonry').
-            ' '.
-            __('modules.projects.record');
-        $this->view = 'project-finances.ajax.masonry';
-
-        $this->costToEdit = GrayMasonryWork::find(request('id'));
-
-        return $this->returnAjax($this->view);
-    }
-
-    public function materialsForm()
-    {
-        request()->action == 'edit'
-            ? ($titleAction = __('modules.projects.edit'))
-            : ($titleAction = __('modules.projects.addNew'));
-
-        $this->pageTitle =
-            $titleAction.
-            ' '.
-            __('modules.projects.tabs.materials').
-            ' '.
-            __('modules.projects.record');
-        $this->view = 'project-finances.ajax.materials';
-
-        $this->costToEdit = Materials::find(request('id'));
-
-        return $this->returnAjax($this->view);
-    }
-
-    public function metalworkingForm()
-    {
-        request()->action == 'edit'
-            ? ($titleAction = __('modules.projects.edit'))
-            : ($titleAction = __('modules.projects.addNew'));
-
-        $this->pageTitle =
-            $titleAction.
-            ' '.
-            __('modules.projects.tabs.materials').
-            ' '.
-            __('modules.projects.record');
-        $this->view = 'project-finances.ajax.metalworking';
-
-        $this->costToEdit = Metalworking::find(request('id'));
-
-        return $this->returnAjax($this->view);
-    }
-
-    public function operationForm()
-    {
-        request()->action == 'edit'
-            ? ($titleAction = __('modules.projects.edit'))
-            : ($titleAction = __('modules.projects.addNew'));
-
-        $this->pageTitle =
-            $titleAction.
-            ' '.
-            __('modules.projects.tabs.operation').
-            ' '.
-            __('modules.projects.record');
-        $this->view = 'project-finances.ajax.operation';
-
-        $this->costToEdit = Operation::find(request('id'));
-
-        return $this->returnAjax($this->view);
-    }
-
-    public function otherCostsForm()
-    {
-        request()->action == 'edit'
-            ? ($titleAction = __('modules.projects.edit'))
-            : ($titleAction = __('modules.projects.addNew'));
-
-        $this->pageTitle =
-            $titleAction.
-            ' '.
-            __('modules.projects.tabs.otherCosts').
-            ' '.
-            __('modules.projects.record');
-        $this->view = 'project-finances.ajax.otherCosts';
-
-        $this->costToEdit = OtherCosts::find(request('id'));
-
-        return $this->returnAjax($this->view);
-    }
-
-    public function paintingForm()
-    {
-        request()->action == 'edit'
-            ? ($titleAction = __('modules.projects.edit'))
-            : ($titleAction = __('modules.projects.addNew'));
-
-        $this->pageTitle =
-            $titleAction.
-            ' '.
-            __('modules.projects.tabs.painting').
-            ' '.
-            __('modules.projects.record');
-        $this->view = 'project-finances.ajax.painting';
-
-        $this->costToEdit = Painting::find(request('id'));
-
-        return $this->returnAjax($this->view);
-    }
-
-    public function storeAdditionalCosts(
-        ProjectFinancesRequest $request,
-        $action = null,
-        $id = null
-    ) {
-        $validatedData = $request->validated();
-        $redirectUrl = route('projectfinances.index').'?tab=additionalCosts';
-
-        AdditionalCosts::create($validatedData);
-
-        return Reply::successWithData(__('messages.recordSaved'), [
-            'redirectUrl' => $redirectUrl,
-        ]);
     }
 
     public function urbanization()

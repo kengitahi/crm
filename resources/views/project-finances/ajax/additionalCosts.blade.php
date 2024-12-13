@@ -62,7 +62,7 @@
     $(document).ready(function() {
 
         $('#save-additional-costs-form').click(function() {
-            const url = "{{ route('projectfinances.storeAdditionalCosts') }}";
+            const url = "{!! route('projectfinances.store') . '?tab=additionalCosts&model=AdditionalCosts' !!}";
             var data = $('#save-additional-costs-data-form').serialize();
 
             saveClient(data, url, "#save-additional-costs-form");
