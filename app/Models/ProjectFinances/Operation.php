@@ -9,6 +9,8 @@ class Operation extends Model
 {
     use HasFactory;
 
+    const CUSTOM_FIELD_MODEL = "App\Models\ProjectFinances\Operation";
+
     protected $table = 'project_finances_operation';
 
     protected $guarded = ['id'];

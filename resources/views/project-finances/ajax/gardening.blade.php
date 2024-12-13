@@ -35,8 +35,8 @@
 
                 <x-form-actions>
                     @if (request()->action == 'edit')
-                        <x-forms.button-primary class="mr-3" icon="pencil" id="update-gardening-form">
-                            @lang('app.save')
+                        <x-forms.button-primary class="mr-3" icon="edit" id="update-gardening-form">
+                            @lang('app.update')
                         </x-forms.button-primary>
                     @else
                         <x-forms.button-primary class="mr-3" icon="check" id="save-gardening-form">

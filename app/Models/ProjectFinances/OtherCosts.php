@@ -11,5 +11,7 @@ class OtherCosts extends Model
 
     protected $table = 'project_finances_other_costs';
 
+    const CUSTOM_FIELD_MODEL = "App\Models\ProjectFinances\OtherCosts";
+
     protected $guarded = ['id'];
 }

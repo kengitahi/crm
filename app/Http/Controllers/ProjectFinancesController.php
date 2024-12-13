@@ -13,6 +13,8 @@ use App\DataTables\LicensesDataTable;
 use App\DataTables\MasonryDataTable;
 use App\DataTables\MaterialsDataTable;
 use App\DataTables\MetalworkingDataTable;
+use App\DataTables\OperationDataTable;
+use App\DataTables\OtherCostsDataTable;
 use App\Helper\Reply;
 use App\Http\Requests\ProjectFinancesRequest;
 use App\Models\ProjectFinance;
@@ -82,8 +84,8 @@ class ProjectFinancesController extends AccountBaseController
             'additionalCosts' => $this->additionalCosts(
                 new AdditionalCostsDataTable
             ),
-            'otherCosts' => $this->otherCosts(),
-            'operation' => $this->operation(),
+            'otherCosts' => $this->otherCosts(new OtherCostsDataTable),
+            'operation' => $this->operation(new OperationDataTable),
             default => view('project-finances.index', $this->data),
         };
     }
@@ -289,6 +291,26 @@ class ProjectFinancesController extends AccountBaseController
             'Project Finances - '.__('modules.projects.tabs.metalworking');
         $this->view = 'project-finances.metalworking';
         $this->activeTab = 'metalworking';
+
+        return $dataTable->render('project-finances.index', $this->data);
+    }
+
+    public function operation(OperationDataTable $dataTable)
+    {
+        $this->pageTitle =
+            'Project Finances - '.__('modules.projects.tabs.operation');
+        $this->view = 'project-finances.operation';
+        $this->activeTab = 'operation';
+
+        return $dataTable->render('project-finances.index', $this->data);
+    }
+
+    public function otherCosts(OtherCostsDataTable $dataTable)
+    {
+        $this->pageTitle =
+            'Project Finances - '.__('modules.projects.tabs.otherCosts');
+        $this->view = 'project-finances.otherCosts';
+        $this->activeTab = 'otherCosts';
 
         return $dataTable->render('project-finances.index', $this->data);
     }
@@ -502,6 +524,44 @@ class ProjectFinancesController extends AccountBaseController
         return $this->returnAjax($this->view);
     }
 
+    public function operationForm()
+    {
+        request()->action == 'edit'
+            ? ($titleAction = __('modules.projects.edit'))
+            : ($titleAction = __('modules.projects.addNew'));
+
+        $this->pageTitle =
+            $titleAction.
+            ' '.
+            __('modules.projects.tabs.operation').
+            ' '.
+            __('modules.projects.record');
+        $this->view = 'project-finances.ajax.operation';
+
+        $this->costToEdit = Operation::find(request('id'));
+
+        return $this->returnAjax($this->view);
+    }
+
+    public function otherCostsForm()
+    {
+        request()->action == 'edit'
+            ? ($titleAction = __('modules.projects.edit'))
+            : ($titleAction = __('modules.projects.addNew'));
+
+        $this->pageTitle =
+            $titleAction.
+            ' '.
+            __('modules.projects.tabs.otherCosts').
+            ' '.
+            __('modules.projects.record');
+        $this->view = 'project-finances.ajax.otherCosts';
+
+        $this->costToEdit = OtherCosts::find(request('id'));
+
+        return $this->returnAjax($this->view);
+    }
+
     public function storeAdditionalCosts(
         ProjectFinancesRequest $request,
         $action = null,
@@ -686,50 +746,6 @@ class ProjectFinancesController extends AccountBaseController
                 ' '.
                 __('modules.projects.record');
             $this->view = 'project-finances.ajax.walls';
-
-            return $this->returnAjax($this->view);
-        }
-
-        return view('project-finances.index', $this->data);
-    }
-
-    public function otherCosts()
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.otherCosts');
-        $this->view = 'project-finances.otherCosts';
-        $this->activeTab = 'otherCosts';
-
-        if (request()->ajax()) {
-            $this->pageTitle =
-                __('modules.projects.addNew').
-                ' '.
-                __('modules.projects.tabs.otherCosts').
-                ' '.
-                __('modules.projects.record');
-            $this->view = 'project-finances.ajax.otherCosts';
-
-            return $this->returnAjax($this->view);
-        }
-
-        return view('project-finances.index', $this->data);
-    }
-
-    public function operation()
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.operation');
-        $this->view = 'project-finances.operation';
-        $this->activeTab = 'operation';
-
-        if (request()->ajax()) {
-            $this->pageTitle =
-                __('modules.projects.addNew').
-                ' '.
-                __('modules.projects.tabs.operation').
-                ' '.
-                __('modules.projects.record');
-            $this->view = 'project-finances.ajax.operation';
 
             return $this->returnAjax($this->view);
         }
