@@ -7,6 +7,8 @@ use App\DataTables\AirconDataTable;
 use App\DataTables\CarpentryDataTable;
 use App\DataTables\ConcreteDataTable;
 use App\DataTables\FinishesDataTable;
+use App\DataTables\GardeningDataTable;
+use App\DataTables\MasonryDataTable;
 use App\Helper\Reply;
 use App\Http\Requests\ProjectFinancesRequest;
 use App\Models\ProjectFinance;
@@ -62,7 +64,9 @@ class ProjectFinancesController extends AccountBaseController
                 new ConcreteDataTable
             ),
             'steel' => $this->steel(),
-            'masonry' => $this->masonry(),
+            'masonry' => $this->masonry(
+                new MasonryDataTable
+            ),
             'materials' => $this->materials(),
             'finishes' => $this->finishes(
                 new FinishesDataTable
@@ -79,7 +83,9 @@ class ProjectFinancesController extends AccountBaseController
                 new AirconDataTable
             ),
             'waterproofing' => $this->waterproofing(),
-            'gardening' => $this->gardening(),
+            'gardening' => $this->gardening(
+                new GardeningDataTable
+            ),
             'walls' => $this->walls(),
             'additionalCosts' => $this->additionalCosts(
                 new AdditionalCostsDataTable
@@ -236,6 +242,26 @@ class ProjectFinancesController extends AccountBaseController
         return $dataTable->render('project-finances.index', $this->data);
     }
 
+    public function gardening($dataTable)
+    {
+        $this->pageTitle =
+            'Project Finances - '.__('modules.projects.tabs.gardening');
+        $this->view = 'project-finances.gardening';
+        $this->activeTab = 'gardening';
+
+        return $dataTable->render('project-finances.index', $this->data);
+    }
+
+    public function masonry($dataTable)
+    {
+        $this->pageTitle =
+            'Project Finances - '.__('modules.projects.tabs.masonry');
+        $this->activeTab = 'masonry';
+        $this->view = 'project-finances.masonry';
+
+        return $dataTable->render('project-finances.index', $this->data);
+    }
+
     public function additionalCostsForm()
     {
         request()->action == 'edit' ? $titleAction = __('modules.projects.edit') : $titleAction = __('modules.projects.addNew');
@@ -317,6 +343,40 @@ class ProjectFinancesController extends AccountBaseController
         $this->view = 'project-finances.ajax.finishes';
 
         $this->costToEdit = Finishes::find(request('id'));
+
+        return $this->returnAjax($this->view);
+    }
+
+    public function gardeningForm()
+    {
+        request()->action == 'edit' ? $titleAction = __('modules.projects.edit') : $titleAction = __('modules.projects.addNew');
+
+        $this->pageTitle =
+            $titleAction.
+            ' '.
+            __('modules.projects.tabs.gardening').
+            ' '.
+            __('modules.projects.record');
+        $this->view = 'project-finances.ajax.gardening';
+
+        $this->costToEdit = Gardening::find(request('id'));
+
+        return $this->returnAjax($this->view);
+    }
+
+    public function masonryForm()
+    {
+        request()->action == 'edit' ? $titleAction = __('modules.projects.edit') : $titleAction = __('modules.projects.addNew');
+
+        $this->pageTitle =
+            $titleAction.
+            ' '.
+            __('modules.projects.tabs.masonry').
+            ' '.
+            __('modules.projects.record');
+        $this->view = 'project-finances.ajax.masonry';
+
+        $this->costToEdit = GrayMasonryWork::find(request('id'));
 
         return $this->returnAjax($this->view);
     }
@@ -414,28 +474,6 @@ class ProjectFinancesController extends AccountBaseController
                 ' '.
                 __('modules.projects.record');
             $this->view = 'project-finances.ajax.steel';
-
-            return $this->returnAjax($this->view);
-        }
-
-        return view('project-finances.index', $this->data);
-    }
-
-    public function masonry()
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.masonry');
-        $this->activeTab = 'masonry';
-        $this->view = 'project-finances.masonry';
-
-        if (request()->ajax()) {
-            $this->pageTitle =
-                __('modules.projects.addNew').
-                ' '.
-                __('modules.projects.tabs.masonry').
-                ' '.
-                __('modules.projects.record');
-            $this->view = 'project-finances.ajax.masonry';
 
             return $this->returnAjax($this->view);
         }
@@ -590,28 +628,6 @@ class ProjectFinancesController extends AccountBaseController
                 ' '.
                 __('modules.projects.record');
             $this->view = 'project-finances.ajax.waterproofing';
-
-            return $this->returnAjax($this->view);
-        }
-
-        return view('project-finances.index', $this->data);
-    }
-
-    public function gardening()
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.gardening');
-        $this->view = 'project-finances.gardening';
-        $this->activeTab = 'gardening';
-
-        if (request()->ajax()) {
-            $this->pageTitle =
-                __('modules.projects.addNew').
-                ' '.
-                __('modules.projects.tabs.gardening').
-                ' '.
-                __('modules.projects.record');
-            $this->view = 'project-finances.ajax.gardening';
 
             return $this->returnAjax($this->view);
         }

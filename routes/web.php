@@ -356,7 +356,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'account'], function () {
             // Route::get('building', 'building')->name('building');
             Route::get('concrete-costs-form', 'concreteForm')->name('concreteForm');
             // Route::get('steel', 'steel')->name('steel');
-            // Route::get('masonry', 'masonry')->name('masonry');
+            Route::get('masonry-form', 'masonryForm')->name('masonryForm');
             // Route::get('materials', 'materials')->name('materials');
             Route::get('finishes-form', 'finishesForm')->name('finishesForm');
             // Route::get('plumbing', 'plumbing')->name('plumbing');
@@ -367,7 +367,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'account'], function () {
             // Route::get('painting', 'painting')->name('painting');
             Route::get('aircon-costs-form', 'airconForm')->name('airconForm');
             // Route::get('waterproofing', 'waterproofing')->name('waterproofing');
-            // Route::get('gardening', 'gardening')->name('gardening');
+            Route::get('gardening-form', 'gardeningForm')->name('gardeningForm');
             // Route::get('walls', 'walls')->name('walls');
             Route::get('additional-costs-form', 'additionalCostsForm')->name('additionalCostsForm');
             // Route::get('other-costs', 'otherCosts')->name('otherCosts');
