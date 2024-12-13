@@ -351,17 +351,17 @@ Route::group(['middleware' => 'auth', 'prefix' => 'account'], function () {
             Route::post('store-operation', 'storeOperation')->name('storeOperation');
 
             //Forms
-            // Route::get('licenses', 'licenses')->name('licenses');
+            Route::get('licenses-costs-form', 'licensesForm')->name('licensesForm');
             // Route::get('urbanization', 'urbanization')->name('urbanization');
             // Route::get('building', 'building')->name('building');
             Route::get('concrete-costs-form', 'concreteForm')->name('concreteForm');
             // Route::get('steel', 'steel')->name('steel');
-            Route::get('masonry-form', 'masonryForm')->name('masonryForm');
+            Route::get('masonry-costs-form', 'masonryForm')->name('masonryForm');
             // Route::get('materials', 'materials')->name('materials');
             Route::get('finishes-form', 'finishesForm')->name('finishesForm');
             // Route::get('plumbing', 'plumbing')->name('plumbing');
             // Route::get('wiring', 'wiring')->name('wiring');
-            // Route::get('kitchens', 'kitchens')->name('kitchens');
+            Route::get('kitchens-costs-form', 'kitchensForm')->name('kitchensForm');
             Route::get('capentry-costs-form', 'capentryForm')->name('capentryForm');
             // Route::get('metalworking', 'metalworking')->name('metalworking');
             // Route::get('painting', 'painting')->name('painting');

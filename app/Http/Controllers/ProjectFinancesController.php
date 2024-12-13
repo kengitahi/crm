@@ -8,6 +8,8 @@ use App\DataTables\CarpentryDataTable;
 use App\DataTables\ConcreteDataTable;
 use App\DataTables\FinishesDataTable;
 use App\DataTables\GardeningDataTable;
+use App\DataTables\KitchensDataTable;
+use App\DataTables\LicensesDataTable;
 use App\DataTables\MasonryDataTable;
 use App\Helper\Reply;
 use App\Http\Requests\ProjectFinancesRequest;
@@ -57,7 +59,9 @@ class ProjectFinancesController extends AccountBaseController
         $this->activeTab = $tab ?: 'preliminary';
 
         return match ($tab) {
-            'licenses' => $this->licenses(),
+            'licenses' => $this->licenses(
+                new LicensesDataTable
+            ),
             'urbanization' => $this->urbanization(),
             'building' => $this->building(),
             'concrete' => $this->concrete(
@@ -73,7 +77,9 @@ class ProjectFinancesController extends AccountBaseController
             ),
             'plumbing' => $this->plumbing(),
             'wiring' => $this->wiring(),
-            'kitchens' => $this->kitchens(),
+            'kitchens' => $this->kitchens(
+                new KitchensDataTable
+            ),
             'capentry' => $this->capentry(
                 new CarpentryDataTable
             ),
@@ -252,6 +258,26 @@ class ProjectFinancesController extends AccountBaseController
         return $dataTable->render('project-finances.index', $this->data);
     }
 
+    public function kitchens(KitchensDataTable $dataTable)
+    {
+        $this->pageTitle =
+            'Project Finances - '.__('modules.projects.tabs.kitchens');
+        $this->view = 'project-finances.kitchens';
+        $this->activeTab = 'kitchens';
+
+        return $dataTable->render('project-finances.index', $this->data);
+    }
+
+    public function licenses($dataTable)
+    {
+        $this->pageTitle =
+            'Project Finances - '.__('modules.projects.tabs.licenses');
+        $this->view = 'project-finances.licenses';
+        $this->activeTab = 'licenses';
+
+        return $dataTable->render('project-finances.index', $this->data);
+    }
+
     public function masonry($dataTable)
     {
         $this->pageTitle =
@@ -364,6 +390,40 @@ class ProjectFinancesController extends AccountBaseController
         return $this->returnAjax($this->view);
     }
 
+    public function kitchensForm()
+    {
+        request()->action == 'edit' ? $titleAction = __('modules.projects.edit') : $titleAction = __('modules.projects.addNew');
+
+        $this->pageTitle =
+            $titleAction.
+            ' '.
+            __('modules.projects.tabs.kitchens').
+            ' '.
+            __('modules.projects.record');
+        $this->view = 'project-finances.ajax.kitchens';
+
+        $this->costToEdit = Kitchens::find(request('id'));
+
+        return $this->returnAjax($this->view);
+    }
+
+    public function licensesForm()
+    {
+        request()->action == 'edit' ? $titleAction = __('modules.projects.edit') : $titleAction = __('modules.projects.addNew');
+
+        $this->pageTitle =
+            $titleAction.
+            ' '.
+            __('modules.projects.tabs.licenses').
+            ' '.
+            __('modules.projects.record');
+        $this->view = 'project-finances.ajax.licenses';
+
+        $this->costToEdit = LicensesAndPermits::find(request('id'));
+
+        return $this->returnAjax($this->view);
+    }
+
     public function masonryForm()
     {
         request()->action == 'edit' ? $titleAction = __('modules.projects.edit') : $titleAction = __('modules.projects.addNew');
@@ -391,28 +451,6 @@ class ProjectFinancesController extends AccountBaseController
         return Reply::successWithData(__('messages.recordSaved'), [
             'redirectUrl' => $redirectUrl,
         ]);
-    }
-
-    public function licenses()
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.licenses');
-        $this->view = 'project-finances.licenses';
-        $this->activeTab = 'licenses';
-
-        if (request()->ajax()) {
-            $this->pageTitle =
-                __('modules.projects.addNew').
-                ' '.
-                __('modules.projects.tabs.licenses').
-                ' '.
-                __('modules.projects.record');
-            $this->view = 'project-finances.ajax.licenses';
-
-            return $this->returnAjax($this->view);
-        }
-
-        return view('project-finances.index', $this->data);
     }
 
     public function urbanization()
@@ -540,28 +578,6 @@ class ProjectFinancesController extends AccountBaseController
                 ' '.
                 __('modules.projects.record');
             $this->view = 'project-finances.ajax.wiring';
-
-            return $this->returnAjax($this->view);
-        }
-
-        return view('project-finances.index', $this->data);
-    }
-
-    public function kitchens()
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.kitchens');
-        $this->view = 'project-finances.kitchens';
-        $this->activeTab = 'kitchens';
-
-        if (request()->ajax()) {
-            $this->pageTitle =
-                __('modules.projects.addNew').
-                ' '.
-                __('modules.projects.tabs.kitchens').
-                ' '.
-                __('modules.projects.record');
-            $this->view = 'project-finances.ajax.kitchens';
 
             return $this->returnAjax($this->view);
         }
