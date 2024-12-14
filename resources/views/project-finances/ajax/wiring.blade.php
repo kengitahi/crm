@@ -11,7 +11,7 @@
                         <div class="row">
                             <input name="form_type" type="hidden" value="wiring">
                             <div class="col-md-4">
-                                <x-forms.number :fieldLabel="__('modules.projects.formLabels.labour')" :fieldPlaceholder="__('placeholders.projects.amount')" :fieldValue="$lead->client_name ?? ''"
+                                <x-forms.number :fieldLabel="__('modules.projects.formLabels.labour')" :fieldPlaceholder="__('placeholders.projects.amount')" :fieldValue="$costToEdit->labour ?? ''"
                                     fieldId="{ __('modules.projects.formFields.labour') }}"
                                     fieldName="{{ __('modules.projects.formFields.labour') }}">
                                 </x-forms.number>
@@ -28,21 +28,23 @@
                         <div class="row">
                             <input name="form_type" type="hidden" value="wiring">
                             <div class="col-md-4">
-                                <x-forms.number :fieldLabel="__('modules.projects.formLabels.lightingFixturesAndAccessories')" :fieldPlaceholder="__('placeholders.projects.amount')" :fieldValue="$lead->client_name ?? ''"
-                                    fieldId="{{ __('modules.projects.formFields.lightingFixturesAndAccessories') }}"
+                                <x-forms.number :fieldLabel="__('modules.projects.formLabels.lightingFixturesAndAccessories')" :fieldPlaceholder="__('placeholders.projects.amount')" :fieldValue="$costToEdit->lighting_fixtures_and_accessories ?? ''"
+                                    fieldId="{ __('modules.projects.formFields.lightingFixturesAndAccessories') }}"
                                     fieldName="{{ __('modules.projects.formFields.lightingFixturesAndAccessories') }}">
                                 </x-forms.number>
                             </div>
+
                             <div class="col-md-4">
-                                <x-forms.number :fieldLabel="__('modules.projects.formLabels.intercommunication')" :fieldPlaceholder="__('placeholders.projects.amount')" :fieldValue="$lead->client_name ?? ''"
-                                    fieldId="{{ __('modules.projects.formFields.intercommunication') }}"
-                                    fieldName="{{ __('modules.projects.formFields.intercommunication') }}">
+                                <x-forms.number :fieldLabel="__('modules.projects.formLabels.variousMaterials')" :fieldPlaceholder="__('placeholders.projects.amount')" :fieldValue="$costToEdit->various_materials ?? ''"
+                                    fieldId="{ __('modules.projects.formFields.variousMaterials') }}"
+                                    fieldName="{{ __('modules.projects.formFields.variousMaterials') }}">
                                 </x-forms.number>
                             </div>
+
                             <div class="col-md-4">
-                                <x-forms.number :fieldLabel="__('modules.projects.formLabels.variousMaterials')" :fieldPlaceholder="__('placeholders.projects.amount')" :fieldValue="$lead->client_name ?? ''"
-                                    fieldId="{{ __('modules.projects.formFields.variousMaterials') }}"
-                                    fieldName="{{ __('modules.projects.formFields.variousMaterials') }}">
+                                <x-forms.number :fieldLabel="__('modules.projects.formLabels.intercommunication')" :fieldPlaceholder="__('placeholders.projects.amount')" :fieldValue="$costToEdit->intercommunication ?? ''"
+                                    fieldId="{ __('modules.projects.formFields.intercommunication') }"
+                                    fieldName="{{ __('modules.projects.formFields.intercommunication') }}">
                                 </x-forms.number>
                             </div>
                         </div>
@@ -56,8 +58,15 @@
                 <x-forms.custom-field :fields="$fields"></x-forms.custom-field>
 
                 <x-form-actions>
-                    <x-forms.button-primary class="mr-3" icon="check" id="save-wiring-form">@lang('app.save')
-                    </x-forms.button-primary>
+                    @if (request()->action == 'edit')
+                        <x-forms.button-primary class="mr-3" icon="edit" id="update-wiring-form">
+                            @lang('app.update')
+                        </x-forms.button-primary>
+                    @else
+                        <x-forms.button-primary class="mr-3" icon="check" id="save-wiring-form">
+                            @lang('app.save')
+                        </x-forms.button-primary>
+                    @endif
                     <x-forms.button-cancel :link="route('projectfinances.index') . '?tab=wiring'" class="border-0">@lang('app.cancel')
                     </x-forms.button-cancel>
                 </x-form-actions>
@@ -73,6 +82,23 @@
             var data = $('#save-wiring-data-form').serialize();
 
             saveClient(data, url, "#save-wiring-form");
+
+        });
+
+        $('#update-wiring-form').click(function() {
+            // Get the current URL
+            const currentUrl = window.location.href;
+
+            // Extract all query parameters
+            const urlParams = new URLSearchParams(currentUrl);
+
+            // Extract the desired parameters
+            const id = urlParams.get('id');
+
+            const url = "{!! route('projectfinances.update') . '?tab=wiring&id=' !!}" + id + "{!! '&model=Wiring' !!}";
+            var data = $('#save-wiring-data-form').serialize();
+
+            saveClient(data, url, "#update-wiring-form");
 
         });
 
