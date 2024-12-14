@@ -16,6 +16,8 @@ use App\DataTables\MetalworkingDataTable;
 use App\DataTables\OperationDataTable;
 use App\DataTables\OtherCostsDataTable;
 use App\DataTables\PaintingDataTable;
+use App\DataTables\PlumbingDataTable;
+use App\DataTables\SteelDataTable;
 use App\Helper\Reply;
 use App\Http\Requests\ProjectFinancesRequest;
 use App\Models\ProjectFinance;
@@ -67,11 +69,11 @@ class ProjectFinancesController extends AccountBaseController
             'urbanization' => $this->urbanization(),
             'building' => $this->building(),
             'concrete' => $this->show(new ConcreteDataTable, 'concrete'),
-            'steel' => $this->steel(),
+            'steel' => $this->show(new SteelDataTable, 'steel'),
             'masonry' => $this->show(new MasonryDataTable, 'masonry'),
             'materials' => $this->show(new MaterialsDataTable, 'materials'),
             'finishes' => $this->show(new FinishesDataTable, 'finishes'),
-            'plumbing' => $this->plumbing(),
+            'plumbing' => $this->show(new PlumbingDataTable, 'plumbing'),
             'wiring' => $this->wiring(),
             'kitchens' => $this->show(new KitchensDataTable, 'kitchens'),
             'capentry' => $this->show(new CarpentryDataTable, 'capentry'),

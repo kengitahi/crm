@@ -74,9 +74,45 @@ class PlumbingDataTable extends BaseDataTable
         });
 
         $datatables->addColumn(
-            'aircon',
-            fn ($row) => $row->air_conditioning_system ?: '--'
+            'labour',
+            fn ($row) => $row->labour ?: '--'
         );
+
+        $datatables->addColumn(
+            'materials',
+            fn ($row) => $row->materials ?: '--'
+        );
+
+        $datatables->addColumn(
+            'hydropneumaticSystem',
+            fn ($row) => $row->hydropneumatic_system ?: '--'
+        );
+
+        $datatables->addColumn(
+            'sprinklerIrrigationSystem',
+            fn ($row) => $row->automated_sprinkler ?: '--'
+        );
+
+        $datatables->addColumn(
+            'tank',
+            fn ($row) => $row->tank ?: '--'
+        );
+
+        $datatables->addColumn(
+            'basicMaterial',
+            fn ($row) => $row->basic_material ?: '--'
+        );
+
+        $datatables->addColumn(
+            'heater',
+            fn ($row) => $row->heater ?: '--'
+        );
+
+        $datatables->addColumn(
+            'bathroom',
+            fn ($row) => $row->bathroom ?: '--'
+        );
+
         $datatables->editColumn(
             'created_at',
             fn ($row) => Carbon::parse($row->created_at)->translatedFormat(
@@ -142,13 +178,70 @@ class PlumbingDataTable extends BaseDataTable
     {
         $columns = [
             Column::make('id'),
-            __('modules.projects.formLabels.aircon') => [
-                'data' => 'aircon',
-                'name' => 'aircon',
-                'title' => __('modules.projects.formLabels.aircon'),
+            __('modules.projects.formLabels.materials') => [
+                'data' => 'materials',
+                'name' => 'materials',
+                'title' => __('modules.projects.formLabels.materials'),
                 'visible' => showId(),
                 'orderable' => false,
             ],
+
+            __('modules.projects.formLabels.labour') => [
+                'data' => 'labour',
+                'name' => 'labour',
+                'title' => __('modules.projects.formLabels.labour'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+
+            __('modules.projects.formLabels.hydropneumaticSystem') => [
+                'data' => 'hydropneumatic_system',
+                'name' => 'hydropneumaticSystem',
+                'title' => __('modules.projects.formLabels.hydropneumaticSystem'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+
+            __('modules.projects.formLabels.sprinklerIrrigationSystem') => [
+                'data' => 'automated_sprinkler',
+                'name' => 'sprinklerIrrigationSystem',
+                'title' => __('modules.projects.formLabels.sprinklerIrrigationSystem'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+
+            __('modules.projects.formLabels.tank') => [
+                'data' => 'tank',
+                'name' => 'tank',
+                'title' => __('modules.projects.formLabels.tank'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+
+            __('modules.projects.formLabels.basicMaterial') => [
+                'data' => 'materials',
+                'name' => 'materials',
+                'title' => __('modules.projects.formLabels.basicMaterial'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+
+            __('modules.projects.formLabels.heater') => [
+                'data' => 'heater',
+                'name' => 'heater',
+                'title' => __('modules.projects.formLabels.heater'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+
+            __('modules.projects.formLabels.bathroom') => [
+                'data' => 'bathroom',
+                'name' => 'bathroom',
+                'title' => __('modules.projects.formLabels.bathroom'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+
             __('app.createdAt') => [
                 'data' => 'created_at',
                 'name' => 'created_at',
@@ -172,7 +265,7 @@ class PlumbingDataTable extends BaseDataTable
 
         return array_merge(
             $columns,
-            CustomFieldGroup::customFieldsDataMerge(new AdditionalCosts),
+            CustomFieldGroup::customFieldsDataMerge(new Plumbing),
             $action
         );
     }

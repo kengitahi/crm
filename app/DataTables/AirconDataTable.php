@@ -4,7 +4,6 @@ namespace App\DataTables;
 
 use App\Models\CustomField;
 use App\Models\CustomFieldGroup;
-use App\Models\ProjectFinances\AdditionalCosts;
 use App\Models\ProjectFinances\AirCon;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
@@ -173,7 +172,7 @@ class AirconDataTable extends BaseDataTable
 
         return array_merge(
             $columns,
-            CustomFieldGroup::customFieldsDataMerge(new AdditionalCosts),
+            CustomFieldGroup::customFieldsDataMerge(new Plumbing),
             $action
         );
     }
