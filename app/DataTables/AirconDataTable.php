@@ -172,7 +172,7 @@ class AirconDataTable extends BaseDataTable
 
         return array_merge(
             $columns,
-            CustomFieldGroup::customFieldsDataMerge(new Plumbing),
+            CustomFieldGroup::customFieldsDataMerge(new AirCon),
             $action
         );
     }

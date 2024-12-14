@@ -11,6 +11,8 @@ class UrbanizationCost extends Model
 
     protected $table = 'project_finances_urbanization';
 
+    const CUSTOM_FIELD_MODEL = "App\Models\ProjectFinances\UrbanizationCost";
+
     // protected $fillable = ["urbanization_suppliers"];
     protected $guarded = ['id'];
 }

@@ -18,6 +18,7 @@ use App\DataTables\OtherCostsDataTable;
 use App\DataTables\PaintingDataTable;
 use App\DataTables\PlumbingDataTable;
 use App\DataTables\SteelDataTable;
+use App\DataTables\UrbanizationDataTable;
 use App\Helper\Reply;
 use App\Http\Requests\ProjectFinancesRequest;
 use App\Models\ProjectFinance;
@@ -66,7 +67,10 @@ class ProjectFinancesController extends AccountBaseController
 
         return match ($tab) {
             'licenses' => $this->show(new LicensesDataTable, 'licenses'),
-            'urbanization' => $this->urbanization(),
+            'urbanization' => $this->show(
+                new UrbanizationDataTable,
+                'urbanization'
+            ),
             'building' => $this->building(),
             'concrete' => $this->show(new ConcreteDataTable, 'concrete'),
             'steel' => $this->show(new SteelDataTable, 'steel'),
