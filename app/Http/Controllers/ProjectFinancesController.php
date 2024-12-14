@@ -20,6 +20,8 @@ use App\DataTables\PlumbingDataTable;
 use App\DataTables\SteelDataTable;
 use App\DataTables\UrbanizationDataTable;
 use App\DataTables\WallsDataTable;
+use App\DataTables\WaterproofingDataTable;
+use App\DataTables\WiringDataTable;
 use App\Helper\Reply;
 use App\Http\Requests\ProjectFinancesRequest;
 use App\Models\ProjectFinance;
@@ -79,7 +81,7 @@ class ProjectFinancesController extends AccountBaseController
             'materials' => $this->show(new MaterialsDataTable, 'materials'),
             'finishes' => $this->show(new FinishesDataTable, 'finishes'),
             'plumbing' => $this->show(new PlumbingDataTable, 'plumbing'),
-            'wiring' => $this->wiring(),
+            'wiring' => $this->show(new WiringDataTable, 'wiring'),
             'kitchens' => $this->show(new KitchensDataTable, 'kitchens'),
             'capentry' => $this->show(new CarpentryDataTable, 'capentry'),
             'metalworking' => $this->show(
@@ -88,7 +90,10 @@ class ProjectFinancesController extends AccountBaseController
             ),
             'painting' => $this->show(new PaintingDataTable, 'painting'),
             'aircon' => $this->show(new AirconDataTable, 'aircon'),
-            'waterproofing' => $this->waterproofing(),
+            'waterproofing' => $this->show(
+                new WaterproofingDataTable,
+                'waterproofing'
+            ),
             'gardening' => $this->show(new GardeningDataTable, 'gardening'),
             'walls' => $this->show(new WallsDataTable, 'walls'),
             'additionalCosts' => $this->show(

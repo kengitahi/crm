@@ -11,5 +11,7 @@ class Waterproofing extends Model
 
     protected $table = 'project_finances_waterproofing';
 
+    const CUSTOM_FIELD_MODEL = "App\Models\ProjectFinances\Waterproofing";
+
     protected $guarded = ['id'];
 }
