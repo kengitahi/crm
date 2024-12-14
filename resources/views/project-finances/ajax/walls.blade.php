@@ -12,7 +12,7 @@
                         <div class="row">
                             <input name="form_type" type="hidden" value="walls">
                             <div class="col-md-4">
-                                <x-forms.number :fieldLabel="__('modules.projects.formLabels.walls')" :fieldPlaceholder="__('placeholders.projects.amount')" :fieldValue="$lead->client_name ?? ''"
+                                <x-forms.number :fieldLabel="__('modules.projects.formLabels.walls')" :fieldPlaceholder="__('placeholders.projects.amount')" :fieldValue="$costToEdit->lightweight_prefabricated_walls ?? ''"
                                     fieldId="{{ __('modules.projects.formFields.walls') }}"
                                     fieldName="{{ __('modules.projects.formFields.walls') }}">
                                 </x-forms.number>
@@ -28,8 +28,15 @@
                 <x-forms.custom-field :fields="$fields"></x-forms.custom-field>
 
                 <x-form-actions>
-                    <x-forms.button-primary class="mr-3" icon="check" id="save-walls-form">@lang('app.save')
-                    </x-forms.button-primary>
+                    @if (request()->action == 'edit')
+                        <x-forms.button-primary class="mr-3" icon="edit" id="update-walls-form">
+                            @lang('app.update')
+                        </x-forms.button-primary>
+                    @else
+                        <x-forms.button-primary class="mr-3" icon="check" id="save-walls-form">
+                            @lang('app.save')
+                        </x-forms.button-primary>
+                    @endif
                     <x-forms.button-cancel :link="route('projectfinances.index') . '?tab=walls'" class="border-0">@lang('app.cancel')
                     </x-forms.button-cancel>
                 </x-form-actions>
@@ -47,6 +54,27 @@
             saveClient(data, url, "#save-walls-form");
 
         });
+        
+        $('#update-walls-form').click(function() {
+            // Get the current URL
+            const currentUrl = window.location.href;
+
+            // Extract all query parameters
+            const urlParams = new URLSearchParams(currentUrl);
+
+            // Extract the desired parameters
+            const id = urlParams.get('id');
+
+            const url = "{!! route('projectfinances.update') . '?tab=walls&id=' !!}" + id + "{!! '&model=Walls' !!}";
+            var data = $('#save-walls-data-form').serialize();
+
+            console.log(url);
+            console.log(data);
+
+            saveClient(data, url, "#update-walls-form");
+
+        });
+
 
         function saveClient(data, url, buttonSelector) {
             $.easyAjax({

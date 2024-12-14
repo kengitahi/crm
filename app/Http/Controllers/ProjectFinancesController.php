@@ -19,6 +19,7 @@ use App\DataTables\PaintingDataTable;
 use App\DataTables\PlumbingDataTable;
 use App\DataTables\SteelDataTable;
 use App\DataTables\UrbanizationDataTable;
+use App\DataTables\WallsDataTable;
 use App\Helper\Reply;
 use App\Http\Requests\ProjectFinancesRequest;
 use App\Models\ProjectFinance;
@@ -89,7 +90,7 @@ class ProjectFinancesController extends AccountBaseController
             'aircon' => $this->show(new AirconDataTable, 'aircon'),
             'waterproofing' => $this->waterproofing(),
             'gardening' => $this->show(new GardeningDataTable, 'gardening'),
-            'walls' => $this->walls(),
+            'walls' => $this->show(new WallsDataTable, 'walls'),
             'additionalCosts' => $this->show(
                 new AdditionalCostsDataTable,
                 'additionalCosts'
@@ -133,6 +134,8 @@ class ProjectFinancesController extends AccountBaseController
     /**
      * Display the specified resource.
      */
+
+    //Main views will show tables
     public function show($dataTable, $title)
     {
         $this->pageTitle =
@@ -143,6 +146,7 @@ class ProjectFinancesController extends AccountBaseController
         return $dataTable->render('project-finances.index', $this->data);
     }
 
+    //Ajax views will show forms
     public function form()
     {
         $title = request('tab');
@@ -222,169 +226,10 @@ class ProjectFinancesController extends AccountBaseController
         ]);
     }
 
-    //Main views will show tables
-    //Ajax views will show forms
-
     public function preliminary()
     {
         return view('project-finances.index', $this->data);
     }
-
-    public function urbanization()
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.urbanization');
-        $this->view = 'project-finances.urbanization';
-        $this->activeTab = 'urbanization';
-
-        if (request()->ajax()) {
-            $this->pageTitle =
-                __('modules.projects.addNew').
-                ' '.
-                __('modules.projects.tabs.urbanization').
-                ' '.
-                __('modules.projects.record');
-            $this->view = 'project-finances.ajax.urbanization';
-
-            return $this->returnAjax($this->view);
-        }
-
-        return view('project-finances.index', $this->data);
-    }
-
-    public function building()
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.building');
-        $this->view = 'project-finances.building';
-        $this->activeTab = 'building';
-
-        if (request()->ajax()) {
-            $this->pageTitle =
-                __('modules.projects.addNew').
-                ' '.
-                __('modules.projects.tabs.building').
-                ' '.
-                __('modules.projects.record');
-            $this->view = 'project-finances.ajax.building';
-
-            return $this->returnAjax($this->view);
-        }
-
-        return view('project-finances.index', $this->data);
-    }
-
-    public function steel()
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.steel');
-        $this->view = 'project-finances.steel';
-        $this->activeTab = 'steel';
-
-        if (request()->ajax()) {
-            $this->pageTitle =
-                __('modules.projects.addNew').
-                ' '.
-                __('modules.projects.tabs.steel').
-                ' '.
-                __('modules.projects.record');
-            $this->view = 'project-finances.ajax.steel';
-
-            return $this->returnAjax($this->view);
-        }
-
-        return view('project-finances.index', $this->data);
-    }
-
-    public function plumbing()
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.plumbing');
-        $this->view = 'project-finances.plumbing';
-        $this->activeTab = 'plumbing';
-
-        if (request()->ajax()) {
-            $this->pageTitle =
-                __('modules.projects.addNew').
-                ' '.
-                __('modules.projects.tabs.plumbing').
-                ' '.
-                __('modules.projects.record');
-            $this->view = 'project-finances.ajax.plumbing';
-
-            return $this->returnAjax($this->view);
-        }
-
-        return view('project-finances.index', $this->data);
-    }
-
-    public function wiring()
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.wiring');
-        $this->view = 'project-finances.wiring';
-        $this->activeTab = 'wiring';
-
-        if (request()->ajax()) {
-            $this->pageTitle =
-                __('modules.projects.addNew').
-                ' '.
-                __('modules.projects.tabs.wiring').
-                ' '.
-                __('modules.projects.record');
-            $this->view = 'project-finances.ajax.wiring';
-
-            return $this->returnAjax($this->view);
-        }
-
-        return view('project-finances.index', $this->data);
-    }
-
-    public function waterproofing()
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.waterproofing');
-        $this->view = 'project-finances.waterproofing';
-        $this->activeTab = 'waterproofing';
-
-        if (request()->ajax()) {
-            $this->pageTitle =
-                __('modules.projects.addNew').
-                ' '.
-                __('modules.projects.tabs.waterproofing').
-                ' '.
-                __('modules.projects.record');
-            $this->view = 'project-finances.ajax.waterproofing';
-
-            return $this->returnAjax($this->view);
-        }
-
-        return view('project-finances.index', $this->data);
-    }
-
-    public function walls()
-    {
-        $this->pageTitle =
-            'Project Finances - '.__('modules.projects.tabs.walls');
-        $this->view = 'project-finances.walls';
-        $this->activeTab = 'walls';
-
-        if (request()->ajax()) {
-            $this->pageTitle =
-                __('modules.projects.addNew').
-                ' '.
-                __('modules.projects.tabs.walls').
-                ' '.
-                __('modules.projects.record');
-            $this->view = 'project-finances.ajax.walls';
-
-            return $this->returnAjax($this->view);
-        }
-
-        return view('project-finances.index', $this->data);
-    }
-
-    //Requests and saving data
 
     public function storeLicenses(ProjectFinancesRequest $request)
     {
