@@ -45,10 +45,11 @@ class MetalworkingDataTable extends BaseDataTable
 
             $action .=
                 '<a class="dropdown-item openRightModal" href="'.
-                route('projectfinances.metalworkingForm', [
+                route('projectfinances.form', [
                     'action' => 'edit',
                     'model' => 'Metalworking',
                     'id' => $row->id,
+                    'tab' => 'metalworking',
                 ]).
                 '">
                                 <i class="fa fa-edit mr-2"></i>

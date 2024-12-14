@@ -69,7 +69,7 @@
 <script>
     $(document).ready(function() {
         $('#save-kitchens-form').click(function() {
-            const url = "{{ route('projectfinances.storeKitchens') }}";
+            const url = "{!! route('projectfinances.store') . '?tab=kitchens&model=Kitchens' !!}";
             var data = $('#save-kitchens-data-form').serialize();
 
             saveClient(data, url, "#save-kitchens-form");

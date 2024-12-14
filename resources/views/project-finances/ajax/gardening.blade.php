@@ -54,7 +54,7 @@
 <script>
     $(document).ready(function() {
         $('#save-gardening-form').click(function() {
-            const url = "{{ route('projectfinances.storeGardening') }}";
+            const url = "{!! route('projectfinances.store') . '?tab=gardening&model=Gardening' !!}";
             var data = $('#save-gardening-data-form').serialize();
 
             saveClient(data, url, "#save-gardening-form");
@@ -73,9 +73,6 @@
 
             const url = "{!! route('projectfinances.update') . '?tab=gardening&id=' !!}" + id + "{!! '&model=Gardening' !!}";
             var data = $('#save-gardening-data-form').serialize();
-
-            console.log(url);
-            console.log(data);
 
             saveClient(data, url, "#update-gardening-form");
 

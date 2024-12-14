@@ -45,7 +45,12 @@ class FinishesDataTable extends BaseDataTable
 
             $action .=
                 '<a class="dropdown-item openRightModal" href="'.
-                route('projectfinances.finishesForm', ['action' => 'edit', 'model' => 'Finishes', 'id' => $row->id]).
+                route('projectfinances.form', [
+                    'action' => 'edit',
+                    'model' => 'Finishes',
+                    'id' => $row->id,
+                    'tab' => 'finishes',
+                ]).
                 '">
                                 <i class="fa fa-edit mr-2"></i>
                                 '.
@@ -68,22 +73,60 @@ class FinishesDataTable extends BaseDataTable
             return $action;
         });
 
-        $datatables->addColumn('woodenStairs', fn ($row) => $row->wooden_stairs ?: '--');
-        $datatables->addColumn('marbleAndGranites', fn ($row) => $row->wooden_stairs ?: '--');
-        $datatables->addColumn('woodenStave', fn ($row) => $row->wooden_stave ?: '--');
-        $datatables->addColumn('wallCovering', fn ($row) => $row->wall_covering ?: '--');
+        $datatables->addColumn(
+            'woodenStairs',
+            fn ($row) => $row->wooden_stairs ?: '--'
+        );
+        $datatables->addColumn(
+            'marbleAndGranites',
+            fn ($row) => $row->wooden_stairs ?: '--'
+        );
+        $datatables->addColumn(
+            'woodenStave',
+            fn ($row) => $row->wooden_stave ?: '--'
+        );
+        $datatables->addColumn(
+            'wallCovering',
+            fn ($row) => $row->wall_covering ?: '--'
+        );
         $datatables->addColumn('kitchens', fn ($row) => $row->kitchens ?: '--');
-        $datatables->addColumn('carpentry', fn ($row) => $row->carpentry ?: '--');
-        $datatables->addColumn('bathroomFurniture', fn ($row) => $row->bathroom_furniture ?: '--');
-        $datatables->addColumn('outdoorAreas', fn ($row) => $row->outdoor_areas ?: '--');
-        $datatables->addColumn('marbleSlabs', fn ($row) => $row->marble_slabs ?: '--');
+        $datatables->addColumn(
+            'carpentry',
+            fn ($row) => $row->carpentry ?: '--'
+        );
+        $datatables->addColumn(
+            'bathroomFurniture',
+            fn ($row) => $row->bathroom_furniture ?: '--'
+        );
+        $datatables->addColumn(
+            'outdoorAreas',
+            fn ($row) => $row->outdoor_areas ?: '--'
+        );
+        $datatables->addColumn(
+            'marbleSlabs',
+            fn ($row) => $row->marble_slabs ?: '--'
+        );
         $datatables->addColumn('floor', fn ($row) => $row->floors ?: '--');
-        $datatables->addColumn('finishes_labour', fn ($row) => $row->finishes_labour ?: '--');
-        $datatables->addColumn('finishes_suppliers', fn ($row) => $row->finishes_suppliers ?: '--');
+        $datatables->addColumn(
+            'finishes_labour',
+            fn ($row) => $row->finishes_labour ?: '--'
+        );
+        $datatables->addColumn(
+            'finishes_suppliers',
+            fn ($row) => $row->finishes_suppliers ?: '--'
+        );
 
-        $datatables->editColumn('created_at', fn ($row) => Carbon::parse($row->created_at)->translatedFormat($this->company->date_format));
+        $datatables->editColumn(
+            'created_at',
+            fn ($row) => Carbon::parse($row->created_at)->translatedFormat(
+                $this->company->date_format
+            )
+        );
 
-        $customFieldColumns = CustomField::customFieldData($datatables, Finishes::CUSTOM_FIELD_MODEL);
+        $customFieldColumns = CustomField::customFieldData(
+            $datatables,
+            Finishes::CUSTOM_FIELD_MODEL
+        );
 
         $datatables->rawColumns(array_merge(['action'], $customFieldColumns));
 
@@ -120,7 +163,13 @@ class FinishesDataTable extends BaseDataTable
                   //
                 }',
         ]);
-        $dataTable->buttons(Button::make(['extend' => 'excel', 'text' => '<i class="fa fa-file-export"></i> '.trans('app.exportExcel')]));
+        $dataTable->buttons(
+            Button::make([
+                'extend' => 'excel',
+                'text' => '<i class="fa fa-file-export"></i> '.
+                    trans('app.exportExcel'),
+            ])
+        );
 
         return $dataTable;
     }
@@ -132,20 +181,100 @@ class FinishesDataTable extends BaseDataTable
     {
         $columns = [
             Column::make('id'),
-            __('modules.projects.formLabels.woodenStairs') => ['data' => 'wooden_stairs', 'name' => 'wooden_stairs', 'title' => __('modules.projects.formLabels.woodenStairs'), 'visible' => showId(), 'orderable' => false],
-            __('modules.projects.formLabels.marbleAndGranites') => ['data' => 'marble_and_granites', 'name' => 'marbleAndGranites', 'title' => __('modules.projects.formLabels.marbleAndGranites'), 'visible' => showId(), 'orderable' => false],
-            __('modules.projects.formLabels.woodenStave') => ['data' => 'wooden_stave', 'name' => 'wooden_stave', 'title' => __('modules.projects.formLabels.woodenStave'), 'visible' => showId(), 'orderable' => false],
-            __('modules.projects.formLabels.wallCovering') => ['data' => 'wall_covering', 'name' => 'wall_covering', 'title' => __('modules.projects.formLabels.wallCovering'), 'visible' => showId(), 'orderable' => false],
-            __('modules.projects.formLabels.kitchens') => ['data' => 'kitchens', 'name' => 'kitchens', 'title' => __('modules.projects.formLabels.kitchens'), 'visible' => showId(), 'orderable' => false],
-            __('modules.projects.formLabels.carpentry') => ['data' => 'carpentry', 'name' => 'carpentry', 'title' => __('modules.projects.formLabels.carpentry'), 'visible' => showId(), 'orderable' => false],
-            __('modules.projects.formLabels.bathroomFurniture') => ['data' => 'bathroom_furniture', 'name' => 'bathroomFurniture', 'title' => __('modules.projects.formLabels.bathroomFurniture'), 'visible' => showId(), 'orderable' => false],
-            __('modules.projects.formLabels.outdoorAreas') => ['data' => 'outdoor_areas', 'name' => 'outdoorAreas', 'title' => __('modules.projects.formLabels.outdoorAreas'), 'visible' => showId(), 'orderable' => false],
-            __('modules.projects.formLabels.marbleSlabs') => ['data' => 'marble_slabs', 'name' => 'marbleSlabs', 'title' => __('modules.projects.formLabels.marbleSlabs'), 'visible' => showId(), 'orderable' => false],
-            __('modules.projects.formLabels.floor') => ['data' => 'floors', 'name' => 'floor', 'title' => __('modules.projects.formLabels.floor'), 'visible' => showId(), 'orderable' => false],
-            'Finishes '.__('modules.projects.formLabels.suppliers') => ['data' => 'finishes_suppliers', 'name' => 'finishes_suppliers', 'title' => 'Finishes '.__('modules.projects.formLabels.suppliers'), 'visible' => showId(), 'orderable' => false],
-            'Finishes '.__('modules.projects.formLabels.labour') => ['data' => 'finishes_labour', 'name' => 'finishes_labour', 'title' => 'Finishes '.__('modules.projects.formLabels.labour'), 'visible' => showId(), 'orderable' => false],
-            __('app.createdAt') => ['data' => 'created_at', 'name' => 'created_at', 'title' => __('app.createdAt')],
-            __('app.updatedOn') => ['data' => 'created_at', 'name' => 'created_at', 'title' => __('app.updatedOn')],
+            __('modules.projects.formLabels.woodenStairs') => [
+                'data' => 'wooden_stairs',
+                'name' => 'wooden_stairs',
+                'title' => __('modules.projects.formLabels.woodenStairs'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            __('modules.projects.formLabels.marbleAndGranites') => [
+                'data' => 'marble_and_granites',
+                'name' => 'marbleAndGranites',
+                'title' => __('modules.projects.formLabels.marbleAndGranites'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            __('modules.projects.formLabels.woodenStave') => [
+                'data' => 'wooden_stave',
+                'name' => 'wooden_stave',
+                'title' => __('modules.projects.formLabels.woodenStave'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            __('modules.projects.formLabels.wallCovering') => [
+                'data' => 'wall_covering',
+                'name' => 'wall_covering',
+                'title' => __('modules.projects.formLabels.wallCovering'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            __('modules.projects.formLabels.kitchens') => [
+                'data' => 'kitchens',
+                'name' => 'kitchens',
+                'title' => __('modules.projects.formLabels.kitchens'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            __('modules.projects.formLabels.carpentry') => [
+                'data' => 'carpentry',
+                'name' => 'carpentry',
+                'title' => __('modules.projects.formLabels.carpentry'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            __('modules.projects.formLabels.bathroomFurniture') => [
+                'data' => 'bathroom_furniture',
+                'name' => 'bathroomFurniture',
+                'title' => __('modules.projects.formLabels.bathroomFurniture'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            __('modules.projects.formLabels.outdoorAreas') => [
+                'data' => 'outdoor_areas',
+                'name' => 'outdoorAreas',
+                'title' => __('modules.projects.formLabels.outdoorAreas'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            __('modules.projects.formLabels.marbleSlabs') => [
+                'data' => 'marble_slabs',
+                'name' => 'marbleSlabs',
+                'title' => __('modules.projects.formLabels.marbleSlabs'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            __('modules.projects.formLabels.floor') => [
+                'data' => 'floors',
+                'name' => 'floor',
+                'title' => __('modules.projects.formLabels.floor'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            'Finishes '.__('modules.projects.formLabels.suppliers') => [
+                'data' => 'finishes_suppliers',
+                'name' => 'finishes_suppliers',
+                'title' => 'Finishes '.__('modules.projects.formLabels.suppliers'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            'Finishes '.__('modules.projects.formLabels.labour') => [
+                'data' => 'finishes_labour',
+                'name' => 'finishes_labour',
+                'title' => 'Finishes '.__('modules.projects.formLabels.labour'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            __('app.createdAt') => [
+                'data' => 'created_at',
+                'name' => 'created_at',
+                'title' => __('app.createdAt'),
+            ],
+            __('app.updatedOn') => [
+                'data' => 'created_at',
+                'name' => 'created_at',
+                'title' => __('app.updatedOn'),
+            ],
         ];
 
         $action = [
@@ -157,7 +286,11 @@ class FinishesDataTable extends BaseDataTable
                 ->addClass('text-right pr-20'),
         ];
 
-        return array_merge($columns, CustomFieldGroup::customFieldsDataMerge(new Finishes), $action);
+        return array_merge(
+            $columns,
+            CustomFieldGroup::customFieldsDataMerge(new Finishes),
+            $action
+        );
     }
 
     /**

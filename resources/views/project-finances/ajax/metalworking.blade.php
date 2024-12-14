@@ -60,7 +60,7 @@
 <script>
     $(document).ready(function() {
         $('#save-metalworking-form').click(function() {
-            const url = "{{ route('projectfinances.storeMetalworking') }}";
+            const url = "{!! route('projectfinances.store') . '?tab=metalworking&model=Metalworking' !!}";
             var data = $('#save-metalworking-data-form').serialize();
 
             saveClient(data, url, "#save-metalworking-form");
@@ -78,9 +78,6 @@
 
             const url = "{!! route('projectfinances.update') . '?tab=metalworking&id=' !!}" + id + "{!! '&model=Metalworking' !!}";
             var data = $('#save-metalworking-data-form').serialize();
-
-            console.log(url);
-            console.log(data);
 
             saveClient(data, url, "#update-metalworking-form");
 

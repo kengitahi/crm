@@ -12,7 +12,7 @@
                         <div class="row">
                             <input name="form_type" type="hidden" value="otherCosts">
                             <div class="col-md-4">
-                                <x-forms.number :fieldLabel="__('modules.projects.formLabels.otherCosts')" :fieldPlaceholder="__('placeholders.projects.amount')" :fieldValue="$lead->client_name ?? ''"
+                                <x-forms.number :fieldLabel="__('modules.projects.formLabels.otherCosts')" :fieldPlaceholder="__('placeholders.projects.amount')" :fieldValue="$costToEdit->other_costs ?? ''"
                                     fieldId="{{ __('modules.projects.formFields.otherCosts') }}"
                                     fieldName="{{ __('modules.projects.formFields.otherCosts') }}">
                                 </x-forms.number>
@@ -48,7 +48,7 @@
 <script>
     $(document).ready(function() {
         $('#save-other-costs-form').click(function() {
-            const url = "{{ route('projectfinances.storeOtherCosts') }}";
+            const url = "{!! route('projectfinances.store') . '?tab=otherCosts&model=OtherCosts' !!}";
             var data = $('#save-other-costs-data-form').serialize();
 
             saveClient(data, url, "#save-other-costs-form");
@@ -67,9 +67,6 @@
 
             const url = "{!! route('projectfinances.update') . '?tab=otherCosts&id=' !!}" + id + "{!! '&model=OtherCosts' !!}";
             var data = $('#save-other-costs-data-form').serialize();
-
-            console.log(url);
-            console.log(data);
 
             saveClient(data, url, "#update-other-costs-form");
 

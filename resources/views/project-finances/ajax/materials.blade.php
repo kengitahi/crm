@@ -100,7 +100,7 @@
 <script>
     $(document).ready(function() {
         $('#save-materials-form').click(function() {
-            const url = "{{ route('projectfinances.storeMaterials') }}";
+            const url = "{!! route('projectfinances.store') . '?tab=materials&model=Materials' !!}";
             var data = $('#save-materials-data-form').serialize();
 
             saveClient(data, url, "#save-materials-form");

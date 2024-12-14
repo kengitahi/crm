@@ -45,7 +45,12 @@ class ConcreteDataTable extends BaseDataTable
 
             $action .=
                 '<a class="dropdown-item openRightModal" href="'.
-                route('projectfinances.concreteForm', ['action' => 'edit', 'model' => 'ConcreteStructure', 'id' => $row->id]).
+                route('projectfinances.form', [
+                    'action' => 'edit',
+                    'model' => 'ConcreteStructure',
+                    'id' => $row->id,
+                    'tab' => 'concrete',
+                ]).
                 '">
                                 <i class="fa fa-edit mr-2"></i>
                                 '.
@@ -68,10 +73,21 @@ class ConcreteDataTable extends BaseDataTable
             return $action;
         });
 
-        $datatables->addColumn('suppliers', fn ($row) => $row->concrete_suppliers ?: '--');
-        $datatables->editColumn('created_at', fn ($row) => Carbon::parse($row->created_at)->translatedFormat($this->company->date_format));
+        $datatables->addColumn(
+            'suppliers',
+            fn ($row) => $row->concrete_suppliers ?: '--'
+        );
+        $datatables->editColumn(
+            'created_at',
+            fn ($row) => Carbon::parse($row->created_at)->translatedFormat(
+                $this->company->date_format
+            )
+        );
 
-        $customFieldColumns = CustomField::customFieldData($datatables, ConcreteStructure::CUSTOM_FIELD_MODEL);
+        $customFieldColumns = CustomField::customFieldData(
+            $datatables,
+            ConcreteStructure::CUSTOM_FIELD_MODEL
+        );
 
         $datatables->rawColumns(array_merge(['action'], $customFieldColumns));
 
@@ -108,7 +124,13 @@ class ConcreteDataTable extends BaseDataTable
                   //
                 }',
         ]);
-        $dataTable->buttons(Button::make(['extend' => 'excel', 'text' => '<i class="fa fa-file-export"></i> '.trans('app.exportExcel')]));
+        $dataTable->buttons(
+            Button::make([
+                'extend' => 'excel',
+                'text' => '<i class="fa fa-file-export"></i> '.
+                    trans('app.exportExcel'),
+            ])
+        );
 
         return $dataTable;
     }
@@ -120,9 +142,23 @@ class ConcreteDataTable extends BaseDataTable
     {
         $columns = [
             Column::make('id'),
-            'Concrete '.__('modules.projects.formLabels.suppliers') => ['data' => 'concrete_suppliers', 'name' => 'suppliers', 'title' => 'Concrete '.__('modules.projects.formLabels.suppliers'), 'visible' => showId(), 'orderable' => false],
-            __('app.createdAt') => ['data' => 'created_at', 'name' => 'created_at', 'title' => __('app.createdAt')],
-            __('app.updatedOn') => ['data' => 'created_at', 'name' => 'created_at', 'title' => __('app.updatedOn')],
+            'Concrete '.__('modules.projects.formLabels.suppliers') => [
+                'data' => 'concrete_suppliers',
+                'name' => 'suppliers',
+                'title' => 'Concrete '.__('modules.projects.formLabels.suppliers'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            __('app.createdAt') => [
+                'data' => 'created_at',
+                'name' => 'created_at',
+                'title' => __('app.createdAt'),
+            ],
+            __('app.updatedOn') => [
+                'data' => 'created_at',
+                'name' => 'created_at',
+                'title' => __('app.updatedOn'),
+            ],
         ];
 
         $action = [
@@ -134,7 +170,11 @@ class ConcreteDataTable extends BaseDataTable
                 ->addClass('text-right pr-20'),
         ];
 
-        return array_merge($columns, CustomFieldGroup::customFieldsDataMerge(new ConcreteStructure), $action);
+        return array_merge(
+            $columns,
+            CustomFieldGroup::customFieldsDataMerge(new ConcreteStructure),
+            $action
+        );
     }
 
     /**

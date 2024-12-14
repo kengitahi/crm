@@ -6,11 +6,10 @@
 
             <div class="flex-grow-1 align-items-center" id="table-actions">
 
-                <x-forms.link-primary :link="route('projectfinances.materials')" class="openRightModal mb-lg-0 mb-md-0 float-left mb-2 mr-3"
+                <x-forms.link-primary :link="route('projectfinances.form', ['tab' => 'materials', 'model' => 'Materials'])"  class="openRightModal mb-lg-0 mb-md-0 float-left mb-2 mr-3"
                     icon="plus">
                     @lang('modules.projects.addRecord')
                 </x-forms.link-primary>
-
                 <x-forms.link-secondary :link="route('clients.import')"
                     class="mb-lg-0 mb-md-0 d-sm-bloc d-none d-lg-block float-left mb-2 mr-3" icon="file-upload">
                     @lang('app.importExcel')
@@ -66,8 +65,7 @@
 
         $('body').on('click', '.delete-table-row', function() {
             const id = $(this).data('row-id');
-            var url = "{{ route('projectfinances.materialsForm', ':id') }}";
-            url = url.replace(':id', id)
+            const url = "{!! route('projectfinances.form') . '?tab=materials&id=' !!}" + id + "{!! '&model=Materials' !!}";
             var token = "{{ csrf_token() }}";
             $.easyAjax({
                 type: 'GET',

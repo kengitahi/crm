@@ -81,7 +81,7 @@
 <script>
     $(document).ready(function() {
         $('#save-masonry-form').click(function() {
-            const url = "{{ route('projectfinances.storeMasonry') }}";
+            const url = "{!! route('projectfinances.store') . '?tab=masonry&model=GrayMasonryWork' !!}";
             var data = $('#save-masonry-data-form').serialize();
 
             saveClient(data, url, "#save-masonry-form");

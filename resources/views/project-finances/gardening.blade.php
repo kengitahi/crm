@@ -6,7 +6,7 @@
 
             <div class="flex-grow-1 align-items-center" id="table-actions">
 
-                <x-forms.link-primary :link="route('projectfinances.gardeningForm')" class="openRightModal mb-lg-0 mb-md-0 float-left mb-2 mr-3"
+                <x-forms.link-primary :link="route('projectfinances.form', ['tab' => 'gardening', 'model' => 'Gardening'])"  class="openRightModal mb-lg-0 mb-md-0 float-left mb-2 mr-3"
                     icon="plus">
                     @lang('modules.projects.addRecord')
                 </x-forms.link-primary>
@@ -66,8 +66,7 @@
 
         $('body').on('click', '.delete-table-row', function() {
             const id = $(this).data('row-id');
-            var url = "{{ route('projectfinances.gardeningForm', ':id') }}";
-            url = url.replace(':id', id)
+            const url = "{!! route('projectfinances.form') . '?tab=gardening&id=' !!}" + id + "{!! '&model=Gardening' !!}";
             var token = "{{ csrf_token() }}";
             $.easyAjax({
                 type: 'GET',

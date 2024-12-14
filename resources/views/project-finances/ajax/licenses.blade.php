@@ -78,7 +78,8 @@
 <script>
     $(document).ready(function() {
         $('#save-licenses-form').click(function() {
-            const url = "{{ route('projectfinances.storeLicenses') }}";
+            const url = "{!! route('projectfinances.store') . '?tab=licenses&model=LicensesAndPermits' !!}";
+
             var data = $('#save-licenses-data-form').serialize();
 
             saveClient(data, url, "#save-licenses-form");
@@ -97,9 +98,6 @@
 
             const url = "{!! route('projectfinances.update') . '?tab=licenses&id=' !!}" + id + "{!! '&model=LicensesAndPermits' !!}";
             var data = $('#save-licenses-data-form').serialize();
-
-            console.log(url);
-            console.log(data);
 
             saveClient(data, url, "#update-licenses-form");
 

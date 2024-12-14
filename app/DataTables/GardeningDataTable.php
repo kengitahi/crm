@@ -45,7 +45,12 @@ class GardeningDataTable extends BaseDataTable
 
             $action .=
                 '<a class="dropdown-item openRightModal" href="'.
-                route('projectfinances.gardeningForm', ['action' => 'edit', 'model' => 'Gardening', 'id' => $row->id]).
+                route('projectfinances.form', [
+                    'action' => 'edit',
+                    'model' => 'Gardening',
+                    'id' => $row->id,
+                    'tab' => 'gardening',
+                ]).
                 '">
                                 <i class="fa fa-edit mr-2"></i>
                                 '.
@@ -68,11 +73,25 @@ class GardeningDataTable extends BaseDataTable
             return $action;
         });
 
-        $datatables->addColumn('plantsAndPots', fn ($row) => $row->plants_and_pots ?: '--');
-        $datatables->addColumn('suppliers', fn ($row) => $row->suppliers ?: '--');
-        $datatables->editColumn('created_at', fn ($row) => Carbon::parse($row->created_at)->translatedFormat($this->company->date_format));
+        $datatables->addColumn(
+            'plantsAndPots',
+            fn ($row) => $row->plants_and_pots ?: '--'
+        );
+        $datatables->addColumn(
+            'suppliers',
+            fn ($row) => $row->suppliers ?: '--'
+        );
+        $datatables->editColumn(
+            'created_at',
+            fn ($row) => Carbon::parse($row->created_at)->translatedFormat(
+                $this->company->date_format
+            )
+        );
 
-        $customFieldColumns = CustomField::customFieldData($datatables, Gardening::CUSTOM_FIELD_MODEL);
+        $customFieldColumns = CustomField::customFieldData(
+            $datatables,
+            Gardening::CUSTOM_FIELD_MODEL
+        );
 
         $datatables->rawColumns(array_merge(['action'], $customFieldColumns));
 
@@ -109,7 +128,13 @@ class GardeningDataTable extends BaseDataTable
                   //
                 }',
         ]);
-        $dataTable->buttons(Button::make(['extend' => 'excel', 'text' => '<i class="fa fa-file-export"></i> '.trans('app.exportExcel')]));
+        $dataTable->buttons(
+            Button::make([
+                'extend' => 'excel',
+                'text' => '<i class="fa fa-file-export"></i> '.
+                    trans('app.exportExcel'),
+            ])
+        );
 
         return $dataTable;
     }
@@ -121,10 +146,30 @@ class GardeningDataTable extends BaseDataTable
     {
         $columns = [
             Column::make('id'),
-            __('modules.projects.formLabels.plantsAndPots') => ['data' => 'plants_and_pots', 'name' => 'plantsAndPots', 'title' => __('modules.projects.formLabels.plantsAndPots'), 'visible' => showId(), 'orderable' => false],
-            'Gardening '.__('modules.projects.formLabels.suppliers') => ['data' => 'suppliers', 'name' => 'suppliers', 'title' => 'Gardening '.__('modules.projects.formLabels.suppliers'), 'visible' => showId(), 'orderable' => false],
-            __('app.createdAt') => ['data' => 'created_at', 'name' => 'created_at', 'title' => __('app.createdAt')],
-            __('app.updatedOn') => ['data' => 'created_at', 'name' => 'created_at', 'title' => __('app.updatedOn')],
+            __('modules.projects.formLabels.plantsAndPots') => [
+                'data' => 'plants_and_pots',
+                'name' => 'plantsAndPots',
+                'title' => __('modules.projects.formLabels.plantsAndPots'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            'Gardening '.__('modules.projects.formLabels.suppliers') => [
+                'data' => 'suppliers',
+                'name' => 'suppliers',
+                'title' => 'Gardening '.__('modules.projects.formLabels.suppliers'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            __('app.createdAt') => [
+                'data' => 'created_at',
+                'name' => 'created_at',
+                'title' => __('app.createdAt'),
+            ],
+            __('app.updatedOn') => [
+                'data' => 'created_at',
+                'name' => 'created_at',
+                'title' => __('app.updatedOn'),
+            ],
         ];
 
         $action = [
@@ -136,7 +181,11 @@ class GardeningDataTable extends BaseDataTable
                 ->addClass('text-right pr-20'),
         ];
 
-        return array_merge($columns, CustomFieldGroup::customFieldsDataMerge(new Gardening), $action);
+        return array_merge(
+            $columns,
+            CustomFieldGroup::customFieldsDataMerge(new Gardening),
+            $action
+        );
     }
 
     /**

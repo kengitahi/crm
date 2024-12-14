@@ -45,7 +45,12 @@ class LicensesDataTable extends BaseDataTable
 
             $action .=
                 '<a class="dropdown-item openRightModal" href="'.
-                route('projectfinances.licensesForm', ['action' => 'edit', 'model' => 'LicensesAndPermits', 'id' => $row->id]).
+                route('projectfinances.form', [
+                    'action' => 'edit',
+                    'model' => 'LicensesAndPermits',
+                    'id' => $row->id,
+                    'tab' => 'licenses',
+                ]).
                 '">
                                 <i class="fa fa-edit mr-2"></i>
                                 '.
@@ -68,17 +73,34 @@ class LicensesDataTable extends BaseDataTable
             return $action;
         });
 
-        $datatables->addColumn('suppliers', fn ($row) => $row->concrete_suppliers ?: '--');
+        $datatables->addColumn(
+            'suppliers',
+            fn ($row) => $row->concrete_suppliers ?: '--'
+        );
         $datatables->addColumn('who', fn ($row) => $row->who ?: '--');
         $datatables->addColumn('cfe', fn ($row) => $row->cfe ?: '--');
-        $datatables->addColumn('condominiumRegime', fn ($row) => $row->condominium_regime ?: '--');
-        $datatables->addColumn('licenseAndAlignment', fn ($row) => $row->license_and_alignment ?: '--');
+        $datatables->addColumn(
+            'condominiumRegime',
+            fn ($row) => $row->condominium_regime ?: '--'
+        );
+        $datatables->addColumn(
+            'licenseAndAlignment',
+            fn ($row) => $row->license_and_alignment ?: '--'
+        );
         $datatables->addColumn('rooms', fn ($row) => $row->rooms ?: '--');
         $datatables->addColumn('mobility', fn ($row) => $row->mobility ?: '--');
 
-        $datatables->editColumn('created_at', fn ($row) => Carbon::parse($row->created_at)->translatedFormat($this->company->date_format));
+        $datatables->editColumn(
+            'created_at',
+            fn ($row) => Carbon::parse($row->created_at)->translatedFormat(
+                $this->company->date_format
+            )
+        );
 
-        $customFieldColumns = CustomField::customFieldData($datatables, LicensesAndPermits::CUSTOM_FIELD_MODEL);
+        $customFieldColumns = CustomField::customFieldData(
+            $datatables,
+            LicensesAndPermits::CUSTOM_FIELD_MODEL
+        );
 
         $datatables->rawColumns(array_merge(['action'], $customFieldColumns));
 
@@ -115,7 +137,13 @@ class LicensesDataTable extends BaseDataTable
                   //
                 }',
         ]);
-        $dataTable->buttons(Button::make(['extend' => 'excel', 'text' => '<i class="fa fa-file-export"></i> '.trans('app.exportExcel')]));
+        $dataTable->buttons(
+            Button::make([
+                'extend' => 'excel',
+                'text' => '<i class="fa fa-file-export"></i> '.
+                    trans('app.exportExcel'),
+            ])
+        );
 
         return $dataTable;
     }
@@ -127,14 +155,60 @@ class LicensesDataTable extends BaseDataTable
     {
         $columns = [
             Column::make('id'),
-            __('modules.projects.formLabels.who') => ['data' => 'who', 'name' => 'who', 'title' => __('modules.projects.formLabels.who'), 'visible' => showId(), 'orderable' => false],
-            __('modules.projects.formLabels.cfe') => ['data' => 'cfe', 'name' => 'cfe', 'title' => __('modules.projects.formLabels.cfe'), 'visible' => showId(), 'orderable' => false],
-            __('modules.projects.formLabels.condominiumRegime') => ['data' => 'condominium_regime', 'name' => 'condominium_regime', 'title' => __('modules.projects.formLabels.condominiumRegime'), 'visible' => showId(), 'orderable' => false],
-            __('modules.projects.formLabels.licenseAndAlignment') => ['data' => 'license_and_alignment', 'name' => 'license_and_alignment', 'title' => __('modules.projects.formLabels.licenseAndAlignment'), 'visible' => showId(), 'orderable' => false],
-            __('modules.projects.formLabels.rooms') => ['data' => 'rooms', 'name' => 'rooms', 'title' => __('modules.projects.formLabels.rooms'), 'visible' => showId(), 'orderable' => false],
-            __('modules.projects.formLabels.mobility') => ['data' => 'mobility', 'name' => 'mobility', 'title' => __('modules.projects.formLabels.mobility'), 'visible' => showId(), 'orderable' => false],
-            __('app.createdAt') => ['data' => 'created_at', 'name' => 'created_at', 'title' => __('app.createdAt')],
-            __('app.updatedOn') => ['data' => 'created_at', 'name' => 'created_at', 'title' => __('app.updatedOn')],
+            __('modules.projects.formLabels.who') => [
+                'data' => 'who',
+                'name' => 'who',
+                'title' => __('modules.projects.formLabels.who'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            __('modules.projects.formLabels.cfe') => [
+                'data' => 'cfe',
+                'name' => 'cfe',
+                'title' => __('modules.projects.formLabels.cfe'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            __('modules.projects.formLabels.condominiumRegime') => [
+                'data' => 'condominium_regime',
+                'name' => 'condominium_regime',
+                'title' => __('modules.projects.formLabels.condominiumRegime'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            __('modules.projects.formLabels.licenseAndAlignment') => [
+                'data' => 'license_and_alignment',
+                'name' => 'license_and_alignment',
+                'title' => __(
+                    'modules.projects.formLabels.licenseAndAlignment'
+                ),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            __('modules.projects.formLabels.rooms') => [
+                'data' => 'rooms',
+                'name' => 'rooms',
+                'title' => __('modules.projects.formLabels.rooms'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            __('modules.projects.formLabels.mobility') => [
+                'data' => 'mobility',
+                'name' => 'mobility',
+                'title' => __('modules.projects.formLabels.mobility'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            __('app.createdAt') => [
+                'data' => 'created_at',
+                'name' => 'created_at',
+                'title' => __('app.createdAt'),
+            ],
+            __('app.updatedOn') => [
+                'data' => 'created_at',
+                'name' => 'created_at',
+                'title' => __('app.updatedOn'),
+            ],
         ];
 
         $action = [
@@ -146,7 +220,11 @@ class LicensesDataTable extends BaseDataTable
                 ->addClass('text-right pr-20'),
         ];
 
-        return array_merge($columns, CustomFieldGroup::customFieldsDataMerge(new LicensesAndPermits), $action);
+        return array_merge(
+            $columns,
+            CustomFieldGroup::customFieldsDataMerge(new LicensesAndPermits),
+            $action
+        );
     }
 
     /**

@@ -45,7 +45,12 @@ class MasonryDataTable extends BaseDataTable
 
             $action .=
                 '<a class="dropdown-item openRightModal" href="'.
-                route('projectfinances.masonryForm', ['action' => 'edit', 'model' => 'GrayMasonryWork', 'id' => $row->id]).
+                route('projectfinances.form', [
+                    'action' => 'edit',
+                    'model' => 'GrayMasonryWork',
+                    'id' => $row->id,
+                    'tab' => 'masonry',
+                ]).
                 '">
                                 <i class="fa fa-edit mr-2"></i>
                                 '.
@@ -68,16 +73,39 @@ class MasonryDataTable extends BaseDataTable
             return $action;
         });
 
-        $datatables->addColumn('labor', fn ($row) => $row->masonry_labour ?: '--');
-        $datatables->addColumn('suppliers', fn ($row) => $row->masonry_suppliers ?: '--');
-        $datatables->addColumn('supervision', fn ($row) => $row->supervision ?: '--');
+        $datatables->addColumn(
+            'labor',
+            fn ($row) => $row->masonry_labour ?: '--'
+        );
+        $datatables->addColumn(
+            'suppliers',
+            fn ($row) => $row->masonry_suppliers ?: '--'
+        );
+        $datatables->addColumn(
+            'supervision',
+            fn ($row) => $row->supervision ?: '--'
+        );
         $datatables->addColumn('several', fn ($row) => $row->several ?: '--');
-        $datatables->addColumn('scaffolding', fn ($row) => $row->scaffolding ?: '--');
-        $datatables->addColumn('mixerAndEquipment', fn ($row) => $row->mixer_and_equipment ?: '--');
+        $datatables->addColumn(
+            'scaffolding',
+            fn ($row) => $row->scaffolding ?: '--'
+        );
+        $datatables->addColumn(
+            'mixerAndEquipment',
+            fn ($row) => $row->mixer_and_equipment ?: '--'
+        );
 
-        $datatables->editColumn('created_at', fn ($row) => Carbon::parse($row->created_at)->translatedFormat($this->company->date_format));
+        $datatables->editColumn(
+            'created_at',
+            fn ($row) => Carbon::parse($row->created_at)->translatedFormat(
+                $this->company->date_format
+            )
+        );
 
-        $customFieldColumns = CustomField::customFieldData($datatables, GrayMasonryWork::CUSTOM_FIELD_MODEL);
+        $customFieldColumns = CustomField::customFieldData(
+            $datatables,
+            GrayMasonryWork::CUSTOM_FIELD_MODEL
+        );
 
         $datatables->rawColumns(array_merge(['action'], $customFieldColumns));
 
@@ -114,7 +142,13 @@ class MasonryDataTable extends BaseDataTable
                   //
                 }',
         ]);
-        $dataTable->buttons(Button::make(['extend' => 'excel', 'text' => '<i class="fa fa-file-export"></i> '.trans('app.exportExcel')]));
+        $dataTable->buttons(
+            Button::make([
+                'extend' => 'excel',
+                'text' => '<i class="fa fa-file-export"></i> '.
+                    trans('app.exportExcel'),
+            ])
+        );
 
         return $dataTable;
     }
@@ -126,14 +160,58 @@ class MasonryDataTable extends BaseDataTable
     {
         $columns = [
             Column::make('id'),
-            'Masonry '.__('modules.projects.formLabels.suppliers') => ['data' => 'masonry_suppliers', 'name' => 'suppliers', 'title' => 'Masonry '.__('modules.projects.formLabels.suppliers'), 'visible' => showId(), 'orderable' => false],
-            'Masonry '.__('modules.projects.formLabels.labour') => ['data' => 'masonry_labour', 'name' => 'labour', 'title' => 'Masonry '.__('modules.projects.formLabels.labour'), 'visible' => showId(), 'orderable' => false],
-            __('modules.projects.formLabels.supervision') => ['data' => 'supervision', 'name' => 'supervision', 'title' => __('modules.projects.formLabels.supervision'), 'visible' => showId(), 'orderable' => false],
-            __('modules.projects.formLabels.scaffolding') => ['data' => 'scaffolding', 'name' => 'scaffolding', 'title' => __('modules.projects.formLabels.scaffolding'), 'visible' => showId(), 'orderable' => false],
-            __('modules.projects.formLabels.several') => ['data' => 'several', 'name' => 'several', 'title' => __('modules.projects.formLabels.several'), 'visible' => showId(), 'orderable' => false],
-            __('modules.projects.formLabels.mixerAndEquipment') => ['data' => 'mixer_and_equipment', 'name' => 'mixerAndEquipment', 'title' => __('modules.projects.formLabels.mixerAndEquipment'), 'visible' => showId(), 'orderable' => false],
-            __('app.createdAt') => ['data' => 'created_at', 'name' => 'created_at', 'title' => __('app.createdAt')],
-            __('app.updatedOn') => ['data' => 'created_at', 'name' => 'created_at', 'title' => __('app.updatedOn')],
+            'Masonry '.__('modules.projects.formLabels.suppliers') => [
+                'data' => 'masonry_suppliers',
+                'name' => 'suppliers',
+                'title' => 'Masonry '.__('modules.projects.formLabels.suppliers'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            'Masonry '.__('modules.projects.formLabels.labour') => [
+                'data' => 'masonry_labour',
+                'name' => 'labour',
+                'title' => 'Masonry '.__('modules.projects.formLabels.labour'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            __('modules.projects.formLabels.supervision') => [
+                'data' => 'supervision',
+                'name' => 'supervision',
+                'title' => __('modules.projects.formLabels.supervision'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            __('modules.projects.formLabels.scaffolding') => [
+                'data' => 'scaffolding',
+                'name' => 'scaffolding',
+                'title' => __('modules.projects.formLabels.scaffolding'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            __('modules.projects.formLabels.several') => [
+                'data' => 'several',
+                'name' => 'several',
+                'title' => __('modules.projects.formLabels.several'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            __('modules.projects.formLabels.mixerAndEquipment') => [
+                'data' => 'mixer_and_equipment',
+                'name' => 'mixerAndEquipment',
+                'title' => __('modules.projects.formLabels.mixerAndEquipment'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            __('app.createdAt') => [
+                'data' => 'created_at',
+                'name' => 'created_at',
+                'title' => __('app.createdAt'),
+            ],
+            __('app.updatedOn') => [
+                'data' => 'created_at',
+                'name' => 'created_at',
+                'title' => __('app.updatedOn'),
+            ],
         ];
 
         $action = [
@@ -145,7 +223,11 @@ class MasonryDataTable extends BaseDataTable
                 ->addClass('text-right pr-20'),
         ];
 
-        return array_merge($columns, CustomFieldGroup::customFieldsDataMerge(new GrayMasonryWork), $action);
+        return array_merge(
+            $columns,
+            CustomFieldGroup::customFieldsDataMerge(new GrayMasonryWork),
+            $action
+        );
     }
 
     /**

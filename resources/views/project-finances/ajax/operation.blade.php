@@ -123,13 +123,13 @@
 <script>
     $(document).ready(function() {
         $('#save-operation-form').click(function() {
-            const url = "{{ route('projectfinances.storeOperation') }}";
+            const url = "{!! route('projectfinances.store') . '?tab=operation&model=Operation' !!}";
             var data = $('#save-operation-data-form').serialize();
 
             saveClient(data, url, "#save-operation-form");
 
         });
-        
+
         $('#update-operation-form').click(function() {
             // Get the current URL
             const currentUrl = window.location.href;
@@ -142,9 +142,6 @@
 
             const url = "{!! route('projectfinances.update') . '?tab=operation&id=' !!}" + id + "{!! '&model=Operation' !!}";
             var data = $('#save-operation-data-form').serialize();
-
-            console.log(url);
-            console.log(data);
 
             saveClient(data, url, "#update-operation-form");
 

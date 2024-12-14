@@ -45,7 +45,12 @@ class CarpentryDataTable extends BaseDataTable
 
             $action .=
                 '<a class="dropdown-item openRightModal" href="'.
-                route('projectfinances.capentryForm', ['action' => 'edit', 'model' => 'Capentry', 'id' => $row->id]).
+                route('projectfinances.form', [
+                    'action' => 'edit',
+                    'model' => 'Capentry',
+                    'id' => $row->id,
+                    'tab' => 'capentry',
+                ]).
                 '">
                                 <i class="fa fa-edit mr-2"></i>
                                 '.
@@ -68,12 +73,29 @@ class CarpentryDataTable extends BaseDataTable
             return $action;
         });
 
-        $datatables->addColumn('locks_and_fittings', fn ($row) => $row->locks_and_fittings ?: '--');
-        $datatables->addColumn('closet_bathroom_stairs', fn ($row) => $row->closet_bathroom_stairs ?: '--');
-        $datatables->addColumn('suppliers', fn ($row) => $row->capentry_suppliers ?: '--');
-        $datatables->editColumn('created_at', fn ($row) => Carbon::parse($row->created_at)->translatedFormat($this->company->date_format));
+        $datatables->addColumn(
+            'locks_and_fittings',
+            fn ($row) => $row->locks_and_fittings ?: '--'
+        );
+        $datatables->addColumn(
+            'closet_bathroom_stairs',
+            fn ($row) => $row->closet_bathroom_stairs ?: '--'
+        );
+        $datatables->addColumn(
+            'suppliers',
+            fn ($row) => $row->capentry_suppliers ?: '--'
+        );
+        $datatables->editColumn(
+            'created_at',
+            fn ($row) => Carbon::parse($row->created_at)->translatedFormat(
+                $this->company->date_format
+            )
+        );
 
-        $customFieldColumns = CustomField::customFieldData($datatables, Capentry::CUSTOM_FIELD_MODEL);
+        $customFieldColumns = CustomField::customFieldData(
+            $datatables,
+            Capentry::CUSTOM_FIELD_MODEL
+        );
 
         $datatables->rawColumns(array_merge(['action'], $customFieldColumns));
 
@@ -110,7 +132,13 @@ class CarpentryDataTable extends BaseDataTable
                   //
                 }',
         ]);
-        $dataTable->buttons(Button::make(['extend' => 'excel', 'text' => '<i class="fa fa-file-export"></i> '.trans('app.exportExcel')]));
+        $dataTable->buttons(
+            Button::make([
+                'extend' => 'excel',
+                'text' => '<i class="fa fa-file-export"></i> '.
+                    trans('app.exportExcel'),
+            ])
+        );
 
         return $dataTable;
     }
@@ -122,11 +150,39 @@ class CarpentryDataTable extends BaseDataTable
     {
         $columns = [
             Column::make('id'),
-            __('modules.projects.formLabels.lockFittings') => ['data' => 'locks_and_fittings', 'name' => 'locks_and_fittings', 'title' => __('modules.projects.formLabels.lockFittings'), 'visible' => showId(), 'orderable' => false],
-            __('modules.projects.formLabels.closetBathroomsStairs') => ['data' => 'closet_bathroom_stairs', 'name' => 'closet_bathroom_stairs', 'title' => __('modules.projects.formLabels.closetBathroomsStairs'), 'visible' => showId(), 'orderable' => false],
-            __('modules.projects.formLabels.suppliers') => ['data' => 'suppliers', 'name' => 'suppliers', 'title' => __('modules.projects.formLabels.suppliers'), 'visible' => showId(), 'orderable' => false],
-            __('app.createdAt') => ['data' => 'created_at', 'name' => 'created_at', 'title' => __('app.createdAt')],
-            __('app.updatedOn') => ['data' => 'created_at', 'name' => 'created_at', 'title' => __('app.updatedOn')],
+            __('modules.projects.formLabels.lockFittings') => [
+                'data' => 'locks_and_fittings',
+                'name' => 'locks_and_fittings',
+                'title' => __('modules.projects.formLabels.lockFittings'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            __('modules.projects.formLabels.closetBathroomsStairs') => [
+                'data' => 'closet_bathroom_stairs',
+                'name' => 'closet_bathroom_stairs',
+                'title' => __(
+                    'modules.projects.formLabels.closetBathroomsStairs'
+                ),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            __('modules.projects.formLabels.suppliers') => [
+                'data' => 'suppliers',
+                'name' => 'suppliers',
+                'title' => __('modules.projects.formLabels.suppliers'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            __('app.createdAt') => [
+                'data' => 'created_at',
+                'name' => 'created_at',
+                'title' => __('app.createdAt'),
+            ],
+            __('app.updatedOn') => [
+                'data' => 'created_at',
+                'name' => 'created_at',
+                'title' => __('app.updatedOn'),
+            ],
         ];
 
         $action = [
@@ -138,7 +194,11 @@ class CarpentryDataTable extends BaseDataTable
                 ->addClass('text-right pr-20'),
         ];
 
-        return array_merge($columns, CustomFieldGroup::customFieldsDataMerge(new Capentry), $action);
+        return array_merge(
+            $columns,
+            CustomFieldGroup::customFieldsDataMerge(new Capentry),
+            $action
+        );
     }
 
     /**

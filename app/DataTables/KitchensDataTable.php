@@ -45,7 +45,12 @@ class KitchensDataTable extends BaseDataTable
 
             $action .=
                 '<a class="dropdown-item openRightModal" href="'.
-                route('projectfinances.kitchensForm', ['action' => 'edit', 'model' => 'Kitchens', 'id' => $row->id]).
+                route('projectfinances.form', [
+                    'action' => 'edit',
+                    'model' => 'Kitchens',
+                    'id' => $row->id,
+                    'tab' => 'kitchens',
+                ]).
                 '">
                                 <i class="fa fa-edit mr-2"></i>
                                 '.
@@ -68,13 +73,30 @@ class KitchensDataTable extends BaseDataTable
             return $action;
         });
 
-        $datatables->addColumn('furniture', fn ($row) => $row->furniture ?: '--');
-        $datatables->addColumn('quartzCover', fn ($row) => $row->quartz_cover ?: '--');
-        $datatables->addColumn('suppliers', fn ($row) => $row->suppliers ?: '--');
+        $datatables->addColumn(
+            'furniture',
+            fn ($row) => $row->furniture ?: '--'
+        );
+        $datatables->addColumn(
+            'quartzCover',
+            fn ($row) => $row->quartz_cover ?: '--'
+        );
+        $datatables->addColumn(
+            'suppliers',
+            fn ($row) => $row->suppliers ?: '--'
+        );
         $datatables->addColumn('team', fn ($row) => $row->team ?: '--');
-        $datatables->editColumn('created_at', fn ($row) => Carbon::parse($row->created_at)->translatedFormat($this->company->date_format));
+        $datatables->editColumn(
+            'created_at',
+            fn ($row) => Carbon::parse($row->created_at)->translatedFormat(
+                $this->company->date_format
+            )
+        );
 
-        $customFieldColumns = CustomField::customFieldData($datatables, Kitchens::CUSTOM_FIELD_MODEL);
+        $customFieldColumns = CustomField::customFieldData(
+            $datatables,
+            Kitchens::CUSTOM_FIELD_MODEL
+        );
 
         $datatables->rawColumns(array_merge(['action'], $customFieldColumns));
 
@@ -111,7 +133,13 @@ class KitchensDataTable extends BaseDataTable
                   //
                 }',
         ]);
-        $dataTable->buttons(Button::make(['extend' => 'excel', 'text' => '<i class="fa fa-file-export"></i> '.trans('app.exportExcel')]));
+        $dataTable->buttons(
+            Button::make([
+                'extend' => 'excel',
+                'text' => '<i class="fa fa-file-export"></i> '.
+                    trans('app.exportExcel'),
+            ])
+        );
 
         return $dataTable;
     }
@@ -123,12 +151,44 @@ class KitchensDataTable extends BaseDataTable
     {
         $columns = [
             Column::make('id'),
-            __('modules.projects.formLabels.quartzCover') => ['data' => 'quartz_cover', 'name' => 'quartzCover', 'title' => __('modules.projects.formLabels.quartzCover'), 'visible' => showId(), 'orderable' => false],
-            __('modules.projects.formLabels.furniture') => ['data' => 'furniture', 'name' => 'furniture', 'title' => __('modules.projects.formLabels.furniture'), 'visible' => showId(), 'orderable' => false],
-            __('modules.projects.formLabels.team') => ['data' => 'team', 'name' => 'team', 'title' => __('modules.projects.formLabels.team'), 'visible' => showId(), 'orderable' => false],
-            __('modules.projects.formLabels.suppliers') => ['data' => 'suppliers', 'name' => 'suppliers', 'title' => __('modules.projects.formLabels.suppliers'), 'visible' => showId(), 'orderable' => false],
-            __('app.createdAt') => ['data' => 'created_at', 'name' => 'created_at', 'title' => __('app.createdAt')],
-            __('app.updatedOn') => ['data' => 'created_at', 'name' => 'created_at', 'title' => __('app.updatedOn')],
+            __('modules.projects.formLabels.quartzCover') => [
+                'data' => 'quartz_cover',
+                'name' => 'quartzCover',
+                'title' => __('modules.projects.formLabels.quartzCover'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            __('modules.projects.formLabels.furniture') => [
+                'data' => 'furniture',
+                'name' => 'furniture',
+                'title' => __('modules.projects.formLabels.furniture'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            __('modules.projects.formLabels.team') => [
+                'data' => 'team',
+                'name' => 'team',
+                'title' => __('modules.projects.formLabels.team'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            __('modules.projects.formLabels.suppliers') => [
+                'data' => 'suppliers',
+                'name' => 'suppliers',
+                'title' => __('modules.projects.formLabels.suppliers'),
+                'visible' => showId(),
+                'orderable' => false,
+            ],
+            __('app.createdAt') => [
+                'data' => 'created_at',
+                'name' => 'created_at',
+                'title' => __('app.createdAt'),
+            ],
+            __('app.updatedOn') => [
+                'data' => 'created_at',
+                'name' => 'created_at',
+                'title' => __('app.updatedOn'),
+            ],
         ];
 
         $action = [
@@ -140,7 +200,11 @@ class KitchensDataTable extends BaseDataTable
                 ->addClass('text-right pr-20'),
         ];
 
-        return array_merge($columns, CustomFieldGroup::customFieldsDataMerge(new Kitchens), $action);
+        return array_merge(
+            $columns,
+            CustomFieldGroup::customFieldsDataMerge(new Kitchens),
+            $action
+        );
     }
 
     /**

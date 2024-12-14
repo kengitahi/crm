@@ -6,7 +6,7 @@
 
             <div class="flex-grow-1 align-items-center" id="table-actions">
 
-                <x-forms.link-primary :link="route('projectfinances.otherCostsForm')" class="openRightModal mb-lg-0 mb-md-0 float-left mb-2 mr-3"
+                <x-forms.link-primary :link="route('projectfinances.form', ['tab' => 'otherCosts', 'model' => 'OtherCosts'])"  class="openRightModal mb-lg-0 mb-md-0 float-left mb-2 mr-3"
                     icon="plus">
                     @lang('modules.projects.addRecord')
                 </x-forms.link-primary>
@@ -48,7 +48,7 @@
         <!-- Task Box Start -->
         <div class="d-flex flex-column w-tables table-responsive mt-3 rounded bg-white">
 
-            {{--{!! $dataTable->table(['class' => 'table table-hover border-0 w-100']) !!}--}}
+            {!! $dataTable->table(['class' => 'table table-hover border-0 w-100']) !!}
 
         </div>
         <!-- Task Box End -->
@@ -66,8 +66,7 @@
 
         $('body').on('click', '.delete-table-row', function() {
             const id = $(this).data('row-id');
-            var url = "{{ route('projectfinances.otherCostsForm', ':id') }}";
-            url = url.replace(':id', id)
+            const url = "{!! route('projectfinances.form') . '?tab=otherCosts&id=' !!}" + id + "{!! '&model=OtherCosts' !!}";
             var token = "{{ csrf_token() }}";
             $.easyAjax({
                 type: 'GET',

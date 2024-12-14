@@ -126,7 +126,7 @@
 <script>
     $(document).ready(function() {
         $('#save-finishes-form').click(function() {
-            const url = "{{ route('projectfinances.storeFinishes') }}";
+            const url = "{!! route('projectfinances.store') . '?tab=finishes&model=Finishes' !!}";
             var data = $('#save-finishes-data-form').serialize();
 
             saveClient(data, url, "#save-finishes-form");

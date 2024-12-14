@@ -45,10 +45,11 @@ class OtherCostsDataTable extends BaseDataTable
 
             $action .=
                 '<a class="dropdown-item openRightModal" href="'.
-                route('projectfinances.otherCostsForm', [
+                route('projectfinances.form', [
                     'action' => 'edit',
                     'model' => 'OtherCosts',
                     'id' => $row->id,
+                    'tab' => 'otherCosts',
                 ]).
                 '">
                                 <i class="fa fa-edit mr-2"></i>

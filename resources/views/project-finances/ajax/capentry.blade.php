@@ -41,8 +41,15 @@
                 <x-forms.custom-field :fields="$fields"></x-forms.custom-field>
 
                 <x-form-actions>
-                    <x-forms.button-primary class="mr-3" icon="check" id="save-capentry-form">@lang('app.save')
-                    </x-forms.button-primary>
+                    @if (request()->action == 'edit')
+                        <x-forms.button-primary class="mr-3" icon="edit" id="update-capentry-form">
+                            @lang('app.update')
+                        </x-forms.button-primary>
+                    @else
+                        <x-forms.button-primary class="mr-3" icon="check" id="save-capentry-form">
+                            @lang('app.save')
+                        </x-forms.button-primary>
+                    @endif
                     <x-forms.button-cancel :link="route('projectfinances.index') . '?tab=capentry'" class="border-0">@lang('app.cancel')
                     </x-forms.button-cancel>
                 </x-form-actions>
@@ -54,10 +61,27 @@
 <script>
     $(document).ready(function() {
         $('#save-capentry-form').click(function() {
-            const url = "{{ route('projectfinances.storeCapentry') }}";
+            const url = "{!! route('projectfinances.store') . '?tab=capentry&model=Capentry' !!}";
             var data = $('#save-capentry-data-form').serialize();
 
             saveClient(data, url, "#save-capentry-form");
+
+        });
+        
+        $('#update-capentry-form').click(function() {
+            // Get the current URL
+            const currentUrl = window.location.href;
+
+            // Extract all query parameters
+            const urlParams = new URLSearchParams(currentUrl);
+
+            // Extract the desired parameters
+            const id = urlParams.get('id');
+
+            const url = "{!! route('projectfinances.update') . '?tab=capentry&id=' !!}" + id + "{!! '&model=Capentry' !!}";
+            var data = $('#save-capentry-data-form').serialize();
+
+            saveClient(data, url, "#update-capentry-form");
 
         });
 

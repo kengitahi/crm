@@ -45,10 +45,11 @@ class OperationDataTable extends BaseDataTable
 
             $action .=
                 '<a class="dropdown-item openRightModal" href="'.
-                route('projectfinances.operationForm', [
+                route('projectfinances.form', [
                     'action' => 'edit',
                     'model' => 'Operation',
                     'id' => $row->id,
+                    'tab' => 'operation',
                 ]).
                 '">
                                 <i class="fa fa-edit mr-2"></i>
